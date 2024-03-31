@@ -1,0 +1,94 @@
+﻿@model IEnumerable<Bina.Models.User>
+
+@{
+    ViewData["Title"] = "User Management";
+}
+
+
+
+<style>
+    /* CSS để làm mờ và ngăn chặn click nút "Edit" khi Status là 0 */
+    .disabled-btn {
+        pointer-events: none; /* Ngăn chặn sự kiện click */
+        opacity: 0.5; /* Làm mờ nút */
+    }
+</style>
+
+@if (ViewBag.SuccessMessage != null)
+{
+    <div class="alert alert-success">
+        @ViewBag.SuccessMessage
+    </div>
+}
+
+<div class="container my-5">
+    <h1 class="text-center mb-4">User Management</h1>
+    <p class="text-end mb-4">
+        <a asp-action="Create" class="btn btn-primary">
+            <i class="bi bi-plus-circle me-2"></i>Create New
+        </a>
+    </p>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover text-center">
+            <thead class="table-dark">
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.UserName)</th>
+                    <th>@Html.DisplayNameFor(model => model.UserFullName)</th>
+                    <th>@Html.DisplayNameFor(model => model.Email)</th>
+                    <th>@Html.DisplayNameFor(model => model.PhoneNumber)</th>
+                    <th>@Html.DisplayNameFor(model => model.DoB)</th>
+                    <th>@Html.DisplayNameFor(model => model.Faculty)</th>
+                    <th>@Html.DisplayNameFor(model => model.Role)</th>
+                    <th>@Html.DisplayNameFor(model => model.DateCreated)</th>
+                    <th>@Html.DisplayNameFor(model => model.Status)</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.UserName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.UserFullName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                        <td>@Html.DisplayFor(modelItem => item.PhoneNumber)</td>
+                        <td>@Html.DisplayFor(modelItem => item.DoB)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Faculty.FacultyId)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Role.RoleName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.DateCreated)</td>
+                        <td>
+                            <div class="d-flex justify-content-center">
+                                <div class="form-check form-switch">
+                                    @using (Html.BeginForm("ToggleStatus", "Users", new { id = item.UserId }, FormMethod.Post))
+                                    {
+                                        <input type="hidden" name="userId" value="@item.UserId" />
+                                        <input class="form-check-input" type="checkbox" role="switch" id="statusToggle_@item.UserId" @(item.Status == 1 ? "checked" : "") onchange="this.form.submit()">
+                                    }
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="btn-group" role="group" aria-label="Actions">
+                                @* @if (item.Status != 0)
+                                {
+                                    <a asp-action="Edit" asp-route-id="@item.UserId" class="btn btn-primary btn-sm" title="Edit">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                } *@
+                                <a asp-action="Edit" asp-route-id="@item.UserId" class="btn btn-primary btn-sm @(item.Status == 0 ? "disabled-btn" : "")" title="Edit">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                                <a asp-action="Details" asp-route-id="@item.UserId" class="btn btn-success btn-sm" title="Detail">
+                                    <i class="bi bi-eye"></i>
+                                </a>
+                                <a asp-action="Delete" asp-route-id="@item.UserId" class="btn btn-danger btn-sm" title="Delete">
+                                    <i class="bi bi-trash3"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
