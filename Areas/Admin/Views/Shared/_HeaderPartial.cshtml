@@ -53,7 +53,7 @@
                                 <i class="bi bi-gear" style="margin-right: 10px"></i>Account
                                 Settings
                             </a>
-                            <a class="dropdown-item d-flex align-items-center py-2" href="login.html">
+                            <a class="dropdown-item d-flex align-items-center py-2" asp-area="" asp-controller="Logins" asp-action="Logout">
                                 <i class="bi bi-box-arrow-right" style="margin-right: 10px"></i>Logout
                             </a>
                         </div>
@@ -123,18 +123,18 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="bi bi-sliders" style="margin-right: 10px"></i> System Configuration </a>
+                    <a class="nav-link" href="#"><i class="bi bi-sliders" style="margin-right: 10px"></i> System configuration </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="bi bi-journal-bookmark" style="margin-right: 10px"></i> System Logs </a>
+                    <a class="nav-link" href="#"><i class="bi bi-journal-bookmark" style="margin-right: 10px"></i> System log </a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link" asp-area="Admin" asp-controller="HelpSupport" asp-action="Index"> Help and Support </a>
                 </li>
 
-                <partial name="_LoginPartial" />
+                @* <partial name="_LoginPartial" /> *@
 
             </ul>
         </div>

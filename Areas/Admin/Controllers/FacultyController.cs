@@ -2,7 +2,9 @@
 using Bina.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-namespace Bina.Controllers
+using Bina.Models.Authentication;
+
+namespace Bina.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class FacultyController : Controller
@@ -13,6 +15,8 @@ namespace Bina.Controllers
         {
             _context = context;
         }
+
+        [Authentication]
 
         // GET: Faculty
         public async Task<IActionResult> Index()

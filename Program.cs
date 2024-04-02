@@ -1,5 +1,4 @@
 using Bina.Data;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,9 +9,12 @@ builder.Services.AddDbContext<Ft1Context>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<Ft1Context>();
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddSession(option =>
+{
+    option.IdleTimeout = TimeSpan.FromMinutes(60);
+});
 
 var app = builder.Build();
 
@@ -35,19 +37,21 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+app.UseSession();
+
+
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute(
         name: "areas",
-        pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
-    );
+        pattern: "{area:exists}/{controller=Logins}/{action=Login}/{id?}");
 
     endpoints.MapControllerRoute(
         name: "default",
-        pattern: "{controller=Home}/{action=Index}/{id?}"
-    );
+        pattern: "{controller=Home}/{action=Index}/{id?}");
 });
 
-app.MapRazorPages();
+
+//app.MapRazorPages();
 
 app.Run();

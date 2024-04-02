@@ -1,6 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Bina.Models;
-using System.Diagnostics;
+﻿using Bina.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Bina.Areas.Admin.Controllers
 {
@@ -53,7 +52,7 @@ namespace Bina.Areas.Admin.Controllers
     {
         private readonly ILogger<HelpSupportController> _logger; //ILogger ghi log cho HelpSupportController
 
-        public HelpSupportController(ILogger<HelpSupportController> logger) 
+        public HelpSupportController(ILogger<HelpSupportController> logger)
         {
             _logger = logger; // gán giá trị _logger cho Ilogger
         }
@@ -66,10 +65,10 @@ namespace Bina.Areas.Admin.Controllers
 
         [HttpPost]
         public IActionResult HelpSupport(HelpSupport model)
-        { 
+        {
             if (ModelState.IsValid) //nếu các phương thức nhập dữ liệu hợp lệ thì trả về trang ConfirmationPage
             {
-               
+
                 return RedirectToAction("ConfirmationPage");
             }
             else

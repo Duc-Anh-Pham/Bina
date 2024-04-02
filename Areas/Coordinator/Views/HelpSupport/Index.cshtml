@@ -1,0 +1,47 @@
+﻿@model Bina.Models.HelpSupport
+
+
+	<div id="Quynh" class="container">
+		<div class="row justify-content-left">
+			<div class="col-md-6">
+				<div class="form-container">
+					<h1 class="mb-4" style="font-color: white">HELP and SUPPORT</h1>
+								<form asp-action="HelpSupport" method="post">
+									<div class="form-group">
+									<label asp-for="HelpSupportID" style="color: white">Help Support ID:</label>
+									<input asp-for="HelpSupportID" class="form-control" />
+									<span asp-validation-for="HelpSupportID" class="text-danger"></span>
+									</div>
+
+									<div class="form-group">
+										<label asp-for="Email" style="color: white">Email Address:</label>
+										<input asp-for="Email" class="form-control" />
+										<span asp-validation-for="Email" class="text-danger"></span>
+									</div>
+
+									<div class="form-group">
+										<label asp-for="FullName" style="color: white">Full Name:</label>
+										<input asp-for="FullName" class="form-control" />
+										<span asp-validation-for="FullName" class="text-danger"></span>
+									</div>
+
+									<div class="form-group">
+										<label asp-for="Title" style="color: white">Title:</label>
+										<input asp-for="Title" class="form-control" />
+										<span asp-validation-for="Title" class="text-danger"></span>
+									</div>
+
+									<div class="form-group">
+										<label asp-for="Comments" style="color: white">Your Comments:</label>
+										<textarea rows="4" cols="68" name="comments" form="usrform"> </textarea>
+										<span asp-validation-for="Comments" class="text-danger"></span>
+									</div>
+
+									<button type="submit" class="btn btn-primary">Send Message</button>
+								</form>
+							</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>

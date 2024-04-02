@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Bina.Models;
+﻿using Bina.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Bina.Data;

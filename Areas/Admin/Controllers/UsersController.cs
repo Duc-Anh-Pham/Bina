@@ -1,5 +1,6 @@
 ﻿using Bina.Data;
 using Bina.Models;
+using Bina.Models.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -16,9 +17,12 @@ namespace Bina.Areas.Admin.Controllers
             _context = context;
         }
 
-        // GET: Users
-        public async Task<IActionResult> Index()
+		[Authentication]
+
+		// GET: Users
+		public async Task<IActionResult> Index()
         {
+
             var Ft1Context = _context.Users
                 .Include(u => u.Faculty)
                 .Include(u => u.Role)
@@ -77,7 +81,7 @@ namespace Bina.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 // Check that User Name and Pssword are not left empty
-                if(string.IsNullOrWhiteSpace(user.UserFullName) || string.IsNullOrWhiteSpace(user.Password))
+                if (string.IsNullOrWhiteSpace(user.UserFullName) || string.IsNullOrWhiteSpace(user.Password))
                 {
                     ModelState.AddModelError("", "Không được bỏ trống!");
                     ViewData["FacultyId"] = new SelectList(_context.Faculties, "FacultyId", "FacultyId", user.FacultyId);

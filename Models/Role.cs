@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Bina.Models;
+﻿namespace Bina.Models;
 
 public partial class Role
 {

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Bina\\Bina.csproj": {}
+    "D:\\Github\\Bina\\Bina.csproj": {}
   },
   "projects": {
-    "D:\\Bina\\Bina.csproj": {
+    "D:\\Github\\Bina\\Bina.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Bina\\Bina.csproj",
+        "projectUniqueName": "D:\\Github\\Bina\\Bina.csproj",
         "projectName": "Bina",
-        "projectPath": "D:\\Bina\\Bina.csproj",
+        "projectPath": "D:\\Github\\Bina\\Bina.csproj",
         "packagesPath": "C:\\Users\\ducan\\.nuget\\packages\\",
-        "outputPath": "D:\\Bina\\obj\\",
+        "outputPath": "D:\\Github\\Bina\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ducan\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -64,6 +64,10 @@
             "Microsoft.EntityFrameworkCore.Tools": {
               "target": "Package",
               "version": "[8.0.3, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[8.0.2, )"
             }
           },
           "imports": [

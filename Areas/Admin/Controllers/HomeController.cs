@@ -1,4 +1,5 @@
 ﻿using Bina.Models;
+using Bina.Models.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -14,15 +15,21 @@ namespace Bina.Areas.Admin.Controllers
             _logger = logger;
         }
 
+        [Authentication]
+
         public IActionResult Index()
         {
             return View();
         }
 
+        [Authentication]
+
         public IActionResult Privacy()
         {
             return View();
         }
+
+        [Authentication]
 
         public IActionResult About()
         {
