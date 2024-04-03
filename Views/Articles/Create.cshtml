@@ -1,0 +1,98 @@
+﻿@* Bina/View/Article/create.cshtml *@
+@model Bina.Models.Article
+
+@{
+    ViewData["Title"] = "Create Article";
+}
+
+<h2 class="mb-4">Create Article</h2>
+
+<form asp-action="Create" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+    <div class="mb-3">
+        <label asp-for="ArticleName" class="form-label">Article Name</label>
+        <input asp-for="ArticleName" class="form-control" placeholder="Enter article name" required>
+        <div class="invalid-feedback">
+            Please provide a name for the article.
+        </div>
+        <span asp-validation-for="ArticleName" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Title" class="form-label">Title</label>
+        <input asp-for="Title" class="form-control" placeholder="Enter title" required>
+        <div class="invalid-feedback">
+            Please provide a title for the article.
+        </div>
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+     
+        <div class="form-group">
+            <label asp-for="Content" class="control-label">Upload File</label>
+            <input type="file" class="form-control" name="uploadFile" />
+        </div>
+       
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="UserId" class="form-label">Author</label>
+        <select asp-for="UserId" asp-items="ViewBag.UserId" class="form-select" required></select>
+        <span asp-validation-for="UserId" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+       
+        <div class="form-group">
+            <label asp-for="ImageId" class="control-label">Upload Image</label>
+            <input type="file" class="form-control" name="uploadImage" />
+        </div>
+       
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ArticleStatusId" class="form-label">Article Status</label>
+        <select asp-for="ArticleStatusId" asp-items="ViewBag.ArticleStatusId" class="form-select" required></select>
+        <span asp-validation-for="ArticleStatusId" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ArticlesDeadlineId" class="form-label">Article Deadline</label>
+        <select asp-for="ArticlesDeadlineId" asp-items="ViewBag.ArticlesDeadlineId" class="form-select" required></select>
+        <span asp-validation-for="ArticlesDeadlineId" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="FacultyId" class="form-label">Faculty</label>
+        <select asp-for="FacultyId" asp-items="ViewBag.FacultyId" class="form-select" required></select>
+        <span asp-validation-for="FacultyId" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> Create Article</button>
+</form>
+
+@section Scripts {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
+}

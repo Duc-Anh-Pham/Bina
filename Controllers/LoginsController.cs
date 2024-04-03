@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Bina.Controllers
 {
-	public class LoginsController : Controller
+    public class LoginsController : Controller
 	{
 		private readonly Ft1Context _context;
 
