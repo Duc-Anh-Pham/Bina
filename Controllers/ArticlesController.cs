@@ -106,7 +106,7 @@ namespace Bina.Controllers
                     }
                 }
 
-                if (uploadImage != null && uploadImage.Length > 0)
+              /*  if (uploadImage != null && uploadImage.Length > 0)
                 {
                     // Tạo tên file duy nhất để tránh xung đột
                     var fileName = Guid.NewGuid().ToString() + Path.GetExtension(uploadImage.FileName);
@@ -138,7 +138,7 @@ namespace Bina.Controllers
                     {
                         article.ImageId = existingImage.ImageId; // Sử dụng ImageId hiện có
                     }
-                }
+                }*/
 
                 // Thêm article vào database
                 _context.Articles.Add(article);

@@ -2881,6 +2881,18 @@
       "PackagePath": "staticwebassets\\scss\\style.scss"
     },
     {
+      "Id": "F:\\Greenwich IT\\TOPUP - 1640 - Enterprise Web Software Development\\Code\\Bina3-4\\Bina\\wwwroot\\uploads\\avatars\\2d291827-6f88-450d-a79b-cfe6b5f9d5e1.png",
+      "PackagePath": "staticwebassets\\uploads\\avatars\\2d291827-6f88-450d-a79b-cfe6b5f9d5e1.png"
+    },
+    {
+      "Id": "F:\\Greenwich IT\\TOPUP - 1640 - Enterprise Web Software Development\\Code\\Bina3-4\\Bina\\wwwroot\\uploads\\avatars\\4c6100e6-ce15-465d-8e98-fda37f75da1d.png",
+      "PackagePath": "staticwebassets\\uploads\\avatars\\4c6100e6-ce15-465d-8e98-fda37f75da1d.png"
+    },
+    {
+      "Id": "F:\\Greenwich IT\\TOPUP - 1640 - Enterprise Web Software Development\\Code\\Bina3-4\\Bina\\wwwroot\\uploads\\avatars\\e3c79d74-5874-40c1-b5a0-cb5916276f46.png",
+      "PackagePath": "staticwebassets\\uploads\\avatars\\e3c79d74-5874-40c1-b5a0-cb5916276f46.png"
+    },
+    {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.Bina.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },
