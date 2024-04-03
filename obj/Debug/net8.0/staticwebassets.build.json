@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "gMdMvtgEKpNYEfNqWnKbjstkhXvKz0J5TCAbg5AOUvc=",
+  "Hash": "5sjT8sOztWiFOg7/zSzXh9P6xCky9Hb0DZeSxDZ2q+8=",
   "Source": "Bina",
   "BasePath": "_content/Bina",
   "Mode": "Default",
@@ -14856,12 +14856,12 @@
       "OriginalItemSpec": "wwwroot\\scss\\style.scss"
     },
     {
-      "Identity": "F:\\Greenwich IT\\TOPUP - 1640 - Enterprise Web Software Development\\Code\\Bina3-4\\Bina\\wwwroot\\uploads\\avatars\\2d291827-6f88-450d-a79b-cfe6b5f9d5e1.png",
+      "Identity": "F:\\Greenwich IT\\TOPUP - 1640 - Enterprise Web Software Development\\Code\\Bina3-4\\Bina\\wwwroot\\uploads\\33355f2c-b182-4835-9359-a4ca13f0465b.png",
       "SourceId": "Bina",
       "SourceType": "Discovered",
       "ContentRoot": "F:\\Greenwich IT\\TOPUP - 1640 - Enterprise Web Software Development\\Code\\Bina3-4\\Bina\\wwwroot\\",
       "BasePath": "_content/Bina",
-      "RelativePath": "uploads/avatars/2d291827-6f88-450d-a79b-cfe6b5f9d5e1.png",
+      "RelativePath": "uploads/33355f2c-b182-4835-9359-a4ca13f0465b.png",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -14872,15 +14872,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\uploads\\avatars\\2d291827-6f88-450d-a79b-cfe6b5f9d5e1.png"
+      "OriginalItemSpec": "wwwroot\\uploads\\33355f2c-b182-4835-9359-a4ca13f0465b.png"
     },
     {
-      "Identity": "F:\\Greenwich IT\\TOPUP - 1640 - Enterprise Web Software Development\\Code\\Bina3-4\\Bina\\wwwroot\\uploads\\avatars\\4c6100e6-ce15-465d-8e98-fda37f75da1d.png",
+      "Identity": "F:\\Greenwich IT\\TOPUP - 1640 - Enterprise Web Software Development\\Code\\Bina3-4\\Bina\\wwwroot\\uploads\\910214aa-b62a-4cec-9924-34393f77bb2d.jpg",
       "SourceId": "Bina",
       "SourceType": "Discovered",
       "ContentRoot": "F:\\Greenwich IT\\TOPUP - 1640 - Enterprise Web Software Development\\Code\\Bina3-4\\Bina\\wwwroot\\",
       "BasePath": "_content/Bina",
-      "RelativePath": "uploads/avatars/4c6100e6-ce15-465d-8e98-fda37f75da1d.png",
+      "RelativePath": "uploads/910214aa-b62a-4cec-9924-34393f77bb2d.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -14891,15 +14891,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\uploads\\avatars\\4c6100e6-ce15-465d-8e98-fda37f75da1d.png"
+      "OriginalItemSpec": "wwwroot\\uploads\\910214aa-b62a-4cec-9924-34393f77bb2d.jpg"
     },
     {
-      "Identity": "F:\\Greenwich IT\\TOPUP - 1640 - Enterprise Web Software Development\\Code\\Bina3-4\\Bina\\wwwroot\\uploads\\avatars\\e3c79d74-5874-40c1-b5a0-cb5916276f46.png",
+      "Identity": "F:\\Greenwich IT\\TOPUP - 1640 - Enterprise Web Software Development\\Code\\Bina3-4\\Bina\\wwwroot\\uploads\\e79a9112-a120-4a03-9de2-c3267ce11bf3.png",
       "SourceId": "Bina",
       "SourceType": "Discovered",
       "ContentRoot": "F:\\Greenwich IT\\TOPUP - 1640 - Enterprise Web Software Development\\Code\\Bina3-4\\Bina\\wwwroot\\",
       "BasePath": "_content/Bina",
-      "RelativePath": "uploads/avatars/e3c79d74-5874-40c1-b5a0-cb5916276f46.png",
+      "RelativePath": "uploads/e79a9112-a120-4a03-9de2-c3267ce11bf3.png",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -14910,7 +14910,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\uploads\\avatars\\e3c79d74-5874-40c1-b5a0-cb5916276f46.png"
+      "OriginalItemSpec": "wwwroot\\uploads\\e79a9112-a120-4a03-9de2-c3267ce11bf3.png"
     }
   ]
 }

@@ -1,79 +1,79 @@
 ﻿@model IEnumerable<Bina.Models.Article>
 
 
-
-<div>
+<div class="container-fluid">
     <p>
-        <a asp-action="Create">Create New Article</a>
+        <a class="btn btn-success" asp-action="Create"><i class="fa fa-plus"></i> Create New Article</a>
     </p>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.First().ArticleName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.First().Title)
-                </th>
-                <th>
-                    Avatar
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.First().ArticleStatus.ArticleStatusName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.First().ArticlesDeadline.DueDate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.First().Faculty.FacultyName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.First().User.UserName)
-                </th>
-                <th>Hành động</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
+    <div class="table-responsive">
+        <table class="table table-hover table-striped">
+            <thead>
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ArticleName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Title)
-                    </td>
-                    <td>
-                        <!-- Hiển thị avatar nếu có đường dẫn -->
-                        @if (!string.IsNullOrWhiteSpace(item.Image?.Imagepath))
-                        {
-                            <img src="@item.Image.Imagepath" alt="Avatar" style="height: 50px; width: 50px; object-fit: cover;" />
-                        }
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ArticleStatus.ArticleStatusName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ArticlesDeadline.DueDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Faculty.FacultyName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.User.UserName)
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.ArticleId">Chỉnh sửa</a> |
-                        <a asp-action="Details" asp-route-id="@item.ArticleId">Chi tiết</a> |
-                        <a asp-action="Delete" asp-route-id="@item.ArticleId">Xóa</a> |
-                        <!-- Chỉ hiển thị link tải nội dung nếu có -->
-                        @if (item.Content != null && item.Content.Length > 0)
-                        {
-                            <a href="@Url.Action("GetFile", new { id = item.ArticleId })" target="_blank">Tải File</a>
-                        }
-                    </td>
+                    <th>
+                        @Html.DisplayNameFor(model => model.First().ArticleName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.First().Title)
+                    </th>
+                    <th>
+                        Avatar
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.First().ArticlesDeadline.StartDue)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.First().ArticlesDeadline.DueDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.First().Faculty.FacultyName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.First().User.UserName)
+                    </th>
+                    <th>Action</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ArticleName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <td>
+                            <!-- Hiển thị avatar nếu có đường dẫn -->
+                            @if (!string.IsNullOrWhiteSpace(item.Image?.Imagepath))
+                            {
+                                <img src="@item.Image.Imagepath" alt="Avatar" style="height: 50px; width: 50px; object-fit: cover;" />
+                            }
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ArticlesDeadline.StartDue)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ArticlesDeadline.DueDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Faculty.FacultyName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.User.UserName)
+                        </td>
+                        <td>
+                            <a class="btn btn-primary btn-sm" asp-action="Edit" asp-route-id="@item.ArticleId"><i class="fas fa-edit"></i> Edit</a>
+                           @*  <a class="btn btn-info btn-sm" asp-action="Details" asp-route-id="@item.ArticleId"><i class="fas fa-info-circle"></i> Details</a> *@
+                            <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.ArticleId"><i class="fas fa-trash-alt"></i> Remove</a>
+                            @if (item.Content != null && item.Content.Length > 0)
+                            {
+                                <a class="btn btn-warning btn-sm" href="@Url.Action("GetFile", new { id = item.ArticleId })" target="_blank"><i class="fas fa-download"></i> Download File</a>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>

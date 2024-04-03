@@ -1,14 +1,9 @@
 ﻿/*Bina / Controllers / ArticlesController.cs*/
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Bina.Data;
+using Bina.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Bina.Data;
-using Bina.Models;
 
 namespace Bina.Controllers
 {
@@ -16,6 +11,11 @@ namespace Bina.Controllers
     {
         private readonly Ft1Context _context;
         private readonly IWebHostEnvironment _hostingEnvironment;
+
+        private bool ArticleExists(int id)
+        {
+            return _context.Articles.Any(e => e.ArticleId == id);
+        }
 
         public ArticlesController(Ft1Context context, IWebHostEnvironment hostingEnvironment) // Modify the constructor
         {
@@ -98,7 +98,7 @@ namespace Bina.Controllers
             {
                 if (uploadFile != null && uploadFile.Length > 0)
                 {
-                    // Lưu file document như BLOB vào cột 'Content'
+                    // Lưu file dưới dạng BLOB trong cột 'Content'
                     using (var memoryStream = new MemoryStream())
                     {
                         await uploadFile.CopyToAsync(memoryStream);
@@ -106,55 +106,39 @@ namespace Bina.Controllers
                     }
                 }
 
-              /*  if (uploadImage != null && uploadImage.Length > 0)
+                if (uploadImage != null && uploadImage.Length > 0)
                 {
-                    // Tạo tên file duy nhất để tránh xung đột
+                    // Lưu file ảnh vào thư mục trên server
                     var fileName = Guid.NewGuid().ToString() + Path.GetExtension(uploadImage.FileName);
-                    var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "uploads", "avatars", fileName);
+                    var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "uploads", fileName);
 
-                    // Tạo thư mục nếu chưa tồn tại
-                    Directory.CreateDirectory(Path.GetDirectoryName(filePath));
-
-                    // Lưu file ảnh vào thư mục 'uploads/avatars'
                     using (var fileStream = new FileStream(filePath, FileMode.Create))
                     {
                         await uploadImage.CopyToAsync(fileStream);
                     }
 
-                    // Tạo đường dẫn đầy đủ cho ảnh avatar
-                    var domain = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}";
-                    var urlPath = $"{domain}/uploads/avatars/{fileName}";
+                    // Lưu đường dẫn file ảnh vào cơ sở dữ liệu, nếu cần
+                    var image = new Image { Imagepath = "/uploads/" + fileName };
+                    _context.Images.Add(image);
+                    await _context.SaveChangesAsync(); // This saves the image record and generates the ImageID
 
-                    // Tạo mới hoặc cập nhật bản ghi Image với đường dẫn đầy đủ
-                    var existingImage = _context.Images.FirstOrDefault(img => img.Imagepath == urlPath);
-                    if (existingImage == null)
-                    {
-                        var image = new Image { Imagepath = urlPath };
-                        _context.Images.Add(image);
-                        await _context.SaveChangesAsync();
-                        article.ImageId = image.ImageId; // Chỉ định ImageId mới tạo cho bài viết
-                    }
-                    else
-                    {
-                        article.ImageId = existingImage.ImageId; // Sử dụng ImageId hiện có
-                    }
-                }*/
+                    article.ImageId = image.ImageId; // Assign the generated ImageId to the article
+                }
 
-                // Thêm article vào database
+                // Thêm bài viết vào cơ sở dữ liệu
                 _context.Articles.Add(article);
-                await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync(); // This saves the article record, which includes the Content BLOB and ImageID
                 return RedirectToAction(nameof(Index));
             }
 
-            // Nếu ModelState không hợp lệ, chuẩn bị lại ViewData cho các dropdown
+            // Prepare ViewData for the view if the model state is not valid
             ViewData["ArticleStatusId"] = new SelectList(_context.ArticleStatuses, "ArticleStatusId", "ArticleStatusName", article.ArticleStatusId);
             ViewData["ArticlesDeadlineId"] = new SelectList(_context.ArticlesDeadlines, "ArticlesDeadlineId", "DueDate", article.ArticlesDeadlineId);
             ViewData["FacultyId"] = new SelectList(_context.Faculties, "FacultyId", "FacultyName", article.FacultyId);
-            // Bỏ đi vì không cần thiết và có thể gây nhầm lẫn: ViewData["ImageId"] = new SelectList(_context.Images, "ImageId", "Imagepath", article.ImageId);
             ViewData["UserId"] = new SelectList(_context.Users, "UserId", "UserName", article.UserId);
-
             return View(article);
         }
+
 
 
         // GET: Articles/Edit/5
@@ -183,7 +167,7 @@ namespace Bina.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ArticleId,ArticleName,Title,Content,UserId,ImageId,ArticleStatusId,ArticlesDeadlineId,FacultyId")] Article article)
+        public async Task<IActionResult> Edit(int id, [Bind("ArticleId,ArticleName,Title,Content,UserId,ImageId,ArticleStatusId,ArticlesDeadlineId,FacultyId")] Article article, IFormFile uploadFile, IFormFile uploadImage)
         {
             if (id != article.ArticleId)
             {
@@ -194,6 +178,37 @@ namespace Bina.Controllers
             {
                 try
                 {
+                    if (uploadFile != null && uploadFile.Length > 0)
+                    {
+                        using (var memoryStream = new MemoryStream())
+                        {
+                            await uploadFile.CopyToAsync(memoryStream);
+                            article.Content = memoryStream.ToArray();
+                        }
+                    }
+
+                    if (uploadImage != null && uploadImage.Length > 0)
+                    {
+                        var fileName = Guid.NewGuid().ToString() + Path.GetExtension(uploadImage.FileName);
+                        var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "uploads", fileName);
+
+                        using (var fileStream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await uploadImage.CopyToAsync(fileStream);
+                        }
+
+                        if (article.Image != null)
+                        {
+                            _context.Images.Remove(article.Image); // Xoá hình ảnh cũ
+                        }
+
+                        var image = new Image { Imagepath = "/uploads/" + fileName };
+                        _context.Images.Add(image);
+                        await _context.SaveChangesAsync();
+
+                        article.ImageId = image.ImageId;
+                    }
+
                     _context.Update(article);
                     await _context.SaveChangesAsync();
                 }
@@ -210,13 +225,18 @@ namespace Bina.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ArticleStatusId"] = new SelectList(_context.ArticleStatuses, "ArticleStatusId", "ArticleStatusId", article.ArticleStatusId);
-            ViewData["ArticlesDeadlineId"] = new SelectList(_context.ArticlesDeadlines, "ArticlesDeadlineId", "ArticlesDeadlineId", article.ArticlesDeadlineId);
-            ViewData["FacultyId"] = new SelectList(_context.Faculties, "FacultyId", "FacultyId", article.FacultyId);
-            ViewData["ImageId"] = new SelectList(_context.Images, "ImageId", "ImageId", article.ImageId);
-            ViewData["UserId"] = new SelectList(_context.Users, "UserId", "UserId", article.UserId);
+            // Cập nhật SelectList cho View
+            ViewData["ArticleStatusId"] = new SelectList(_context.ArticleStatuses, "ArticleStatusId", "ArticleStatusName", article.ArticleStatusId);
+            ViewData["ArticlesDeadlineId"] = new SelectList(_context.ArticlesDeadlines, "ArticlesDeadlineId", "DueDate", article.ArticlesDeadlineId);
+            ViewData["FacultyId"] = new SelectList(_context.Faculties, "FacultyId", "FacultyName", article.FacultyId);
+            ViewData["ImageId"] = new SelectList(_context.Images, "ImageId", "Imagepath", article.ImageId);
+            ViewData["UserId"] = new SelectList(_context.Users, "UserId", "UserName", article.UserId);
             return View(article);
         }
+
+
+
+
 
         // GET: Articles/Delete/5
         public async Task<IActionResult> Delete(int? id)
@@ -246,19 +266,36 @@ namespace Bina.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var article = await _context.Articles.FindAsync(id);
+            var article = await _context.Articles.Include(a => a.Image).FirstOrDefaultAsync(a => a.ArticleId == id);
             if (article != null)
             {
+                // Xoá file ảnh từ server
+                if (article.Image != null)
+                {
+                    var imagePath = Path.Combine(_hostingEnvironment.WebRootPath, article.Image.Imagepath.TrimStart('/'));
+                    if (System.IO.File.Exists(imagePath))
+                    {
+                        System.IO.File.Delete(imagePath);
+                    }
+                    _context.Images.Remove(article.Image);
+                }
+
+                // Xoá file nếu bài viết có file đính kèm
+                if (article.Content != null)
+                {
+                    // Tùy thuộc vào cách bạn lưu trữ file, nếu bạn lưu trữ file trên server, xoá file tại đây
+                    // Ví dụ: System.IO.File.Delete(ServerFilePath);
+                }
+
                 _context.Articles.Remove(article);
+                await _context.SaveChangesAsync();
             }
 
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ArticleExists(int id)
-        {
-            return _context.Articles.Any(e => e.ArticleId == id);
-        }
+
+
+
     }
 }

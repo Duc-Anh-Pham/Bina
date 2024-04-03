@@ -11520,12 +11520,12 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\scss\style.scss))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\avatars\2d291827-6f88-450d-a79b-cfe6b5f9d5e1.png))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\33355f2c-b182-4835-9359-a4ca13f0465b.png))">
       <SourceType>Package</SourceType>
       <SourceId>Bina</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/Bina</BasePath>
-      <RelativePath>uploads/avatars/2d291827-6f88-450d-a79b-cfe6b5f9d5e1.png</RelativePath>
+      <RelativePath>uploads/33355f2c-b182-4835-9359-a4ca13f0465b.png</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
@@ -11534,14 +11534,14 @@
       <AssetTraitValue></AssetTraitValue>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\avatars\2d291827-6f88-450d-a79b-cfe6b5f9d5e1.png))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\33355f2c-b182-4835-9359-a4ca13f0465b.png))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\avatars\4c6100e6-ce15-465d-8e98-fda37f75da1d.png))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\910214aa-b62a-4cec-9924-34393f77bb2d.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>Bina</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/Bina</BasePath>
-      <RelativePath>uploads/avatars/4c6100e6-ce15-465d-8e98-fda37f75da1d.png</RelativePath>
+      <RelativePath>uploads/910214aa-b62a-4cec-9924-34393f77bb2d.jpg</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
@@ -11550,14 +11550,14 @@
       <AssetTraitValue></AssetTraitValue>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\avatars\4c6100e6-ce15-465d-8e98-fda37f75da1d.png))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\910214aa-b62a-4cec-9924-34393f77bb2d.jpg))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\avatars\e3c79d74-5874-40c1-b5a0-cb5916276f46.png))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\e79a9112-a120-4a03-9de2-c3267ce11bf3.png))">
       <SourceType>Package</SourceType>
       <SourceId>Bina</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/Bina</BasePath>
-      <RelativePath>uploads/avatars/e3c79d74-5874-40c1-b5a0-cb5916276f46.png</RelativePath>
+      <RelativePath>uploads/e79a9112-a120-4a03-9de2-c3267ce11bf3.png</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
@@ -11566,7 +11566,7 @@
       <AssetTraitValue></AssetTraitValue>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\avatars\e3c79d74-5874-40c1-b5a0-cb5916276f46.png))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\e79a9112-a120-4a03-9de2-c3267ce11bf3.png))</OriginalItemSpec>
     </StaticWebAsset>
   </ItemGroup>
 </Project>

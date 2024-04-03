@@ -42,7 +42,7 @@ public partial class Ft1Context : DbContext
     {
         modelBuilder.Entity<Article>(entity =>
         {
-            entity.HasKey(e => e.ArticleId).HasName("PK__Articles__9C6270C83AEB18D4");
+            entity.HasKey(e => e.ArticleId).HasName("PK__Articles__9C6270C822B5CEEE");
 
             entity.Property(e => e.ArticleId).HasColumnName("ArticleID");
             entity.Property(e => e.ArticleName)
@@ -82,7 +82,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<ArticleComment>(entity =>
         {
-            entity.HasKey(e => e.CommentId).HasName("PK__ArticleC__C3B4DFAA1BF3DCB0");
+            entity.HasKey(e => e.CommentId).HasName("PK__ArticleC__C3B4DFAABA4CDD94");
 
             entity.Property(e => e.CommentId)
                 .ValueGeneratedNever()
@@ -102,7 +102,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<ArticleStatus>(entity =>
         {
-            entity.HasKey(e => e.ArticleStatusId).HasName("PK__ArticleS__3F0E2D6B56B8CFEF");
+            entity.HasKey(e => e.ArticleStatusId).HasName("PK__ArticleS__3F0E2D6BD796A888");
 
             entity.ToTable("ArticleStatus");
 
@@ -114,7 +114,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<ArticlesDeadline>(entity =>
         {
-            entity.HasKey(e => e.ArticlesDeadlineId).HasName("PK__Articles__253F2FDCC4C11E50");
+            entity.HasKey(e => e.ArticlesDeadlineId).HasName("PK__Articles__253F2FDCFF659A32");
 
             entity.ToTable("ArticlesDeadline");
 
@@ -133,7 +133,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<Faculty>(entity =>
         {
-            entity.HasKey(e => e.FacultyId).HasName("PK__Faculty__306F636E7A568F48");
+            entity.HasKey(e => e.FacultyId).HasName("PK__Faculty__306F636EA86BF5B0");
 
             entity.ToTable("Faculty");
 
@@ -146,7 +146,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<Image>(entity =>
         {
-            entity.HasKey(e => e.ImageId).HasName("PK__Image__7516F4EC8406AB4E");
+            entity.HasKey(e => e.ImageId).HasName("PK__Image__7516F4EC9D8F7267");
 
             entity.ToTable("Image");
 
@@ -160,7 +160,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<Role>(entity =>
         {
-            entity.HasKey(e => e.RoleId).HasName("PK__Role__8AFACE3A7CC19ACD");
+            entity.HasKey(e => e.RoleId).HasName("PK__Role__8AFACE3A7039D9E7");
 
             entity.ToTable("Role");
 
@@ -172,7 +172,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<TermsAndCondition>(entity =>
         {
-            entity.HasKey(e => e.TermsId).HasName("PK__TermsAnd__C05EBE008C57B0FF");
+            entity.HasKey(e => e.TermsId).HasName("PK__TermsAnd__C05EBE00B1F4C6E2");
 
             entity.Property(e => e.TermsId)
                 .ValueGeneratedNever()
@@ -182,7 +182,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.UserId).HasName("PK__User__1788CCAC118B22FA");
+            entity.HasKey(e => e.UserId).HasName("PK__User__1788CCAC6686E0F9");
 
             entity.ToTable("User");
 
