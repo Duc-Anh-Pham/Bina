@@ -1,10 +1,9 @@
 ﻿using Bina.Data;
 using Bina.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Bina.Models.Authentication;
-
-namespace Bina.Areas.Admin.Controllers
+namespace Bina.Controllers
 {
     [Area("Admin")]
     public class FacultyController : Controller
@@ -15,8 +14,6 @@ namespace Bina.Areas.Admin.Controllers
         {
             _context = context;
         }
-
-        [Authentication]
 
         // GET: Faculty
         public async Task<IActionResult> Index()
@@ -32,10 +29,11 @@ namespace Bina.Areas.Admin.Controllers
                     FacultyId = faculty.FacultyId,
                     FacultyName = faculty.FacultyName,
                     Established = faculty.Established ?? default(DateTime),
+                    Status = faculty.Status,
                     CoordinatorUserName = _context.Users
                         .Where(u => u.FacultyId == faculty.FacultyId && u.Role.RoleName == "Marketing Coordinator")
                         .Select(u => u.UserName)
-                        .FirstOrDefault() // Assuming there's only one coordinator per faculty
+                        .FirstOrDefault()
                 }).ToListAsync();
 
             return View(facultiesWithCoordinators);
@@ -72,21 +70,48 @@ namespace Bina.Areas.Admin.Controllers
         // GET: Faculty/Create
         public IActionResult Create()
         {
+            ViewBag.CoordinatorUserNames = _context.Users
+           .Where(u => u.RoleId == 2 && u.FacultyId == null)
+           .Select(u => new SelectListItem
+           {
+               Text = u.UserName,
+               Value = u.UserName
+           })
+           .ToList();
+
             return View();
         }
 
         // POST: Faculty/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("FacultyId,FacultyName,Established")] Faculty faculty)
+        public async Task<IActionResult> Create([Bind("FacultyId,FacultyName,Established,CoordinatorUserName")] ViewModels viewModel)
         {
             if (ModelState.IsValid)
             {
+                var faculty = new Faculty
+                {
+                    FacultyId = viewModel.FacultyId,
+                    FacultyName = viewModel.FacultyName,
+                    Established = viewModel.Established
+                };
                 _context.Add(faculty);
                 await _context.SaveChangesAsync();
+
+                if (!string.IsNullOrWhiteSpace(viewModel.CoordinatorUserName))
+                {
+                    var coordinator = await _context.Users.FirstOrDefaultAsync(u => u.UserName == viewModel.CoordinatorUserName);
+                    if (coordinator != null)
+                    {
+                        coordinator.FacultyId = faculty.FacultyId;
+                        _context.Update(coordinator);
+                        await _context.SaveChangesAsync();
+                    }
+                }
+
                 return RedirectToAction(nameof(Index));
             }
-            return View(faculty);
+            return View(viewModel);
         }
         // GET: Faculty/Edit/5
         public async Task<IActionResult> Edit(string id)
@@ -113,6 +138,14 @@ namespace Bina.Areas.Admin.Controllers
             {
                 return NotFound();
             }
+            ViewBag.CoordinatorUserNames = _context.Users
+         .Where(u => u.RoleId == 2 && u.FacultyId == null)
+         .Select(u => new SelectListItem
+         {
+             Text = u.UserName,
+             Value = u.UserName
+         })
+         .ToList();
 
             return View(faculty);
         }
@@ -131,7 +164,6 @@ namespace Bina.Areas.Admin.Controllers
             {
                 try
                 {
-                    // First, update the faculty details
                     var faculty = await _context.Faculties.FindAsync(viewModel.FacultyId);
                     if (faculty == null)
                     {
@@ -142,16 +174,24 @@ namespace Bina.Areas.Admin.Controllers
                     faculty.Established = viewModel.Established;
                     _context.Update(faculty);
 
-                    // Then, update the coordinator user name if it has changed
                     var currentCoordinator = await _context.Users
-                        .Where(u => u.FacultyId == viewModel.FacultyId && u.Role.RoleName == "Marketing coordinator")
-                        .FirstOrDefaultAsync();
+                       .Where(u => u.FacultyId == viewModel.FacultyId && u.Role.RoleName == "Marketing coordinator")
+                       .FirstOrDefaultAsync();
 
-                    if (currentCoordinator != null && currentCoordinator.UserName != viewModel.CoordinatorUserName)
+                    if (viewModel.CoordinatorUserName != currentCoordinator?.UserName && !string.IsNullOrWhiteSpace(viewModel.CoordinatorUserName))
                     {
-                        // Here you would ideally check if the new username exists or any business logic around changing usernames
-                        currentCoordinator.UserName = viewModel.CoordinatorUserName;
-                        _context.Update(currentCoordinator);
+                        var newCoordinator = await _context.Users.FirstOrDefaultAsync(u => u.UserName == viewModel.CoordinatorUserName);
+                        if (newCoordinator != null && newCoordinator.FacultyId == null)
+                        {
+                            // Update the old coordinator if exists
+                            if (currentCoordinator != null)
+                            {
+                                currentCoordinator.FacultyId = null; // Unassign the old coordinator
+                                _context.Update(currentCoordinator);
+                            }
+                            newCoordinator.FacultyId = faculty.FacultyId;
+                            _context.Update(newCoordinator);
+                        }
                     }
 
                     await _context.SaveChangesAsync();
@@ -171,6 +211,7 @@ namespace Bina.Areas.Admin.Controllers
             }
             return View(viewModel);
         }
+
 
 
         // GET: Faculty/Delete/5
@@ -211,12 +252,47 @@ namespace Bina.Areas.Admin.Controllers
             {
                 return Problem("Entity set 'FT1Context.Faculties' is null.");
             }
+
             var faculty = await _context.Faculties.FindAsync(id);
             if (faculty != null)
             {
+                // Find all users associated with this faculty
+                var associatedUsers = _context.Users.Where(u => u.FacultyId == id);
+
+                // Option 1: Set FacultyId to null for all associated users
+                foreach (var user in associatedUsers)
+                {
+                    user.FacultyId = null; // Or set to another valid FacultyId
+                }
+
+                // Option 2: Delete all associated users (Use with caution!)
+                // _context.Users.RemoveRange(associatedUsers);
+
+                // Save changes for users if needed
+                await _context.SaveChangesAsync();
+
                 _context.Faculties.Remove(faculty);
                 await _context.SaveChangesAsync();
             }
+
+            return RedirectToAction(nameof(Index));
+        }
+        // POST: Users/ToggleStatus/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ToggleStatus(string facultyId)
+        {
+            var faculty = await _context.Faculties.FindAsync(facultyId);
+            if (faculty == null)
+            {
+                return NotFound();
+            }
+
+            // Toggle status
+            faculty.Status = (byte)(faculty.Status == 1 ? 0 : 1);
+
+            _context.Update(faculty);
+            await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
         }

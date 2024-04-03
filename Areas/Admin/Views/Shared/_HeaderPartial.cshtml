@@ -108,12 +108,9 @@
                 </li>
 
                 <li class="nav-item">
-                    @* <a class="nav-link" href="#"><i class="bi bi-book" style="margin-right: 10px"></i> Article Management </a> *@
-                </li>
-
-                <li class="nav-item">
                     <a class="nav-link" asp-area="Admin" asp-controller="Faculty" asp-action="Index">
-                        <i class="bi bi-people-fill" style="margin-right: 10px"></i>Faculty Management</a>
+                        <i class="bi bi-people-fill" style="margin-right: 10px"></i>Faculty Management
+                    </a>
                 </li>
 
                 <li class="nav-item">
@@ -123,11 +120,17 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="bi bi-sliders" style="margin-right: 10px"></i> System configuration </a>
+                    <a class="nav-link" asp-area="Admin" asp-controller="Articles" asp-action="Index">
+                        <i class="bi bi-people-fill" style="margin-right: 10px"></i>Articles Deadline
+                    </a>
                 </li>
 
+                @* <li class="nav-item">
+                <a class="nav-link" href="#"><i class="bi bi-sliders" style="margin-right: 10px"></i> System Configuration </a>
+                </li> *@
+
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="bi bi-journal-bookmark" style="margin-right: 10px"></i> System log </a>
+                    <a class="nav-link" href="#"><i class="bi bi-journal-bookmark" style="margin-right: 10px"></i> System Logs </a>
                 </li>
 
                 <li class="nav-item">

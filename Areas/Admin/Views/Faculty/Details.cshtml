@@ -4,12 +4,11 @@
     ViewData["Title"] = "Details";
 }
 
-<div class="container my-5">
-    <h1 class="text-center mb-4">Faculty Details</h1>
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-body">
+<h1 class="text-center mb-4">Faculty Details</h1>
+
+<div>
+
+    <hr />
     <dl class="row">
         <dt class="col-sm-2">
             Faculty ID
@@ -40,9 +39,9 @@
         </dd>
     </dl>
 </div>
-<br/>
-
+</br>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.FacultyId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model?.FacultyId" class="btn btn-primary">Edit</a>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
 </div>
+
