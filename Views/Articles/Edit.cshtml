@@ -1,0 +1,50 @@
+﻿@model Bina.Models.Article
+
+<div class="container mt-4">
+    <h4>Edit Article</h4>
+    <hr />
+    <form asp-action="Edit" method="post" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="ArticleId" />
+
+        <div class="mb-3">
+            <label asp-for="ArticleName" class="form-label">Article Name</label>
+            <input asp-for="ArticleName" class="form-control" />
+            <span asp-validation-for="ArticleName" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Title" class="form-label">Title</label>
+            <input asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+
+        <!-- Phần tải lên file PDF -->
+        <div class="mb-3">
+            <label for="uploadFile" class="form-label">PDF File (Optional: upload to replace current file)</label>
+            <input type="file" class="form-control" name="uploadFile" accept=".pdf" />
+        </div>
+
+        <!-- Phần tải lên hình ảnh -->
+        <div class="mb-3">
+            <label for="uploadImage" class="form-label">Image (Optional: upload to replace current image)</label>
+            <input type="file" class="form-control" name="uploadImage" accept="image/*" />
+        </div>
+
+        <!-- Các trường khác giống như trong Create -->
+        <div class="mb-3">
+            <label asp-for="UserId" class="form-label">User</label>
+            <select asp-for="UserId" class="form-select" asp-items="ViewBag.UserId"></select>
+            <span asp-validation-for="UserId" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="ArticleStatusId" class="form-label">Article Status</label>
+            <select asp-for="ArticleStatusId" class="form-select" asp-items="ViewBag.ArticleStatusId"></select>
+            <span asp-validation-for="ArticleStatusId" class="text-danger"></span>
+        </div>
+
+        <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+        </div>
+    </form>
+    <a href="@Url.Action("Index")" class="btn btn-secondary mt-2">Back to List</a>
+</div>

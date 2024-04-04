@@ -1,0 +1,79 @@
+﻿@model IEnumerable<Bina.Models.Article>
+
+
+<div class="container-fluid">
+    <p>
+        <a class="btn btn-success" asp-action="Create"><i class="fa fa-plus"></i> Create New Article</a>
+    </p>
+    <div class="table-responsive">
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.First().ArticleName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.First().Title)
+                    </th>
+                    <th>
+                        Avatar
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.First().ArticlesDeadline.StartDue)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.First().ArticlesDeadline.DueDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.First().Faculty.FacultyName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.First().User.UserName)
+                    </th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ArticleName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <td>
+                            <!-- Hiển thị avatar nếu có đường dẫn -->
+                            @if (!string.IsNullOrWhiteSpace(item.Image?.Imagepath))
+                            {
+                                <img src="@item.Image.Imagepath" alt="Avatar" style="height: 50px; width: 50px; object-fit: cover;" />
+                            }
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ArticlesDeadline.StartDue)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ArticlesDeadline.DueDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Faculty.FacultyName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.User.UserName)
+                        </td>
+                        <td>
+                            <a class="btn btn-primary btn-sm" asp-action="Edit" asp-route-id="@item.ArticleId"><i class="fas fa-edit"></i> Edit</a>
+                           @*  <a class="btn btn-info btn-sm" asp-action="Details" asp-route-id="@item.ArticleId"><i class="fas fa-info-circle"></i> Details</a> *@
+                            <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.ArticleId"><i class="fas fa-trash-alt"></i> Remove</a>
+                            @if (item.Content != null && item.Content.Length > 0)
+                            {
+                                <a class="btn btn-warning btn-sm" href="@Url.Action("GetFile", new { id = item.ArticleId })" target="_blank"><i class="fas fa-download"></i> Download File</a>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
