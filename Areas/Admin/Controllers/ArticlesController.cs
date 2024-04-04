@@ -3,7 +3,6 @@ using Bina.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-
 namespace Bina.Areas.Admin.Controllers
 {
     [Area("Admin")]
@@ -17,11 +16,31 @@ namespace Bina.Areas.Admin.Controllers
         }
 
         // GET: Admin/Articles
-        public async Task<IActionResult> Index()
+        [HttpGet]
+        public async Task<IActionResult> Index(string? facultyId = null, int page = 1)
         {
-            var fT1Context = _context.Articles.Include(a => a.ArticleStatus).Include(a => a.ArticlesDeadline).Include(a => a.Image).Include(a => a.User);
-            return View(await fT1Context.ToListAsync());
+            IQueryable<Article> fT1Context = _context.Articles
+                .Include(a => a.ArticleStatus)
+                .Include(a => a.ArticlesDeadline)
+                .Include(a => a.Image)
+                .Include(a => a.User);
+
+            if (!string.IsNullOrWhiteSpace(facultyId) && !facultyId.Equals("ALL", StringComparison.OrdinalIgnoreCase))
+            {
+                fT1Context = fT1Context.Where(a => a.FacultyId == facultyId);
+            }
+
+            int pageSize = 4;
+            int totalArticles = await fT1Context.CountAsync();
+            var articles = await fT1Context.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
+            var pager = new Pager(totalArticles, page, pageSize);
+
+            var model = new Tuple<IEnumerable<Article>, Pager>(articles, pager);
+
+            return View(model);
         }
+
+
 
         // GET: Articles/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -206,16 +225,6 @@ namespace Bina.Areas.Admin.Controllers
 
             return View(article);
         }
-
-
-
-
-
-
-
-
-
-
         // GET: Admin/Articles/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -277,9 +286,6 @@ namespace Bina.Areas.Admin.Controllers
                 return RedirectToAction(nameof(Delete), new { id = id, saveChangesError = true });
             }
         }
-
-
-
         private bool ArticleExists(int id)
         {
             return _context.Articles.Any(e => e.ArticleId == id);

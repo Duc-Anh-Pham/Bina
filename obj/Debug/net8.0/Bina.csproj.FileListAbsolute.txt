@@ -1098,3 +1098,14 @@ E:\Main\Bina\bin\Debug\net8.0\Microsoft.AspNetCore.Metadata.dll
 E:\Main\Bina\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 E:\Main\Bina\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
 E:\Main\Bina\bin\Debug\net8.0\Microsoft.JSInterop.dll
+E:\Main\Bina\bin\Debug\net8.0\X.PagedList.dll
+E:\Main\Bina\bin\Debug\net8.0\X.PagedList.Mvc.Core.dll
+E:\Main\Bina\bin\Debug\net8.0\System.Web.Mvc.dll
+E:\Main\Bina\bin\Debug\net8.0\System.Web.Razor.dll
+E:\Main\Bina\bin\Debug\net8.0\System.Web.Helpers.dll
+E:\Main\Bina\bin\Debug\net8.0\System.Web.WebPages.Deployment.dll
+E:\Main\Bina\bin\Debug\net8.0\System.Web.WebPages.Razor.dll
+E:\Main\Bina\bin\Debug\net8.0\System.Web.WebPages.dll
+E:\Main\Bina\bin\Debug\net8.0\Microsoft.Web.Infrastructure.dll
+E:\Main\Bina\bin\Debug\net8.0\X.PagedList.Mvc.dll
+E:\Main\Bina\bin\Debug\net8.0\X.PagedList.Web.Common.dll
