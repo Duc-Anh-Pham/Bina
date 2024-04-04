@@ -1,9 +1,9 @@
 using Bina.Data;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Authentication.MicrosoftAccount;
-using Microsoft.Extensions.Options;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +12,7 @@ builder.Services.AddAuthentication(option =>
 {
     option.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
     option.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
-	option.DefaultChallengeScheme = MicrosoftAccountDefaults.AuthenticationScheme;
+    option.DefaultChallengeScheme = MicrosoftAccountDefaults.AuthenticationScheme;
 })
 
 .AddCookie()
@@ -27,8 +27,8 @@ builder.Services.AddAuthentication(option =>
 //Login Microsoft OAuth
 .AddMicrosoftAccount(MicrosoftAccountDefaults.AuthenticationScheme, option =>
 {
-	option.ClientId = builder.Configuration.GetSection("MicrosoftKeys:ClientId").Value;
-	option.ClientSecret = builder.Configuration.GetSection("MicrosoftKeys:ClientSecret").Value;
+    option.ClientId = builder.Configuration.GetSection("MicrosoftKeys:ClientId").Value;
+    option.ClientSecret = builder.Configuration.GetSection("MicrosoftKeys:ClientSecret").Value;
 });
 
 // Add services to the container.
