@@ -4,6 +4,14 @@
     ViewData["Title"] = "Index";
 }
 
+<style>
+    /* CSS để làm mờ và ngăn chặn click nút "Edit" khi Status là 0 */
+    .disabled-btn {
+        pointer-events: none; /* Ngăn chặn sự kiện click */
+        opacity: 0.5; /* Làm mờ nút */
+    }
+</style>
+
 <div class="container my-5">
     <h1 class="text-center mb-4">Faculty Management</h1>
     <p class="text-end mb-4">
@@ -12,65 +20,48 @@
         </a>
     </p>
     <div class="table-responsive">
-        <table class = "table table-striped table-bordered table-hover text-center">
+        <table class="table table-striped table-bordered table-hover text-center">
             <thead class="table-dark">
                 <tr>
-                     <th>
-                            Faculty ID
-                        </th>
-
-                     <th>
-                        Faculty Name
-                     </th>
-
-                    <th>
-                        Coordinator Username
-                    </th>
-
-                    <th>
-                        Established
-                     </th>
-
-                     <th>
-                            Action
-                    </th>
-
+                    <th>Faculty ID</th>
+                    <th>Faculty Name</th>
+                    <th>Established </th>
+                    <th>Coordinator</th>
+                    <th>Status</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
-
             <tbody>
                 @foreach (var item in Model)
                 {
-                     <tr>
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.FacultyId)</td>
+                        <td>@Html.DisplayFor(modelItem => item.FacultyName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Established)</td>
+                        <td>@Html.DisplayFor(modelItem => item.CoordinatorUserName)</td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.FacultyId)
+                            <div class="d-flex justify-content-center">
+                                <div class="form-check form-switch">
+                                    @using (Html.BeginForm("ToggleStatus", "Faculty", new { id = item.FacultyId }, FormMethod.Post))
+                                    {
+                                        <input type="hidden" name="facultyId" value="@item.FacultyId" />
+                                        <input class="form-check-input" type="checkbox" role="switch" id="statusToggle_@item.FacultyId" @(item.Status == 1 ? "checked" : "") onchange="this.form.submit()">
+                                    }
+                                </div>
+                            </div>
                         </td>
 
-
                         <td>
-                            @Html.DisplayFor(modelItem => item.FacultyName)
-                        </td>
-
-
-                        <td>
-                            @Html.DisplayFor(modelItem => item.CoordinatorUserName)
-                        </td>
-
-
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Established)
-                        </td>
-                        <td>
-                               <div class="btn-group" role="group" aria-label="Actions">
-                                            <a asp-action="Edit" asp-route-id="@item.FacultyId" class="btn btn-primary btn-sm" title="Edit">
-                                                <i class="bi bi-pencil"></i>
-                                            </a>
-                                            <a asp-action="Details" asp-route-id="@item.FacultyId" class="btn btn-success btn-sm" title="Detail">
-                                                <i class="bi bi-eye"></i>
-                                            </a>
-                                            <a asp-action="Delete" asp-route-id="@item.FacultyId" class="btn btn-danger btn-sm" title="Delete">
-                                                <i class="bi bi-trash3"></i>
-                                            </a>
+                            <div class="btn-group" role="group" aria-label="Actions">
+                                <a asp-action="Edit" asp-route-id="@item.FacultyId" class="btn btn-primary btn-sm @(item.Status == 0 ? "disabled-btn" : "")" title="Edit">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                                <a asp-action="Details" asp-route-id="@item.FacultyId" class="btn btn-success btn-sm" title="Detail">
+                                    <i class="bi bi-eye"></i>
+                                </a>
+                           @*      <a asp-action="Delete" asp-route-id="@item.FacultyId" class="btn btn-danger btn-sm" title="Delete">
+                                    <i class="bi bi-trash3"></i>
+                                </a> *@
                             </div>
                         </td>
                     </tr>
