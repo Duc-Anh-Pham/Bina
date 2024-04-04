@@ -1,4 +1,7 @@
-﻿namespace Bina.Models;
+﻿using System;
+using System.Collections.Generic;
+
+namespace Bina.Models;
 
 public partial class Faculty
 {
@@ -8,7 +11,9 @@ public partial class Faculty
 
     public DateTime? Established { get; set; }
 
-    public virtual ICollection<ArticleStatus> ArticleStatuses { get; set; } = new List<ArticleStatus>();
+    public byte? Status { get; set; }
+
+    public virtual ICollection<Article> Articles { get; set; } = new List<Article>();
 
     public virtual ICollection<User> Users { get; set; } = new List<User>();
 }

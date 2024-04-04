@@ -1,18 +1,30 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\Github\\Bina\\",
+  "WorkspaceRootPath": "D:\\Github\\COMP1640\\Bina\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|d:\\github\\bina\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|solutionrelative:models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|d:\\github\\comp1640\\bina\\areas\\admin\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|solutionrelative:areas\\admin\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|d:\\github\\bina\\views\\logins\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|d:\\github\\comp1640\\bina\\areas\\admin\\views\\users\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|solutionrelative:areas\\admin\\views\\users\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|d:\\github\\comp1640\\bina\\controllers\\loginscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|solutionrelative:controllers\\loginscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|d:\\github\\comp1640\\bina\\views\\logins\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|solutionrelative:views\\logins\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|d:\\github\\bina\\controllers\\loginscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|solutionrelative:controllers\\loginscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|d:\\github\\comp1640\\bina\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|d:\\github\\comp1640\\bina\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -30,41 +42,80 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\Github\\COMP1640\\Bina\\Areas\\Admin\\Views\\Users\\Index.cshtml",
+              "RelativeDocumentMoniker": "Areas\\Admin\\Views\\Users\\Index.cshtml",
+              "ToolTip": "D:\\Github\\COMP1640\\Bina\\Areas\\Admin\\Views\\Users\\Index.cshtml",
+              "RelativeToolTip": "Areas\\Admin\\Views\\Users\\Index.cshtml",
+              "ViewState": "AQIAADcAAAAAAAAAAAAqwEQAAAAbAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-04T00:50:28.435Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "D:\\Github\\COMP1640\\Bina\\Views\\Logins\\Login.cshtml",
+              "RelativeDocumentMoniker": "Views\\Logins\\Login.cshtml",
+              "ToolTip": "D:\\Github\\COMP1640\\Bina\\Views\\Logins\\Login.cshtml",
+              "RelativeToolTip": "Views\\Logins\\Login.cshtml",
+              "ViewState": "AQIAACQAAAAAAAAAAADwvzEAAAAqAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-04T00:07:13.338Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "User.cs",
-              "DocumentMoniker": "D:\\Github\\Bina\\Models\\User.cs",
-              "RelativeDocumentMoniker": "Models\\User.cs",
-              "ToolTip": "D:\\Github\\Bina\\Models\\User.cs",
-              "RelativeToolTip": "Models\\User.cs",
-              "ViewState": "AQIAAAwAAAAAAAAAAAAAABUAAAAAAAAA",
+              "Title": "UsersController.cs",
+              "DocumentMoniker": "D:\\Github\\COMP1640\\Bina\\Areas\\Admin\\Controllers\\UsersController.cs",
+              "RelativeDocumentMoniker": "Areas\\Admin\\Controllers\\UsersController.cs",
+              "ToolTip": "D:\\Github\\COMP1640\\Bina\\Areas\\Admin\\Controllers\\UsersController.cs",
+              "RelativeToolTip": "Areas\\Admin\\Controllers\\UsersController.cs",
+              "ViewState": "AQIAAPoAAAAAAAAAAAAqwCEBAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-02T21:37:46.837Z",
+              "WhenOpened": "2024-04-04T00:01:02.59Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
               "Title": "LoginsController.cs",
-              "DocumentMoniker": "D:\\Github\\Bina\\Controllers\\LoginsController.cs",
+              "DocumentMoniker": "D:\\Github\\COMP1640\\Bina\\Controllers\\LoginsController.cs",
               "RelativeDocumentMoniker": "Controllers\\LoginsController.cs",
-              "ToolTip": "D:\\Github\\Bina\\Controllers\\LoginsController.cs",
+              "ToolTip": "D:\\Github\\COMP1640\\Bina\\Controllers\\LoginsController.cs",
               "RelativeToolTip": "Controllers\\LoginsController.cs",
-              "ViewState": "AQIAABkAAAAAAAAAAAAowCEAAAADAAAA",
+              "ViewState": "AQIAAFcAAAAAAAAAAAAAABEAAAAoAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-02T21:35:09.177Z",
+              "WhenOpened": "2024-04-03T21:57:15.798Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Login.cshtml",
-              "DocumentMoniker": "D:\\Github\\Bina\\Views\\Logins\\Login.cshtml",
-              "RelativeDocumentMoniker": "Views\\Logins\\Login.cshtml",
-              "ToolTip": "D:\\Github\\Bina\\Views\\Logins\\Login.cshtml",
-              "RelativeToolTip": "Views\\Logins\\Login.cshtml",
-              "ViewState": "AQIAADAAAAAAAAAAAAAowEkAAABjAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-02T20:57:53.626Z",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Github\\COMP1640\\Bina\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "D:\\Github\\COMP1640\\Bina\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AQIAAAIAAAAAAAAAAAAqwBcAAABcAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-03T21:57:09.814Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\Github\\COMP1640\\Bina\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "D:\\Github\\COMP1640\\Bina\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAARAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-04-03T21:56:39.966Z",
               "EditorCaption": ""
             }
           ]

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "7iSPPZ6nHbOb/n2bxJul3qCkmwasQQ5H4aMy44Uzu7nG0qlrql6vkWfgGKNwCah1d+VeuzJ38GxUV88ro1gzdw==",
+  "dgSpecHash": "eLTkwQisp2ArsGJ4mWmJyGEznOZqovKs2mIKPw0SeeWPcwtaMzIVp+wOjQ+/eIETfwBz/BS4qOdNh4RqSJjlvQ==",
   "success": true,
-  "projectFilePath": "D:\\Github\\Bina\\Bina.csproj",
+  "projectFilePath": "D:\\Github\\COMP1640\\Bina\\Bina.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ducan\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\ducan\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
@@ -56,6 +56,8 @@
     "C:\\Users\\ducan\\.nuget\\packages\\humanizer.core.zh-cn\\2.14.1\\humanizer.core.zh-cn.2.14.1.nupkg.sha512",
     "C:\\Users\\ducan\\.nuget\\packages\\humanizer.core.zh-hans\\2.14.1\\humanizer.core.zh-hans.2.14.1.nupkg.sha512",
     "C:\\Users\\ducan\\.nuget\\packages\\humanizer.core.zh-hant\\2.14.1\\humanizer.core.zh-hant.2.14.1.nupkg.sha512",
+    "C:\\Users\\ducan\\.nuget\\packages\\microsoft.aspnetcore.authentication.google\\8.0.3\\microsoft.aspnetcore.authentication.google.8.0.3.nupkg.sha512",
+    "C:\\Users\\ducan\\.nuget\\packages\\microsoft.aspnetcore.authentication.microsoftaccount\\8.0.3\\microsoft.aspnetcore.authentication.microsoftaccount.8.0.3.nupkg.sha512",
     "C:\\Users\\ducan\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\8.0.3\\microsoft.aspnetcore.cryptography.internal.8.0.3.nupkg.sha512",
     "C:\\Users\\ducan\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\8.0.3\\microsoft.aspnetcore.cryptography.keyderivation.8.0.3.nupkg.sha512",
     "C:\\Users\\ducan\\.nuget\\packages\\microsoft.aspnetcore.diagnostics.entityframeworkcore\\8.0.3\\microsoft.aspnetcore.diagnostics.entityframeworkcore.8.0.3.nupkg.sha512",

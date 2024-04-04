@@ -1,4 +1,7 @@
-﻿namespace Bina.Models;
+﻿using System;
+using System.Collections.Generic;
+
+namespace Bina.Models;
 
 public partial class ArticleStatus
 {
@@ -6,9 +9,5 @@ public partial class ArticleStatus
 
     public string? ArticleStatusName { get; set; }
 
-    public string? FacultyId { get; set; }
-
     public virtual ICollection<Article> Articles { get; set; } = new List<Article>();
-
-    public virtual Faculty? Faculty { get; set; }
 }

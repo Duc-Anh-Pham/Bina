@@ -1,4 +1,7 @@
-﻿namespace Bina.Models;
+﻿using System;
+using System.Collections.Generic;
+
+namespace Bina.Models;
 
 public partial class Article
 {
@@ -8,7 +11,7 @@ public partial class Article
 
     public string? Title { get; set; }
 
-    public string? Content { get; set; }
+    public byte[]? Content { get; set; }
 
     public int? UserId { get; set; }
 
@@ -16,13 +19,17 @@ public partial class Article
 
     public int? ArticleStatusId { get; set; }
 
-    public int? ArticlesDeadlineId { get; set; }
+    public Guid? ArticlesDeadlineId { get; set; }
+
+    public string? FacultyId { get; set; }
 
     public virtual ICollection<ArticleComment> ArticleComments { get; set; } = new List<ArticleComment>();
 
     public virtual ArticleStatus? ArticleStatus { get; set; }
 
     public virtual ArticlesDeadline? ArticlesDeadline { get; set; }
+
+    public virtual Faculty? Faculty { get; set; }
 
     public virtual Image? Image { get; set; }
 

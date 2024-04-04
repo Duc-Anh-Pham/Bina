@@ -1,7 +1,35 @@
 using Bina.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.Google;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.MicrosoftAccount;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
+builder.Services.AddAuthentication(option =>
+{
+    option.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    option.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
+	option.DefaultChallengeScheme = MicrosoftAccountDefaults.AuthenticationScheme;
+})
+
+.AddCookie()
+
+//Login Google OAuth
+.AddGoogle(GoogleDefaults.AuthenticationScheme, option =>
+{
+    option.ClientId = builder.Configuration.GetSection("GoogleKeys:ClientId").Value;
+    option.ClientSecret = builder.Configuration.GetSection("GoogleKeys:ClientSecret").Value;
+})
+
+//Login Microsoft OAuth
+.AddMicrosoftAccount(MicrosoftAccountDefaults.AuthenticationScheme, option =>
+{
+	option.ClientId = builder.Configuration.GetSection("MicrosoftKeys:ClientId").Value;
+	option.ClientSecret = builder.Configuration.GetSection("MicrosoftKeys:ClientSecret").Value;
+});
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
@@ -35,6 +63,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseSession();
@@ -51,7 +80,5 @@ app.UseEndpoints(endpoints =>
         pattern: "{controller=Home}/{action=Index}/{id?}");
 });
 
-
-//app.MapRazorPages();
 
 app.Run();

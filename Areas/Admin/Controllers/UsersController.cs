@@ -90,7 +90,7 @@ namespace Bina.Areas.Admin.Controllers
 
                 }
                 // Kiểm tra email đã tồn tại hay chưa
-                var existingUser = await _context.Users.FirstOrDefaultAsync(u => u.Email == user.Email || u.UserName == user.UserName);
+                var existingUser = await _context.Users.FirstOrDefaultAsync(u => u.Email == user.Email);
                 if (existingUser != null)
                 {
                     // Thông báo email hoặc UserName đã tồn tại

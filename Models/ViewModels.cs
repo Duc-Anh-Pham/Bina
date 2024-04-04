@@ -6,5 +6,6 @@
         public string? FacultyName { get; set; }
         public DateTime? Established { get; set; }
         public string? CoordinatorUserName { get; set; }
+        public byte? Status { get; set; }
     }
 }
