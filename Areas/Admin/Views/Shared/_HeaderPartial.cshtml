@@ -26,18 +26,7 @@
                 <div class="header-actions d-flex align-items-center justify-content-end">
 
 
-                    <!-- Search container start -->
-                    <div class="search-container d-none d-lg-block">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search....." />
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" type="button">
-                                    <i class="bi bi-search-heart-fill"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Search container end -->
+   
 
                     <div class="dropdown ms-2">
                         <a class="dropdown-toggle d-flex align-items-center user-settings" href="#!" role="button"
@@ -108,12 +97,9 @@
                 </li>
 
                 <li class="nav-item">
-                    @* <a class="nav-link" href="#"><i class="bi bi-book" style="margin-right: 10px"></i> Article Management </a> *@
-                </li>
-
-                <li class="nav-item">
                     <a class="nav-link" asp-area="Admin" asp-controller="Faculty" asp-action="Index">
-                        <i class="bi bi-people-fill" style="margin-right: 10px"></i>Faculty Management</a>
+                        <i class="bi bi-people-fill" style="margin-right: 10px"></i>Faculty Management
+                    </a>
                 </li>
 
                 <li class="nav-item">
@@ -123,11 +109,17 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="bi bi-sliders" style="margin-right: 10px"></i> System configuration </a>
+                    <a class="nav-link" asp-area="Admin" asp-controller="Articles" asp-action="Index">
+                        <i class="bi bi-people-fill" style="margin-right: 10px"></i>Articles Deadline
+                    </a>
                 </li>
 
+                @* <li class="nav-item">
+                <a class="nav-link" href="#"><i class="bi bi-sliders" style="margin-right: 10px"></i> System Configuration </a>
+                </li> *@
+
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="bi bi-journal-bookmark" style="margin-right: 10px"></i> System log </a>
+                    <a class="nav-link" href="#"><i class="bi bi-journal-bookmark" style="margin-right: 10px"></i> System Logs </a>
                 </li>
 
                 <li class="nav-item">

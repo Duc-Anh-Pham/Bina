@@ -25,8 +25,11 @@ namespace Bina.Migrations
             modelBuilder.Entity("Bina.Models.Article", b =>
                 {
                     b.Property<int>("ArticleId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasColumnName("ArticleID");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ArticleId"));
 
                     b.Property<string>("ArticleName")
                         .HasMaxLength(255)
@@ -37,13 +40,17 @@ namespace Bina.Migrations
                         .HasColumnType("int")
                         .HasColumnName("ArticleStatusID");
 
-                    b.Property<int?>("ArticlesDeadlineId")
-                        .HasColumnType("int")
+                    b.Property<Guid?>("ArticlesDeadlineId")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("ArticlesDeadlineID");
 
-                    b.Property<string>("Content")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
+                    b.Property<byte[]>("Content")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("FacultyId")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("FacultyID");
 
                     b.Property<int?>("ImageId")
                         .HasColumnType("int")
@@ -59,11 +66,13 @@ namespace Bina.Migrations
                         .HasColumnName("UserID");
 
                     b.HasKey("ArticleId")
-                        .HasName("PK__Articles__9C6270C8BC49B6AE");
+                        .HasName("PK__Articles__9C6270C85CA7DDC9");
 
                     b.HasIndex("ArticleStatusId");
 
                     b.HasIndex("ArticlesDeadlineId");
+
+                    b.HasIndex("FacultyId");
 
                     b.HasIndex("ImageId");
 
@@ -94,7 +103,7 @@ namespace Bina.Migrations
                         .HasColumnName("UserID");
 
                     b.HasKey("CommentId")
-                        .HasName("PK__ArticleC__C3B4DFAA2D5382AB");
+                        .HasName("PK__ArticleC__C3B4DFAAF65DE434");
 
                     b.HasIndex("ArticleId");
 
@@ -113,41 +122,34 @@ namespace Bina.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("FacultyId")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
-                        .HasColumnName("FacultyID");
-
                     b.HasKey("ArticleStatusId")
-                        .HasName("PK__ArticleS__3F0E2D6B8284D621");
-
-                    b.HasIndex("FacultyId");
+                        .HasName("PK__ArticleS__3F0E2D6BF59EE711");
 
                     b.ToTable("ArticleStatus", (string)null);
                 });
 
             modelBuilder.Entity("Bina.Models.ArticlesDeadline", b =>
                 {
-                    b.Property<int>("ArticlesDeadlineId")
-                        .HasColumnType("int")
+                    b.Property<Guid>("ArticlesDeadlineId")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("ArticlesDeadlineID");
 
                     b.Property<int?>("AcademicYear")
                         .HasColumnType("int")
                         .HasColumnName("academicYear");
 
-                    b.Property<DateOnly?>("DueDate")
-                        .HasColumnType("date");
+                    b.Property<DateTime?>("DueDate")
+                        .HasColumnType("datetime");
 
-                    b.Property<DateOnly?>("StartDue")
-                        .HasColumnType("date");
+                    b.Property<DateTime?>("StartDue")
+                        .HasColumnType("datetime");
 
                     b.Property<int?>("UserId")
                         .HasColumnType("int")
                         .HasColumnName("UserID");
 
                     b.HasKey("ArticlesDeadlineId")
-                        .HasName("PK__Articles__253F2FDC8F761093");
+                        .HasName("PK__Articles__253F2FDCBC23781D");
 
                     b.HasIndex("UserId");
 
@@ -168,8 +170,11 @@ namespace Bina.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<byte>("Status")
+                        .HasColumnType("tinyint");
+
                     b.HasKey("FacultyId")
-                        .HasName("PK__Faculty__306F636EFFFF63A6");
+                        .HasName("PK__Faculty__306F636EB2995065");
 
                     b.ToTable("Faculty", (string)null);
                 });
@@ -186,7 +191,7 @@ namespace Bina.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.HasKey("ImageId")
-                        .HasName("PK__Image__7516F4EC4320BA76");
+                        .HasName("PK__Image__7516F4EC437AB771");
 
                     b.ToTable("Image", (string)null);
                 });
@@ -202,7 +207,7 @@ namespace Bina.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("RoleId")
-                        .HasName("PK__Role__8AFACE3A845AF9EB");
+                        .HasName("PK__Role__8AFACE3A272CC538");
 
                     b.ToTable("Role", (string)null);
                 });
@@ -218,7 +223,7 @@ namespace Bina.Migrations
                         .HasColumnType("nvarchar(500)");
 
                     b.HasKey("TermsId")
-                        .HasName("PK__TermsAnd__C05EBE004AD38F21");
+                        .HasName("PK__TermsAnd__C05EBE000B28BBAA");
 
                     b.ToTable("TermsAndConditions");
                 });
@@ -282,7 +287,7 @@ namespace Bina.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.HasKey("UserId")
-                        .HasName("PK__User__1788CCAC65166875");
+                        .HasName("PK__User__1788CCACB81EF04B");
 
                     b.HasIndex("FacultyId");
 
@@ -298,26 +303,33 @@ namespace Bina.Migrations
                     b.HasOne("Bina.Models.ArticleStatus", "ArticleStatus")
                         .WithMany("Articles")
                         .HasForeignKey("ArticleStatusId")
-                        .HasConstraintName("FK__Articles__Articl__4CA06362");
+                        .HasConstraintName("FK__Articles__Articl__38996AB5");
 
                     b.HasOne("Bina.Models.ArticlesDeadline", "ArticlesDeadline")
                         .WithMany("Articles")
                         .HasForeignKey("ArticlesDeadlineId")
-                        .HasConstraintName("FK__Articles__Articl__4D94879B");
+                        .HasConstraintName("FK__Articles__Articl__398D8EEE");
+
+                    b.HasOne("Bina.Models.Faculty", "Faculty")
+                        .WithMany("Articles")
+                        .HasForeignKey("FacultyId")
+                        .HasConstraintName("FK__Articles__Facult__3B75D760");
 
                     b.HasOne("Bina.Models.Image", "Image")
                         .WithMany("Articles")
                         .HasForeignKey("ImageId")
-                        .HasConstraintName("FK__Articles__ImageI__4E88ABD4");
+                        .HasConstraintName("FK__Articles__ImageI__3A81B327");
 
                     b.HasOne("Bina.Models.User", "User")
                         .WithMany("Articles")
                         .HasForeignKey("UserId")
-                        .HasConstraintName("FK__Articles__UserID__4BAC3F29");
+                        .HasConstraintName("FK__Articles__UserID__37A5467C");
 
                     b.Navigation("ArticleStatus");
 
                     b.Navigation("ArticlesDeadline");
+
+                    b.Navigation("Faculty");
 
                     b.Navigation("Image");
 
@@ -329,26 +341,16 @@ namespace Bina.Migrations
                     b.HasOne("Bina.Models.Article", "Article")
                         .WithMany("ArticleComments")
                         .HasForeignKey("ArticleId")
-                        .HasConstraintName("FK__ArticleCo__Artic__52593CB8");
+                        .HasConstraintName("FK__ArticleCo__Artic__3F466844");
 
                     b.HasOne("Bina.Models.User", "User")
                         .WithMany("ArticleComments")
                         .HasForeignKey("UserId")
-                        .HasConstraintName("FK__ArticleCo__UserI__5165187F");
+                        .HasConstraintName("FK__ArticleCo__UserI__3E52440B");
 
                     b.Navigation("Article");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Bina.Models.ArticleStatus", b =>
-                {
-                    b.HasOne("Bina.Models.Faculty", "Faculty")
-                        .WithMany("ArticleStatuses")
-                        .HasForeignKey("FacultyId")
-                        .HasConstraintName("FK__ArticleSt__Facul__46E78A0C");
-
-                    b.Navigation("Faculty");
                 });
 
             modelBuilder.Entity("Bina.Models.ArticlesDeadline", b =>
@@ -356,7 +358,7 @@ namespace Bina.Migrations
                     b.HasOne("Bina.Models.User", "User")
                         .WithMany("ArticlesDeadlines")
                         .HasForeignKey("UserId")
-                        .HasConstraintName("FK__ArticlesD__UserI__440B1D61");
+                        .HasConstraintName("FK__ArticlesD__UserI__30F848ED");
 
                     b.Navigation("User");
                 });
@@ -366,17 +368,17 @@ namespace Bina.Migrations
                     b.HasOne("Bina.Models.Faculty", "Faculty")
                         .WithMany("Users")
                         .HasForeignKey("FacultyId")
-                        .HasConstraintName("FK__User__FacultyID__403A8C7D");
+                        .HasConstraintName("FK__User__FacultyID__2D27B809");
 
                     b.HasOne("Bina.Models.Role", "Role")
                         .WithMany("Users")
                         .HasForeignKey("RoleId")
-                        .HasConstraintName("FK__User__RoleID__3F466844");
+                        .HasConstraintName("FK__User__RoleID__2C3393D0");
 
                     b.HasOne("Bina.Models.TermsAndCondition", "Terms")
                         .WithMany("Users")
                         .HasForeignKey("TermsId")
-                        .HasConstraintName("FK__User__TermsID__412EB0B6");
+                        .HasConstraintName("FK__User__TermsID__2E1BDC42");
 
                     b.Navigation("Faculty");
 
@@ -402,7 +404,7 @@ namespace Bina.Migrations
 
             modelBuilder.Entity("Bina.Models.Faculty", b =>
                 {
-                    b.Navigation("ArticleStatuses");
+                    b.Navigation("Articles");
 
                     b.Navigation("Users");
                 });
