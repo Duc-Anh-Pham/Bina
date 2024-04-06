@@ -29,7 +29,7 @@ namespace Bina.Controllers
                     FacultyId = faculty.FacultyId,
                     FacultyName = faculty.FacultyName,
                     Established = faculty.Established ?? default(DateTime),
-                    Status = faculty.Status,
+                    
                     CoordinatorUserName = _context.Users
                         .Where(u => u.FacultyId == faculty.FacultyId && u.Role.RoleName == "Marketing Coordinator")
                         .Select(u => u.UserName)
@@ -289,7 +289,7 @@ namespace Bina.Controllers
             }
 
             // Toggle status
-            faculty.Status = (byte)(faculty.Status == 1 ? 0 : 1);
+        /*    faculty.Status = (byte)(faculty.Status == 1 ? 0 : 1);*/
 
             _context.Update(faculty);
             await _context.SaveChangesAsync();

@@ -1,4 +1,4 @@
-using Bina.Data;
+﻿using Bina.Data;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Authentication.MicrosoftAccount;
@@ -60,10 +60,16 @@ else
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+var uploadsPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "avatars");
+if (!Directory.Exists(uploadsPath))
+{
+    Directory.CreateDirectory(uploadsPath);
+}
+
+// Cấu hình để sử dụng thư mục cho các tệp tĩnh
 app.UseStaticFiles(new StaticFileOptions
 {
-    FileProvider = new PhysicalFileProvider(
-        Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "avatars")),
+    FileProvider = new PhysicalFileProvider(uploadsPath),
     RequestPath = "/uploads/avatars"
 });
 

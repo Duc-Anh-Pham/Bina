@@ -9,9 +9,13 @@
 
   <ItemGroup>
     <Compile Remove="Areas\Identity\**" />
+    <Compile Remove="wwwroot\uploads\avatars\**" />
     <Content Remove="Areas\Identity\**" />
+    <Content Remove="wwwroot\uploads\avatars\**" />
     <EmbeddedResource Remove="Areas\Identity\**" />
+    <EmbeddedResource Remove="wwwroot\uploads\avatars\**" />
     <None Remove="Areas\Identity\**" />
+    <None Remove="wwwroot\uploads\avatars\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -141,7 +145,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\uploads\avatars\" />
+    <Folder Include="wwwroot\uploads\" />
   </ItemGroup>
 
 </Project>
