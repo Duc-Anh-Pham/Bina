@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Github\\COMP1640\\Bina\\Bina.csproj": {}
+    "D:\\1640\\Bina\\Bina.csproj": {}
   },
   "projects": {
-    "D:\\Github\\COMP1640\\Bina\\Bina.csproj": {
+    "D:\\1640\\Bina\\Bina.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Github\\COMP1640\\Bina\\Bina.csproj",
+        "projectUniqueName": "D:\\1640\\Bina\\Bina.csproj",
         "projectName": "Bina",
-        "projectPath": "D:\\Github\\COMP1640\\Bina\\Bina.csproj",
-        "packagesPath": "C:\\Users\\ducan\\.nuget\\packages\\",
-        "outputPath": "D:\\Github\\COMP1640\\Bina\\obj\\",
+        "projectPath": "D:\\1640\\Bina\\Bina.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "D:\\1640\\Bina\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ducan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -97,7 +97,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.201/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

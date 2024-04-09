@@ -5,7 +5,6 @@ namespace Bina.Models
     public class HelpSupport
     {
         [Key]
-        [Required]
         public int HelpSupportID { get; set; }
 
         [Required(ErrorMessage = "Email Address is required")]
@@ -15,9 +14,13 @@ namespace Bina.Models
         [Required(ErrorMessage = "Full Name is required")]
         public string FullName { get; set; }
 
-        [Required(ErrorMessage = "Title is required")]
+        [Required(ErrorMessage = "Your title cannot be left blank")]
         public string? Title { get; set; }
 
-        public string? Comments { get; set; }
+        [Required(ErrorMessage = "Your messages cannot be left blank")]
+        public string? UserMessages { get; set; }
+        [Required]
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
+
     }
 }
