@@ -60,7 +60,7 @@
 								@* <input id="password-field" type="password" class="form-control" placeholder="password" required> *@
 								@Html.PasswordFor(us => us.Password, new { @class = "form-control", type = "password", required = "required", placeholder = "Password", /* pattern = "(?=.* [a - z])(?=.* [A - Z])(?=.*\\d)(?=.* [@$! % *? &])[A - Za - z\\d@$! % *? &]{ 8}", title = "Password must contain at least 8 characters, including uppercase, lowercase, numbers, and special characters."*/ })
 								@* Show Password *@
-								<span chuyển đổi="#password-field" class="fa fa-fw fa-eye field-icon chuyển đổi-password"></span>
+								<span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
 							</div>
 
 
