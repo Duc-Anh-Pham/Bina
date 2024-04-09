@@ -5,6 +5,14 @@
       "PackagePath": "staticwebassets\\Bina.bundle.scp.css"
     },
     {
+      "Id": "D:\\Github\\COMP1640\\Bina\\wwwroot\\css\\Loading.css",
+      "PackagePath": "staticwebassets\\css\\Loading.css"
+    },
+    {
+      "Id": "D:\\Github\\COMP1640\\Bina\\wwwroot\\css\\NotificationMessage.css",
+      "PackagePath": "staticwebassets\\css\\NotificationMessage.css"
+    },
+    {
       "Id": "D:\\Github\\COMP1640\\Bina\\wwwroot\\css\\bootstrap.min.css",
       "PackagePath": "staticwebassets\\css\\bootstrap.min.css"
     },

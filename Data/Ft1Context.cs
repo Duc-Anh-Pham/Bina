@@ -42,7 +42,7 @@ public partial class Ft1Context : DbContext
     {
         modelBuilder.Entity<Article>(entity =>
         {
-            entity.HasKey(e => e.ArticleId).HasName("PK__Articles__9C6270C8389F143C");
+            entity.HasKey(e => e.ArticleId).HasName("PK__Articles__9C6270C81F121BB0");
 
             entity.Property(e => e.ArticleId).HasColumnName("ArticleID");
             entity.Property(e => e.ArticleName)
@@ -82,7 +82,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<ArticleComment>(entity =>
         {
-            entity.HasKey(e => e.CommentId).HasName("PK__ArticleC__C3B4DFAA0D201041");
+            entity.HasKey(e => e.CommentId).HasName("PK__ArticleC__C3B4DFAA55297C62");
 
             entity.Property(e => e.CommentId)
                 .ValueGeneratedNever()
@@ -102,7 +102,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<ArticleStatus>(entity =>
         {
-            entity.HasKey(e => e.ArticleStatusId).HasName("PK__ArticleS__3F0E2D6B49405496");
+            entity.HasKey(e => e.ArticleStatusId).HasName("PK__ArticleS__3F0E2D6B20AE9143");
 
             entity.ToTable("ArticleStatus");
 
@@ -114,7 +114,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<ArticlesDeadline>(entity =>
         {
-            entity.HasKey(e => e.ArticlesDeadlineId).HasName("PK__Articles__253F2FDC36F9DBF0");
+            entity.HasKey(e => e.ArticlesDeadlineId).HasName("PK__Articles__253F2FDC2821DDB2");
 
             entity.ToTable("ArticlesDeadline");
 
@@ -133,7 +133,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<Faculty>(entity =>
         {
-            entity.HasKey(e => e.FacultyId).HasName("PK__Faculty__306F636E47D6D612");
+            entity.HasKey(e => e.FacultyId).HasName("PK__Faculty__306F636E0C1897AA");
 
             entity.ToTable("Faculty");
 
@@ -147,7 +147,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<Image>(entity =>
         {
-            entity.HasKey(e => e.ImageId).HasName("PK__Image__7516F4ECF11FB880");
+            entity.HasKey(e => e.ImageId).HasName("PK__Image__7516F4EC610532C1");
 
             entity.ToTable("Image");
 
@@ -161,7 +161,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<Role>(entity =>
         {
-            entity.HasKey(e => e.RoleId).HasName("PK__Role__8AFACE3AC849003C");
+            entity.HasKey(e => e.RoleId).HasName("PK__Role__8AFACE3A7F148AAB");
 
             entity.ToTable("Role");
 
@@ -173,7 +173,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<TermsAndCondition>(entity =>
         {
-            entity.HasKey(e => e.TermsId).HasName("PK__TermsAnd__C05EBE00A4E97789");
+            entity.HasKey(e => e.TermsId).HasName("PK__TermsAnd__C05EBE00912A5A23");
 
             entity.Property(e => e.TermsId)
                 .ValueGeneratedNever()
@@ -183,7 +183,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.UserId).HasName("PK__User__1788CCACCD7DB6B4");
+            entity.HasKey(e => e.UserId).HasName("PK__User__1788CCAC5AD7973B");
 
             entity.ToTable("User");
 
@@ -195,12 +195,13 @@ public partial class Ft1Context : DbContext
             entity.Property(e => e.FacultyId)
                 .HasMaxLength(50)
                 .HasColumnName("FacultyID");
+            entity.Property(e => e.FirstName).HasMaxLength(100);
             entity.Property(e => e.Gender).HasMaxLength(10);
+            entity.Property(e => e.LastName).HasMaxLength(100);
             entity.Property(e => e.Password).HasMaxLength(100);
             entity.Property(e => e.RoleId).HasColumnName("RoleID");
             entity.Property(e => e.Status).HasDefaultValue((byte)1);
             entity.Property(e => e.TermsId).HasColumnName("TermsID");
-            entity.Property(e => e.UserFullName).HasMaxLength(100);
             entity.Property(e => e.UserName).HasMaxLength(100);
 
             entity.HasOne(d => d.Faculty).WithMany(p => p.Users)

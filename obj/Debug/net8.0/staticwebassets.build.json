@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "s/2nDrD2XukC/scmF5IuERqRacPeS3rBVgyHljmTDSM=",
+  "Hash": "mSpelZkfQnuNOA3M2EKvyptcYtogeZoYTOJ3WLSc3ZY=",
   "Source": "Bina",
   "BasePath": "_content/Bina",
   "Mode": "Default",
@@ -1366,6 +1366,25 @@
       "OriginalItemSpec": "wwwroot\\css\\icomoon.css"
     },
     {
+      "Identity": "D:\\Github\\COMP1640\\Bina\\wwwroot\\css\\Loading.css",
+      "SourceId": "Bina",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Github\\COMP1640\\Bina\\wwwroot\\",
+      "BasePath": "_content/Bina",
+      "RelativePath": "css/Loading.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\Loading.css"
+    },
+    {
       "Identity": "D:\\Github\\COMP1640\\Bina\\wwwroot\\css\\main.css",
       "SourceId": "Bina",
       "SourceType": "Discovered",
@@ -1402,6 +1421,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\main.min.css"
+    },
+    {
+      "Identity": "D:\\Github\\COMP1640\\Bina\\wwwroot\\css\\NotificationMessage.css",
+      "SourceId": "Bina",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Github\\COMP1640\\Bina\\wwwroot\\",
+      "BasePath": "_content/Bina",
+      "RelativePath": "css/NotificationMessage.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\NotificationMessage.css"
     },
     {
       "Identity": "D:\\Github\\COMP1640\\Bina\\wwwroot\\css\\site.css",

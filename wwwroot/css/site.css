@@ -1,4 +1,4 @@
-html {
+﻿html {
     font-size: 14px;
 }
 
@@ -17,6 +17,11 @@ body {
     margin-bottom: 60px;
 }
 
+/* CSS để làm mờ và ngăn chặn click nút "Edit" khi Status là 0 */
+.disabled-btn {
+    pointer-events: none; /* Ngăn chặn sự kiện click */
+    opacity: 0.5; /* Làm mờ nút */
+}
 
 /* footer Start */
 .entry-footer {

@@ -1,4 +1,5 @@
-﻿<!-- App header starts -->
+﻿
+<!-- App header starts -->
 <div class="app-header d-flex align-items-center">
 
     <!-- Container starts -->
@@ -10,7 +11,7 @@
 
                 <!-- App brand starts -->
                 <div class="app-brand">
-                    <a class="d-lg-block d-none" asp-area="Manager" asp-controller="Home" asp-action="Index">
+                    <a class="d-lg-block d-none" asp-area="Giám đốc" asp-controller="Home" asp-action="Index">
                         <img src="~/img/logo.svg" class="logo" alt="Bootstrap Gallery" />
                     </a>
                     <a class="d-lg-none d-md-block" asp-area="Manager" asp-controller="Home" asp-action="Index">
@@ -24,27 +25,21 @@
             <div class="col-md-9 col-10">
                 <!-- App header actions start -->
                 <div class="header-actions d-flex align-items-center justify-content-end">
-
-
-                    <!-- Search container start -->
-                    <div class="search-container d-none d-lg-block">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search....." />
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" type="button">
-                                    <i class="bi bi-search-heart-fill"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Search container end -->
-
                     <div class="dropdown ms-2">
+
                         <a class="dropdown-toggle d-flex align-items-center user-settings" href="#!" role="button"
                            data-bs-toggle="dropdown" aria-expanded="false">
-                            <span class="d-none d-md-block">Kasey Petersen</span>
+                            @if (!string.IsNullOrEmpty(Context.Session.GetString("UserName")))
+                            {
+                                <span class="d-none d-md-block">Hello, @Context.Session.GetString("UserName")</span>
+                            }
+                            else if (!User.Identity.IsAuthenticated)
+                            {
+                                <span class="d-none d-md-block">Hello, @User.Identity.Name</span>
+                            }
                             <img src="~/img/user3.png" class="img-3x m-2 me-0 rounded-5" alt="Bootstrap Gallery" />
                         </a>
+
                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-sm shadow-sm gap-3" style="">
                             <a class="dropdown-item d-flex align-items-center py-2" href="agent-profile.html">
                                 <i class="bi bi-person-vcard" style="margin-right: 10px"></i>User Profile
@@ -95,15 +90,15 @@
                         <i class="bi bi-house-door" style="margin-right: 10px"></i>
                         Dashboards
                     </a>
-                  @*   <ul class="dropdown-menu">
-                        <li>
-                            <a class="dropdown-item current-page" asp-area="" asp-controller="Home" asp-action="Index">Analytics</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="#">
-                                <span>Reports</span>
-                            </a>
-                        </li>
+                    @*   <ul class="dropdown-menu">
+                    <li>
+                    <a class="dropdown-item current-page" asp-area="" asp-controller="Home" asp-action="Index">Analytics</a>
+                    </li>
+                    <li>
+                    <a class="dropdown-item" href="#">
+                    <span>Reports</span>
+                    </a>
+                    </li>
                     </ul> *@
                 </li>
 
@@ -113,7 +108,8 @@
 
                 <li class="nav-item">
                     <a class="nav-link" asp-area="Manager" asp-controller="Faculty" asp-action="Index">
-                        <i class="bi bi-people-fill" style="margin-right: 10px"></i>Faculty Management</a>
+                        <i class="bi bi-people-fill" style="margin-right: 10px"></i>Faculty Management
+                    </a>
                 </li>
 
                 <li class="nav-item">
