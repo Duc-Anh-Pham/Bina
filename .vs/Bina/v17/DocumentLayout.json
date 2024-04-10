@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "F:\\Greenwich IT\\TOPUP - 1640 - Enterprise Web Software Development\\Code\\Bina3-4\\Bina\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|f:\\greenwich it\\topup - 1640 - enterprise web software development\\code\\bina3-4\\bina\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|f:\\greenwich it\\topup - 1640 - enterprise web software development\\code\\bina3-4\\bina\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -21,10 +25,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|f:\\greenwich it\\topup - 1640 - enterprise web software development\\code\\bina3-4\\bina\\areas\\admin\\controllers\\facultycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|solutionrelative:areas\\admin\\controllers\\facultycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|f:\\greenwich it\\topup - 1640 - enterprise web software development\\code\\bina3-4\\bina\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|f:\\greenwich it\\topup - 1640 - enterprise web software development\\code\\bina3-4\\bina\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -62,7 +62,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Bookmark",
@@ -78,20 +78,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Program.cs",
               "DocumentMoniker": "F:\\Greenwich IT\\TOPUP - 1640 - Enterprise Web Software Development\\Code\\Bina3-4\\Bina\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "F:\\Greenwich IT\\TOPUP - 1640 - Enterprise Web Software Development\\Code\\Bina3-4\\Bina\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AQIAAEMAAAAAAAAAAAAqwEoAAAARAAAA",
+              "ViewState": "AQIAAD4AAAAAAAAAAAAqwEcAAAAdAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-04T07:19:55.395Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "ArticleComment.cs",
               "DocumentMoniker": "F:\\Greenwich IT\\TOPUP - 1640 - Enterprise Web Software Development\\Code\\Bina3-4\\Bina\\Models\\ArticleComment.cs",
               "RelativeDocumentMoniker": "Models\\ArticleComment.cs",
@@ -103,7 +103,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "ErrorViewModel.cs",
               "DocumentMoniker": "F:\\Greenwich IT\\TOPUP - 1640 - Enterprise Web Software Development\\Code\\Bina3-4\\Bina\\Models\\ErrorViewModel.cs",
               "RelativeDocumentMoniker": "Models\\ErrorViewModel.cs",
@@ -115,7 +115,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "Ft1Context.cs",
               "DocumentMoniker": "F:\\Greenwich IT\\TOPUP - 1640 - Enterprise Web Software Development\\Code\\Bina3-4\\Bina\\Data\\Ft1Context.cs",
               "RelativeDocumentMoniker": "Data\\Ft1Context.cs",
@@ -127,7 +127,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "FacultyController.cs",
               "DocumentMoniker": "F:\\Greenwich IT\\TOPUP - 1640 - Enterprise Web Software Development\\Code\\Bina3-4\\Bina\\Areas\\Admin\\Controllers\\FacultyController.cs",
               "RelativeDocumentMoniker": "Areas\\Admin\\Controllers\\FacultyController.cs",
@@ -139,15 +139,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 0,
               "Title": "appsettings.json",
               "DocumentMoniker": "F:\\Greenwich IT\\TOPUP - 1640 - Enterprise Web Software Development\\Code\\Bina3-4\\Bina\\appsettings.json",
               "RelativeDocumentMoniker": "appsettings.json",
               "ToolTip": "F:\\Greenwich IT\\TOPUP - 1640 - Enterprise Web Software Development\\Code\\Bina3-4\\Bina\\appsettings.json",
               "RelativeToolTip": "appsettings.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAnAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAYAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-04-04T06:50:35.938Z"
+              "WhenOpened": "2024-04-04T06:50:35.938Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
