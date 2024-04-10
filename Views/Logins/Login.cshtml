@@ -8,6 +8,18 @@
 	ViewData["Title"] = "Login";
 }
 
+<link href="~/css/NotificationMessage.css" rel="stylesheet" />
+
+@if (TempData["ErrorMessage"] != null)
+{
+	<div class="alert-login d-flex justify-content-center">
+		<span class="alert-message"><strong>Account:</strong> @TempData["ErrorMessage"]</span>
+	</div>
+
+	<!-- Thêm meta refresh để tự động làm mất thông báo sau 1 giây -->
+	<meta http-equiv="refresh" content="1">
+}
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -46,11 +58,12 @@
 
 							<div class="form-group">
 								@* <input id="password-field" type="password" class="form-control" placeholder="password" required> *@
-								@Html.TextBoxFor(us => us.Password, new { @class = "form-control", type = "password", required = "required", placeholder = "Password", /* pattern = "(?=.* [a - z])(?=.* [A - Z])(?=.*\\d)(?=.* [@$! % *? &])[A - Za - z\\d@$! % *? &]{ 8}", title = "Password must contain at least 8 characters, including uppercase, lowercase, numbers, and special characters."*/ })
+								@Html.PasswordFor(us => us.Password, new { @class = "form-control", type = "password", required = "required", placeholder = "Password", /* pattern = "(?=.* [a - z])(?=.* [A - Z])(?=.*\\d)(?=.* [@$! % *? &])[A - Za - z\\d@$! % *? &]{ 8}", title = "Password must contain at least 8 characters, including uppercase, lowercase, numbers, and special characters."*/ })
+								@* Show Password *@
 								<span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
 							</div>
 
-							
+
 							<div class="form-group text-center">
 								@* <button type="submit" class="form-control btn btn-primary submit px-3">Sign In</button> *@
 								<button type="submit" class="custom-btn btn-1">Login</button>
@@ -71,8 +84,14 @@
 						@* </form> *@
 						<p class="w-100 text-center">&mdash; Or Sign In With &mdash;</p>
 						<div class="social d-flex text-center">
-							<a asp-controller="Logins" asp-action="Google" class="px-2 py-2 mr-md-1 rounded"> Google </a>
-							<a asp-controller="Logins" asp-action="Microsoft" class="px-2 py-2 mr-md-1 rounded"> Microsoft </a>
+							<a asp-controller="Logins" asp-action="Google" class="px-2 py-2 mr-md-1 rounded" style="display: inline-block;">
+								<img src="~/img/social/Google.png" style="width: 30px; height: 30px; float: left; margin-right: 5px;"> Sign in Google
+							</a>
+							<a asp-controller="Logins" asp-action="Microsoft" class="px-2 py-2 mr-md-1 rounded" style="display: inline-block;">
+								<img src="~/img/social/Microsoft.png" style="width: 29px; height: 29px; float: left; margin-right: 5px;">
+								Sign in Microsoft
+							</a>
+
 						</div>
 					</div>
 				</div>

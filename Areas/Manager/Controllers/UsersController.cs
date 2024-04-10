@@ -19,15 +19,21 @@ namespace Bina.Areas.Manager.Controllers
 
 		[Authentication]
 
-		// GET: Users
-		public async Task<IActionResult> Index()
+        // GET: Users/Index/Search
+        [HttpGet]
+        public async Task<IActionResult> Index(string searchTerm)
         {
-
-            var Ft1Context = _context.Users
+            IQueryable<User> Ft1Context = _context.Users
                 .Include(u => u.Faculty)
                 .Include(u => u.Role)
                 .Include(u => u.Terms);
-            ViewBag.SuccessMessage = TempData["SuccessMessage"]; // Add this line
+
+            if (!string.IsNullOrWhiteSpace(searchTerm))
+            {
+                Ft1Context = Ft1Context.Where(u => u.UserName.Contains(searchTerm) || u.Email.Contains(searchTerm));
+            }
+
+            ViewBag.SuccessMessage = TempData["SuccessMessage"];
             return View(await Ft1Context.ToListAsync());
         }
 
@@ -62,7 +68,7 @@ namespace Bina.Areas.Manager.Controllers
         {
             ViewData["FacultyId"] = new SelectList(_context.Faculties, "FacultyId", "FacultyId");
             ViewData["RoleName"] = new SelectList(_context.Roles, "RoleId", "RoleName");
-            ViewData["TermsText"] = new SelectList(_context.TermsAndConditions, "TermsText", "TermsText");
+            ViewData["TermsText"] = new SelectList(_context.TermsAndConditions, "TermsId", "TermsText");
 
             // Lấy RoleName của vai trò "Student"
             var studentRoleName = _context.Roles.FirstOrDefault(r => r.RoleName == "Student")?.RoleName;
@@ -80,15 +86,15 @@ namespace Bina.Areas.Manager.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Check that User Name and Pssword are not left empty
-                if (string.IsNullOrWhiteSpace(user.UserFullName) || string.IsNullOrWhiteSpace(user.Password))
+                // Check that User Name and Password are not left empty
+                if (string.IsNullOrWhiteSpace(user.UserName) || string.IsNullOrWhiteSpace(user.Password))
                 {
                     ModelState.AddModelError("", "Không được bỏ trống!");
                     ViewData["FacultyId"] = new SelectList(_context.Faculties, "FacultyId", "FacultyId", user.FacultyId);
-                    ViewData["RoleId"] = new SelectList(_context.Roles, "RoleId", "RoleName", user.RoleId);
+                    ViewData["RoleName"] = new SelectList(_context.Roles, "RoleId", "RoleName", user.RoleId);
                     return View(user);
-
                 }
+
                 // Kiểm tra email đã tồn tại hay chưa
                 var existingUser = await _context.Users.FirstOrDefaultAsync(u => u.Email == user.Email || u.UserName == user.UserName);
                 if (existingUser != null)
@@ -97,22 +103,21 @@ namespace Bina.Areas.Manager.Controllers
                     string errorMessage = existingUser.Email == user.Email ? "Email đã tồn tại trong hệ thống. Vui lòng nhập email khác." : "UserName đã tồn tại trong hệ thống. Vui lòng nhập UserName khác.";
                     ModelState.AddModelError(existingUser.Email == user.Email ? "Email" : "UserName", errorMessage);
                     ViewData["FacultyId"] = new SelectList(_context.Faculties, "FacultyId", "FacultyId", user.FacultyId);
-                    ViewData["RoleId"] = new SelectList(_context.Roles, "RoleId", "RoleName", user.RoleId);
+                    ViewData["RoleName"] = new SelectList(_context.Roles, "RoleId", "RoleName", user.RoleId);
                     return View(user);
                 }
 
                 // Gán giá trị RoleId từ form vào đối tượng user
                 user.RoleId = int.Parse(Request.Form["Role"]);
 
-                // Kiểm tra nếu RoleId tương ứng với vai trò "Student"
-                var roleId = user.RoleId;
-                var role = await _context.Roles.FindAsync(roleId);
-                if (role != null && role.RoleName == "Student")
-                {
-                    // Gán TermsText từ ViewBag vào model User
-                    user.Terms = new TermsAndCondition { TermsText = ViewBag.TermsText };
-                }
-
+                //// Kiểm tra nếu RoleId tương ứng với vai trò "Student"
+                //var roleId = user.RoleId;
+                //var role = await _context.Roles.FindAsync(roleId);
+                //if (role != null && role.RoleName == "Student")
+                //{
+                //    // Gán TermsText từ ViewBag vào model User
+                //    user.Terms = new TermsAndCondition { TermsText = ViewBag.TermsText };
+                //}
 
                 _context.Users.Add(user);
                 await _context.SaveChangesAsync();
@@ -121,8 +126,7 @@ namespace Bina.Areas.Manager.Controllers
             }
 
             ViewData["FacultyId"] = new SelectList(_context.Faculties, "FacultyId", "FacultyId", user.FacultyId);
-            ViewData["RoleId"] = new SelectList(_context.Roles, "RoleId", "RoleName", user.RoleId);
-
+            ViewData["RoleName"] = new SelectList(_context.Roles, "RoleId", "RoleName", user.RoleId);
             ViewData["TermsText"] = new SelectList(_context.TermsAndConditions, "TermsId", "TermsText", user.TermsId);
 
             return View(user);
@@ -191,7 +195,8 @@ namespace Bina.Areas.Manager.Controllers
 
                     // Cập nhật các trường dữ liệu khác
                     userToUpdate.UserName = user.UserName;
-                    userToUpdate.UserFullName = user.UserFullName;
+                    userToUpdate.FirstName = user.FirstName;
+                    userToUpdate.LastName = user.LastName;
                     userToUpdate.Email = user.Email;
                     userToUpdate.PhoneNumber = user.PhoneNumber;
                     userToUpdate.DoB = user.DoB;
@@ -207,23 +212,25 @@ namespace Bina.Areas.Manager.Controllers
                     var newRole = await _context.Roles.FindAsync(user.RoleId);
                     if (newRole != null && newRole.RoleName == "Student")
                     {
-                        // Tạo mới hoặc cập nhật TermsAndConditions
-                        if (currentTermsId == null)
+                        // Kiểm tra nếu TermsText không rỗng
+                        if (!string.IsNullOrWhiteSpace(user.Terms?.TermsText))
                         {
-                            var newTerms = new TermsAndCondition { TermsText = user.Terms?.TermsText };
-                            _context.TermsAndConditions.Add(newTerms);
-                            await _context.SaveChangesAsync();
-                            userToUpdate.TermsId = newTerms.TermsId;
-                        }
-                        else
-                        {
-                            var existingTerms = await _context.TermsAndConditions.FindAsync(currentTermsId);
+                            // Tìm TermsAndCondition có TermsText tương ứng trong cơ sở dữ liệu
+                            var existingTerms = await _context.TermsAndConditions
+                                .FirstOrDefaultAsync(t => t.TermsText == user.Terms.TermsText);
+
                             if (existingTerms != null)
                             {
-                                existingTerms.TermsText = user.Terms?.TermsText;
-                                _context.TermsAndConditions.Update(existingTerms);
-                                await _context.SaveChangesAsync();
+                                // Nếu TermsText đã tồn tại, gán TermsId hiện có cho user
                                 userToUpdate.TermsId = existingTerms.TermsId;
+                            }
+                            else
+                            {
+                                // Ngược lại, tạo mới TermsAndCondition
+                                var newTerms = new TermsAndCondition { TermsText = user.Terms.TermsText };
+                                _context.TermsAndConditions.Add(newTerms);
+                                await _context.SaveChangesAsync();
+                                userToUpdate.TermsId = newTerms.TermsId;
                             }
                         }
                     }

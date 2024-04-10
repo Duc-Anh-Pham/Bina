@@ -70,7 +70,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Bookmark",
@@ -250,7 +250,7 @@
               "RelativeToolTip": "Areas\\Admin\\Controllers\\UsersController.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAQAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-04T00:01:02.59Z",
+              "WhenOpened": "2024-04-04T07:19:55.395Z",
               "EditorCaption": ""
             },
             {
@@ -263,8 +263,19 @@
               "RelativeToolTip": "Controllers\\LoginsController.cs",
               "ViewState": "AQIAADMAAAAAAAAAAAAAABEAAAAoAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-03T21:57:15.798Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-04T06:54:07.717Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ErrorViewModel.cs",
+              "DocumentMoniker": "F:\\Greenwich IT\\TOPUP - 1640 - Enterprise Web Software Development\\Code\\Bina3-4\\Bina\\Models\\ErrorViewModel.cs",
+              "RelativeDocumentMoniker": "Models\\ErrorViewModel.cs",
+              "ToolTip": "F:\\Greenwich IT\\TOPUP - 1640 - Enterprise Web Software Development\\Code\\Bina3-4\\Bina\\Models\\ErrorViewModel.cs",
+              "RelativeToolTip": "Models\\ErrorViewModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-04T06:54:07.014Z"
             },
             {
               "$type": "Document",

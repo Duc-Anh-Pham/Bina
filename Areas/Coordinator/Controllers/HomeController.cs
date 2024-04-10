@@ -22,10 +22,14 @@ namespace Bina.Areas.Coordinator.Controllers
             return View();
         }
 
+        [Authentication]
+
         public IActionResult Privacy()
         {
             return View();
         }
+
+        [Authentication]
 
         public IActionResult About()
         {
