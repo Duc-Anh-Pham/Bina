@@ -1077,8 +1077,6 @@ D:\Github\COMP1640\Bina\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTarge
 D:\Github\COMP1640\Bina\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.Bina.props
 D:\Github\COMP1640\Bina\obj\Debug\net8.0\staticwebassets.pack.json
 D:\Github\COMP1640\Bina\obj\Debug\net8.0\scopedcss\Areas\Admin\Views\Shared\_Layout.cshtml.rz.scp.css
-D:\Github\COMP1640\Bina\obj\Debug\net8.0\scopedcss\Areas\Coordinator\Views\Shared\_Layout.cshtml.rz.scp.css
-D:\Github\COMP1640\Bina\obj\Debug\net8.0\scopedcss\Areas\Manager\Views\Shared\_Layout.cshtml.rz.scp.css
 D:\Github\COMP1640\Bina\obj\Debug\net8.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 D:\Github\COMP1640\Bina\obj\Debug\net8.0\scopedcss\bundle\Bina.styles.css
 D:\Github\COMP1640\Bina\obj\Debug\net8.0\scopedcss\projectbundle\Bina.bundle.scp.css
