@@ -45,9 +45,9 @@
                         </td>
                         <td>
                             <!-- Hiển thị avatar nếu có đường dẫn -->
-                            @if (!string.IsNullOrWhiteSpace(item.Image?.Imagepath))
+                            @if (!string.IsNullOrWhiteSpace(item.Image?.ImagePath))
                             {
-                                <img src="@item.Image.Imagepath" alt="Avatar" style="height: 50px; width: 50px; object-fit: cover;" />
+                                <img src="@item.Image.ImagePath" alt="Avatar" style="height: 50px; width: 50px; object-fit: cover;" />
                             }
                         </td>
                         <td>

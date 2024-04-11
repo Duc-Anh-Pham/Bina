@@ -25,7 +25,7 @@ public partial class User
 
     public string? Password { get; set; }
 
-	public int? RoleId { get; set; }
+    public int? RoleId { get; set; }
 
     public string? FacultyId { get; set; }
 
@@ -44,13 +44,4 @@ public partial class User
     public virtual Role? Role { get; set; }
 
     public virtual TermsAndCondition? Terms { get; set; }
-
-
-    public string FullName
-    {
-        get
-        {
-            return FirstName + " " + LastName; 
-        }
-    }
 }

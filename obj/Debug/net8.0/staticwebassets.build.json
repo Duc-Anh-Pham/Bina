@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "25UtEWuGFKGGLVtsX42dphw9OPs5xR4aDfjNDYUXey8=",
+  "Hash": "ZjwAaG5lSGetwD0IFxuYWlCaIst3aFhQpBlXjPkrO18=",
   "Source": "Bina",
   "BasePath": "_content/Bina",
   "Mode": "Default",
@@ -1404,6 +1404,25 @@
       "OriginalItemSpec": "wwwroot\\css\\icomoon.css"
     },
     {
+      "Identity": "F:\\Greenwich IT\\TOPUP - 1640 - Enterprise Web Software Development\\Code\\Bina3-4\\Bina\\wwwroot\\css\\Loading.css",
+      "SourceId": "Bina",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\Greenwich IT\\TOPUP - 1640 - Enterprise Web Software Development\\Code\\Bina3-4\\Bina\\wwwroot\\",
+      "BasePath": "_content/Bina",
+      "RelativePath": "css/Loading.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\Loading.css"
+    },
+    {
       "Identity": "F:\\Greenwich IT\\TOPUP - 1640 - Enterprise Web Software Development\\Code\\Bina3-4\\Bina\\wwwroot\\css\\main.css",
       "SourceId": "Bina",
       "SourceType": "Discovered",
@@ -1440,6 +1459,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\main.min.css"
+    },
+    {
+      "Identity": "F:\\Greenwich IT\\TOPUP - 1640 - Enterprise Web Software Development\\Code\\Bina3-4\\Bina\\wwwroot\\css\\NotificationMessage.css",
+      "SourceId": "Bina",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\Greenwich IT\\TOPUP - 1640 - Enterprise Web Software Development\\Code\\Bina3-4\\Bina\\wwwroot\\",
+      "BasePath": "_content/Bina",
+      "RelativePath": "css/NotificationMessage.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\NotificationMessage.css"
     },
     {
       "Identity": "F:\\Greenwich IT\\TOPUP - 1640 - Enterprise Web Software Development\\Code\\Bina3-4\\Bina\\wwwroot\\css\\site.css",

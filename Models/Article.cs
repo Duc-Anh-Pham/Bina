@@ -17,6 +17,8 @@ public partial class Article
 
     public int? ImageId { get; set; }
 
+    public int? DocumentId { get; set; }
+
     public int? ArticleStatusId { get; set; }
 
     public Guid? ArticlesDeadlineId { get; set; }
@@ -28,6 +30,8 @@ public partial class Article
     public virtual ArticleStatus? ArticleStatus { get; set; }
 
     public virtual ArticlesDeadline? ArticlesDeadline { get; set; }
+
+    public virtual Document? Document { get; set; }
 
     public virtual Faculty? Faculty { get; set; }
 

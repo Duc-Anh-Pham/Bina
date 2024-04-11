@@ -24,7 +24,11 @@ public partial class Ft1Context : DbContext
 
     public virtual DbSet<ArticlesDeadline> ArticlesDeadlines { get; set; }
 
+    public virtual DbSet<Document> Documents { get; set; }
+
     public virtual DbSet<Faculty> Faculties { get; set; }
+
+    public virtual DbSet<HelpAndSupport> HelpAndSupports { get; set; }
 
     public virtual DbSet<Image> Images { get; set; }
 
@@ -36,13 +40,13 @@ public partial class Ft1Context : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=DUC_ANH;Initial Catalog=FT1;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False");
+        => optionsBuilder.UseSqlServer("Data Source=(localdb)\\ProjectModels;Initial Catalog=FT1;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Article>(entity =>
         {
-            entity.HasKey(e => e.ArticleId).HasName("PK__Articles__9C6270C81F121BB0");
+            entity.HasKey(e => e.ArticleId).HasName("PK__Articles__9C6270C8AAFF11E6");
 
             entity.Property(e => e.ArticleId).HasColumnName("ArticleID");
             entity.Property(e => e.ArticleName)
@@ -50,6 +54,7 @@ public partial class Ft1Context : DbContext
                 .IsUnicode(false);
             entity.Property(e => e.ArticleStatusId).HasColumnName("ArticleStatusID");
             entity.Property(e => e.ArticlesDeadlineId).HasColumnName("ArticlesDeadlineID");
+            entity.Property(e => e.DocumentId).HasColumnName("DocumentID");
             entity.Property(e => e.FacultyId)
                 .HasMaxLength(50)
                 .HasColumnName("FacultyID");
@@ -61,28 +66,32 @@ public partial class Ft1Context : DbContext
 
             entity.HasOne(d => d.ArticleStatus).WithMany(p => p.Articles)
                 .HasForeignKey(d => d.ArticleStatusId)
-                .HasConstraintName("FK__Articles__Articl__4CA06362");
+                .HasConstraintName("FK__Articles__Articl__5070F446");
 
             entity.HasOne(d => d.ArticlesDeadline).WithMany(p => p.Articles)
                 .HasForeignKey(d => d.ArticlesDeadlineId)
-                .HasConstraintName("FK__Articles__Articl__4D94879B");
+                .HasConstraintName("FK__Articles__Articl__5165187F");
+
+            entity.HasOne(d => d.Document).WithMany(p => p.Articles)
+                .HasForeignKey(d => d.DocumentId)
+                .HasConstraintName("FK__Articles__Docume__534D60F1");
 
             entity.HasOne(d => d.Faculty).WithMany(p => p.Articles)
                 .HasForeignKey(d => d.FacultyId)
-                .HasConstraintName("FK__Articles__Facult__4F7CD00D");
+                .HasConstraintName("FK__Articles__Facult__5441852A");
 
             entity.HasOne(d => d.Image).WithMany(p => p.Articles)
                 .HasForeignKey(d => d.ImageId)
-                .HasConstraintName("FK__Articles__ImageI__4E88ABD4");
+                .HasConstraintName("FK__Articles__ImageI__52593CB8");
 
             entity.HasOne(d => d.User).WithMany(p => p.Articles)
                 .HasForeignKey(d => d.UserId)
-                .HasConstraintName("FK__Articles__UserID__4BAC3F29");
+                .HasConstraintName("FK__Articles__UserID__4F7CD00D");
         });
 
         modelBuilder.Entity<ArticleComment>(entity =>
         {
-            entity.HasKey(e => e.CommentId).HasName("PK__ArticleC__C3B4DFAA55297C62");
+            entity.HasKey(e => e.CommentId).HasName("PK__ArticleC__C3B4DFAAAB09E706");
 
             entity.Property(e => e.CommentId)
                 .ValueGeneratedNever()
@@ -93,16 +102,16 @@ public partial class Ft1Context : DbContext
 
             entity.HasOne(d => d.Article).WithMany(p => p.ArticleComments)
                 .HasForeignKey(d => d.ArticleId)
-                .HasConstraintName("FK__ArticleCo__Artic__534D60F1");
+                .HasConstraintName("FK__ArticleCo__Artic__5812160E");
 
             entity.HasOne(d => d.User).WithMany(p => p.ArticleComments)
                 .HasForeignKey(d => d.UserId)
-                .HasConstraintName("FK__ArticleCo__UserI__52593CB8");
+                .HasConstraintName("FK__ArticleCo__UserI__571DF1D5");
         });
 
         modelBuilder.Entity<ArticleStatus>(entity =>
         {
-            entity.HasKey(e => e.ArticleStatusId).HasName("PK__ArticleS__3F0E2D6B20AE9143");
+            entity.HasKey(e => e.ArticleStatusId).HasName("PK__ArticleS__3F0E2D6BEC19A1A8");
 
             entity.ToTable("ArticleStatus");
 
@@ -114,7 +123,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<ArticlesDeadline>(entity =>
         {
-            entity.HasKey(e => e.ArticlesDeadlineId).HasName("PK__Articles__253F2FDC2821DDB2");
+            entity.HasKey(e => e.ArticlesDeadlineId).HasName("PK__Articles__253F2FDCEBDB6EFC");
 
             entity.ToTable("ArticlesDeadline");
 
@@ -128,12 +137,22 @@ public partial class Ft1Context : DbContext
 
             entity.HasOne(d => d.User).WithMany(p => p.ArticlesDeadlines)
                 .HasForeignKey(d => d.UserId)
-                .HasConstraintName("FK__ArticlesD__UserI__44FF419A");
+                .HasConstraintName("FK__ArticlesD__UserI__46E78A0C");
+        });
+
+        modelBuilder.Entity<Document>(entity =>
+        {
+            entity.HasKey(e => e.DocumentId).HasName("PK__Document__1ABEEF6F6DB8437F");
+
+            entity.Property(e => e.DocumentId).HasColumnName("DocumentID");
+            entity.Property(e => e.DocumentPath)
+                .HasMaxLength(255)
+                .IsUnicode(false);
         });
 
         modelBuilder.Entity<Faculty>(entity =>
         {
-            entity.HasKey(e => e.FacultyId).HasName("PK__Faculty__306F636E0C1897AA");
+            entity.HasKey(e => e.FacultyId).HasName("PK__Faculty__306F636E3BD3A903");
 
             entity.ToTable("Faculty");
 
@@ -145,23 +164,34 @@ public partial class Ft1Context : DbContext
             entity.Property(e => e.Status).HasDefaultValue((byte)1);
         });
 
+        modelBuilder.Entity<HelpAndSupport>(entity =>
+        {
+            entity.HasKey(e => e.HelpSupportId).HasName("PK__HelpAndS__65D53B0F4E2A086B");
+
+            entity.ToTable("HelpAndSupport");
+
+            entity.Property(e => e.HelpSupportId).HasColumnName("HelpSupportID");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Email).HasMaxLength(255);
+            entity.Property(e => e.FullName).HasMaxLength(255);
+            entity.Property(e => e.Title).HasMaxLength(255);
+        });
+
         modelBuilder.Entity<Image>(entity =>
         {
-            entity.HasKey(e => e.ImageId).HasName("PK__Image__7516F4EC610532C1");
+            entity.HasKey(e => e.ImageId).HasName("PK__Images__7516F4ECAA2AC41E");
 
-            entity.ToTable("Image");
-
-            entity.Property(e => e.ImageId)
-                .ValueGeneratedNever()
-                .HasColumnName("ImageID");
-            entity.Property(e => e.Imagepath)
+            entity.Property(e => e.ImageId).HasColumnName("ImageID");
+            entity.Property(e => e.ImagePath)
                 .HasMaxLength(255)
                 .IsUnicode(false);
         });
 
         modelBuilder.Entity<Role>(entity =>
         {
-            entity.HasKey(e => e.RoleId).HasName("PK__Role__8AFACE3A7F148AAB");
+            entity.HasKey(e => e.RoleId).HasName("PK__Role__8AFACE3A0E28160A");
 
             entity.ToTable("Role");
 
@@ -173,7 +203,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<TermsAndCondition>(entity =>
         {
-            entity.HasKey(e => e.TermsId).HasName("PK__TermsAnd__C05EBE00912A5A23");
+            entity.HasKey(e => e.TermsId).HasName("PK__TermsAnd__C05EBE00C9142132");
 
             entity.Property(e => e.TermsId)
                 .ValueGeneratedNever()
@@ -183,7 +213,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.UserId).HasName("PK__User__1788CCAC5AD7973B");
+            entity.HasKey(e => e.UserId).HasName("PK__User__1788CCAC13CEF90F");
 
             entity.ToTable("User");
 
@@ -206,15 +236,15 @@ public partial class Ft1Context : DbContext
 
             entity.HasOne(d => d.Faculty).WithMany(p => p.Users)
                 .HasForeignKey(d => d.FacultyId)
-                .HasConstraintName("FK__User__FacultyID__412EB0B6");
+                .HasConstraintName("FK__User__FacultyID__403A8C7D");
 
             entity.HasOne(d => d.Role).WithMany(p => p.Users)
                 .HasForeignKey(d => d.RoleId)
-                .HasConstraintName("FK__User__RoleID__403A8C7D");
+                .HasConstraintName("FK__User__RoleID__3F466844");
 
             entity.HasOne(d => d.Terms).WithMany(p => p.Users)
                 .HasForeignKey(d => d.TermsId)
-                .HasConstraintName("FK__User__TermsID__4222D4EF");
+                .HasConstraintName("FK__User__TermsID__412EB0B6");
         });
 
         OnModelCreatingPartial(modelBuilder);

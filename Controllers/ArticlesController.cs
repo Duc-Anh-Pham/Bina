@@ -118,7 +118,7 @@ namespace Bina.Controllers
                     }
 
                     // Lưu đường dẫn file ảnh vào cơ sở dữ liệu, nếu cần
-                    var image = new Image { Imagepath = "/uploads/" + fileName };
+                    var image = new Image { ImagePath = "/uploads/" + fileName };
                     _context.Images.Add(image);
                     await _context.SaveChangesAsync(); // This saves the image record and generates the ImageID
 
@@ -202,7 +202,7 @@ namespace Bina.Controllers
                             _context.Images.Remove(article.Image); // Xoá hình ảnh cũ
                         }
 
-                        var image = new Image { Imagepath = "/uploads/" + fileName };
+                        var image = new Image { ImagePath = "/uploads/" + fileName };
                         _context.Images.Add(image);
                         await _context.SaveChangesAsync();
 
@@ -272,7 +272,7 @@ namespace Bina.Controllers
                 // Xoá file ảnh từ server
                 if (article.Image != null)
                 {
-                    var imagePath = Path.Combine(_hostingEnvironment.WebRootPath, article.Image.Imagepath.TrimStart('/'));
+                    var imagePath = Path.Combine(_hostingEnvironment.WebRootPath, article.Image.ImagePath.TrimStart('/'));
                     if (System.IO.File.Exists(imagePath))
                     {
                         System.IO.File.Delete(imagePath);
