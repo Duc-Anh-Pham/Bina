@@ -23,7 +23,7 @@ namespace Bina.Controllers
             _hostingEnvironment = hostingEnvironment; // Set the environment
         }
 
-        public async Task<IActionResult> GetFile(int id)
+        /*public async Task<IActionResult> GetFile(int id)
         {
             var article = await _context.Articles
                 .FirstOrDefaultAsync(a => a.ArticleId == id);
@@ -40,9 +40,9 @@ namespace Bina.Controllers
             // Ví dụ: "application/pdf" cho PDF, "image/jpeg" cho JPEG, v.v.
             var contentType = "application/pdf"; // Thay đổi này dựa vào loại file thực tế
 
-            var stream = new MemoryStream(article.Content);
-            return File(stream, contentType, fileName);
-        }
+          *//*  var stream = new MemoryStream(article.Content);*/
+        /*return File(stream, contentType, fileName);*//*
+    }*/
 
 
 
@@ -96,35 +96,35 @@ namespace Bina.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (uploadFile != null && uploadFile.Length > 0)
-                {
-                    // Lưu file dưới dạng BLOB trong cột 'Content'
-                    using (var memoryStream = new MemoryStream())
-                    {
-                        await uploadFile.CopyToAsync(memoryStream);
-                        article.Content = memoryStream.ToArray();
-                    }
-                }
+                /*   if (uploadFile != null && uploadFile.Length > 0)
+                   {
+                       // Lưu file dưới dạng BLOB trong cột 'Content'
+                       using (var memoryStream = new MemoryStream())
+                       {
+                           await uploadFile.CopyToAsync(memoryStream);
+                           article.Content = memoryStream.ToArray();
+                       }
+                   }
 
-                if (uploadImage != null && uploadImage.Length > 0)
-                {
-                    // Lưu file ảnh vào thư mục trên server
-                    var fileName = Guid.NewGuid().ToString() + Path.GetExtension(uploadImage.FileName);
-                    var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "uploads", fileName);
+                   if (uploadImage != null && uploadImage.Length > 0)
+                   {
+                       // Lưu file ảnh vào thư mục trên server
+                       var fileName = Guid.NewGuid().ToString() + Path.GetExtension(uploadImage.FileName);
+                       var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "uploads", fileName);
 
-                    using (var fileStream = new FileStream(filePath, FileMode.Create))
-                    {
-                        await uploadImage.CopyToAsync(fileStream);
-                    }
+                       using (var fileStream = new FileStream(filePath, FileMode.Create))
+                       {
+                           await uploadImage.CopyToAsync(fileStream);
+                       }
 
-                    // Lưu đường dẫn file ảnh vào cơ sở dữ liệu, nếu cần
-                    var image = new Image { ImagePath = "/uploads/" + fileName };
-                    _context.Images.Add(image);
-                    await _context.SaveChangesAsync(); // This saves the image record and generates the ImageID
+                       // Lưu đường dẫn file ảnh vào cơ sở dữ liệu, nếu cần
+                       var image = new Image { ImagePath = "/uploads/" + fileName };
+                       _context.Images.Add(image);
+                       await _context.SaveChangesAsync(); // This saves the image record and generates the ImageID
 
-                    article.ImageId = image.ImageId; // Assign the generated ImageId to the article
-                }
-
+                       article.ImageId = image.ImageId; // Assign the generated ImageId to the article
+                   }
+   */
                 // Thêm bài viết vào cơ sở dữ liệu
                 _context.Articles.Add(article);
                 await _context.SaveChangesAsync(); // This saves the article record, which includes the Content BLOB and ImageID
@@ -178,14 +178,14 @@ namespace Bina.Controllers
             {
                 try
                 {
-                    if (uploadFile != null && uploadFile.Length > 0)
-                    {
-                        using (var memoryStream = new MemoryStream())
-                        {
-                            await uploadFile.CopyToAsync(memoryStream);
-                            article.Content = memoryStream.ToArray();
-                        }
-                    }
+                    /* if (uploadFile != null && uploadFile.Length > 0)
+                     {
+                         using (var memoryStream = new MemoryStream())
+                         {
+                             await uploadFile.CopyToAsync(memoryStream);
+                             article.Content = memoryStream.ToArray();
+                         }
+                     }*/
 
                     if (uploadImage != null && uploadImage.Length > 0)
                     {
