@@ -19,6 +19,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Views\HelpSupport\ConfirmationPage.cshtml" />
+    <None Include="Views\HelpSupport\Index.cshtml" />
     <None Include="wwwroot\css\bootstrap.min.css" />
     <None Include="wwwroot\css\bootstrap\mixins\_border-radius.css" />
     <None Include="wwwroot\css\bootstrap\mixins\_reset-text.css" />

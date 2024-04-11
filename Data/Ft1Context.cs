@@ -16,6 +16,8 @@ public partial class Ft1Context : DbContext
     {
     }
 
+    public virtual DbSet<HelpAndSupport> HelpSupports { get; set; }
+
     public virtual DbSet<Article> Articles { get; set; }
 
     public virtual DbSet<ArticleComment> ArticleComments { get; set; }

@@ -1,7 +1,8 @@
-﻿using Bina.Models;
+﻿using Bina.Data;
+using Bina.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Bina.Areas.Admin.Controllers
+namespace Bina.Controllers
 {
     /*   public class HelpSupportController : Controller
        {
@@ -47,14 +48,15 @@ namespace Bina.Areas.Admin.Controllers
         }
     }
     */
-    [Area("Admin")]
     public class HelpSupportController : Controller
     {
         private readonly ILogger<HelpSupportController> _logger; //ILogger ghi log cho HelpSupportController
+        private readonly Ft1Context _ft1;
 
-        public HelpSupportController(ILogger<HelpSupportController> logger)
+        public HelpSupportController(ILogger<HelpSupportController> logger, Ft1Context ft1)
         {
             _logger = logger; // gán giá trị _logger cho Ilogger
+            _ft1 = ft1;
         }
 
         [HttpGet]
@@ -64,18 +66,18 @@ namespace Bina.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult HelpSupport(HelpSupport model)
+        public IActionResult HelpSupport(HelpAndSupport model)
         {
-            if (ModelState.IsValid) //nếu các phương thức nhập dữ liệu hợp lệ thì trả về trang ConfirmationPage
+            if (ModelState.IsValid)
             {
-
-                return RedirectToAction("ConfirmationPage");
+                model.CreatedAt = DateTime.Now;
+                _ft1.HelpAndSupports.Add(model);
+                _ft1.SaveChanges();
+                return RedirectToAction(nameof(ConfirmationPage));
             }
-            else
-            {
-                return View("Index", model);
-            }
+            return View(model);
         }
+
 
         public IActionResult ConfirmationPage()
         {

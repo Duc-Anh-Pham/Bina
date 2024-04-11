@@ -66,14 +66,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcRmFjdWx0eVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/Greenwich IT/TOPUP - 1640 - Enterprise Web Software Development/Code/Bina3-4/Bina/Areas/Admin/Views/HelpSupport/ConfirmationPage.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcSGVscFN1cHBvcnRcQ29uZmlybWF0aW9uUGFnZS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[F:/Greenwich IT/TOPUP - 1640 - Enterprise Web Software Development/Code/Bina3-4/Bina/Areas/Admin/Views/HelpSupport/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcSGVscFN1cHBvcnRcSW5kZXguY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
 [F:/Greenwich IT/TOPUP - 1640 - Enterprise Web Software Development/Code/Bina3-4/Bina/Areas/Admin/Views/Home/About.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcSG9tZVxBYm91dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -340,6 +332,14 @@ build_metadata.AdditionalFiles.CssScope =
 
 [F:/Greenwich IT/TOPUP - 1640 - Enterprise Web Software Development/Code/Bina3-4/Bina/Views/Articles/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXJ0aWNsZXNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/Greenwich IT/TOPUP - 1640 - Enterprise Web Software Development/Code/Bina3-4/Bina/Views/HelpSupport/ConfirmationPage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGVscFN1cHBvcnRcQ29uZmlybWF0aW9uUGFnZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/Greenwich IT/TOPUP - 1640 - Enterprise Web Software Development/Code/Bina3-4/Bina/Views/HelpSupport/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGVscFN1cHBvcnRcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [F:/Greenwich IT/TOPUP - 1640 - Enterprise Web Software Development/Code/Bina3-4/Bina/Views/Home/Index.cshtml]
