@@ -68,8 +68,6 @@ namespace Bina.Controllers
 					});
 				}
 
-				u.RememberMe = user.RememberMe; // Set the RememberMe property
-
 				// Save the changes to the database
 				_context.SaveChanges();
 

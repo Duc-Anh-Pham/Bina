@@ -11,13 +11,13 @@ public partial class Article
 
     public string? Title { get; set; }
 
-    public byte[]? Content { get; set; }
+    public string? Content { get; set; }
 
     public int? UserId { get; set; }
 
-    public int? ImageId { get; set; }
+    public string? ImagePath { get; set; }
 
-    public int? DocumentId { get; set; }
+    public string? DocumentPath { get; set; }
 
     public int? ArticleStatusId { get; set; }
 
@@ -31,11 +31,7 @@ public partial class Article
 
     public virtual ArticlesDeadline? ArticlesDeadline { get; set; }
 
-    public virtual Document? Document { get; set; }
-
     public virtual Faculty? Faculty { get; set; }
-
-    public virtual Image? Image { get; set; }
 
     public virtual User? User { get; set; }
 }

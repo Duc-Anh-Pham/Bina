@@ -15,5 +15,7 @@ public partial class Faculty
 
     public virtual ICollection<Article> Articles { get; set; } = new List<Article>();
 
+    public virtual ICollection<ArticlesDeadline> ArticlesDeadlines { get; set; } = new List<ArticlesDeadline>();
+
     public virtual ICollection<User> Users { get; set; } = new List<User>();
 }

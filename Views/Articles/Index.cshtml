@@ -44,13 +44,6 @@
                             @Html.DisplayFor(modelItem => item.Title)
                         </td>
                         <td>
-                            <!-- Hiển thị avatar nếu có đường dẫn -->
-                            @if (!string.IsNullOrWhiteSpace(item.Image?.ImagePath))
-                            {
-                                <img src="@item.Image.ImagePath" alt="Avatar" style="height: 50px; width: 50px; object-fit: cover;" />
-                            }
-                        </td>
-                        <td>
                             @Html.DisplayFor(modelItem => item.ArticlesDeadline.StartDue)
                         </td>
                         <td>

@@ -1379,3 +1379,15 @@ F:\Greenwich IT\TOPUP - 1640 - Enterprise Web Software Development\Code\Bina3-4\
 F:\Greenwich IT\TOPUP - 1640 - Enterprise Web Software Development\Code\Bina3-4\Bina\bin\Debug\net8.0\X.PagedList.Mvc.dll
 F:\Greenwich IT\TOPUP - 1640 - Enterprise Web Software Development\Code\Bina3-4\Bina\bin\Debug\net8.0\X.PagedList.Mvc.Core.dll
 F:\Greenwich IT\TOPUP - 1640 - Enterprise Web Software Development\Code\Bina3-4\Bina\bin\Debug\net8.0\X.PagedList.Web.Common.dll
+D:\Github\COMP1640\Bina\bin\Debug\net8.0\Microsoft.AspNetCore.Authorization.dll
+D:\Github\COMP1640\Bina\bin\Debug\net8.0\Microsoft.AspNetCore.Components.dll
+D:\Github\COMP1640\Bina\bin\Debug\net8.0\Microsoft.AspNetCore.Components.Forms.dll
+D:\Github\COMP1640\Bina\bin\Debug\net8.0\Microsoft.AspNetCore.Components.QuickGrid.dll
+D:\Github\COMP1640\Bina\bin\Debug\net8.0\Microsoft.AspNetCore.Components.QuickGrid.EntityFrameworkAdapter.dll
+D:\Github\COMP1640\Bina\bin\Debug\net8.0\Microsoft.AspNetCore.Components.Web.dll
+D:\Github\COMP1640\Bina\bin\Debug\net8.0\Microsoft.AspNetCore.Metadata.dll
+D:\Github\COMP1640\Bina\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\Github\COMP1640\Bina\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+D:\Github\COMP1640\Bina\bin\Debug\net8.0\Microsoft.JSInterop.dll
+D:\Github\COMP1640\Bina\bin\Debug\net8.0\X.PagedList.dll
+D:\Github\COMP1640\Bina\bin\Debug\net8.0\X.PagedList.Mvc.Core.dll

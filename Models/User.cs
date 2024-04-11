@@ -1,4 +1,7 @@
-﻿namespace Bina.Models;
+﻿using System;
+using System.Collections.Generic;
+
+namespace Bina.Models;
 
 public partial class User
 {
@@ -22,7 +25,9 @@ public partial class User
 
     public string? Password { get; set; }
 
-    public int? RoleId { get; set; }
+    public bool RememberMe { get; set; }
+
+	public int? RoleId { get; set; }
 
     public string? FacultyId { get; set; }
 
@@ -46,7 +51,7 @@ public partial class User
     {
         get
         {
-            return FirstName + " " + LastName;
-        }
-    }
+			return FirstName + " " + LastName;
+		}
+	}
 }

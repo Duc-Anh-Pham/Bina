@@ -43,15 +43,6 @@
         </div>
 
         <div class="mb-3">
-
-            <div class="form-group">
-                <label asp-for="ImageId" class="control-label">Upload Image</label>
-                <input type="file" class="form-control" name="uploadImage" />
-            </div>
-
-        </div>
-
-        <div class="mb-3">
             <label asp-for="ArticleStatusId" class="form-label">Article Status</label>
             <select asp-for="ArticleStatusId" asp-items="ViewBag.ArticleStatusId" class="form-select" required></select>
             <span asp-validation-for="ArticleStatusId" class="text-danger"></span>

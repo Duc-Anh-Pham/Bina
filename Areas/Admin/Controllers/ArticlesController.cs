@@ -22,7 +22,6 @@ namespace Bina.Areas.Admin.Controllers
             IQueryable<Article> fT1Context = _context.Articles
                 .Include(a => a.ArticleStatus)
                 .Include(a => a.ArticlesDeadline)
-                .Include(a => a.Image)
                 .Include(a => a.User);
 
             if (!string.IsNullOrWhiteSpace(facultyId) && !facultyId.Equals("ALL", StringComparison.OrdinalIgnoreCase))
@@ -68,7 +67,6 @@ namespace Bina.Areas.Admin.Controllers
         {
             ViewData["ArticleStatusId"] = new SelectList(_context.ArticleStatuses, "ArticleStatusId", "ArticleStatusId");
             ViewData["ArticlesDeadlineId"] = new SelectList(_context.ArticlesDeadlines, "ArticlesDeadlineId", "ArticlesDeadlineId");
-            ViewData["ImageId"] = new SelectList(_context.Images, "ImageId", "ImageId");
             ViewData["UserId"] = new SelectList(_context.Users, "UserId", "UserId");
             ViewBag.FacultyId = new SelectList(_context.Faculties, "FacultyId", "FacultyId");
 
@@ -236,7 +234,6 @@ namespace Bina.Areas.Admin.Controllers
             var article = await _context.Articles
                 .Include(a => a.ArticleStatus)
                 .Include(a => a.ArticlesDeadline)
-                .Include(a => a.Image)
                 .Include(a => a.User)
                 .FirstOrDefaultAsync(m => m.ArticleId == id);
 
