@@ -60,11 +60,15 @@ else
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+// Create the directory if it doesn't exist
+Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "avatars"));
+
+// Then, use the static file provider
 app.UseStaticFiles(new StaticFileOptions
 {
-    FileProvider = new PhysicalFileProvider(
-        Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "avatars")),
-    RequestPath = "/uploads/avatars"
+	FileProvider = new PhysicalFileProvider(
+		Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "avatars")),
+	RequestPath = "/uploads/avatars"
 });
 
 app.UseRouting();

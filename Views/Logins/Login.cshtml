@@ -13,7 +13,7 @@
 @if (TempData["ErrorMessage"] != null)
 {
 	<div class="alert-login d-flex justify-content-center">
-		<span class="alert-message"><strong>Account:</strong> @TempData["ErrorMessage"]</span>
+		<span class="alert-message"><strong>Account</strong> @TempData["ErrorMessage"]</span>
 	</div>
 
 	<!-- Thêm meta refresh để tự động làm mất thông báo sau 1 giây -->
@@ -58,7 +58,7 @@
 
 							<div class="form-group">
 								@* <input id="password-field" type="password" class="form-control" placeholder="password" required> *@
-								@Html.PasswordFor(us => us.Password, new { @class = "form-control", type = "password", required = "required", placeholder = "Password", /* pattern = "(?=.* [a - z])(?=.* [A - Z])(?=.*\\d)(?=.* [@$! % *? &])[A - Za - z\\d@$! % *? &]{ 8}", title = "Password must contain at least 8 characters, including uppercase, lowercase, numbers, and special characters."*/ })
+								@Html.PasswordFor(us => us.Password, new { @class = "form-control", type = "password", required = "required", placeholder = "Password", id = "password-field" /* , pattern = "(?=.* [a - z])(?=.* [A - Z])(?=.*\\d)(?=.* [@$! % *? &])[A - Za - z\\d@$! % *? &]{ 8}", title = "Password must contain at least 8 characters, including uppercase, lowercase, numbers, and special characters."*/ })
 								@* Show Password *@
 								<span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
 							</div>
@@ -72,7 +72,7 @@
 								<div class="w-50">
 									<label class="checkbox-wrap checkbox-primary">
 										Remember Me
-										<input type="checkbox" checked>
+										@Html.CheckBoxFor(us => us.RememberMe)
 										<span class="checkmark"></span>
 									</label>
 								</div>
