@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Bina.Models;
+﻿namespace Bina.Models;
 
 public partial class User
 {
@@ -44,4 +41,12 @@ public partial class User
     public virtual Role? Role { get; set; }
 
     public virtual TermsAndCondition? Terms { get; set; }
+
+    public string FullName
+    {
+        get
+        {
+            return FirstName + " " + LastName;
+        }
+    }
 }
