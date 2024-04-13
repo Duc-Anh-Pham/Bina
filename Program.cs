@@ -7,12 +7,17 @@ using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
-builder.Services.AddAuthentication(option =>
+builder.Services.AddLogging(config =>
 {
-    option.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-    option.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
-    option.DefaultChallengeScheme = MicrosoftAccountDefaults.AuthenticationScheme;
+    config.AddConsole()
+          .AddDebug()
+          .AddEventSourceLogger();
+});
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
 })
 
 .AddCookie()
@@ -46,6 +51,9 @@ builder.Services.AddSession(option =>
 
 var app = builder.Build();
 
+app.Logger.LogInformation("Application has started.");
+
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -66,9 +74,9 @@ Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot
 // Then, use the static file provider
 app.UseStaticFiles(new StaticFileOptions
 {
-	FileProvider = new PhysicalFileProvider(
-		Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "avatars")),
-	RequestPath = "/uploads/avatars"
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "avatars")),
+    RequestPath = "/uploads/avatars"
 });
 
 app.UseRouting();
@@ -89,6 +97,5 @@ app.UseEndpoints(endpoints =>
         name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}");
 });
-
 
 app.Run();
