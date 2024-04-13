@@ -18,8 +18,21 @@ namespace Bina.Controllers
         // GET: Articles
         public async Task<IActionResult> Index()
         {
-            var ft1Context = _context.Articles.Include(a => a.ArticleStatus).Include(a => a.ArticlesDeadline).Include(a => a.Faculty).Include(a => a.User);
-            return View(await ft1Context.ToListAsync());
+            int? userId = HttpContext.Session.GetInt32("UserId");
+            if (userId == null)
+            {
+                // Xử lý trường hợp không tìm thấy UserId, có thể là chưa đăng nhập
+                return RedirectToAction("Login", "Logins");
+            }
+
+            var articles = _context.Articles
+                .Include(a => a.ArticleStatus)
+                .Include(a => a.ArticlesDeadline)
+                .Include(a => a.Faculty)
+                .Include(a => a.User)
+                .Where(a => a.UserId == userId);  // Lọc các bài viết theo UserId
+
+            return View(await articles.ToListAsync());
         }
 
         // GET: Articles/Details/5
