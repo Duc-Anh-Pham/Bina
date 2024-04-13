@@ -4,17 +4,14 @@
 @{
     // Define a helper function to cut the string
     Func<string, int, string> truncate = (str, length) =>
-        str.Length <= length ? str : str.Substring(0, length) + "...";
+     str?.Length > length ? str.Substring(0, length) + "..." : str;
 }
-
-</ul>
-<p>User ID: @ViewData["UserId"]</p>
 
 
 <div class="album py-5 bg-body-tertiary">
     <div class="container">
         <p>
-            <a asp-action="Create">Create New</a>
+            <a asp-action="Create">Add New Article</a>
         </p>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
              @foreach (var item in Model)
