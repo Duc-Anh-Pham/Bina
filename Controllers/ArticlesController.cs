@@ -112,6 +112,10 @@ namespace Bina.Controllers
                 FacultyId = user.FacultyId // Đặt khoa mặc định cho bài viết dựa trên khoa của người dùng
             };
 
+            // Lấy deadline đầu tiên phù hợp hoặc null nếu không có
+            article.ArticlesDeadlineId = deadlines.FirstOrDefault()?.ArticlesDeadlineId;
+
+
             return View(article);
         }
 

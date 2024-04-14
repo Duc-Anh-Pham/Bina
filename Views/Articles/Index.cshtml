@@ -11,8 +11,9 @@
 <div class="album py-5 bg-body-tertiary">
     <div class="container">
         <p>
-            <a asp-action="Create">Add New Article</a>
+            <a asp-action="Create" class="btn btn-success">Add New Article</a>
         </p>
+
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
              @foreach (var item in Model)
             {
