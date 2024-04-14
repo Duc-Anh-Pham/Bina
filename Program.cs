@@ -1,4 +1,5 @@
 using Bina.Data;
+using Firebase.Storage;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Authentication.MicrosoftAccount;
@@ -49,6 +50,20 @@ builder.Services.AddSession(option =>
     option.IdleTimeout = TimeSpan.FromMinutes(60);
 });
 
+builder.Services.AddSingleton<FirebaseStorage>(provider =>
+{
+    var config = provider.GetRequiredService<IConfiguration>();
+    var firebaseConfig = config.GetSection("Firebase");
+    return new FirebaseStorage(
+        firebaseConfig["Bucket"],
+        new FirebaseStorageOptions
+        {
+            AuthTokenAsyncFactory = () => Task.FromResult(firebaseConfig["ApiKey"]),
+            ThrowOnCancel = true // optionally
+        });
+});
+
+
 var app = builder.Build();
 
 app.Logger.LogInformation("Application has started.");
@@ -97,5 +112,7 @@ app.UseEndpoints(endpoints =>
         name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}");
 });
+
+
 
 app.Run();

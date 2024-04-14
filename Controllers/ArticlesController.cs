@@ -84,15 +84,23 @@ namespace Bina.Controllers
                 .OrderBy(a => a.DueDate) // Sắp xếp theo ngày hạn chót để lấy ra hạn chót gần nhất
                 .ToList(); // Lấy ra tất cả mà không chỉ là đầu tiên
 
-
+            // Lấy danh sách deadlines theo FacultyId của người dùng
             var faculties = _context.Faculties
            .Where(f => f.FacultyId == user.FacultyId) // Chỉ lấy khoa mà người dùng thuộc về
            .ToList();
+
+            // Tạo SelectList cho các deadlines bao gồm ngày bắt đầu và kết thúc
+            var deadlineTermsSelectList = deadlines.Select(ad => new SelectListItem
+            {
+                Value = ad.ArticlesDeadlineId.ToString(),
+                Text = $"{ad.TermTitle} - từ {ad.StartDue?.ToString("dd/MM/yyyy")} đến {ad.DueDate?.ToString("dd/MM/yyyy")}"
+            }).ToList();
 
             ViewData["ArticleStatusId"] = new SelectList(_context.ArticleStatuses, "ArticleStatusId", "ArticleStatusId");
             ViewData["ArticlesDeadlineId"] = new SelectList(deadlines, "ArticlesDeadlineId", "TermTitle");
             ViewData["FacultyId"] = new SelectList(faculties, "FacultyId", "FacultyId", user.FacultyId);
             ViewData["UserId"] = new SelectList(_context.Users, "UserId", "UserId", userId);
+            ViewData["DeadlineTerms"] = deadlineTermsSelectList;
 
             var article = new Article
             {
@@ -117,12 +125,14 @@ namespace Bina.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            // Trường hợp có lỗi xảy ra, trả về lại view với thông tin đã nhập
             ViewData["ArticleStatusId"] = new SelectList(_context.ArticleStatuses, "ArticleStatusId", "ArticleStatusId", article.ArticleStatusId);
             ViewData["ArticlesDeadlineId"] = new SelectList(_context.ArticlesDeadlines, "ArticlesDeadlineId", "ArticlesDeadlineId", article.ArticlesDeadlineId);
             ViewData["FacultyId"] = new SelectList(_context.Faculties, "FacultyId", "FacultyId", article.FacultyId);
             ViewData["UserId"] = new SelectList(_context.Users, "UserId", "UserId", article.UserId);
             return View(article);
         }
+
 
         // GET: Articles/Edit/5
         public async Task<IActionResult> Edit(int? id)
