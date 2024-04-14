@@ -1,5 +1,6 @@
 ﻿using Bina.Data;
 using Bina.Models;
+using Bina.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -9,10 +10,12 @@ namespace Bina.Controllers
     public class ArticlesController : Controller
     {
         private readonly Ft1Context _context;
+        private readonly FirebaseCloud _firebaseCloud;
 
-        public ArticlesController(Ft1Context context)
+        public ArticlesController(Ft1Context context, ILogger<ArticlesController> logger, FirebaseCloud firebaseCloud)
         {
             _context = context;
+            _firebaseCloud = firebaseCloud;
         }
 
         // GET: Articles
@@ -113,23 +116,32 @@ namespace Bina.Controllers
         }
 
         // POST: Articles/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ArticleId,ArticleName,Title,Content,UserId,ImagePath,DocumentPath,ArticleStatusId,ArticlesDeadlineId,FacultyId")] Article article)
+        public async Task<IActionResult> Create(Article article, IFormFile imageFile, IFormFile documentFile)
         {
             if (ModelState.IsValid)
             {
+                // Xử lý file ảnh
+                if (imageFile != null && imageFile.Length > 0)
+                {
+                    var imageUrl = await _firebaseCloud.UploadFileToFirebase(imageFile);
+                    article.ImagePath = imageUrl; // Lưu URL của ảnh vào thuộc tính ImagePath
+                }
+
+                // Xử lý file tài liệu
+                if (documentFile != null && documentFile.Length > 0)
+                {
+                    var documentUrl = await _firebaseCloud.UploadFileToFirebase(documentFile);
+                    article.DocumentPath = documentUrl; // Lưu URL của tài liệu vào thuộc tính DocumentPath
+                }
+
                 _context.Add(article);
                 await _context.SaveChangesAsync();
+
                 return RedirectToAction(nameof(Index));
             }
-            // Trường hợp có lỗi xảy ra, trả về lại view với thông tin đã nhập
-            ViewData["ArticleStatusId"] = new SelectList(_context.ArticleStatuses, "ArticleStatusId", "ArticleStatusId", article.ArticleStatusId);
-            ViewData["ArticlesDeadlineId"] = new SelectList(_context.ArticlesDeadlines, "ArticlesDeadlineId", "ArticlesDeadlineId", article.ArticlesDeadlineId);
-            ViewData["FacultyId"] = new SelectList(_context.Faculties, "FacultyId", "FacultyId", article.FacultyId);
-            ViewData["UserId"] = new SelectList(_context.Users, "UserId", "UserId", article.UserId);
+
             return View(article);
         }
 

@@ -1,10 +1,9 @@
-using Bina.Data;
-using Firebase.Storage;
+﻿using Bina.Data;
+using Bina.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Authentication.MicrosoftAccount;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -45,24 +44,27 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddControllersWithViews();
 
+// In ConfigureServices FirebaseCloud
+builder.Services.AddSingleton<FirebaseCloud>(provider =>
+{
+    var configuration = provider.GetRequiredService<IConfiguration>();
+    var firebaseConfig = configuration.GetSection("Firebase");
+
+    return new FirebaseCloud(
+        firebaseConfig["apiKey"],
+        firebaseConfig["storageBucket"],
+        "", // authEmail not use in config
+        ""  // authPassword not use in config
+    );
+});
+
+
+
+
 builder.Services.AddSession(option =>
 {
     option.IdleTimeout = TimeSpan.FromMinutes(60);
 });
-
-builder.Services.AddSingleton<FirebaseStorage>(provider =>
-{
-    var config = provider.GetRequiredService<IConfiguration>();
-    var firebaseConfig = config.GetSection("Firebase");
-    return new FirebaseStorage(
-        firebaseConfig["Bucket"],
-        new FirebaseStorageOptions
-        {
-            AuthTokenAsyncFactory = () => Task.FromResult(firebaseConfig["ApiKey"]),
-            ThrowOnCancel = true // optionally
-        });
-});
-
 
 var app = builder.Build();
 
@@ -83,16 +85,6 @@ else
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-// Create the directory if it doesn't exist
-Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "avatars"));
-
-// Then, use the static file provider
-app.UseStaticFiles(new StaticFileOptions
-{
-    FileProvider = new PhysicalFileProvider(
-        Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "avatars")),
-    RequestPath = "/uploads/avatars"
-});
 
 app.UseRouting();
 
@@ -111,6 +103,10 @@ app.UseEndpoints(endpoints =>
     endpoints.MapControllerRoute(
         name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}");
+
+    endpoints.MapControllerRoute(
+        name: "upload",
+        pattern: "{controller=Upload}/{action=Index}");
 });
 
 

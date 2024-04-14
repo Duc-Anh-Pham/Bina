@@ -5,7 +5,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-4">
-            <form asp-action="Create" method="post">
+            <form asp-action="Create" method="post" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                 <div class="form-group">
@@ -25,15 +25,13 @@
                 <input asp-for="ArticleStatusId" type="hidden" />
 
                 <div class="form-group">
-                    <label asp-for="ImagePath" class="control-label">Image path:</label>
-                    <input asp-for="ImagePath" class="form-control" />
-                    <span asp-validation-for="ImagePath" class="text-danger"></span>
+                    <label asp-for="ImagePath" class="control-label">Select Image:</label>
+                    <input type="file" name="ImageFile" class="form-control" />
                 </div>
 
                 <div class="form-group">
-                    <label asp-for="DocumentPath" class="control-label">Document path:</label>
-                    <input asp-for="DocumentPath" class="form-control" />
-                    <span asp-validation-for="DocumentPath" class="text-danger"></span>
+                    <label asp-for="DocumentPath" class="control-label">Select Document:</label>
+                    <input type="file" name="DocumentFile" class="form-control" />
                 </div>
 
                 @* <div class="form-group">
@@ -43,19 +41,19 @@
 
                 <div class="form-group">
                     <label asp-for="ArticlesDeadlineId" class="control-label">Deadline Term:</label>
-                    <select asp-for="ArticlesDeadlineId" class="form-control" asp-items="@ViewData["DeadlineTerms"] as IEnumerable<SelectListItem>"></select>
+                    <select asp-for="ArticlesDeadlineId" class="form-control" asp-items="@ViewData["DeadlineTerms"] as IEnumerable<SelectListItem>" disabled></select>
                     <span asp-validation-for="ArticlesDeadlineId" class="text-danger"></span>
                 </div>
 
                 <div class="form-group">
                     <label asp-for="FacultyId" class="control-label">Faculty:</label>
-                    <select asp-for="FacultyId" class="form-control" asp-items="ViewBag.FacultyId"></select>
+                    <select asp-for="FacultyId" class="form-control" asp-items="ViewBag.FacultyId" disabled></select>
                 </div>
 
-
+                <br />
 
                 <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-primary" />
+                    <input type="submit" value="Submit" class="btn btn-primary" />
                 </div>
             </form>
         </div>
