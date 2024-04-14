@@ -1,4 +1,7 @@
-﻿namespace Bina.Models;
+﻿using System;
+using System.Collections.Generic;
+
+namespace Bina.Models;
 
 public partial class User
 {
@@ -38,13 +41,13 @@ public partial class User
 
     public virtual Faculty? Faculty { get; set; }
 
+    public bool RememberMe { get; set; }
+
     public virtual Role? Role { get; set; }
 
     public virtual TermsAndCondition? Terms { get; set; }
 
-
-
-    public bool RememberMe { get; set; }
+    
 
     public string FullName
     {
