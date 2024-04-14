@@ -1,75 +1,68 @@
-﻿@model Bina.Models.Article
+﻿@* Articles/create.cshtml *@
 
-@{
-    Layout = null;
-}
+@model Bina.Models.Article
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Create</title>
-</head>
-<body>
-
-<h4>Article</h4>
-<hr />
-<div class="row">
+<div class="container row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
             <div class="form-group">
-                <label asp-for="ArticleName" class="control-label"></label>
+                <label asp-for="ArticleName" class="control-label">Article name:</label>
                 <input asp-for="ArticleName" class="form-control" />
                 <span asp-validation-for="ArticleName" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Content" class="control-label"></label>
+                <label asp-for="Content" class="control-label">Description:</label>
                 <input asp-for="Content" class="form-control" />
                 <span asp-validation-for="Content" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="UserId" class="control-label"></label>
-                <select asp-for="UserId" class ="form-control" asp-items="ViewBag.UserId"></select>
+                <label asp-for="UserId" class="control-label">User ID:</label>
+                <select asp-for="UserId" class="form-control" asp-items="ViewBag.UserId"></select>
             </div>
+            <!-- Giấu UserId nếu đã được xác định tự động -->
+           @*  <input asp-for="UserId" type="hidden" /> *@
+
             <div class="form-group">
-                <label asp-for="ImagePath" class="control-label"></label>
+                <label asp-for="ArticleStatusId" class="control-label">Article Status:</label>
+                <select asp-for="ArticleStatusId" class="form-control" asp-items="ViewBag.ArticleStatusId"></select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ImagePath" class="control-label">Image path:</label>
                 <input asp-for="ImagePath" class="form-control" />
                 <span asp-validation-for="ImagePath" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="DocumentPath" class="control-label"></label>
+                <label asp-for="DocumentPath" class="control-label">Document path:</label>
                 <input asp-for="DocumentPath" class="form-control" />
                 <span asp-validation-for="DocumentPath" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="ArticleStatusId" class="control-label"></label>
-                <select asp-for="ArticleStatusId" class ="form-control" asp-items="ViewBag.ArticleStatusId"></select>
+                <label asp-for="ArticlesDeadlineId" class="control-label">Term:</label>
+                <select asp-for="ArticlesDeadlineId" class="form-control" asp-items="ViewBag.ArticlesDeadlineId"></select>
             </div>
+
             <div class="form-group">
-                <label asp-for="ArticlesDeadlineId" class="control-label"></label>
-                <select asp-for="ArticlesDeadlineId" class ="form-control" asp-items="ViewBag.ArticlesDeadlineId"></select>
+                <label class="control-label">Deadline Term:</label>
+                <select class="form-control"></select>
             </div>
+
             <div class="form-group">
-                <label asp-for="FacultyId" class="control-label"></label>
-                <select asp-for="FacultyId" class ="form-control" asp-items="ViewBag.FacultyId"></select>
+                <label asp-for="FacultyId" class="control-label">Faculty:</label>
+                <select asp-for="FacultyId" class="form-control" asp-items="ViewBag.FacultyId"></select>
             </div>
+
+
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-</body>
-</html>

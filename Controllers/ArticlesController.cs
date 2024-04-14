@@ -60,11 +60,48 @@ namespace Bina.Controllers
         // GET: Articles/Create
         public IActionResult Create()
         {
+            // Lấy UserId từ session
+            int? userId = HttpContext.Session.GetInt32("UserId");
+            if (userId == null)
+            {
+                // Nếu không tìm thấy UserId, có thể chuyển hướng người dùng đến trang đăng nhập
+                return RedirectToAction("Login", "Logins");
+            }
+
+            var user = _context.Users
+            .Include(u => u.Faculty) // Giả sử mỗi người dùng liên kết với một khoa
+            .FirstOrDefault(u => u.UserId == userId);
+
+            if (user == null || user.FacultyId == null)
+            {
+                // Xử lý nếu không tìm thấy người dùng hoặc người dùng không có khoa nào
+                return RedirectToAction("Login", "Logins"); // Hoặc trả về một thông báo lỗi phù hợp
+            }
+
+            // Lấy danh sách deadlines liên quan đến khoa của người dùng
+            var deadlines = _context.ArticlesDeadlines
+                .Where(a => a.FacultyId == user.FacultyId)
+                .OrderBy(a => a.DueDate) // Sắp xếp theo ngày hạn chót để lấy ra hạn chót gần nhất
+                .ToList(); // Lấy ra tất cả mà không chỉ là đầu tiên
+
+
+            var faculties = _context.Faculties
+           .Where(f => f.FacultyId == user.FacultyId) // Chỉ lấy khoa mà người dùng thuộc về
+           .ToList();
+
             ViewData["ArticleStatusId"] = new SelectList(_context.ArticleStatuses, "ArticleStatusId", "ArticleStatusId");
-            ViewData["ArticlesDeadlineId"] = new SelectList(_context.ArticlesDeadlines, "ArticlesDeadlineId", "ArticlesDeadlineId");
-            ViewData["FacultyId"] = new SelectList(_context.Faculties, "FacultyId", "FacultyId");
-            ViewData["UserId"] = new SelectList(_context.Users, "UserId", "UserId");
-            return View();
+            ViewData["ArticlesDeadlineId"] = new SelectList(deadlines, "ArticlesDeadlineId", "TermTitle");
+            ViewData["FacultyId"] = new SelectList(faculties, "FacultyId", "FacultyId", user.FacultyId);
+            ViewData["UserId"] = new SelectList(_context.Users, "UserId", "UserId", userId);
+
+            var article = new Article
+            {
+                UserId = userId,
+                ArticleStatusId = 3,
+                FacultyId = user.FacultyId // Đặt khoa mặc định cho bài viết dựa trên khoa của người dùng
+            };
+
+            return View(article);
         }
 
         // POST: Articles/Create
