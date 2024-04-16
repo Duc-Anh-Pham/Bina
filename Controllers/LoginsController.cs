@@ -25,14 +25,14 @@ namespace Bina.Controllers
 		[HttpGet]
 		public IActionResult Login()
 		{
-			// Xóa phiên làm việc hiện tại
-			HttpContext.Session.Clear();
+            // Xóa phiên làm việc hiện tại
+            HttpContext.Session.Clear();
 
-			// Kiểm tra xem có thông tin đăng nhập được lưu trong cookie hay không
-			var rememberMeCookie = Request.Cookies["RememberMe"];
-			if (rememberMeCookie != null)
-			{
-				var emailAndPassword = Encoding.UTF8.GetString(Convert.FromBase64String(rememberMeCookie));
+            // Kiểm tra xem có thông tin đăng nhập được lưu trong cookie hay không
+            var rememberMeCookie = Request.Cookies["RememberMe"];
+            if (rememberMeCookie != null)
+            {
+                var emailAndPassword = Encoding.UTF8.GetString(Convert.FromBase64String(rememberMeCookie));
 				var parts = emailAndPassword.Split(':');
 				if (parts.Length == 2)
 				{
@@ -44,8 +44,13 @@ namespace Bina.Controllers
 					return View(user);
 				}
 			}
+            else
+            {
+                // Xóa cookie "RememberMe" nếu nó tồn tại
+                Response.Cookies.Delete("RememberMe");
+            }
 
-			return View();
+            return View();
 		}
 
 		[HttpPost]
@@ -55,21 +60,21 @@ namespace Bina.Controllers
 				.Include(u => u.Role)
 				.FirstOrDefault(us => us.Email.Equals(user.Email) && us.Password.Equals(user.Password));
 
-			if (u != null && u.Status == 1)
-			{   
-				if (user.RememberMe)
-				{
-					// Lưu thông tin đăng nhập vào cookie
-					var emailAndPassword = $"{user.Email}:{user.Password}";
-					var encryptedData = Convert.ToBase64String(Encoding.UTF8.GetBytes(emailAndPassword));
-					Response.Cookies.Append("RememberMe", encryptedData, new CookieOptions
-					{
-						Expires = DateTimeOffset.Now.AddDays(30) // Đặt thời gian hết hạn của cookie (ví dụ: 30 ngày)
-					});
-				}
+            if (u != null && u.Status == 1)
+            {
+                if (user.RememberMe)
+                {
+                    // Lưu thông tin đăng nhập vào cookie
+                    var emailAndPassword = $"{user.Email}:{user.Password}";
+                    var encryptedData = Convert.ToBase64String(Encoding.UTF8.GetBytes(emailAndPassword));
+                    Response.Cookies.Append("RememberMe", encryptedData, new CookieOptions
+                    {
+                        Expires = DateTimeOffset.Now.AddDays(30)
+                    });
+                }
 
-				// Save the changes to the database
-				_context.SaveChanges();
+                // Save the changes to the database
+                _context.SaveChanges();
 
 				HttpContext.Session.SetString("Email", u.Email.ToString());
 				HttpContext.Session.SetString("UserName", u.UserName.ToString());

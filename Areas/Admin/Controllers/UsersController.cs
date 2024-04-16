@@ -4,14 +4,8 @@ using Bina.Models.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using Microsoft.VisualBasic;
-using Microsoft.Win32;
-using System.Net.Mail;
 using System.Net;
-using System.Security.Claims;
-using MimeKit;
-using MailKit.Security;
+using System.Net.Mail;
 
 namespace Bina.Areas.Admin.Controllers
 {
@@ -25,24 +19,54 @@ namespace Bina.Areas.Admin.Controllers
             _context = context;
         }
 
-		[Authentication]
+        [Authentication]
 
         // GET: Users/Index/Search
         [HttpGet]
-        public async Task<IActionResult> Index(string searchTerm)
+        public async Task<IActionResult> Index(string searchTerm, string sortBy, string sortDirection, int? pageSize = 5, int? pageNumber = 1)
         {
+            int defaultPageSize = pageSize ?? 5;
+            int currentPageNumber = pageNumber ?? 1;
+
             IQueryable<User> Ft1Context = _context.Users
                 .Include(u => u.Faculty)
                 .Include(u => u.Role)
                 .Include(u => u.Terms);
 
+            //Function Search
             if (!string.IsNullOrWhiteSpace(searchTerm))
             {
                 Ft1Context = Ft1Context.Where(u => u.UserName.Contains(searchTerm) || u.Email.Contains(searchTerm));
             }
 
+            // Function Sort alphabetically
+            if (!string.IsNullOrWhiteSpace(sortBy))
+            {
+                var isDesc = string.Equals(sortDirection, "Desc", StringComparison.OrdinalIgnoreCase);
+
+                if (string.Equals(sortBy, "UserName", StringComparison.OrdinalIgnoreCase))
+                {
+                    Ft1Context = isDesc ? Ft1Context.OrderByDescending(u => u.UserName) : Ft1Context.OrderBy(u => u.UserName);
+                }
+            }
+
+            // Function Pagination
+            int totalRecords = await Ft1Context.CountAsync();
+            int totalPages = (int)Math.Ceiling((double)totalRecords / defaultPageSize);
+
+            // Lấy danh sách users cho trang hiện tại
+            var users = await Ft1Context
+                .Skip((currentPageNumber - 1) * defaultPageSize)
+                .Take(defaultPageSize)
+                .ToListAsync();
+
+            ViewBag.TotalPages = totalPages;
+            ViewBag.CurrentPage = currentPageNumber;
+            ViewBag.PageSize = defaultPageSize;
+
             ViewBag.SuccessMessage = TempData["SuccessMessage"];
-            return View(await Ft1Context.ToListAsync());
+            return View(users);
+            //return View(await Ft1Context.ToListAsync());
         }
 
         // GET: Users/Details/5
@@ -122,9 +146,9 @@ namespace Bina.Areas.Admin.Controllers
                 _context.Users.Add(user);
                 await _context.SaveChangesAsync();
 
-                // Tạo đường dẫn xác nhận email
+                // Tạo đường dẫn xác nhận email và thay đổi mật khẩu
                 var confirmationToken = GenerateConfirmationToken(user);
-                var confirmationLink = Url.Action("ConfirmEmail", "Users", new { userId = user.UserId, token = confirmationToken }, Request.Scheme, Request.Host.Value);
+                var confirmationLink = Url.Action("ConfirmEmail", "Users", new { userId = user.UserId, token = confirmationToken, changePassword = true }, Request.Scheme, Request.Host.Value);
 
                 // Gửi email xác nhận đến người dùng
                 SendConfirmationEmail(user.Email, confirmationLink);
@@ -146,7 +170,7 @@ namespace Bina.Areas.Admin.Controllers
             if (id == null || _context.Users == null)
             {
                 return NotFound();
-            } 
+            }
 
             var user = await _context.Users
                 .Include(u => u.Faculty)
@@ -398,11 +422,78 @@ namespace Bina.Areas.Admin.Controllers
             return View(user);
         }
 
+        // GET: Users/ChangePassword/5
+        [HttpGet]
+        public async Task<IActionResult> ChangePassword(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var userId = HttpContext.Session.GetInt32("UserIdForPasswordChange");
+            if (userId == null || userId != id)
+            {
+                // Xử lý trường hợp userId không khớp hoặc Session không có giá trị
+                return RedirectToAction("Index", "Home"); // Hoặc bất kỳ action nào khác
+            }
+
+            var user = await _context.Users.FindAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return View(user);
+        }
+
+        // POST: Users/ChangePassword/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ChangePassword(int id, [Bind("UserId,OldPassword,NewPassword,ConfirmPassword")] User user)
+        {
+            if (id != user.UserId)
+            {
+                return NotFound();
+            }
+
+            // Kiểm tra mật khẩu cũ có đúng không
+            var existingUser = await _context.Users.FindAsync(id);
+            if (existingUser.Password != user.OldPassword)
+            {
+                ModelState.AddModelError("OldPassword", "The old password is incorrect.");
+                return View(user);
+            }
+
+            // Kiểm tra mật khẩu mới và xác nhận mật khẩu mới có khớp không
+            if (user.NewPassword != user.ConfirmPassword)
+            {
+                ModelState.AddModelError("ConfirmPassword", "New password and confirm new password do not match.");
+                return View(user);
+            }
+
+            // Cập nhật mật khẩu mới cho người dùng
+            existingUser.Password = user.NewPassword;
+            _context.Users.Update(existingUser);
+            await _context.SaveChangesAsync();
+
+            // Xóa giá trị UserIdForPasswordChange khỏi Session sau khi thay đổi mật khẩu thành công
+            HttpContext.Session.Remove("UserIdForPasswordChange");
+
+            TempData["SuccessMessage"] = "Password changed successfully.";
+            return RedirectToAction(nameof(Index));
+        }
+
 
         private string GenerateConfirmationToken(User user)
         {
             // Tạo một GUID duy nhất làm token xác nhận
-            return Guid.NewGuid().ToString();
+            var token = Guid.NewGuid().ToString();
+
+            // Tạo đường dẫn xác nhận email và thay đổi mật khẩu
+            var confirmationLink = Url.Action("ConfirmEmail", "Users", new { userId = user.UserId, token = token, changePassword = true }, Request.Scheme, Request.Host.Value);
+
+            return confirmationLink;
         }
 
         private void SendConfirmationEmail(string email, string confirmationLink)
@@ -430,7 +521,7 @@ namespace Bina.Areas.Admin.Controllers
         }
 
         // GET: Users/ConfirmEmail
-        public async Task<IActionResult> ConfirmEmail(int userId, string token)
+        public async Task<IActionResult> ConfirmEmail(int userId, string token, bool changePassword)
         {
             var user = await _context.Users.FindAsync(userId);
             if (user == null)
@@ -452,8 +543,18 @@ namespace Bina.Areas.Admin.Controllers
             _context.Users.Update(user);
             await _context.SaveChangesAsync();
 
-            TempData["SuccessMessage"] = "Your account has been activated successfully.";
-            return RedirectToAction(nameof(Index));
+            if (changePassword)
+            {
+                // Lưu trữ userId vào Session để sử dụng trong view ChangePassword
+                HttpContext.Session.SetInt32("UserIdForPasswordChange", user.UserId);
+
+                return RedirectToAction("ChangePassword", new { id = user.UserId });
+            }
+            else
+            {
+                TempData["SuccessMessage"] = "Your account has been activated successfully.";
+                return RedirectToAction(nameof(Index));
+            }
         }
 
         private bool UserExists(int id)

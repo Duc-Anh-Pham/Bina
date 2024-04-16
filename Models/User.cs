@@ -25,6 +25,12 @@ public partial class User
 
     public string? Password { get; set; }
 
+    public string? OldPassword { get; set; }
+
+    public string? NewPassword { get; set; }
+
+    public string? ConfirmPassword { get; set; }
+
     public bool RememberMe { get; set; }
 
 	public int? RoleId { get; set; }
@@ -54,4 +60,6 @@ public partial class User
 			return FirstName + " " + LastName;
 		}
 	}
+
+    
 }

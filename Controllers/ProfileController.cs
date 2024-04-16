@@ -89,6 +89,58 @@ namespace Bina.Controllers
             return View(user);
         }
 
+        // GET: Users/ChangePassword/5
+        [HttpGet]
+        public async Task<IActionResult> ChangePassword(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var user = await _context.Users.FindAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return View(user);
+        }
+
+        // POST: Users/ChangePassword/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ChangePassword(int id, [Bind("UserId,OldPassword,NewPassword,ConfirmPassword")] User user)
+        {
+            if (id != user.UserId)
+            {
+                return NotFound();
+            }
+
+            // Kiểm tra mật khẩu cũ có đúng không
+            var existingUser = await _context.Users.FindAsync(id);
+            if (existingUser.Password != user.OldPassword)
+            {
+                ModelState.AddModelError("OldPassword", "The old password is incorrect.");
+                return View(user);
+            }
+
+            // Kiểm tra mật khẩu mới và xác nhận mật khẩu mới có khớp không
+            if (user.NewPassword != user.ConfirmPassword)
+            {
+                ModelState.AddModelError("ConfirmPassword", "New password and confirm new password do not match.");
+                return View(user);
+            }
+
+            // Cập nhật mật khẩu mới cho người dùng
+            existingUser.Password = user.NewPassword;
+            _context.Users.Update(existingUser);
+            await _context.SaveChangesAsync();
+
+            TempData["SuccessMessage"] = "Password changed successfully.";
+            return RedirectToAction(nameof(Index));
+        }
+
         private bool UserExists(int id)
         {
             return (_context.Users?.Any(e => e.UserId == id)).GetValueOrDefault();
