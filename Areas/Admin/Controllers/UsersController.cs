@@ -4,6 +4,14 @@ using Bina.Models.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using Microsoft.VisualBasic;
+using Microsoft.Win32;
+using System.Net.Mail;
+using System.Net;
+using System.Security.Claims;
+using MimeKit;
+using MailKit.Security;
 
 namespace Bina.Areas.Admin.Controllers
 {
@@ -78,8 +86,6 @@ namespace Bina.Areas.Admin.Controllers
         }
 
         // POST: Users/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("UserId,UserName,FirstName,LastName,PhoneNumber,DoB,DateCreated,Gender,Email,Password,RoleId,FacultyId,Terms.TermsText")] User user)
@@ -110,18 +116,20 @@ namespace Bina.Areas.Admin.Controllers
                 // Gán giá trị RoleId từ form vào đối tượng user
                 user.RoleId = int.Parse(Request.Form["Role"]);
 
-                //// Kiểm tra nếu RoleId tương ứng với vai trò "Student"
-                //var roleId = user.RoleId;
-                //var role = await _context.Roles.FindAsync(roleId);
-                //if (role != null && role.RoleName == "Student")
-                //{
-                //    // Gán TermsText từ ViewBag vào model User
-                //    user.Terms = new TermsAndCondition { TermsText = ViewBag.TermsText };
-                //}
+                // Mặc định Status = 0 (Inactive)
+                user.Status = 0;
 
                 _context.Users.Add(user);
                 await _context.SaveChangesAsync();
-                TempData["SuccessMessage"] = "Đã thêm người dùng thành công!"; // Add this line
+
+                // Tạo đường dẫn xác nhận email
+                var confirmationToken = GenerateConfirmationToken(user);
+                var confirmationLink = Url.Action("ConfirmEmail", "Users", new { userId = user.UserId, token = confirmationToken }, Request.Scheme, Request.Host.Value);
+
+                // Gửi email xác nhận đến người dùng
+                SendConfirmationEmail(user.Email, confirmationLink);
+
+                TempData["SuccessMessage"] = "Please confirm your email to activate your account.";
                 return RedirectToAction(nameof(Index));
             }
 
@@ -132,13 +140,13 @@ namespace Bina.Areas.Admin.Controllers
             return View(user);
         }
 
-        // GET: Users/Edit/5
+        // GET: Users/Profile/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Users == null)
             {
                 return NotFound();
-            }
+            } 
 
             var user = await _context.Users
                 .Include(u => u.Faculty)
@@ -193,7 +201,7 @@ namespace Bina.Areas.Admin.Controllers
                     // Tạm thời gán TermsId thành null
                     userToUpdate.TermsId = null;
 
-                    // Cập nhật các trường dữ liệu khác
+                    // Cập nhật các trường dữ liệu
                     userToUpdate.UserName = user.UserName;
                     userToUpdate.FirstName = user.FirstName;
                     userToUpdate.LastName = user.LastName;
@@ -313,6 +321,138 @@ namespace Bina.Areas.Admin.Controllers
             _context.Update(user);
             await _context.SaveChangesAsync();
 
+            return RedirectToAction(nameof(Index));
+        }
+
+        // GET: Users/Profile/5
+        [Authentication]
+        public async Task<IActionResult> Profile(int? id)
+        {
+            if (id == null || _context.Users == null)
+            {
+                return NotFound();
+            }
+
+            var user = _context.Users.Find(id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            ViewData["FacultyId"] = new SelectList(_context.Faculties, "FacultyId", "FacultyId", user.FacultyId);
+            ViewData["RoleName"] = new SelectList(_context.Roles, "RoleId", "RoleName", user.RoleId);
+
+            return View(user);
+        }
+
+        // POST: Users/Profile/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Profile(int id, [Bind("UserId,FirstName,LastName,PhoneNumber,DoB,Gender,Password")] User user)
+        {
+            int userId = HttpContext.Session.GetInt32("UserId").Value;
+            if (id != user.UserId)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var userToUpdate = await _context.Users.FindAsync(id);
+
+                    if (userToUpdate == null)
+                    {
+                        return NotFound();
+                    }
+
+                    userToUpdate.FirstName = user.FirstName;
+                    userToUpdate.LastName = user.LastName;
+                    userToUpdate.PhoneNumber = user.PhoneNumber;
+                    userToUpdate.DoB = user.DoB;
+                    userToUpdate.Gender = user.Gender;
+                    userToUpdate.Password = user.Password;
+
+                    _context.Users.Update(userToUpdate);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!UserExists(user.UserId))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+
+                return RedirectToAction(nameof(Index));
+            }
+
+            ViewData["FacultyId"] = new SelectList(_context.Faculties, "FacultyId", "FacultyId", user.FacultyId);
+            ViewData["RoleId"] = new SelectList(_context.Roles, "RoleId", "RoleName", user.RoleId);
+            return View(user);
+        }
+
+
+        private string GenerateConfirmationToken(User user)
+        {
+            // Tạo một GUID duy nhất làm token xác nhận
+            return Guid.NewGuid().ToString();
+        }
+
+        private void SendConfirmationEmail(string email, string confirmationLink)
+        {
+            string subject = "Confirm your email";
+            string body = $"Please click the following link to confirm your email: {confirmationLink}";
+
+            // Use Mailtrap's provided credentials
+            string mailTrapUsername = "api";
+            string mailTrapPassword = "ac8c6889944c190ff3cf2d13283296b0";
+
+            using (var client = new SmtpClient("bulk.smtp.mailtrap.io", 587))
+            {
+                client.Credentials = new NetworkCredential("api", "ac8c6889944c190ff3cf2d13283296b0");
+                client.EnableSsl = true;
+
+                var message = new MailMessage();
+                message.From = new MailAddress("articleuniversity@demomailtrap.com");
+                message.To.Add(new MailAddress(email));
+                message.Subject = subject;
+                message.Body = body;
+
+                client.Send(message);
+            }
+        }
+
+        // GET: Users/ConfirmEmail
+        public async Task<IActionResult> ConfirmEmail(int userId, string token)
+        {
+            var user = await _context.Users.FindAsync(userId);
+            if (user == null)
+            {
+                // Xử lý trường hợp không tìm thấy user
+                return NotFound();
+            }
+
+            // Kiểm tra xem token có khớp với token được tạo cho user này không
+            var confirmationToken = GenerateConfirmationToken(user);
+            if (token != confirmationToken)
+            {
+                // Xử lý trường hợp token không hợp lệ
+                return BadRequest();
+            }
+
+            // Kích hoạt tài khoản user
+            user.Status = 1;
+            _context.Users.Update(user);
+            await _context.SaveChangesAsync();
+
+            TempData["SuccessMessage"] = "Your account has been activated successfully.";
             return RedirectToAction(nameof(Index));
         }
 

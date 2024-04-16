@@ -47,7 +47,7 @@
                     <img src="~/img/user3.png" class="img-3x m-2 me-0 rounded-5" style="max-width: 40px;" alt="Bootstrap Gallery" />
                 </a>
                 <div class="dropdown-menu dropdown-menu dropdown-menu-sm shadow-sm gap-3" style="">
-                    <a class="dropdown-item d-flex align-items-center py-2" href="agent-profile.html">
+                    <a class="dropdown-item d-flex align-items-center py-2" asp-controller="Profile" asp-action="EditProfile" asp-route-id="@Context.Session.GetInt32("UserId")">
                         <i class="bi bi-person-vcard" style="margin-right: 10px"></i>User Profile
                     </a>
                     <a class="dropdown-item d-flex align-items-center py-2" href="account-settings.html">

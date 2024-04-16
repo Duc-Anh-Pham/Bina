@@ -15,10 +15,9 @@
 	<div class="alert-login d-flex justify-content-center">
 		<span class="alert-message"><strong>Account</strong> @TempData["ErrorMessage"]</span>
 	</div>
-
-	<!-- Thêm meta refresh để tự động làm mất thông báo sau 1 giây -->
 	<meta http-equiv="refresh" content="1">
 }
+
 
 <!doctype html>
 <html lang="en">
@@ -63,7 +62,6 @@
 								<span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
 							</div>
 
-
 							<div class="form-group text-center">
 								@* <button type="submit" class="form-control btn btn-primary submit px-3">Sign In</button> *@
 								<button type="submit" class="custom-btn btn-1">Login</button>
@@ -76,6 +74,8 @@
 										<span class="checkmark"></span>
 									</label>
 								</div>
+
+								@* Forgot Password Function ??? *@
 								<div class="w-50 text-md-right">
 									<a href="#" style="color: #fff">Forgot Password</a>
 								</div>

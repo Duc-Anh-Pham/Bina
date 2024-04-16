@@ -55,8 +55,8 @@ namespace Bina.Controllers
 				.Include(u => u.Role)
 				.FirstOrDefault(us => us.Email.Equals(user.Email) && us.Password.Equals(user.Password));
 
-			if (u != null)
-			{
+			if (u != null && u.Status == 1)
+			{   
 				if (user.RememberMe)
 				{
 					// Lưu thông tin đăng nhập vào cookie
@@ -74,6 +74,7 @@ namespace Bina.Controllers
 				HttpContext.Session.SetString("Email", u.Email.ToString());
 				HttpContext.Session.SetString("UserName", u.UserName.ToString());
 				HttpContext.Session.SetInt32("RoleId", u.RoleId.Value);
+				HttpContext.Session.SetInt32("UserId", u.UserId);
 
 				// Kiểm tra RoleId và chuyển hướng đến Area tương ứng
 				switch (u.Role.RoleId)
@@ -88,9 +89,12 @@ namespace Bina.Controllers
 						return RedirectToAction("Index", "Home");
 				}
 			}
-
-			// Nếu không tìm thấy người dùng, chúng ta sẽ trả về View đăng nhập
-			return View();
+            else
+            {
+                // Nếu không tìm thấy người dùng, lưu thông báo lỗi vào TempData
+                TempData["ErrorMessage"] = "Invalid Email or Password";
+                return View(user);
+            }
 		}
 
 		public async Task Google()
@@ -125,9 +129,10 @@ namespace Bina.Controllers
 			HttpContext.Session.SetString("UserName", user.UserName.ToString());
 			HttpContext.Session.SetString("Email", user.Email.ToString());
 			HttpContext.Session.SetInt32("RoleId", user.RoleId.Value);
+            HttpContext.Session.SetInt32("UserId", user.UserId);
 
-			// Kiểm tra RoleId và chuyển hướng đến Area tương ứng
-			return RedirectToAreaBasedOnRoleId(user.RoleId.Value);
+            // Kiểm tra RoleId và chuyển hướng đến Area tương ứng
+            return RedirectToAreaBasedOnRoleId(user.RoleId.Value);
 		}
 
 		public async Task Microsoft()
@@ -154,7 +159,7 @@ namespace Bina.Controllers
 			if (user == null)
 			{
 				// Nếu người dùng không tồn tại, trả về trang Login với thông báo lỗi
-				TempData["ErrorMessage"] = "Tài khoản không khả dụng!";
+				TempData["ErrorMessage"] = "Unavailable!";
 				return RedirectToAction("Login", "Logins");
 			}
 
@@ -162,9 +167,10 @@ namespace Bina.Controllers
 			HttpContext.Session.SetString("UserName", user.UserName.ToString());
 			HttpContext.Session.SetString("Email", user.Email.ToString());
 			HttpContext.Session.SetInt32("RoleId", user.RoleId.Value);
+            HttpContext.Session.SetInt32("UserId", user.UserId);
 
-			// Kiểm tra RoleId và chuyển hướng đến Area tương ứng
-			return RedirectToAreaBasedOnRoleId(user.RoleId.Value);
+            // Kiểm tra RoleId và chuyển hướng đến Area tương ứng
+            return RedirectToAreaBasedOnRoleId(user.RoleId.Value);
 		}
 
 		private IActionResult RedirectToAreaBasedOnRoleId(int roleId)
