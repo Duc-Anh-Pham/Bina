@@ -1,0 +1,69 @@
+﻿@model Bina.Models.ArticlesDeadline
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+ 
+
+<div class="container my-5">
+    <h1 class="text-center mb-4">Edit Articles Deadline</h1>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <form asp-action="Edit">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="ArticlesDeadlineId" />
+                        <div class="form-group">
+                            <label asp-for="TermName" class="control-label"> Term Name</label>
+                            <input asp-for="TermName" class="form-control" />
+                            <span asp-validation-for="TermName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="TermTitle" class="control-label">Term Title </label>
+                            <input asp-for="TermTitle" class="form-control" />
+                            <span asp-validation-for="TermTitle" class="text-danger"></span>
+                        </div
+
+ 
+                         <div class="form-group">
+                            <label asp-for="FacultyId" class="control-label">Faculty ID</label>
+                            <select asp-for="FacultyId" class="form-control" asp-items="@ViewBag.FacultyId"></select>
+                            <span asp-validation-for="FacultyId" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="StartDue" class="control-label">Start Due</label>
+                            <input asp-for=" StartDue" class="form-control" asp-items="ViewBag.DateCreated" />
+                            <span asp-validation-for=" StartDue" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for=" DueDate" class="control-label">Due Date</label>
+                            <input asp-for=" DueDate" class="form-control" asp-items="ViewBag.DateCreated" />
+                            <span asp-validation-for=" DueDate" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for=" AcademicYear" class="control-label">Academic Year</label>
+                            <input asp-for=" AcademicYear" class="form-control" asp-items="ViewBag.AcademicYear" />
+                            <span asp-validation-for="AcademicYear" class="text-danger"></span>
+                        </div>
+
+
+                        </br>
+                        <div class="form-group text-center">
+                            <input type="submit" value="Save" class="btn btn-primary" />
+                            <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+ 

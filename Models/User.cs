@@ -41,11 +41,7 @@ public partial class User
     public virtual Role? Role { get; set; }
 
     public virtual TermsAndCondition? Terms { get; set; }
-
-
-
     public bool RememberMe { get; set; }
-
     public string FullName
     {
         get

@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Bina.Models.Article>
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="container my-5">
+    <h1 class="text-center mb-4">Welcome to: @ViewBag.FacultyId Faculty Page</h1>
+    <div>
+        @foreach (var item in Model)
+        {
+            <div class="list-group-item mb-3">
+                <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; display: flex; flex-direction: column;">
+                    <!-- Username -->
+                    <div style="flex-grow: 1;">
+                        <h4 style="margin-bottom: 0;">@Html.DisplayFor(modelItem => item.User.FirstName)</h4>
+                    </div>
+                    <div style="flex-grow: 1;">
+                        <h4 style="margin-bottom: 0;">@Html.DisplayFor(modelItem => item.ArticlesDeadline.TermTitle)</h4>
+                    </div>
+                    <!-- Article Name -->
+                    <div style="margin-left: 5ch; flex-grow: 1;">
+                        <h5 style="margin-top: 5px; margin-bottom: 0;">@Html.DisplayFor(modelItem => item.Content)</h5>
+                    </div>
+                    <!-- Title -->
+                </div>
+                <!-- Image -->
+               @*   @if (!string.IsNullOrEmpty(item.Image?.Imagepath))
+                {
+                    <div class="text-center">
+                        <img src="@Url.Content(item.Image.Imagepath)" alt="Article Image" style="width: 200px; height: auto; object-fit: contain; margin: 0 auto;" />
+                    </div>
+                } *@
+
+                <!-- Comment Section -->
+
+            </div>
+        }
+
+    </div>

@@ -67,6 +67,8 @@ namespace Bina.Controllers
 
                 // Save the changes to the database
                 _context.SaveChanges();
+                if (u.FacultyId != null)
+                    HttpContext.Session.SetString("FacultyId", u.FacultyId);
 
                 HttpContext.Session.SetString("Email", u.Email.ToString());
                 HttpContext.Session.SetString("UserName", u.UserName.ToString());
@@ -124,6 +126,8 @@ namespace Bina.Controllers
             HttpContext.Session.SetString("Email", user.Email.ToString());
             HttpContext.Session.SetInt32("RoleId", user.RoleId.Value);
             HttpContext.Session.SetInt32("UserId", user.UserId);
+            if (user.FacultyId != null)
+                HttpContext.Session.SetString("FacultyId", user.FacultyId);
 
             // Kiểm tra RoleId và chuyển hướng đến Area tương ứng
             return RedirectToAreaBasedOnRoleId(user.RoleId.Value);
@@ -162,7 +166,8 @@ namespace Bina.Controllers
             HttpContext.Session.SetString("Email", user.Email.ToString());
             HttpContext.Session.SetInt32("RoleId", user.RoleId.Value);
             HttpContext.Session.SetInt32("UserId", user.UserId);
-
+            if (user.FacultyId != null)
+                HttpContext.Session.SetString("FacultyId", user.FacultyId);
             // Kiểm tra RoleId và chuyển hướng đến Area tương ứng
             return RedirectToAreaBasedOnRoleId(user.RoleId.Value);
         }
