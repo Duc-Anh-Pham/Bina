@@ -1953,3 +1953,6 @@ E:\Main\Bina\obj\Debug\net8.0\refint\Bina.dll
 E:\Main\Bina\obj\Debug\net8.0\Bina.pdb
 E:\Main\Bina\obj\Debug\net8.0\Bina.genruntimeconfig.cache
 E:\Main\Bina\obj\Debug\net8.0\ref\Bina.dll
+F:\Greenwich IT\TOPUP - 1640 - Enterprise Web Software Development\Code\Bina 14-4\Bina\obj\Debug\net8.0\Bina.dll
+F:\Greenwich IT\TOPUP - 1640 - Enterprise Web Software Development\Code\Bina 14-4\Bina\obj\Debug\net8.0\refint\Bina.dll
+F:\Greenwich IT\TOPUP - 1640 - Enterprise Web Software Development\Code\Bina 14-4\Bina\obj\Debug\net8.0\Bina.pdb
