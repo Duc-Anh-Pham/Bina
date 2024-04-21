@@ -11,9 +11,7 @@
 </head>
 <div class="album py-5 bg-body-tertiary">
     <div class="container">
-        <p>
-            <a asp-action="Create" class="btn btn-success">Add New Article</a>
-        </p>
+        
 
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             @foreach (var item in Model)
@@ -49,7 +47,7 @@
                                 <a asp-action="Details" asp-route-id="@item.ArticleId" class="btn btn-primary my-2 read-more-button">
                                     <i class="fa-solid fa-star"></i> READ MORE
                                 </a>
-                                <small class="text-body-secondary">9 mins</small>
+                                <small class="text-body-secondary">@item.DateCreate</small>
                             </div>
                         </div>
                     </div>

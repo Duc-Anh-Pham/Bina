@@ -137,6 +137,7 @@ namespace Bina.Controllers
             return View(article);
         }
 
+
         // GET: ArticlesHome/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
