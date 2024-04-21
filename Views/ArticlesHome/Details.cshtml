@@ -1,0 +1,100 @@
+﻿@model Bina.Models.Article
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Article Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h4 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        dl {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        dt, dd {
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+        }
+
+        dt {
+            font-weight: bold;
+        }
+
+        dd {
+            margin: 0;
+        }
+
+        .actions {
+            margin-top: 20px;
+        }
+
+            .actions a {
+                text-decoration: none;
+                color: #007bff;
+                margin-right: 10px;
+            }
+
+                .actions a:hover {
+                    text-decoration: underline;
+                }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h4 style="text-align:center; font-size: 24px;">Article Details</h4>
+        <hr />
+        <dl>
+            <dt>Article Name</dt>
+            <dd>@Html.DisplayFor(model => model.ArticleName)</dd>
+            <dt>Title</dt>
+            <dd>@Html.DisplayFor(model => model.Title)</dd>
+            <dt>Content</dt>
+            <dd>@Html.DisplayFor(model => model.Content)</dd>
+            <dt>Image Path</dt>
+            <dd>@Html.DisplayFor(model => model.ImagePath)</dd>
+            <dt>Document Path</dt>
+            <dd>@Html.DisplayFor(model => model.DocumentPath)</dd>
+            <dt>Date Created</dt>
+            <dd>@Html.DisplayFor(model => model.DateCreate)</dd>
+            <dt>Article Status</dt>
+            <dd>@Html.DisplayFor(model => model.ArticleStatus.ArticleStatusId)</dd>
+            <dt>Articles Deadline</dt>
+            <dd>@Html.DisplayFor(model => model.ArticlesDeadline.ArticlesDeadlineId)</dd>
+            <dt>Faculty</dt>
+            <dd>@Html.DisplayFor(model => model.Faculty.FacultyId)</dd>
+            <dt>User</dt>
+            <dd>@Html.DisplayFor(model => model.User.UserId)</dd>
+        </dl>
+        <div class="actions">
+            <a asp-action="Edit" asp-route-id="@Model?.ArticleId">Edit</a>
+            <a asp-action="Index">Back to List</a>
+        </div>
+    </div>
+
+</body>
+</html>
