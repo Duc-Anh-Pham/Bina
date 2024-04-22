@@ -21,8 +21,7 @@ namespace Bina.Controllers
             var facultyId = HttpContext.Session.GetString("FacultyId");
             if (string.IsNullOrEmpty(facultyId))
             {
-                // Handle case when no facultyId is set, maybe redirect to an error page or a default view.
-                return RedirectToAction("Login", "Logins"); // Or another appropriate response
+                return RedirectToAction("Login", "Logins");
             }
 
             var ft1Context = _context.Articles
@@ -49,6 +48,8 @@ namespace Bina.Controllers
                 .Include(a => a.ArticlesDeadline)
                 .Include(a => a.Faculty)
                 .Include(a => a.User)
+                .Include(a => a.ArticleComments)
+            .ThenInclude(c => c.User)
                 .FirstOrDefaultAsync(m => m.ArticleId == id);
             if (article == null)
             {
@@ -56,6 +57,46 @@ namespace Bina.Controllers
             }
 
             return View(article);
+        }
+        [HttpPost]
+        public async Task<IActionResult> AddComment(int? articleId, string commentText)
+        {
+            if (!ModelState.IsValid || articleId == null || string.IsNullOrWhiteSpace(commentText))
+            {
+                articleId = 1;
+                commentText = "No comment";
+            }
+
+            var userId = GetCurrentUserIdFromSession();
+
+
+            var newComment = new ArticleComment
+            {
+                CommentId = Guid.NewGuid(),
+                ArticleId = articleId.Value,
+                CommentText = commentText,
+                CommentDay = DateTime.Now,
+                UserId = userId.Value
+            };
+
+            _context.ArticleComments.Add(newComment);
+
+            try
+            {
+                await _context.SaveChangesAsync();
+
+            }
+            catch (Exception ex)
+            {
+            }
+            return RedirectToAction("Details", "ArticlesFaculty", new { id = articleId.Value });
+        }
+
+
+        private int? GetCurrentUserIdFromSession()
+        {
+            var userId = HttpContext.Session.GetInt32("UserId");
+            return userId;
         }
 
         // GET: ArticlesFaculty/Create
