@@ -431,12 +431,12 @@ namespace Bina.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var userId = HttpContext.Session.GetInt32("UserIdForPasswordChange");
-            if (userId == null || userId != id)
-            {
-                // Xử lý trường hợp userId không khớp hoặc Session không có giá trị
-                return RedirectToAction("Index", "Home"); // Hoặc bất kỳ action nào khác
-            }
+            //var userId = HttpContext.Session.GetInt32("UserIdForPasswordChange");
+            //if (userId == null || userId != id)
+            //{
+            //    // Xử lý trường hợp userId không khớp hoặc Session không có giá trị
+            //    return RedirectToAction("Index", "Home"); // Hoặc bất kỳ action nào khác
+            //}
 
             var user = await _context.Users.FindAsync(id);
             if (user == null)

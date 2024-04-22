@@ -282,9 +282,6 @@ namespace Bina.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"));
 
-                    b.Property<string>("ConfirmPassword")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("DateCreated")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
@@ -315,9 +312,6 @@ namespace Bina.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("NewPassword")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("OldPassword")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")
