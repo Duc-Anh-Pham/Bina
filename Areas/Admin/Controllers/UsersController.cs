@@ -109,63 +109,96 @@ namespace Bina.Areas.Admin.Controllers
             return View();
         }
 
-        // POST: Users/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UserId,UserName,FirstName,LastName,PhoneNumber,DoB,DateCreated,Gender,Email,Password,RoleId,FacultyId,Terms.TermsText")] User user)
-        {
-            if (ModelState.IsValid)
-            {
-                // Check that User Name and Password are not left empty
-                if (string.IsNullOrWhiteSpace(user.UserName) || string.IsNullOrWhiteSpace(user.Password))
-                {
-                    ModelState.AddModelError("", "Không được bỏ trống!");
-                    ViewData["FacultyId"] = new SelectList(_context.Faculties, "FacultyId", "FacultyId", user.FacultyId);
-                    ViewData["RoleName"] = new SelectList(_context.Roles, "RoleId", "RoleName", user.RoleId);
-                    return View(user);
-                }
+		private string GenerateRandomPassword(int length = 8)
+		{
+			const string uppercaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+			const string lowercaseChars = "abcdefghijklmnopqrstuvwxyz";
+			const string numericChars = "0123456789";
+			const string specialChars = "@$!%*?&#";
 
-                // Kiểm tra email đã tồn tại hay chưa
-                var existingUser = await _context.Users.FirstOrDefaultAsync(u => u.Email == user.Email || u.UserName == user.UserName);
-                if (existingUser != null)
-                {
-                    // Thông báo email hoặc UserName đã tồn tại
-                    string errorMessage = existingUser.Email == user.Email ? "Email đã tồn tại trong hệ thống. Vui lòng nhập email khác." : "UserName đã tồn tại trong hệ thống. Vui lòng nhập UserName khác.";
-                    ModelState.AddModelError(existingUser.Email == user.Email ? "Email" : "UserName", errorMessage);
-                    ViewData["FacultyId"] = new SelectList(_context.Faculties, "FacultyId", "FacultyId", user.FacultyId);
-                    ViewData["RoleName"] = new SelectList(_context.Roles, "RoleId", "RoleName", user.RoleId);
-                    return View(user);
-                }
+			char[] password = new char[length];
+			Random random = new Random();
 
-                // Gán giá trị RoleId từ form vào đối tượng user
-                user.RoleId = int.Parse(Request.Form["Role"]);
+			// Make sure there is at least one uppercase character
+			password[random.Next(length)] = uppercaseChars[random.Next(uppercaseChars.Length)];
 
-                // Mặc định Status = 0 (Inactive)
-                user.Status = 0;
+			// Make sure there is at least one lowercase character
+			password[random.Next(length)] = lowercaseChars[random.Next(lowercaseChars.Length)];
 
-                _context.Users.Add(user);
-                await _context.SaveChangesAsync();
+			// Make sure there is at least one number
+			password[random.Next(length)] = numericChars[random.Next(numericChars.Length)];
 
-                // Tạo đường dẫn xác nhận email và thay đổi mật khẩu
-                var confirmationToken = GenerateConfirmationToken(user);
-                var confirmationLink = Url.Action("ConfirmEmail", "Users", new { userId = user.UserId, token = confirmationToken, changePassword = true }, Request.Scheme, Request.Host.Value);
+			// Make sure there is at least one special character
+			password[random.Next(length)] = specialChars[random.Next(specialChars.Length)];
 
-                // Gửi email xác nhận đến người dùng
-                SendConfirmationEmail(user.Email, confirmationLink);
+			// Fill in the remaining characters randomly
+			for (int i = 0; i < length; i++)
+			{
+				if (password[i] == '\0')
+				{
+					string validChars = uppercaseChars + lowercaseChars + numericChars + specialChars;
+					password[i] = validChars[random.Next(validChars.Length)];
+				}
+			}
 
-                TempData["SuccessMessage"] = "Please confirm your email to activate your account.";
-                return RedirectToAction(nameof(Index));
-            }
+			return new string(password);
+		}
 
-            ViewData["FacultyId"] = new SelectList(_context.Faculties, "FacultyId", "FacultyId", user.FacultyId);
-            ViewData["RoleName"] = new SelectList(_context.Roles, "RoleId", "RoleName", user.RoleId);
-            ViewData["TermsText"] = new SelectList(_context.TermsAndConditions, "TermsId", "TermsText", user.TermsId);
+		// POST: Users/Create
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public async Task<IActionResult> Create([Bind("UserId,UserName,FirstName,LastName,PhoneNumber,DoB,DateCreated,Gender,Email,Password,RoleId,FacultyId,Terms.TermsText")] User user)
+		{
+			if (ModelState.IsValid)
+			{
+				// Check that User Name is not left empty
+				if (string.IsNullOrWhiteSpace(user.UserName))
+				{
+					ModelState.AddModelError("", "User Name cannot be empty!");
+					ViewData["FacultyId"] = new SelectList(_context.Faculties, "FacultyId", "FacultyId", user.FacultyId);
+					ViewData["RoleName"] = new SelectList(_context.Roles, "RoleId", "RoleName", user.RoleId);
+					return View(user);
+				}
 
-            return View(user);
-        }
+				// Kiểm tra email đã tồn tại hay chưa
+				var existingUser = await _context.Users.FirstOrDefaultAsync(u => u.Email == user.Email || u.UserName == user.UserName);
+				if (existingUser != null)
+				{
+					// Thông báo email hoặc UserName đã tồn tại
+					string errorMessage = existingUser.Email == user.Email ? "Email already exists in the system. Please enter another email." : "User Name already exists in the system. Please enter another User Name.";
+					ModelState.AddModelError(existingUser.Email == user.Email ? "Email" : "UserName", errorMessage);
+					ViewData["FacultyId"] = new SelectList(_context.Faculties, "FacultyId", "FacultyId", user.FacultyId);
+					ViewData["RoleName"] = new SelectList(_context.Roles, "RoleId", "RoleName", user.RoleId);
+					return View(user);
+				}
 
-        // GET: Users/Profile/5
-        public async Task<IActionResult> Edit(int? id)
+				// Tạo mật khẩu ngẫu nhiên
+				user.Password = GenerateRandomPassword();
+
+				// Gán giá trị RoleId từ form vào đối tượng user
+				user.RoleId = int.Parse(Request.Form["Role"]);
+
+				_context.Users.Add(user);
+				await _context.SaveChangesAsync();
+
+				// Tạo đường dẫn xác nhận email và thay đổi mật khẩu
+				var confirmationToken = GenerateConfirmationToken(user);
+
+				// Gửi email xác nhận đến người dùng
+				SendConfirmationEmail(user.Email, confirmationToken, user.Password);
+
+				TempData["SuccessMessage"] = "Please confirm your email to activate your account.";
+				return RedirectToAction(nameof(Index));
+			}
+
+			ViewData["FacultyId"] = new SelectList(_context.Faculties, "FacultyId", "FacultyId", user.FacultyId);
+			ViewData["RoleName"] = new SelectList(_context.Roles, "RoleId", "RoleName", user.RoleId);
+			ViewData["TermsText"] = new SelectList(_context.TermsAndConditions, "TermsId", "TermsText", user.TermsId);
+			return View(user);
+		}
+
+		// GET: Users/Profile/5
+		public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Users == null)
             {
@@ -352,9 +385,18 @@ namespace Bina.Areas.Admin.Controllers
         [Authentication]
         public async Task<IActionResult> Profile(int? id)
         {
+            int userId = HttpContext.Session.GetInt32("UserId").Value;
+
             if (id == null || _context.Users == null)
             {
                 return NotFound();
+            }
+
+            // Kiểm tra xem id có khớp với userId của người dùng đăng nhập hay không
+            if (id != userId)
+            {
+                TempData["ErrorMessage"] = "You are not authorized to access this page.";
+                return RedirectToAction("Profile", new { id = userId });
             }
 
             var user = _context.Users.Find(id);
@@ -426,17 +468,19 @@ namespace Bina.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> ChangePassword(int? id)
         {
+            int userId = HttpContext.Session.GetInt32("UserId").Value;
+
             if (id == null)
             {
                 return NotFound();
             }
 
-            //var userId = HttpContext.Session.GetInt32("UserIdForPasswordChange");
-            //if (userId == null || userId != id)
-            //{
-            //    // Xử lý trường hợp userId không khớp hoặc Session không có giá trị
-            //    return RedirectToAction("Index", "Home"); // Hoặc bất kỳ action nào khác
-            //}
+            // Kiểm tra xem id có khớp với userId của người dùng đăng nhập hay không
+            if (id != userId)
+            {
+                TempData["ErrorMessage"] = "You are not authorized to access this page.";
+                return RedirectToAction("ChangePassword", new { id = userId });
+            }
 
             var user = await _context.Users.FindAsync(id);
             if (user == null)
@@ -477,8 +521,10 @@ namespace Bina.Areas.Admin.Controllers
             _context.Users.Update(existingUser);
             await _context.SaveChangesAsync();
 
-            // Xóa giá trị UserIdForPasswordChange khỏi Session sau khi thay đổi mật khẩu thành công
-            HttpContext.Session.Remove("UserIdForPasswordChange");
+            //// Kích hoạt tài khoản sau khi đổi mật khẩu thành công
+            //existingUser.Status = 1;
+            //_context.Users.Update(existingUser);
+            //await _context.SaveChangesAsync();
 
             TempData["SuccessMessage"] = "Password changed successfully.";
             return RedirectToAction(nameof(Index));
@@ -490,28 +536,30 @@ namespace Bina.Areas.Admin.Controllers
             // Tạo một GUID duy nhất làm token xác nhận
             var token = Guid.NewGuid().ToString();
 
-            // Tạo đường dẫn xác nhận email và thay đổi mật khẩu
-            var confirmationLink = Url.Action("ConfirmEmail", "Users", new { userId = user.UserId, token = token, changePassword = true }, Request.Scheme, Request.Host.Value);
+            // Tạo đường dẫn xác nhận email
+            var confirmationLink = $"https://localhost:7234/";
 
             return confirmationLink;
         }
 
-        private void SendConfirmationEmail(string email, string confirmationLink)
+        private void SendConfirmationEmail(string email, string confirmationLink, string password)
         {
-            string subject = "Confirm your email";
-            string body = $"Please click the following link to confirm your email: {confirmationLink}";
+            string subject = "Your account information";
+            string body = $"Please click on the link to access the website: {confirmationLink}\n\nYour email: {email}\n\nYour password: {password}";
 
-            // Use Mailtrap's provided credentials
-            string mailTrapUsername = "api";
-            string mailTrapPassword = "ac8c6889944c190ff3cf2d13283296b0";
+            // Google SMTP information
+            string smtpServer = "smtp.gmail.com";
+            int smtpPort = 587;
+            string smtpUsername = "ducanh04022003@gmail.com";
+            string smtpPassword = "gpdhevvjsbkgfivz";
 
-            using (var client = new SmtpClient("bulk.smtp.mailtrap.io", 587))
+            using (var client = new SmtpClient(smtpServer, smtpPort))
             {
-                client.Credentials = new NetworkCredential("api", "ac8c6889944c190ff3cf2d13283296b0");
+                client.Credentials = new NetworkCredential(smtpUsername, smtpPassword);
                 client.EnableSsl = true;
 
                 var message = new MailMessage();
-                message.From = new MailAddress("articleuniversity@demomailtrap.com");
+                message.From = new MailAddress(smtpUsername);
                 message.To.Add(new MailAddress(email));
                 message.Subject = subject;
                 message.Body = body;
@@ -530,32 +578,15 @@ namespace Bina.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            // Kiểm tra xem token có khớp với token được tạo cho user này không
-            var confirmationToken = GenerateConfirmationToken(user);
-            if (token != confirmationToken)
-            {
-                // Xử lý trường hợp token không hợp lệ
-                return BadRequest();
-            }
+            //// Kích hoạt tài khoản user
+            //user.Status = 1;
+            //_context.Users.Update(user);
+            //await _context.SaveChangesAsync();
 
-            // Kích hoạt tài khoản user
-            user.Status = 1;
-            _context.Users.Update(user);
-            await _context.SaveChangesAsync();
-
-            if (changePassword)
-            {
-                // Lưu trữ userId vào Session để sử dụng trong view ChangePassword
-                HttpContext.Session.SetInt32("UserIdForPasswordChange", user.UserId);
-
-                return RedirectToAction("ChangePassword", new { id = user.UserId });
-            }
-            else
-            {
-                TempData["SuccessMessage"] = "Your account has been activated successfully.";
-                return RedirectToAction(nameof(Index));
-            }
+            TempData["SuccessMessage"] = "Your account has been activated successfully.";
+            return RedirectToAction(nameof(Index));
         }
+
 
         private bool UserExists(int id)
         {

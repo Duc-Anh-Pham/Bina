@@ -53,15 +53,22 @@ namespace Bina.Controllers
             return View();
 		}
 
-		[HttpPost]
-		public IActionResult Login(User user)
-		{
-			var u = _context.Users
-				.Include(u => u.Role)
-				.FirstOrDefault(us => us.Email.Equals(user.Email) && us.Password.Equals(user.Password));
+        [HttpPost]
+        public IActionResult Login(User user)
+        {
+            var u = _context.Users
+                .Include(u => u.Role)
+                .FirstOrDefault(us => us.Email.Equals(user.Email) && us.Password.Equals(user.Password));
 
-            if (u != null && u.Status == 1)
+            if (u != null)
             {
+                if (u.Status == 0)
+                {
+                    // Nếu tài khoản bị vô hiệu hóa, lưu thông báo vào TempData và quay lại view Login
+                    TempData["ErrorMessage"] = "Your account is disabled.";
+                    return View(user);
+                }
+
                 if (user.RememberMe)
                 {
                     // Lưu thông tin đăng nhập vào cookie
@@ -76,33 +83,34 @@ namespace Bina.Controllers
                 // Save the changes to the database
                 _context.SaveChanges();
 
-				HttpContext.Session.SetString("Email", u.Email.ToString());
-				HttpContext.Session.SetString("UserName", u.UserName.ToString());
-				HttpContext.Session.SetInt32("RoleId", u.RoleId.Value);
-				HttpContext.Session.SetInt32("UserId", u.UserId);
+                HttpContext.Session.SetString("Email", u.Email.ToString());
+                HttpContext.Session.SetString("UserName", u.UserName.ToString());
+                HttpContext.Session.SetInt32("RoleId", u.RoleId.Value);
+                HttpContext.Session.SetInt32("UserId", u.UserId);
 
-				// Kiểm tra RoleId và chuyển hướng đến Area tương ứng
-				switch (u.Role.RoleId)
-				{
-					case 1: // Admin
-						return RedirectToAction("Index", "Home", new { area = "Admin" });
-					case 2: // Coordinator
-						return RedirectToAction("Index", "Home", new { area = "Coordinator" });
-					case 3: // Manager
-						return RedirectToAction("Index", "Home", new { area = "Manager" });
-					default: // Students
-						return RedirectToAction("Index", "Home");
-				}
-			}
+                // Kiểm tra RoleId và chuyển hướng đến Area tương ứng
+                switch (u.Role.RoleId)
+                {
+                    case 1: // Admin
+                        return RedirectToAction("Index", "Home", new { area = "Admin" });
+                    case 2: // Coordinator
+                        return RedirectToAction("Index", "Home", new { area = "Coordinator" });
+                    case 3: // Manager
+                        return RedirectToAction("Index", "Home", new { area = "Manager" });
+                    default: // Students
+                        return RedirectToAction("Index", "Home");
+                }
+            }
             else
             {
-                // Nếu không tìm thấy người dùng, lưu thông báo lỗi vào TempData
+                // Nếu không tìm thấy người dùng, lưu thông báo lỗi vào TempData và quay lại view Login
                 TempData["ErrorMessage"] = "Invalid Email or Password";
                 return View(user);
             }
-		}
+        }
 
-		public async Task Google()
+
+        public async Task Google()
 		{
 			await HttpContext.ChallengeAsync(GoogleDefaults.AuthenticationScheme,
 				new AuthenticationProperties()

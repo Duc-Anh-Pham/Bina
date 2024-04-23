@@ -60,4 +60,5 @@ public partial class User
             return FirstName + " " + LastName;
         }
     }
+
 }

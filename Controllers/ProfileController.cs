@@ -15,13 +15,23 @@ namespace Bina.Controllers
         {
             _context = context;
         }
+
         // GET: Users/Profile/5
         [Authentication]
         public async Task<IActionResult> EditProfile(int? id)
         {
+            int userId = HttpContext.Session.GetInt32("UserId").Value;
+
             if (id == null || _context.Users == null)
             {
                 return NotFound();
+            }
+
+            // Kiểm tra xem id có khớp với userId của người dùng đăng nhập hay không
+            if (id != userId)
+            {
+                TempData["ErrorMessage"] = "You are not authorized to access this page.";
+                return RedirectToAction("EditProfile", new { id = userId });
             }
 
             var user = _context.Users.Find(id);
@@ -93,9 +103,18 @@ namespace Bina.Controllers
         [HttpGet]
         public async Task<IActionResult> ChangePassword(int? id)
         {
+            int userId = HttpContext.Session.GetInt32("UserId").Value;
+
             if (id == null)
             {
                 return NotFound();
+            }
+
+            // Kiểm tra xem id có khớp với userId của người dùng đăng nhập hay không
+            if (id != userId)
+            {
+                TempData["ErrorMessage"] = "You are not authorized to access this page.";
+                return RedirectToAction("ChangePassword", new { id = userId });
             }
 
             var user = await _context.Users.FindAsync(id);
