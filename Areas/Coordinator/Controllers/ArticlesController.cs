@@ -17,11 +17,51 @@ namespace Bina.Areas.Coordinator.Controllers
         }
 
         // GET: Coordinator/Articles
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string faculty, string term, string academicYear, string status)
         {
-            var ft1Context = _context.Articles.Include(a => a.ArticleStatus).Include(a => a.ArticlesDeadline).Include(a => a.Faculty).Include(a => a.User);
-            return View(await ft1Context.ToListAsync());
+            var facultyId = HttpContext.Session.GetString("FacultyId");
+            if (string.IsNullOrEmpty(facultyId))
+            {
+                return RedirectToAction("Login", "Logins");
+            }
+            ViewBag.FacultyId = facultyId;
+
+            ViewBag.Faculties = await _context.Faculties.ToListAsync();
+            ViewBag.Terms = await _context.ArticlesDeadlines.ToListAsync();
+            ViewBag.Statuses = await _context.ArticleStatuses.ToListAsync();
+
+            var articlesQuery = _context.Articles
+                .Include(a => a.ArticleStatus)
+                .Include(a => a.ArticlesDeadline)
+                .Include(a => a.Faculty)
+                .Include(a => a.User)
+                .Where(a => a.Faculty.FacultyId == facultyId); // Chỉ lấy bài báo thuộc facultyId của user
+
+            // Áp dụng các bộ lọc dựa trên tham số đầu vào
+            if (!string.IsNullOrEmpty(faculty))
+            {
+                articlesQuery = articlesQuery.Where(a => a.ArticlesDeadline.FacultyId == faculty);
+            }
+
+            if (!string.IsNullOrEmpty(term))
+            {
+                articlesQuery = articlesQuery.Where(a => a.ArticlesDeadline.TermTitle == term);
+            }
+
+            if (!string.IsNullOrEmpty(academicYear))
+            {
+                articlesQuery = articlesQuery.Where(a => a.ArticlesDeadline.AcademicYear.ToString() == academicYear);
+            }
+
+            if (!string.IsNullOrEmpty(status))
+            {
+                articlesQuery = articlesQuery.Where(a => a.ArticleStatus.ArticleStatusName == status);
+            }
+
+            var filteredArticles = await articlesQuery.ToListAsync();
+            return View(filteredArticles);
         }
+
 
         // GET: Coordinator/Articles/Details/5
         public async Task<IActionResult> Details(int? id)

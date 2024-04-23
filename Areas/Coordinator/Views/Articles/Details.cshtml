@@ -51,15 +51,18 @@
                          <strong class="text-primary" id="currentStatus">@Model.ArticleStatus.ArticleStatusName</strong>
                     </li>
                 </ul>
-                 <div class="mb-3">
+                <div class="mb-3">
                     <label for="statusSelect" class="form-label">Select Status:</label>
-                    <select class="form-select" id="statusSelect">
-                         @foreach (var status in ViewBag.StatusList)
+                    <select class="form-select" id="statusSelect" name="statusSelect">
+                        @foreach (var status in ViewBag.StatusList)
                         {
-                            <option value="@status.ArticleStatusId">@status.ArticleStatusName</option>
+                            <option value="@status.ArticleStatusId" selected="@((status.ArticleStatusId == @Model.ArticleStatusId) ? "selected" : null)">
+                                @status.ArticleStatusName
+                            </option>
                         }
                     </select>
                 </div>
+
 
                 <!-- Save button -->
                 <button class="btn btn-primary" onclick="updateStatus()">Save</button>

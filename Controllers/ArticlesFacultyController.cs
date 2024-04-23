@@ -18,18 +18,21 @@ namespace Bina.Controllers
         // GET: ArticlesFaculty
         public async Task<IActionResult> Index()
         {
+
+
             var facultyId = HttpContext.Session.GetString("FacultyId");
             if (string.IsNullOrEmpty(facultyId))
             {
                 return RedirectToAction("Login", "Logins");
             }
+            ViewBag.FacultyId = facultyId;
 
             var ft1Context = _context.Articles
                                      .Include(a => a.ArticleStatus)
                                      .Include(a => a.ArticlesDeadline)
                                      .Include(a => a.Faculty)
                                      .Include(a => a.User)
-                                     .Where(a => a.Faculty.FacultyId == facultyId);
+                                     .Where(a => a.ArticleStatus.ArticleStatusName == "Active");
 
             return View(await ft1Context.ToListAsync());
         }

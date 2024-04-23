@@ -8,6 +8,39 @@
 
 <div class="container my-5">
     <h1 class="text-center mb-4">Welcome to: @ViewBag.FacultyId Faculty Page</h1>
+
+    <form method="get" action="@Url.Action("Index","Articles")">
+        <div class="row mb-3">
+            
+            <div class="col-sm">
+                <select class="form-control" name="term">
+                    <option value="">All Terms</option>
+                    <!-- Populate from server-side -->
+                    @foreach (var term in ViewBag.Terms)
+                    {
+                        <option value="@term.TermTitle">@term.TermTitle</option>
+                    }
+                </select>
+            </div>
+            <div class="col-sm">
+                <input type="text" class="form-control" name="academicYear" placeholder="Academic Year">
+            </div>
+            <div class="col-sm">
+                <select class="form-control" name="status">
+                    <option value="">All Statuses</option>
+                    <!-- Populate from server-side -->
+                    @foreach (var stat in ViewBag.Statuses)
+                    {
+                        <option value="@stat.ArticleStatusName">@stat.ArticleStatusName</option>
+                    }
+                </select>
+            </div>
+            <div class="col-sm-auto">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </div>
+    </form>
+
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         @foreach (var item in Model)
         {
