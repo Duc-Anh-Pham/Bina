@@ -1,4 +1,4 @@
-﻿@model Bina.Models.Article
+﻿@model Bina.Models.ArticlesDeadline
 
 @{
     ViewData["Title"] = "Delete";
@@ -12,17 +12,17 @@
                 <div class="card-body">
                     <dl class="row">
                         <dt class="col-sm-2">
-                            Article Name
+                            Term Name
                         </dt>
                         <dd class="col-sm-10">
-                            @Html.DisplayFor(model => model.ArticleName)
+                            @Html.DisplayFor(model => model.TermName)
                         </dd>
 
                         <dt class="col-sm-2">
                             Title
                         </dt>
                         <dd class="col-sm-10">
-                            @Html.DisplayFor(model => model.Title)
+                            @Html.DisplayFor(model => model.TermTitle)
                         </dd>
 
                         <dt class="col-sm-2">
@@ -36,21 +36,21 @@
                             Start Due
                         </dt>
                         <dd class="col-sm-10">
-                            @Html.DisplayFor(model => model.ArticlesDeadline.StartDue)
+                            @Html.DisplayFor(model => model.StartDue)
                         </dd>
 
                         <dt class="col-sm-2">
                             Due Date
                         </dt>
                         <dd class="col-sm-10">
-                            @Html.DisplayFor(model => model.ArticlesDeadline.DueDate)
+                            @Html.DisplayFor(model => model.DueDate)
                         </dd>
 
                         <dt class="col-sm-2">
                             Academic Year
                         </dt>
                         <dd class="col-sm-10">
-                            @Html.DisplayFor(model => model.ArticlesDeadline.AcademicYear)
+                            @Html.DisplayFor(model => model.AcademicYear)
                         </dd>
 
                         </br>
@@ -74,7 +74,7 @@
                             </div>
                             <div class="modal-footer">
                                 <form asp-action="Delete">
-                                    <input type="hidden" asp-for="ArticleId" />
+                                    <input type="hidden" asp-for="ArticlesDeadlineId" />
                                     <button type="submit" class="btn btn-danger">Yes</button>
                                 </form>
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>

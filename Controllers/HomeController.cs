@@ -15,7 +15,15 @@ namespace Bina.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var cookies = HttpContext.Request.Cookies;
+            var cookieList = new List<string>();
+
+            foreach (var cookie in cookies)
+            {
+                cookieList.Add($"{cookie.Key}: {cookie.Value}");
+            }
+
+            return View(cookieList);
         }
 
         public IActionResult Privacy()

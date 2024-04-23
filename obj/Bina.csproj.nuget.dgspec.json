@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Github\\COMP1640\\Bina\\Bina.csproj": {}
+    "E:\\Document\\1640 12\\Bina\\Bina.csproj": {}
   },
   "projects": {
-    "D:\\Github\\COMP1640\\Bina\\Bina.csproj": {
+    "E:\\Document\\1640 12\\Bina\\Bina.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Github\\COMP1640\\Bina\\Bina.csproj",
+        "projectUniqueName": "E:\\Document\\1640 12\\Bina\\Bina.csproj",
         "projectName": "Bina",
-        "projectPath": "D:\\Github\\COMP1640\\Bina\\Bina.csproj",
-        "packagesPath": "C:\\Users\\ducan\\.nuget\\packages\\",
-        "outputPath": "D:\\Github\\COMP1640\\Bina\\obj\\",
+        "projectPath": "E:\\Document\\1640 12\\Bina\\Bina.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "E:\\Document\\1640 12\\Bina\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ducan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -34,24 +34,15 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
-            "Azure.Identity": {
+            "FirebaseStorage.net": {
               "target": "Package",
-              "version": "[1.11.0, )"
-            },
-            "MailKit": {
-              "target": "Package",
-              "version": "[4.5.0, )"
+              "version": "[1.0.3, )"
             },
             "Microsoft.AspNetCore.Authentication.Google": {
               "target": "Package",
@@ -63,7 +54,7 @@
             },
             "Microsoft.AspNetCore.Components.QuickGrid.EntityFrameworkAdapter": {
               "target": "Package",
-              "version": "[8.0.3, )"
+              "version": "[8.0.4, )"
             },
             "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
               "target": "Package",
@@ -75,23 +66,21 @@
             },
             "Microsoft.AspNetCore.Identity.UI": {
               "target": "Package",
-              "version": "[8.0.4, )"
+              "version": "[8.0.3, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[8.0.3, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
-              "version": "[8.0.3, )"
+              "version": "[8.0.4, )"
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[8.0.2, )"
-            },
-            "MimeKit": {
-              "target": "Package",
-              "version": "[4.5.0, )"
             },
             "X.PagedList": {
               "target": "Package",
@@ -121,7 +110,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

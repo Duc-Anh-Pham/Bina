@@ -26,24 +26,24 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = D:\Github\COMP1640\Bina
 build_property._RazorSourceGeneratorDebug = 
 
-[D:/Github/COMP1640/Bina/Areas/Admin/Views/Articles/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQXJ0aWNsZXNcQ3JlYXRlLmNzaHRtbA==
+[D:/Github/COMP1640/Bina/Areas/Admin/Views/ArticlesDeadline/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQXJ0aWNsZXNEZWFkbGluZVxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Github/COMP1640/Bina/Areas/Admin/Views/Articles/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQXJ0aWNsZXNcRGVsZXRlLmNzaHRtbA==
+[D:/Github/COMP1640/Bina/Areas/Admin/Views/ArticlesDeadline/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQXJ0aWNsZXNEZWFkbGluZVxEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Github/COMP1640/Bina/Areas/Admin/Views/Articles/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQXJ0aWNsZXNcRGV0YWlscy5jc2h0bWw=
+[D:/Github/COMP1640/Bina/Areas/Admin/Views/ArticlesDeadline/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQXJ0aWNsZXNEZWFkbGluZVxEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Github/COMP1640/Bina/Areas/Admin/Views/Articles/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQXJ0aWNsZXNcRWRpdC5jc2h0bWw=
+[D:/Github/COMP1640/Bina/Areas/Admin/Views/ArticlesDeadline/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQXJ0aWNsZXNEZWFkbGluZVxFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Github/COMP1640/Bina/Areas/Admin/Views/Articles/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQXJ0aWNsZXNcSW5kZXguY3NodG1s
+[D:/Github/COMP1640/Bina/Areas/Admin/Views/ArticlesDeadline/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQXJ0aWNsZXNEZWFkbGluZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Github/COMP1640/Bina/Areas/Admin/Views/Faculty/Create.cshtml]
@@ -138,6 +138,46 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Github/COMP1640/Bina/Areas/Coordinator/Views/Articles/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQ29vcmRpbmF0b3JcVmlld3NcQXJ0aWNsZXNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Github/COMP1640/Bina/Areas/Coordinator/Views/Articles/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQ29vcmRpbmF0b3JcVmlld3NcQXJ0aWNsZXNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Github/COMP1640/Bina/Areas/Coordinator/Views/Articles/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQ29vcmRpbmF0b3JcVmlld3NcQXJ0aWNsZXNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Github/COMP1640/Bina/Areas/Coordinator/Views/Articles/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQ29vcmRpbmF0b3JcVmlld3NcQXJ0aWNsZXNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Github/COMP1640/Bina/Areas/Coordinator/Views/Articles/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQ29vcmRpbmF0b3JcVmlld3NcQXJ0aWNsZXNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Github/COMP1640/Bina/Views/ArticlesFaculty/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXJ0aWNsZXNGYWN1bHR5XENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Github/COMP1640/Bina/Views/ArticlesFaculty/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXJ0aWNsZXNGYWN1bHR5XERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Github/COMP1640/Bina/Views/ArticlesFaculty/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXJ0aWNsZXNGYWN1bHR5XERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Github/COMP1640/Bina/Views/ArticlesFaculty/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXJ0aWNsZXNGYWN1bHR5XEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Github/COMP1640/Bina/Views/ArticlesFaculty/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXJ0aWNsZXNGYWN1bHR5XEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Github/COMP1640/Bina/Views/Articles/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXJ0aWNsZXNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -204,6 +244,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/Github/COMP1640/Bina/Views/Shared/Loading.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXExvYWRpbmcuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Github/COMP1640/Bina/Views/Upload/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXBsb2FkXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Github/COMP1640/Bina/Views/_ViewImports.cshtml]
