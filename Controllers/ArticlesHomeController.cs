@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Bina.Data;
+using Bina.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Bina.Data;
-using Bina.Models;
-using Microsoft.AspNetCore.Authorization;
 
 namespace Bina.Controllers
 {
@@ -164,11 +159,18 @@ namespace Bina.Controllers
         // GET: HomePage
         public async Task<IActionResult> Index(string faculty, string term, string academicYear, string status)
         {
-            var facultyId = HttpContext.Session.GetString("FacultyId");
-            if (string.IsNullOrEmpty(facultyId))
+            int? userId = HttpContext.Session.GetInt32("UserId");
+            if (userId == null)
             {
+                // Xử lý trường hợp không tìm thấy UserId, có thể là chưa đăng nhập
                 return RedirectToAction("Login", "Logins");
             }
+
+            var facultyId = HttpContext.Session.GetString("FacultyId");
+            /*            if (string.IsNullOrEmpty(facultyId))
+                        {
+                            return RedirectToAction("Login", "Logins");
+                        }*/
 
             ViewBag.Faculties = await _context.Faculties.ToListAsync();
             ViewBag.Terms = await _context.ArticlesDeadlines.ToListAsync();
