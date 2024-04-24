@@ -8,55 +8,144 @@
 }
 
 
-<div class="album py-5 bg-body-tertiary">
-    <div class="container">
-        <p>
-            <a asp-action="Create" class="btn btn-success">Add New Article</a>
-        </p>
+<head>
+    <style>
+        /* CSS cho filter-tags */
+        .filter-tags {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
 
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-             @foreach (var item in Model)
+        .filter-tag select,
+        .filter-tag input[type="text"] {
+            width: 200px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .filter-tag button {
+            padding: 8px 15px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            outline: none;
+            transition: background-color 0.3s ease;
+        }
+
+            .filter-tag button:hover {
+                background-color: #0056b3;
+            }
+
+        /* CSS cho card */
+        .card {
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+            .card:hover {
+                transform: translateY(-5px);
+            }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .card-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .card-text {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .read-more-button {
+            font-size: 16px;
+            padding: 8px 15px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+            .read-more-button:hover {
+                background-color: #0056b3;
+            }
+    </style>
+</head>
+
+<body>
+    <h4 style="text-align: center;">Public Articles of All Faculty</h4>
+
+    <div class="filter-tags">
+        <div class="filter-tag">
+            <select id="faculty-filter" class="form-select">
+                <option value="">Select Faculty</option>
+                <option value="FASS">FASS</option>
+                <option value="FBA">FBA</option>
+                <option value="FGD">FGD</option>
+                <option value="FIT">FIT</option>
+            </select>
+        </div>
+        <div class="filter-tag">
+            <select id="term-filter" class="form-select">
+                <option value="">Select Term</option>
+                <option value="Spring">Spring</option>
+                <option value="Winter">Winter</option>
+                <option value="Summer">Summer</option>
+            </select>
+        </div>
+        <div class="filter-tag">
+            <input type="text" id="year-filter" class="form-control" placeholder="Enter Academic Year">
+        </div>
+        <div class="filter-tag">
+            <button id="filter-button" class="btn btn-primary">Filter</button>
+        </div>
+    </div>
+
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="article-list">
+        @foreach (var item in Model)
+        {
+            if (item.ArticleStatus.ArticleStatusName == "Public")
             {
                 <div class="col">
                     <div class="card shadow-sm">
-
                         <div class="position-relative">
                             <img src="@Url.Content(item.ImagePath)" class="card-img-top" alt="Image" style="height:225px; width:100%; object-fit:cover;">
-                            <span class="position-absolute top-0 end-0 bg-warning text-dark m-2 px-2 py-1 rounded">
-                                @Html.DisplayFor(modelItem => item.ArticleStatus.ArticleStatusName)
-                            </span>
+                            <span class="position-absolute top-0 end-0 bg-warning text-dark m-2 px-2 py-1 rounded">@Html.DisplayFor(modelItem => item.ArticleStatus.ArticleStatusName)</span>
                         </div>
-
                         <div class="card-body">
                             <h5 class="card-title">@Html.DisplayFor(modelItem => item.ArticleName)</h5>
-
-                            <p class="card-text">
-                                <span class="h6">Description:</span> <span>@truncate(item.Content, 50)</span>
-                            </p>
-                            
-                            <p class="card-text">
-                                <span class="h6">Faculty:</span> <span>@Html.DisplayFor(modelItem => item.ArticlesDeadline.FacultyId)</span>
-                                <span>-</span>
-                                <span class="h6">Term:</span> <span>@Html.DisplayFor(modelItem => item.ArticlesDeadline.TermTitle)</span>
-                            </p>
-
-                            <p class="card-text">
-                                <span class="h6">Create by:</span> <span>@Html.DisplayFor(modelItem => item.User.FullName)</span>
-                            </p>
-                            
+                            <p class="card-text"><span class="h6">Description:</span> <span>@truncate(item.Content, 50)</span></p>
+                            <p class="card-text"><span class="h6">Faculty:</span> <span>@Html.DisplayFor(modelItem => item.ArticlesDeadline.FacultyId)</span> <span>-</span> <span class="h6">Term:</span> <span>@Html.DisplayFor(modelItem => item.ArticlesDeadline.TermTitle)</span></p>
+                            <p class="card-text"><span class="h6">Create by:</span> <span>@Html.DisplayFor(modelItem => item.User.FullName)</span></p>
                             <div class="d-flex justify-content-between align-items-center">
-                                <button type="button" class="btn btn-primary my-2 read-more-button" data-article-id="@item.ArticleId">
-                                    <i class="fa-solid fa-star"></i> READ MORE
-                                </button>
-                                <small class="text-body-secondary">9 mins</small>
+                                <a asp-action="Details" asp-route-id="@item.ArticleId" class="btn btn-primary my-2 read-more-button"><i class="fa-solid fa-star"></i> READ MORE</a>
+                                <small class="text-body-secondary">@item.DateCreate</small>
                             </div>
                         </div>
                     </div>
                 </div>
             }
-        </div>
+        }
     </div>
-</div>
+</body>
+
 
 @section Scripts {
     <script>

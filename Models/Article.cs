@@ -21,6 +21,8 @@ public partial class Article
 
     public DateTime? DateCreate { get; set; }
 
+    public bool? GuestAllow { get; set; }
+
     public int? ArticleStatusId { get; set; }
 
     public Guid? ArticlesDeadlineId { get; set; }

@@ -13,7 +13,7 @@ public partial class User
 
     public string? LastName { get; set; }
 
-    public int? PhoneNumber { get; set; }
+    public string? PhoneNumber { get; set; }
 
     public DateOnly? DoB { get; set; }
 
@@ -24,8 +24,6 @@ public partial class User
     public string? Email { get; set; }
 
     public string? Password { get; set; }
-
-    public bool RememberMe { get; set; }
 
     public int? RoleId { get; set; }
 
@@ -41,12 +39,15 @@ public partial class User
 
     public virtual ICollection<ArticlesDeadline> ArticlesDeadlines { get; set; } = new List<ArticlesDeadline>();
 
+    public virtual ICollection<CommentFeedback> CommentFeedbacks { get; set; } = new List<CommentFeedback>();
+
     public virtual Faculty? Faculty { get; set; }
 
     public virtual Role? Role { get; set; }
 
     public virtual TermsAndCondition? Terms { get; set; }
 
+    public bool RememberMe { get; set; }
     public string FullName
     {
         get
@@ -54,6 +55,4 @@ public partial class User
             return FirstName + " " + LastName;
         }
     }
-
-
 }

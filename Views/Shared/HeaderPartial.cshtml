@@ -72,7 +72,8 @@
         <div class="navbar-collapse collapse show" id="navbarCollapse" style="">
             <ul class="navbar-nav me-auto mb-2 mb-md-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#"><i class="fa-solid fa-newspaper"></i> Article</a>
+                    <a class="nav-link text-dark" asp-area="" class="nav-link" asp-controller="ArticlesHome" asp-action="Index">
+                        <i class="fa-solid fa-newspaper"></i> Article</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-dark" asp-area="" asp-controller="ArticlesFaculty" asp-action="index"><i class="fa-solid fa-list-check"></i> Faculty</a>
@@ -83,12 +84,6 @@
                         <a class="nav-link text-dark" asp-area="" asp-controller="Articles" asp-action="index"><i class="fa-solid fa-list-check"></i>Article Management</a>
                     </li>
                 }
-
-                <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" class="nav-link" asp-controller="ArticlesHome" asp-action="Index">
-                        <i class="fa-solid fa-list-check" style="margin-right: 10px"></i>Article Homepage
-                    </a>
-                </li>
 
                 <li class="nav-item">
                     <a class="nav-link" href="#"><i class="fa-regular fa-address-book"></i> Contact</a>
