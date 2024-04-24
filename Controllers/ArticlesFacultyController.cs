@@ -18,13 +18,15 @@ namespace Bina.Controllers
         // GET: ArticlesFaculty
         public async Task<IActionResult> Index()
         {
-
-
-            var facultyId = HttpContext.Session.GetString("FacultyId");
-            if (string.IsNullOrEmpty(facultyId))
+            int? userId = HttpContext.Session.GetInt32("UserId");
+            if (userId == null)
             {
+                // Xử lý trường hợp không tìm thấy UserId, có thể là chưa đăng nhập
                 return RedirectToAction("Login", "Logins");
             }
+
+            var facultyId = HttpContext.Session.GetString("FacultyId");
+
             ViewBag.FacultyId = facultyId;
 
             var ft1Context = _context.Articles
@@ -32,7 +34,7 @@ namespace Bina.Controllers
                                      .Include(a => a.ArticlesDeadline)
                                      .Include(a => a.Faculty)
                                      .Include(a => a.User)
-                                     .Where(a => a.ArticleStatus.ArticleStatusName == "Active");
+                                     .Where(a => a.ArticleStatus.ArticleStatusName == "public");
 
             return View(await ft1Context.ToListAsync());
         }
