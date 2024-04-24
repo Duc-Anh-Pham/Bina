@@ -4,6 +4,7 @@ using Bina.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Bina.Migrations
 {
     [DbContext(typeof(Ft1Context))]
-    partial class Ft1ContextModelSnapshot : ModelSnapshot
+    [Migration("20240419110022_add2")]
+    partial class add2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -86,7 +89,7 @@ namespace Bina.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Articles", (string)null);
+                    b.ToTable("Articles");
                 });
 
             modelBuilder.Entity("Bina.Models.ArticleComment", b =>
@@ -117,7 +120,7 @@ namespace Bina.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ArticleComments", (string)null);
+                    b.ToTable("ArticleComments");
                 });
 
             modelBuilder.Entity("Bina.Models.ArticleStatus", b =>
@@ -272,7 +275,7 @@ namespace Bina.Migrations
                     b.HasKey("TermsId")
                         .HasName("PK__TermsAnd__C05EBE0068ECE614");
 
-                    b.ToTable("TermsAndConditions", (string)null);
+                    b.ToTable("TermsAndConditions");
                 });
 
             modelBuilder.Entity("Bina.Models.User", b =>
@@ -283,9 +286,6 @@ namespace Bina.Migrations
                         .HasColumnName("UserID");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"));
-
-                    b.Property<string>("ConfirmPassword")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("DateCreated")
                         .ValueGeneratedOnAdd()
@@ -315,12 +315,6 @@ namespace Bina.Migrations
                     b.Property<string>("LastName")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("NewPassword")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("OldPassword")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")
                         .HasMaxLength(100)

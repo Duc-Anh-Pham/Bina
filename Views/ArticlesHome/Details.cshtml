@@ -1,0 +1,145 @@
+﻿@model Bina.Models.Article
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+
+        title {
+            font-weight: bold;
+            font-size: 26px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h4 {
+            text-align: center;
+            font-size: 24px;
+            color: #333;
+        }
+
+        .row {
+            margin-bottom: 20px;
+        }
+
+        .col-md-5 {
+            text-align: center;
+        }
+
+            .col-md-5 img {
+                max-width: 100%;
+                height: auto;
+                border-radius: 5px;
+            }
+
+        .list-group-item {
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+            .list-group-item h6 {
+                margin-bottom: 5px;
+            }
+
+        .card {
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .actions {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+            .actions a {
+                text-decoration: none;
+                color: #007bff;
+                margin-right: 10px;
+            }
+
+                .actions a:hover {
+                    text-decoration: underline;
+                }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h4>@Model.ArticleName _ @Model.FacultyId</h4>
+        </header>
+        <hr />
+        <div class="row">
+            <div class="col-md-5">
+                <h4 class="text-primary" style="font-style: italic">INFORMATION</h4>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <img src="@Model.ImagePath" alt="Image">
+                    </li>
+                    <li class="list-group-item">
+                        <h6 style="font-style: italic">Term:</h6>
+                        <strong>@Html.DisplayFor(model => model.ArticlesDeadline.TermTitle)</strong>
+                    </li>
+                    <li class="list-group-item">
+                        <h6 style="font-style: italic">Faculty:</h6>
+                        <strong>@Html.DisplayFor(model => model.Faculty.FacultyName)</strong>
+                    </li>
+                    <li class="list-group-item">
+                        <h6 style="font-style: italic">Status:</h6>
+                        <strong>@Html.DisplayFor(model => model.ArticleStatus.ArticleStatusName)</strong>
+                    </li>
+                    <li class="list-group-item">
+                        <h6 style="font-style: italic">Deadline:</h6>
+                        <strong>@Html.DisplayFor(model => model.ArticlesDeadline.DueDate)</strong>
+                    </li>
+                </ul>
+                <div class="card">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <h6 style="font-style: italic">Submit by:</h6>
+                            <strong>@Html.DisplayFor(model => model.User.FullName) - @Html.DisplayFor(model => model.User.UserName)</strong>
+                        </li>
+                        <li class="list-group-item">
+                            <h6 style="font-style: italic">Submit Date:</h6>
+                            <strong>(Wait Update New Version)</strong>
+                        </li>
+                    </ul>
+                    <div class="actions">
+                        <a asp-action="Edit" asp-route-id="@Model?.ArticleId" class="btn btn-primary" style="background-color: #007bff; border-color: #007bff; color: white;">Edit</a>
+                        <a asp-action="Index" class="btn btn-secondary" style="background-color: #6c757d; border-color: #6c757d; color: white;">Back to List</a>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="col-md-7">
+                <!--<h3>@Html.DisplayFor(model => model.ArticleName)</h3>-->
+                <dl>
+                    <dt>Description:</dt>
+                    <dd>@Html.DisplayFor(model => model.Content)</dd>
+                    <dt>Article Content:</dt>
+                    <dd>
+                        <embed src="@Model.DocumentPath" type="application/pdf" width="100%" height="600px">
+                        <a href="@Model.DocumentPath" download="@Model.DocumentPath" class="btn btn-success">Download File</a>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+﻿@model Bina.Models.Article
+
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container">
+        <h4>Edit @Model.ArticleName</h4>
+        <hr />
+        <div class="row">
+            <div class="col-md-6">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="ArticleId" />
+                    <div class="form-group">
+                        <label asp-for="ArticleName" class="control-label"></label>
+                        <input asp-for="ArticleName" class="form-control" />
+                        <span asp-validation-for="ArticleName" class="text-danger"></span>
+                    </div>
+                    <!-- Thêm điều kiện kiểm tra xem trang có được truy cập từ trang chủ không -->
+                    @if (ViewBag.FromHomePage == null || ViewBag.FromHomePage != true)
+                    {
+                        <div class="form-group">
+                            <input type="submit" value="Save" class="btn btn-primary" />
+                        </div>
+                    }
+                </form>
+            </div>
+        </div>
+
+        <div>
+            <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+        </div>
+    </div>
+
+</body>
+</html>
