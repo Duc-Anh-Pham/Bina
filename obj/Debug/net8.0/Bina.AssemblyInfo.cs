@@ -16,7 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Bina")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+69acbf15bd2aef0fb4f670a7db92b214f7da5729")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e026263fa267bf05eec710cd2b0bc58e1f273b00")]
 [assembly: System.Reflection.AssemblyProductAttribute("Bina")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Bina")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
