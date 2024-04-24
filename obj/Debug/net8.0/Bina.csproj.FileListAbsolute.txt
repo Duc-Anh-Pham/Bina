@@ -1672,3 +1672,7 @@ F:\Greenwich IT\TOPUP - 1640 - Enterprise Web Software Development\Code\Bina12-4
 F:\Greenwich IT\TOPUP - 1640 - Enterprise Web Software Development\Code\Bina12-4\Bina\obj\Debug\net8.0\Bina.pdb
 F:\Greenwich IT\TOPUP - 1640 - Enterprise Web Software Development\Code\Bina12-4\Bina\obj\Debug\net8.0\Bina.genruntimeconfig.cache
 F:\Greenwich IT\TOPUP - 1640 - Enterprise Web Software Development\Code\Bina12-4\Bina\obj\Debug\net8.0\ref\Bina.dll
+F:\Greenwich IT\TOPUP - 1640 - Enterprise Web Software Development\Code\Bina12-4\Bina\bin\Debug\net8.0\BouncyCastle.Cryptography.dll
+F:\Greenwich IT\TOPUP - 1640 - Enterprise Web Software Development\Code\Bina12-4\Bina\bin\Debug\net8.0\MailKit.dll
+F:\Greenwich IT\TOPUP - 1640 - Enterprise Web Software Development\Code\Bina12-4\Bina\bin\Debug\net8.0\MimeKit.dll
+F:\Greenwich IT\TOPUP - 1640 - Enterprise Web Software Development\Code\Bina12-4\Bina\bin\Debug\net8.0\System.ClientModel.dll

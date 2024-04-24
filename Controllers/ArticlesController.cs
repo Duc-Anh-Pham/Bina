@@ -96,7 +96,7 @@ namespace Bina.Controllers
             var deadlineTermsSelectList = deadlines.Select(ad => new SelectListItem
             {
                 Value = ad.ArticlesDeadlineId.ToString(),
-                Text = $"{ad.TermTitle} - từ {ad.StartDue?.ToString("dd/MM/yyyy")} đến {ad.DueDate?.ToString("dd/MM/yyyy")}"
+                Text = $"{ad.TermTitle} - From {ad.StartDue?.ToString("dd/MM/yyyy")} => To {ad.DueDate?.ToString("HH:mm MMMM dd, yyyy")}"
             }).ToList();
 
             ViewData["ArticleStatusId"] = new SelectList(_context.ArticleStatuses, "ArticleStatusId", "ArticleStatusId");

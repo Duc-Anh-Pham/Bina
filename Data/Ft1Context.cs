@@ -44,7 +44,7 @@ public partial class Ft1Context : DbContext
     {
         modelBuilder.Entity<Article>(entity =>
         {
-            entity.HasKey(e => e.ArticleId).HasName("PK__Articles__9C6270C82C45E093");
+            entity.HasKey(e => e.ArticleId).HasName("PK__Articles__9C6270C8DD58D0E4");
 
             entity.Property(e => e.ArticleId).HasColumnName("ArticleID");
             entity.Property(e => e.ArticleName)
@@ -87,7 +87,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<ArticleComment>(entity =>
         {
-            entity.HasKey(e => e.CommentId).HasName("PK__ArticleC__C3B4DFAA1C596F8F");
+            entity.HasKey(e => e.CommentId).HasName("PK__ArticleC__C3B4DFAA2E02761B");
 
             entity.Property(e => e.CommentId)
                 .HasDefaultValueSql("(newsequentialid())")
@@ -108,7 +108,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<ArticleStatus>(entity =>
         {
-            entity.HasKey(e => e.ArticleStatusId).HasName("PK__ArticleS__3F0E2D6B885CD871");
+            entity.HasKey(e => e.ArticleStatusId).HasName("PK__ArticleS__3F0E2D6BC8861508");
 
             entity.ToTable("ArticleStatus");
 
@@ -120,7 +120,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<ArticlesDeadline>(entity =>
         {
-            entity.HasKey(e => e.ArticlesDeadlineId).HasName("PK__Articles__253F2FDCAD9F100A");
+            entity.HasKey(e => e.ArticlesDeadlineId).HasName("PK__Articles__253F2FDC67025273");
 
             entity.ToTable("ArticlesDeadline");
 
@@ -147,7 +147,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<CommentFeedback>(entity =>
         {
-            entity.HasKey(e => e.CommentFeedbackId).HasName("PK__CommentF__9454C0BAC9477F7B");
+            entity.HasKey(e => e.CommentFeedbackId).HasName("PK__CommentF__9454C0BA820A2D36");
 
             entity.ToTable("CommentFeedback");
 
@@ -165,7 +165,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<Faculty>(entity =>
         {
-            entity.HasKey(e => e.FacultyId).HasName("PK__Faculty__306F636E5A2F5A59");
+            entity.HasKey(e => e.FacultyId).HasName("PK__Faculty__306F636ED0F068B9");
 
             entity.ToTable("Faculty");
 
@@ -179,7 +179,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<HelpAndSupport>(entity =>
         {
-            entity.HasKey(e => e.HelpSupportId).HasName("PK__HelpAndS__65D53B0FAB068048");
+            entity.HasKey(e => e.HelpSupportId).HasName("PK__HelpAndS__65D53B0F34ECCC0F");
 
             entity.ToTable("HelpAndSupport");
 
@@ -194,7 +194,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<Role>(entity =>
         {
-            entity.HasKey(e => e.RoleId).HasName("PK__Role__8AFACE3A7591B028");
+            entity.HasKey(e => e.RoleId).HasName("PK__Role__8AFACE3A529CE484");
 
             entity.ToTable("Role");
 
@@ -206,7 +206,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<TermsAndCondition>(entity =>
         {
-            entity.HasKey(e => e.TermsId).HasName("PK__TermsAnd__C05EBE00B5AE4342");
+            entity.HasKey(e => e.TermsId).HasName("PK__TermsAnd__C05EBE000687DD99");
 
             entity.Property(e => e.TermsId)
                 .ValueGeneratedNever()
@@ -216,7 +216,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.UserId).HasName("PK__User__1788CCAC4924F369");
+            entity.HasKey(e => e.UserId).HasName("PK__User__1788CCACC12C592A");
 
             entity.ToTable("User");
 
@@ -232,6 +232,9 @@ public partial class Ft1Context : DbContext
             entity.Property(e => e.Gender).HasMaxLength(10);
             entity.Property(e => e.LastName).HasMaxLength(100);
             entity.Property(e => e.Password).HasMaxLength(100);
+            entity.Property(e => e.PhoneNumber)
+                .HasMaxLength(10)
+                .IsUnicode(false);
             entity.Property(e => e.RoleId).HasColumnName("RoleID");
             entity.Property(e => e.Status).HasDefaultValue((byte)1);
             entity.Property(e => e.TermsId).HasColumnName("TermsID");
