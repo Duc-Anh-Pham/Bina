@@ -1,5 +1,4 @@
-﻿
-<!-- App header starts -->
+﻿<!-- App header starts -->
 <div class="app-header d-flex align-items-center">
 
     <!-- Container starts -->
@@ -41,7 +40,7 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-sm shadow-sm gap-3" style="">
-                            <a class="dropdown-item d-flex align-items-center py-2" href="agent-profile.html">
+                            <a class="dropdown-item d-flex align-items-center py-2" asp-area="Admin" asp-controller="Users" asp-action="Profile" asp-route-id="@Context.Session.GetInt32("UserId")" >
                                 <i class="bi bi-person-vcard" style="margin-right: 10px"></i>User Profile
                             </a>
                             <a class="dropdown-item d-flex align-items-center py-2" href="account-settings.html">

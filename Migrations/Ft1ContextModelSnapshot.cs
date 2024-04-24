@@ -83,7 +83,7 @@ namespace Bina.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Articles");
+                    b.ToTable("Articles", (string)null);
                 });
 
             modelBuilder.Entity("Bina.Models.ArticleComment", b =>
@@ -114,7 +114,7 @@ namespace Bina.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ArticleComments");
+                    b.ToTable("ArticleComments", (string)null);
                 });
 
             modelBuilder.Entity("Bina.Models.ArticleStatus", b =>
@@ -267,7 +267,7 @@ namespace Bina.Migrations
                     b.HasKey("TermsId")
                         .HasName("PK__TermsAnd__C05EBE00C5C4011E");
 
-                    b.ToTable("TermsAndConditions");
+                    b.ToTable("TermsAndConditions", (string)null);
                 });
 
             modelBuilder.Entity("Bina.Models.User", b =>
@@ -278,6 +278,9 @@ namespace Bina.Migrations
                         .HasColumnName("UserID");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"));
+
+                    b.Property<string>("ConfirmPassword")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("DateCreated")
                         .ValueGeneratedOnAdd()
@@ -307,6 +310,12 @@ namespace Bina.Migrations
                     b.Property<string>("LastName")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("NewPassword")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OldPassword")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")
                         .HasMaxLength(100)
