@@ -11,15 +11,15 @@
 
     <form method="get" action="@Url.Action("Index","Articles")">
         <div class="row mb-3">
-            
-             
+
+
             <div class="col-sm">
                 <input type="text" class="form-control" name="academicYear" placeholder="Academic Year">
-            </div>  
+            </div>
             <div class="col-sm">
                 <select class="form-control" name="status">
                     <option value="">All Statuses</option>
-                     @foreach (var stat in ViewBag.Statuses)
+                    @foreach (var stat in ViewBag.Statuses)
                     {
                         <option value="@stat.ArticleStatusName" style="color: black">@stat.ArticleStatusName</option>
                     }
