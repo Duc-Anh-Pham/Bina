@@ -38,13 +38,13 @@ public partial class Ft1Context : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=(localdb)\\ProjectModels;Initial Catalog=FT1;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
+        => optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=FT1;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Article>(entity =>
         {
-            entity.HasKey(e => e.ArticleId).HasName("PK__Articles__9C6270C8DD58D0E4");
+            entity.HasKey(e => e.ArticleId).HasName("PK__Articles__9C6270C87F69B08F");
 
             entity.Property(e => e.ArticleId).HasColumnName("ArticleID");
             entity.Property(e => e.ArticleName)
@@ -87,7 +87,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<ArticleComment>(entity =>
         {
-            entity.HasKey(e => e.CommentId).HasName("PK__ArticleC__C3B4DFAA2E02761B");
+            entity.HasKey(e => e.CommentId).HasName("PK__ArticleC__C3B4DFAAEE53FB41");
 
             entity.Property(e => e.CommentId)
                 .HasDefaultValueSql("(newsequentialid())")
@@ -108,7 +108,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<ArticleStatus>(entity =>
         {
-            entity.HasKey(e => e.ArticleStatusId).HasName("PK__ArticleS__3F0E2D6BC8861508");
+            entity.HasKey(e => e.ArticleStatusId).HasName("PK__ArticleS__3F0E2D6BD495686C");
 
             entity.ToTable("ArticleStatus");
 
@@ -120,7 +120,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<ArticlesDeadline>(entity =>
         {
-            entity.HasKey(e => e.ArticlesDeadlineId).HasName("PK__Articles__253F2FDC67025273");
+            entity.HasKey(e => e.ArticlesDeadlineId).HasName("PK__Articles__253F2FDCD877F69B");
 
             entity.ToTable("ArticlesDeadline");
 
@@ -147,16 +147,21 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<CommentFeedback>(entity =>
         {
-            entity.HasKey(e => e.CommentFeedbackId).HasName("PK__CommentF__9454C0BA820A2D36");
+            entity.HasKey(e => e.CommentFeedbackId).HasName("PK__CommentF__9454C0BAF884AB9B");
 
             entity.ToTable("CommentFeedback");
 
             entity.Property(e => e.CommentFeedbackId)
                 .HasDefaultValueSql("(newsequentialid())")
                 .HasColumnName("CommentFeedbackID");
+            entity.Property(e => e.ArticleId).HasColumnName("ArticleID");
             entity.Property(e => e.CommentDay).HasColumnType("datetime");
             entity.Property(e => e.ContentFeedback).HasMaxLength(1000);
             entity.Property(e => e.UserId).HasColumnName("UserID");
+
+            entity.HasOne(d => d.Article).WithMany(p => p.CommentFeedbacks)
+                .HasForeignKey(d => d.ArticleId)
+                .HasConstraintName("FK__CommentFe__Artic__59FA5E80");
 
             entity.HasOne(d => d.User).WithMany(p => p.CommentFeedbacks)
                 .HasForeignKey(d => d.UserId)
@@ -165,7 +170,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<Faculty>(entity =>
         {
-            entity.HasKey(e => e.FacultyId).HasName("PK__Faculty__306F636ED0F068B9");
+            entity.HasKey(e => e.FacultyId).HasName("PK__Faculty__306F636E9CB11652");
 
             entity.ToTable("Faculty");
 
@@ -179,7 +184,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<HelpAndSupport>(entity =>
         {
-            entity.HasKey(e => e.HelpSupportId).HasName("PK__HelpAndS__65D53B0F34ECCC0F");
+            entity.HasKey(e => e.HelpSupportId).HasName("PK__HelpAndS__65D53B0FF7AA149B");
 
             entity.ToTable("HelpAndSupport");
 
@@ -194,7 +199,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<Role>(entity =>
         {
-            entity.HasKey(e => e.RoleId).HasName("PK__Role__8AFACE3A529CE484");
+            entity.HasKey(e => e.RoleId).HasName("PK__Role__8AFACE3ADEDB5EAB");
 
             entity.ToTable("Role");
 
@@ -206,7 +211,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<TermsAndCondition>(entity =>
         {
-            entity.HasKey(e => e.TermsId).HasName("PK__TermsAnd__C05EBE000687DD99");
+            entity.HasKey(e => e.TermsId).HasName("PK__TermsAnd__C05EBE00BFA28D90");
 
             entity.Property(e => e.TermsId)
                 .ValueGeneratedNever()
@@ -216,11 +221,12 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.UserId).HasName("PK__User__1788CCACC12C592A");
+            entity.HasKey(e => e.UserId).HasName("PK__User__1788CCAC99431DA0");
 
             entity.ToTable("User");
 
             entity.Property(e => e.UserId).HasColumnName("UserID");
+            entity.Property(e => e.AvatarPath).HasMaxLength(255);
             entity.Property(e => e.DateCreated)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");

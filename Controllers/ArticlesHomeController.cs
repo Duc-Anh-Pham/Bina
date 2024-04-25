@@ -3,6 +3,10 @@ using Bina.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Threading.Tasks;
+using System;
+using X.PagedList;
 
 namespace Bina.Controllers
 {
@@ -157,20 +161,10 @@ namespace Bina.Controllers
         }
 
         // GET: HomePage
-        public async Task<IActionResult> Index(string faculty, string term, string academicYear, string status)
+        public async Task<IActionResult> Index(string faculty, string academicYear, int? pageNumber, int? pageSize)
         {
-            int? userId = HttpContext.Session.GetInt32("UserId");
-            if (userId == null)
-            {
-                // Xử lý trường hợp không tìm thấy UserId, có thể là chưa đăng nhập
-                return RedirectToAction("Login", "Logins");
-            }
-
-            var facultyId = HttpContext.Session.GetString("FacultyId");
-            /*            if (string.IsNullOrEmpty(facultyId))
-                        {
-                            return RedirectToAction("Login", "Logins");
-                        }*/
+            int defaultPageSize = pageSize ?? 6;
+            int currentPageNumber = pageNumber ?? 1;
 
             ViewBag.Faculties = await _context.Faculties.ToListAsync();
             ViewBag.Terms = await _context.ArticlesDeadlines.ToListAsync();
@@ -188,17 +182,26 @@ namespace Bina.Controllers
                 articlesQuery = articlesQuery.Where(a => a.ArticlesDeadline.FacultyId == faculty);
             }
 
-            if (!string.IsNullOrEmpty(term))
-            {
-                articlesQuery = articlesQuery.Where(a => a.ArticlesDeadline.TermTitle == term);
-            }
-
             if (!string.IsNullOrEmpty(academicYear))
             {
                 articlesQuery = articlesQuery.Where(a => a.ArticlesDeadline.AcademicYear.ToString() == academicYear);
             }
-            var filteredArticles = await articlesQuery.ToListAsync();
-            return View(filteredArticles);
+
+            // Pagination
+            int totalRecords = await articlesQuery.CountAsync();
+            int totalPages = (int)Math.Ceiling((double)totalRecords / defaultPageSize);
+
+            var articles = await articlesQuery
+                .Skip((currentPageNumber - 1) * defaultPageSize)
+                .Take(defaultPageSize)
+                .ToListAsync();
+
+            ViewBag.TotalPages = totalPages;
+            ViewBag.CurrentPage = currentPageNumber;
+            ViewBag.PageSize = defaultPageSize;
+            ViewBag.Faculties = await _context.Faculties.ToListAsync(); // Assuming you need this for dropdown
+
+            return View(articles);
         }
     }
 }

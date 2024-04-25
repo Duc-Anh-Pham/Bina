@@ -4,6 +4,9 @@
     // Define a helper function to cut the string
     Func<string, int, string> truncate = (str, length) =>
         str?.Length > length ? str.Substring(0, length) + "..." : str;
+
+    int pageNumber = ViewBag.PageNumber ?? 1; // Default page number
+    int pageSize = ViewBag.PageSize ?? 6; // Default page size
 }
 
 <head>
@@ -44,7 +47,6 @@
                 <div class="card shadow-sm">
                     <div class="position-relative">
                         <img src="@Url.Content(item.ImagePath)" class="card-img-top" alt="Image" style="height:225px; width:100%; object-fit:cover;">
-                        <span class="position-absolute top-0 end-0 bg-warning text-dark m-2 px-2 py-1 rounded">@Html.DisplayFor(modelItem => item.ArticleStatus.ArticleStatusName)</span>
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">@Html.DisplayFor(modelItem => item.ArticleName)</h5>
@@ -61,3 +63,21 @@
         }
     }
 </div>
+
+<!-- Pagination controls -->
+<div class="d-flex justify-content-center mt-4">
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            @for (int i = 1; i <= ViewBag.TotalPages; i++)
+            {
+                <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                    <a class="page-link" href="?pageNumber=@i">@i</a>
+                </li>
+            }
+        </ul>
+    </nav>
+</div>
+
+
+
+
