@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "tQ9T2nDnem/4Hx/luPaz+J16cG5AWMEz1xJ5XrdOk1OIjiyolG5+A3HmrNqmqgmU+Pf1YjeyNTlsW+Nlo8/MJA==",
+  "dgSpecHash": "d33OWp2hHGP/Ce/qDVySv/AfNGI9ZBX/oXEs4IHc7KHMlOOZ7vMIi0z/7mJqHnxEoe4oINcXwG1uiQ7obbVpkQ==",
   "success": true,
-  "projectFilePath": "E:\\Document\\1640 12\\Bina.csproj",
+  "projectFilePath": "C:\\Users\\Admin\\Downloads\\Bina-main\\Bina\\Bina.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\azure.identity\\1.11.0\\azure.identity.1.11.0.nupkg.sha512",
