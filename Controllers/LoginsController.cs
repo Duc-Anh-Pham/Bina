@@ -41,6 +41,11 @@ namespace Bina.Controllers
                     return View(user);
                 }
             }
+            else
+            {
+                // Xóa cookie "RememberMe" nếu nó tồn tại
+                Response.Cookies.Delete("RememberMe");
+            }
 
             return View();
         }
@@ -54,6 +59,13 @@ namespace Bina.Controllers
 
             if (u != null)
             {
+                if (u.Status == 0)
+                {
+                    // Nếu tài khoản bị vô hiệu hóa, lưu thông báo vào TempData và quay lại view Login
+                    TempData["ErrorMessage"] = "Your account is disabled.";
+                    return View(user);
+                }
+
                 if (user.RememberMe)
                 {
                     // Lưu thông tin đăng nhập vào cookie
@@ -61,14 +73,12 @@ namespace Bina.Controllers
                     var encryptedData = Convert.ToBase64String(Encoding.UTF8.GetBytes(emailAndPassword));
                     Response.Cookies.Append("RememberMe", encryptedData, new CookieOptions
                     {
-                        Expires = DateTimeOffset.Now.AddDays(30) // Đặt thời gian hết hạn của cookie (ví dụ: 30 ngày)
+                        Expires = DateTimeOffset.Now.AddDays(30)
                     });
                 }
 
                 // Save the changes to the database
                 _context.SaveChanges();
-                if (u.FacultyId != null)
-                    HttpContext.Session.SetString("FacultyId", u.FacultyId);
 
                 HttpContext.Session.SetString("Email", u.Email.ToString());
                 HttpContext.Session.SetString("UserName", u.UserName.ToString());
@@ -85,13 +95,17 @@ namespace Bina.Controllers
                     case 3: // Manager
                         return RedirectToAction("Index", "Home", new { area = "Manager" });
                     default: // Students
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "ArticlesHome");
                 }
             }
-
-            // Nếu không tìm thấy người dùng, chúng ta sẽ trả về View đăng nhập
-            return View();
+            else
+            {
+                // Nếu không tìm thấy người dùng, lưu thông báo lỗi vào TempData và quay lại view Login
+                TempData["ErrorMessage"] = "Invalid Email or Password";
+                return View(user);
+            }
         }
+
 
         public async Task Google()
         {
@@ -126,8 +140,6 @@ namespace Bina.Controllers
             HttpContext.Session.SetString("Email", user.Email.ToString());
             HttpContext.Session.SetInt32("RoleId", user.RoleId.Value);
             HttpContext.Session.SetInt32("UserId", user.UserId);
-            if (user.FacultyId != null)
-                HttpContext.Session.SetString("FacultyId", user.FacultyId);
 
             // Kiểm tra RoleId và chuyển hướng đến Area tương ứng
             return RedirectToAreaBasedOnRoleId(user.RoleId.Value);
@@ -157,7 +169,7 @@ namespace Bina.Controllers
             if (user == null)
             {
                 // Nếu người dùng không tồn tại, trả về trang Login với thông báo lỗi
-                TempData["ErrorMessage"] = "Tài khoản không khả dụng!";
+                TempData["ErrorMessage"] = "Unavailable!";
                 return RedirectToAction("Login", "Logins");
             }
 
@@ -166,8 +178,7 @@ namespace Bina.Controllers
             HttpContext.Session.SetString("Email", user.Email.ToString());
             HttpContext.Session.SetInt32("RoleId", user.RoleId.Value);
             HttpContext.Session.SetInt32("UserId", user.UserId);
-            if (user.FacultyId != null)
-                HttpContext.Session.SetString("FacultyId", user.FacultyId);
+
             // Kiểm tra RoleId và chuyển hướng đến Area tương ứng
             return RedirectToAreaBasedOnRoleId(user.RoleId.Value);
         }
@@ -183,12 +194,14 @@ namespace Bina.Controllers
                 case 3: // Manager
                     return RedirectToAction("Index", "Home", new { area = "Manager" });
                 default: // Students
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "ArticlesHome");
             }
         }
 
         //create forgot password 
 
+
+        // Logout
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
@@ -197,7 +210,7 @@ namespace Bina.Controllers
             HttpContext.Session.Clear();
             HttpContext.Session.Remove("Email");
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "Logins");
         }
     }
 }

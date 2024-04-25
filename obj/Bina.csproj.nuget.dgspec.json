@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Document\\1640 12\\Bina\\Bina.csproj": {}
+    "F:\\Greenwich IT\\TOPUP - 1640 - Enterprise Web Software Development\\Code\\Bina12-4\\Bina\\Bina.csproj": {}
   },
   "projects": {
-    "E:\\Document\\1640 12\\Bina\\Bina.csproj": {
+    "F:\\Greenwich IT\\TOPUP - 1640 - Enterprise Web Software Development\\Code\\Bina12-4\\Bina\\Bina.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Document\\1640 12\\Bina\\Bina.csproj",
+        "projectUniqueName": "F:\\Greenwich IT\\TOPUP - 1640 - Enterprise Web Software Development\\Code\\Bina12-4\\Bina\\Bina.csproj",
         "projectName": "Bina",
-        "projectPath": "E:\\Document\\1640 12\\Bina\\Bina.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "E:\\Document\\1640 12\\Bina\\obj\\",
+        "projectPath": "F:\\Greenwich IT\\TOPUP - 1640 - Enterprise Web Software Development\\Code\\Bina12-4\\Bina\\Bina.csproj",
+        "packagesPath": "C:\\Users\\s2vet\\.nuget\\packages\\",
+        "outputPath": "F:\\Greenwich IT\\TOPUP - 1640 - Enterprise Web Software Development\\Code\\Bina12-4\\Bina\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\s2vet\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -34,15 +39,32 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Azure.Identity": {
+              "target": "Package",
+              "version": "[1.11.0, )"
+            },
+            "DinkToPdf": {
+              "target": "Package",
+              "version": "[1.0.8, )"
+            },
             "FirebaseStorage.net": {
               "target": "Package",
               "version": "[1.0.3, )"
+            },
+            "MailKit": {
+              "target": "Package",
+              "version": "[4.5.0, )"
             },
             "Microsoft.AspNetCore.Authentication.Google": {
               "target": "Package",
@@ -54,7 +76,7 @@
             },
             "Microsoft.AspNetCore.Components.QuickGrid.EntityFrameworkAdapter": {
               "target": "Package",
-              "version": "[8.0.4, )"
+              "version": "[8.0.3, )"
             },
             "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
               "target": "Package",
@@ -66,21 +88,23 @@
             },
             "Microsoft.AspNetCore.Identity.UI": {
               "target": "Package",
-              "version": "[8.0.3, )"
+              "version": "[8.0.4, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[8.0.3, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
               "target": "Package",
-              "version": "[8.0.4, )"
+              "version": "[8.0.3, )"
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[8.0.2, )"
+            },
+            "MimeKit": {
+              "target": "Package",
+              "version": "[4.5.0, )"
             },
             "X.PagedList": {
               "target": "Package",
@@ -110,7 +134,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

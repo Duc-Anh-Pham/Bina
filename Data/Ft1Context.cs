@@ -161,11 +161,8 @@ public partial class Ft1Context : DbContext
 
             entity.HasOne(d => d.Article).WithMany(p => p.CommentFeedbacks)
                 .HasForeignKey(d => d.ArticleId)
-                .HasConstraintName("FK__CommentFe__Artic__59FA5E80");
 
             entity.HasOne(d => d.User).WithMany(p => p.CommentFeedbacks)
-                .HasForeignKey(d => d.UserId)
-                .HasConstraintName("FK__CommentFe__UserI__59063A47");
         });
 
         modelBuilder.Entity<Faculty>(entity =>

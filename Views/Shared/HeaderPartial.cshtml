@@ -1,13 +1,14 @@
 ﻿@{
-    var isAuthenticated = User.Identity.IsAuthenticated || (!string.IsNullOrEmpty(Context.Session.GetString("Email")) && Context.Session.GetInt32("RoleId") == 4);
+    var isAuthenticated = User.Identity.IsAuthenticated || (!string.IsNullOrEmpty(Context.Session.GetString("Email")) && (Context.Session.GetInt32("RoleId") == 4 || Context.Session.GetInt32("RoleId") == 5));
+    var isStudent = Context.Session.GetInt32("RoleId") == 4;
 }
-
 
 <div class="container-fluid">
     <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+        <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"
+           asp-area="" asp-controller="ArticlesHome" asp-action="Index">
             <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
-            <span class="fs-4">Article University</span>
+            <span class="fs-4">SC University Magazine</span>
         </a>
 
         <div class="col-md-3 mb-2 mb-md-0">
@@ -15,14 +16,6 @@
                 <svg class="bi" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
             </a>
         </div>
-
-        <ul class="nav nav-pills">
-            <li class="nav-item"><a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link active" aria-current="page">Home</a></li>
-            <li class="nav-item"><a href="#" class="nav-link">Features</a></li>
-            <li class="nav-item"><a href="#" class="nav-link">Pricing</a></li>
-            <li class="nav-item"><a href="#" class="nav-link">FAQs</a></li>
-            <li class="nav-item"><a href="#" class="nav-link">About</a></li>
-        </ul>
 
         @if (!isAuthenticated)
         {
@@ -47,7 +40,7 @@
                     <img src="~/img/user3.png" class="img-3x m-2 me-0 rounded-5" style="max-width: 40px;" alt="Bootstrap Gallery" />
                 </a>
                 <div class="dropdown-menu dropdown-menu dropdown-menu-sm shadow-sm gap-3" style="">
-                    <a class="dropdown-item d-flex align-items-center py-2" href="agent-profile.html">
+                    <a class="dropdown-item d-flex align-items-center py-2" asp-controller="Profile" asp-action="EditProfile" asp-route-id="@Context.Session.GetInt32("UserId")">
                         <i class="bi bi-person-vcard" style="margin-right: 10px"></i>User Profile
                     </a>
                     <a class="dropdown-item d-flex align-items-center py-2" href="account-settings.html">
@@ -65,37 +58,43 @@
 
 <nav class="navbar navbar-expand-md bg-info mb-4">
     <div class="container-fluid">
-        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" aria-current="page">Academic Portal</a>
+
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="true" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="navbar-collapse collapse show" id="navbarCollapse" style="">
-            <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="HomePageArticle" asp-action="index"><i class="fa-solid fa-list-check"></i> Article</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="ArticlesFaculty" asp-action="index"><i class="fa-solid fa-list-check"></i> Faculty</a>
-                 </li>
-                @if (isAuthenticated)
+
+            <ul class="navbar-nav mx-auto mb-2 mb-md-0">
+                <a class="navbar-brand" asp-area="" asp-controller="ArticlesHome" asp-action="Index" aria-current="page">
+                    <i class="fa-solid fa-house"></i> Academic Portal
+                </a>
+
+                @* <li class="nav-item">
+                    <a class="nav-link text-dark" class="nav-link" asp-area="" asp-controller="ArticlesHome" asp-action="Index">
+                        <i class="fa-solid fa-newspaper"></i> Article</a>
+                </li> *@
+
+                @if (isStudent)
                 {
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Articles" asp-action="index"><i class="fa-solid fa-list-check"></i>Article Management</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="ArticlesFaculty" asp-action="index">
+                            <i class="fa-solid fa-list-check"></i> Faculty</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Articles" asp-action="index">
+                            <i class="fa-solid fa-list-check"></i> Article Management</a>
                     </li>
                 }
-                <li class="nav-item">
+
+                @*<li class="nav-item">
                     <a class="nav-link" href="#"><i class="fa-regular fa-address-book"></i> Contact</a>
-                </li>
+                </li> *@
                 <li class="nav-item">
                     <a class="nav-link" asp-controller="HelpSupport" asp-action="Index">
-                        <i class="bi bi-people-fill" style="margin-right: 10px"></i>Help And Support
+                        <i class="fa-solid fa-circle-info"></i> Help And Support
                     </a>
                 </li>
             </ul>
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
         </div>
     </div>
 </nav>

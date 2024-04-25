@@ -105,9 +105,12 @@ namespace Bina.Controllers
         // GET: Articles/Create
         public IActionResult Create()
         {
+             
+            // Get UserId from session
             int? userId = HttpContext.Session.GetInt32("UserId");
             if (userId == null)
             {
+                // If UserId is not found, possibly user is not logged in
                 return RedirectToAction("Login", "Logins");
             }
 
@@ -117,7 +120,19 @@ namespace Bina.Controllers
 
             if (user == null || user.FacultyId == null)
             {
-                return RedirectToAction("Login", "Logins");
+               
+                // If user or user's faculty is not found
+                return RedirectToAction("ErrorPage", new { message = "Your faculty information is missing." });
+            }
+
+            // Get the current deadline for the user's faculty
+            var currentDeadline = _context.ArticlesDeadlines
+                .FirstOrDefault(ad => ad.FacultyId == user.FacultyId && ad.DueDate >= DateTime.Now);
+
+            if (currentDeadline == null)
+            {
+                // If current date is past the DueDate or there's no active deadline
+                return RedirectToAction("ErrorPage", new { message = "Currently, this Department has closed the Article Submission function. Please contact the Coordinator if you need further assistance" });
             }
 
             var deadlines = _context.ArticlesDeadlines
@@ -129,11 +144,25 @@ namespace Bina.Controllers
           .Where(f => f.FacultyId == user.FacultyId)
           .ToList();
 
-            var deadlineTermsSelectList = deadlines.Select(ad => new SelectListItem
+            // Get the current deadlines for the user's faculty that are still valid
+            var validDeadlines = _context.ArticlesDeadlines
+                .Where(ad => ad.FacultyId == user.FacultyId && ad.DueDate >= DateTime.Now)
+                .OrderBy(ad => ad.DueDate)
+                .ToList();
+
+            if (!validDeadlines.Any())
+            {
+                // If there are no valid deadlines
+                return RedirectToAction("ErrorPage", new { message = "Hiện tại Khoa này đã đóng chức năng Nộp bài Article, vui lòng liên hệ Coordinator nếu cần hỗ trợ thêm" });
+            }
+
+            // Create a SelectList for the current valid deadlines
+            var deadlineTermsSelectList = validDeadlines.Select(ad => new SelectListItem
             {
                 Value = ad.ArticlesDeadlineId.ToString(),
-                Text = $"{ad.TermTitle} - từ {ad.StartDue?.ToString("dd/MM/yyyy")} đến {ad.DueDate?.ToString("dd/MM/yyyy")}"
+                Text = $"{ad.TermTitle} - From {ad.StartDue?.ToString("dd/MM/yyyy")} => To {ad.DueDate?.ToString("HH:mm MMMM dd, yyyy")}"
             }).ToList();
+
 
             ViewData["ArticleStatusId"] = new SelectList(_context.ArticleStatuses, "ArticleStatusId", "ArticleStatusId");
             ViewData["ArticlesDeadlineId"] = new SelectList(deadlines, "ArticlesDeadlineId", "TermTitle");
@@ -145,10 +174,12 @@ namespace Bina.Controllers
             {
                 UserId = userId,
                 ArticleStatusId = 3,
-                FacultyId = user.FacultyId
+                FacultyId = user.FacultyId, // Đặt khoa mặc định cho bài viết dựa trên khoa của người dùng
+                ArticlesDeadlineId = validDeadlines.First().ArticlesDeadlineId
             };
 
-            article.ArticlesDeadlineId = deadlines.FirstOrDefault()?.ArticlesDeadlineId;
+            // Lấy deadline đầu tiên phù hợp hoặc null nếu không có
+            /* article.ArticlesDeadlineId = deadlines.FirstOrDefault()?.ArticlesDeadlineId;*/
 
 
             return View(article);
@@ -283,6 +314,13 @@ namespace Bina.Controllers
         private bool ArticleExists(int id)
         {
             return _context.Articles.Any(e => e.ArticleId == id);
+        }
+
+        // Custom error page action
+        public IActionResult ErrorPage(string message)
+        {
+            ViewData["ErrorMessage"] = message;
+            return View();
         }
     }
 }

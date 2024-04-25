@@ -15,10 +15,9 @@
 	<div class="alert-login d-flex justify-content-center">
 		<span class="alert-message"><strong>Account</strong> @TempData["ErrorMessage"]</span>
 	</div>
-
-	<!-- Thêm meta refresh để tự động làm mất thông báo sau 1 giây -->
 	<meta http-equiv="refresh" content="1">
 }
+
 
 <!doctype html>
 <html lang="en">
@@ -51,18 +50,13 @@
 						@using (Html.BeginForm("Login", "Logins", FormMethod.Post))
 						{
 							<div class="form-group">
-								@* <input type="text" class="form-control" placeholder="Email" required> *@
-
-								@Html.TextBoxFor(us => us.Email, new { @class = "form-control", autofocus = "autofocus", placeholder = "Email@gmail.com", required = "required" })
+								@Html.TextBoxFor(us => us.Email, new { @class = "form-control", autofocus = "autofocus", placeholder = "Email@gmail.com", required = "required"})
 							</div>
 
 							<div class="form-group">
-								@* <input id="password-field" type="password" class="form-control" placeholder="password" required> *@
-								@Html.PasswordFor(us => us.Password, new { @class = "form-control", type = "password", required = "required", placeholder = "Password", id = "password-field" /* , pattern = "(?=.* [a - z])(?=.* [A - Z])(?=.*\\d)(?=.* [@$! % *? &])[A - Za - z\\d@$! % *? &]{ 8}", title = "Password must contain at least 8 characters, including uppercase, lowercase, numbers, and special characters."*/ })
-								@* Show Password *@
+								@Html.PasswordFor(us => us.Password, new { @class = "form-control", type = "password", required = "required", placeholder = "Password", id = "password-field", pattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&#])[A-Za-z\\d@$!%*?&#]{6,}$", title = "Password must contain at least 6 characters, including uppercase, lowercase, numbers, and special characters." })
 								<span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
 							</div>
-
 
 							<div class="form-group text-center">
 								@* <button type="submit" class="form-control btn btn-primary submit px-3">Sign In</button> *@
@@ -76,8 +70,10 @@
 										<span class="checkmark"></span>
 									</label>
 								</div>
+
+								@* Forgot Password Function ??? *@
 								<div class="w-50 text-md-right">
-									<a href="#" style="color: #fff">Forgot Password</a>
+									<a asp-controller="Forgot" asp-action="ForgotPassword" style="color: #fff">Forgot Password</a>
 								</div>
 							</div>
 						}

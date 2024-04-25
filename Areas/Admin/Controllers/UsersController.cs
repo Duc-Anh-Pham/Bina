@@ -4,6 +4,8 @@ using Bina.Models.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
+using System.Net.Mail;
 
 namespace Bina.Areas.Admin.Controllers
 {
@@ -21,20 +23,50 @@ namespace Bina.Areas.Admin.Controllers
 
         // GET: Users/Index/Search
         [HttpGet]
-        public async Task<IActionResult> Index(string searchTerm)
+        public async Task<IActionResult> Index(string searchTerm, string sortBy, string sortDirection, int? pageSize = 5, int? pageNumber = 1)
         {
+            int defaultPageSize = pageSize ?? 5;
+            int currentPageNumber = pageNumber ?? 1;
+
             IQueryable<User> Ft1Context = _context.Users
                 .Include(u => u.Faculty)
                 .Include(u => u.Role)
                 .Include(u => u.Terms);
 
+            //Function Search
             if (!string.IsNullOrWhiteSpace(searchTerm))
             {
                 Ft1Context = Ft1Context.Where(u => u.UserName.Contains(searchTerm) || u.Email.Contains(searchTerm));
             }
 
+            // Function Sort alphabetically
+            if (!string.IsNullOrWhiteSpace(sortBy))
+            {
+                var isDesc = string.Equals(sortDirection, "Desc", StringComparison.OrdinalIgnoreCase);
+
+                if (string.Equals(sortBy, "UserName", StringComparison.OrdinalIgnoreCase))
+                {
+                    Ft1Context = isDesc ? Ft1Context.OrderByDescending(u => u.UserName) : Ft1Context.OrderBy(u => u.UserName);
+                }
+            }
+
+            // Function Pagination
+            int totalRecords = await Ft1Context.CountAsync();
+            int totalPages = (int)Math.Ceiling((double)totalRecords / defaultPageSize);
+
+            // Lấy danh sách users cho trang hiện tại
+            var users = await Ft1Context
+                .Skip((currentPageNumber - 1) * defaultPageSize)
+                .Take(defaultPageSize)
+                .ToListAsync();
+
+            ViewBag.TotalPages = totalPages;
+            ViewBag.CurrentPage = currentPageNumber;
+            ViewBag.PageSize = defaultPageSize;
+
             ViewBag.SuccessMessage = TempData["SuccessMessage"];
-            return View(await Ft1Context.ToListAsync());
+            return View(users);
+            //return View(await Ft1Context.ToListAsync());
         }
 
         // GET: Users/Details/5
@@ -112,22 +144,96 @@ namespace Bina.Areas.Admin.Controllers
                 //{
                 //    user.Terms = new TermsAndCondition { TermsText = ViewBag.TermsText };
                 //}
+		private string GenerateRandomPassword(int length = 8)
+		{
+			const string uppercaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+			const string lowercaseChars = "abcdefghijklmnopqrstuvwxyz";
+			const string numericChars = "0123456789";
+			const string specialChars = "@$!%*?&#";
 
-                _context.Users.Add(user);
-                await _context.SaveChangesAsync();
-                TempData["SuccessMessage"] = "Đã thêm người dùng thành công!"; // Add this line
-                return RedirectToAction(nameof(Index));
-            }
+			char[] password = new char[length];
+			Random random = new Random();
 
-            ViewData["FacultyId"] = new SelectList(_context.Faculties, "FacultyId", "FacultyId", user.FacultyId);
-            ViewData["RoleName"] = new SelectList(_context.Roles, "RoleId", "RoleName", user.RoleId);
-            ViewData["TermsText"] = new SelectList(_context.TermsAndConditions, "TermsId", "TermsText", user.TermsId);
+			// Make sure there is at least one uppercase character
+			password[random.Next(length)] = uppercaseChars[random.Next(uppercaseChars.Length)];
 
-            return View(user);
-        }
+			// Make sure there is at least one lowercase character
+			password[random.Next(length)] = lowercaseChars[random.Next(lowercaseChars.Length)];
 
-        // GET: Users/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+			// Make sure there is at least one number
+			password[random.Next(length)] = numericChars[random.Next(numericChars.Length)];
+
+			// Make sure there is at least one special character
+			password[random.Next(length)] = specialChars[random.Next(specialChars.Length)];
+
+			// Fill in the remaining characters randomly
+			for (int i = 0; i < length; i++)
+			{
+				if (password[i] == '\0')
+				{
+					string validChars = uppercaseChars + lowercaseChars + numericChars + specialChars;
+					password[i] = validChars[random.Next(validChars.Length)];
+				}
+			}
+
+			return new string(password);
+		}
+
+		// POST: Users/Create
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public async Task<IActionResult> Create([Bind("UserId,UserName,FirstName,LastName,PhoneNumber,DoB,DateCreated,Gender,Email,Password,RoleId,FacultyId,Terms.TermsText")] User user)
+		{
+			if (ModelState.IsValid)
+			{
+				// Check that User Name is not left empty
+				if (string.IsNullOrWhiteSpace(user.UserName))
+				{
+					ModelState.AddModelError("", "User Name cannot be empty!");
+					ViewData["FacultyId"] = new SelectList(_context.Faculties, "FacultyId", "FacultyId", user.FacultyId);
+					ViewData["RoleName"] = new SelectList(_context.Roles, "RoleId", "RoleName", user.RoleId);
+					return View(user);
+				}
+
+				// Kiểm tra email đã tồn tại hay chưa
+				var existingUser = await _context.Users.FirstOrDefaultAsync(u => u.Email == user.Email || u.UserName == user.UserName);
+				if (existingUser != null)
+				{
+					// Thông báo email hoặc UserName đã tồn tại
+					string errorMessage = existingUser.Email == user.Email ? "Email already exists in the system. Please enter another email." : "User Name already exists in the system. Please enter another User Name.";
+					ModelState.AddModelError(existingUser.Email == user.Email ? "Email" : "UserName", errorMessage);
+					ViewData["FacultyId"] = new SelectList(_context.Faculties, "FacultyId", "FacultyId", user.FacultyId);
+					ViewData["RoleName"] = new SelectList(_context.Roles, "RoleId", "RoleName", user.RoleId);
+					return View(user);
+				}
+
+				// Tạo mật khẩu ngẫu nhiên
+				user.Password = GenerateRandomPassword();
+
+				// Gán giá trị RoleId từ form vào đối tượng user
+				user.RoleId = int.Parse(Request.Form["Role"]);
+
+				_context.Users.Add(user);
+				await _context.SaveChangesAsync();
+
+				// Tạo đường dẫn xác nhận email và thay đổi mật khẩu
+				var confirmationToken = GenerateConfirmationToken(user);
+
+				// Gửi email xác nhận đến người dùng
+				SendConfirmationEmail(user.Email, confirmationToken, user.Password);
+
+				TempData["SuccessMessage"] = "Please confirm your email to activate your account.";
+				return RedirectToAction(nameof(Index));
+			}
+
+			ViewData["FacultyId"] = new SelectList(_context.Faculties, "FacultyId", "FacultyId", user.FacultyId);
+			ViewData["RoleName"] = new SelectList(_context.Roles, "RoleId", "RoleName", user.RoleId);
+			ViewData["TermsText"] = new SelectList(_context.TermsAndConditions, "TermsId", "TermsText", user.TermsId);
+			return View(user);
+		}
+
+		// GET: Users/Profile/5
+		public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Users == null)
             {
@@ -187,6 +293,7 @@ namespace Bina.Areas.Admin.Controllers
 
                     userToUpdate.TermsId = null;
 
+                    // Cập nhật các trường dữ liệu
                     userToUpdate.UserName = user.UserName;
                     userToUpdate.FirstName = user.FirstName;
                     userToUpdate.LastName = user.LastName;
@@ -307,6 +414,213 @@ namespace Bina.Areas.Admin.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        // GET: Users/Profile/5
+        [Authentication]
+        public async Task<IActionResult> Profile(int? id)
+        {
+            int userId = HttpContext.Session.GetInt32("UserId").Value;
+
+            if (id == null || _context.Users == null)
+            {
+                return NotFound();
+            }
+
+            // Kiểm tra xem id có khớp với userId của người dùng đăng nhập hay không
+            if (id != userId)
+            {
+                TempData["ErrorMessage"] = "You are not authorized to access this page.";
+                return RedirectToAction("Profile", new { id = userId });
+            }
+
+            var user = _context.Users.Find(id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            ViewData["FacultyId"] = new SelectList(_context.Faculties, "FacultyId", "FacultyId", user.FacultyId);
+            ViewData["RoleName"] = new SelectList(_context.Roles, "RoleId", "RoleName", user.RoleId);
+
+            return View(user);
+        }
+
+        // POST: Users/Profile/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Profile(int id, [Bind("UserId,FirstName,LastName,PhoneNumber,DoB,Gender,Password")] User user)
+        {
+            int userId = HttpContext.Session.GetInt32("UserId").Value;
+            if (id != user.UserId)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var userToUpdate = await _context.Users.FindAsync(id);
+
+                    if (userToUpdate == null)
+                    {
+                        return NotFound();
+                    }
+
+                    userToUpdate.FirstName = user.FirstName;
+                    userToUpdate.LastName = user.LastName;
+                    userToUpdate.PhoneNumber = user.PhoneNumber;
+                    userToUpdate.DoB = user.DoB;
+                    userToUpdate.Gender = user.Gender;
+                    userToUpdate.Password = user.Password;
+
+                    _context.Users.Update(userToUpdate);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!UserExists(user.UserId))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+
+                return RedirectToAction(nameof(Index));
+            }
+
+            ViewData["FacultyId"] = new SelectList(_context.Faculties, "FacultyId", "FacultyId", user.FacultyId);
+            ViewData["RoleId"] = new SelectList(_context.Roles, "RoleId", "RoleName", user.RoleId);
+            return View(user);
+        }
+
+        // GET: Users/ChangePassword/5
+        [HttpGet]
+        public async Task<IActionResult> ChangePassword(int? id)
+        {
+            int userId = HttpContext.Session.GetInt32("UserId").Value;
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            // Kiểm tra xem id có khớp với userId của người dùng đăng nhập hay không
+            if (id != userId)
+            {
+                TempData["ErrorMessage"] = "You are not authorized to access this page.";
+                return RedirectToAction("ChangePassword", new { id = userId });
+            }
+
+            var user = await _context.Users.FindAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return View(user);
+        }
+
+        // POST: Users/ChangePassword/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ChangePassword(int id, [Bind("UserId,OldPassword,NewPassword,ConfirmPassword")] User user)
+        {
+            if (id != user.UserId)
+            {
+                return NotFound();
+            }
+
+            // Kiểm tra mật khẩu cũ có đúng không
+            var existingUser = await _context.Users.FindAsync(id);
+            if (existingUser.Password != user.OldPassword)
+            {
+                ModelState.AddModelError("OldPassword", "The old password is incorrect.");
+                return View(user);
+            }
+
+            // Kiểm tra mật khẩu mới và xác nhận mật khẩu mới có khớp không
+            if (user.NewPassword != user.ConfirmPassword)
+            {
+                ModelState.AddModelError("ConfirmPassword", "New password and confirm new password do not match.");
+                return View(user);
+            }
+
+            // Cập nhật mật khẩu mới cho người dùng
+            existingUser.Password = user.NewPassword;
+            _context.Users.Update(existingUser);
+            await _context.SaveChangesAsync();
+
+            //// Kích hoạt tài khoản sau khi đổi mật khẩu thành công
+            //existingUser.Status = 1;
+            //_context.Users.Update(existingUser);
+            //await _context.SaveChangesAsync();
+
+            TempData["SuccessMessage"] = "Password changed successfully.";
+            return RedirectToAction(nameof(Index));
+        }
+
+
+        private string GenerateConfirmationToken(User user)
+        {
+            // Tạo một GUID duy nhất làm token xác nhận
+            var token = Guid.NewGuid().ToString();
+
+            // Tạo đường dẫn xác nhận email
+            var confirmationLink = $"https://localhost:7234/";
+
+            return confirmationLink;
+        }
+
+        private void SendConfirmationEmail(string email, string confirmationLink, string password)
+        {
+            string subject = "Your account information";
+            string body = $"Please click on the link to access the website: {confirmationLink}\n\nYour email: {email}\n\nYour password: {password}";
+
+            // Google SMTP information
+            string smtpServer = "smtp.gmail.com";
+            int smtpPort = 587;
+            string smtpUsername = "ducanh04022003@gmail.com";
+            string smtpPassword = "gpdhevvjsbkgfivz";
+
+            using (var client = new SmtpClient(smtpServer, smtpPort))
+            {
+                client.Credentials = new NetworkCredential(smtpUsername, smtpPassword);
+                client.EnableSsl = true;
+
+                var message = new MailMessage();
+                message.From = new MailAddress(smtpUsername);
+                message.To.Add(new MailAddress(email));
+                message.Subject = subject;
+                message.Body = body;
+
+                client.Send(message);
+            }
+        }
+
+        // GET: Users/ConfirmEmail
+        public async Task<IActionResult> ConfirmEmail(int userId, string token, bool changePassword)
+        {
+            var user = await _context.Users.FindAsync(userId);
+            if (user == null)
+            {
+                // Xử lý trường hợp không tìm thấy user
+                return NotFound();
+            }
+
+            //// Kích hoạt tài khoản user
+            //user.Status = 1;
+            //_context.Users.Update(user);
+            //await _context.SaveChangesAsync();
+
+            TempData["SuccessMessage"] = "Your account has been activated successfully.";
+            return RedirectToAction(nameof(Index));
+        }
+
 
         private bool UserExists(int id)
         {

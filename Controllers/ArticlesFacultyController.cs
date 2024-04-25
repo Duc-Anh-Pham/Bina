@@ -18,9 +18,10 @@ namespace Bina.Controllers
         // GET: ArticlesFaculty
         public async Task<IActionResult> Index(int page = 1)
         {
-            var facultyId = HttpContext.Session.GetString("FacultyId");
-            if (string.IsNullOrEmpty(facultyId))
+            int? userId = HttpContext.Session.GetInt32("UserId");
+            if (userId == null)
             {
+                // Xử lý trường hợp không tìm thấy UserId, có thể là chưa đăng nhập
                 return RedirectToAction("Login", "Logins");
             }
             //ViewBag.FacultyId = facultyId;
