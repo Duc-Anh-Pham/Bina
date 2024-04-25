@@ -24,6 +24,8 @@ public partial class Ft1Context : DbContext
 
     public virtual DbSet<ArticlesDeadline> ArticlesDeadlines { get; set; }
 
+    public virtual DbSet<CommentFeedback> CommentFeedbacks { get; set; }
+
     public virtual DbSet<Faculty> Faculties { get; set; }
 
     public virtual DbSet<HelpAndSupport> HelpAndSupports { get; set; }
@@ -42,7 +44,7 @@ public partial class Ft1Context : DbContext
     {
         modelBuilder.Entity<Article>(entity =>
         {
-            entity.HasKey(e => e.ArticleId).HasName("PK__Articles__9C6270C8F3EE6535");
+            entity.HasKey(e => e.ArticleId).HasName("PK__Articles__9C6270C8CCA51955");
 
             entity.Property(e => e.ArticleId).HasColumnName("ArticleID");
             entity.Property(e => e.ArticleName)
@@ -85,27 +87,28 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<ArticleComment>(entity =>
         {
-            entity.HasKey(e => e.CommentId).HasName("PK__ArticleC__C3B4DFAA758AC175");
+            entity.HasKey(e => e.CommentId).HasName("PK__ArticleC__C3B4DFAA4EC416F0");
 
             entity.Property(e => e.CommentId)
-                .ValueGeneratedNever()
+                .HasDefaultValueSql("(newsequentialid())")
                 .HasColumnName("CommentID");
             entity.Property(e => e.ArticleId).HasColumnName("ArticleID");
+            entity.Property(e => e.CommentDay).HasColumnType("datetime");
             entity.Property(e => e.CommentText).HasMaxLength(500);
             entity.Property(e => e.UserId).HasColumnName("UserID");
 
             entity.HasOne(d => d.Article).WithMany(p => p.ArticleComments)
                 .HasForeignKey(d => d.ArticleId)
-                .HasConstraintName("FK__ArticleCo__Artic__5441852A");
+                .HasConstraintName("FK__ArticleCo__Artic__5535A963");
 
             entity.HasOne(d => d.User).WithMany(p => p.ArticleComments)
                 .HasForeignKey(d => d.UserId)
-                .HasConstraintName("FK__ArticleCo__UserI__534D60F1");
+                .HasConstraintName("FK__ArticleCo__UserI__5441852A");
         });
 
         modelBuilder.Entity<ArticleStatus>(entity =>
         {
-            entity.HasKey(e => e.ArticleStatusId).HasName("PK__ArticleS__3F0E2D6BCB8957FA");
+            entity.HasKey(e => e.ArticleStatusId).HasName("PK__ArticleS__3F0E2D6B50D86C1C");
 
             entity.ToTable("ArticleStatus");
 
@@ -117,7 +120,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<ArticlesDeadline>(entity =>
         {
-            entity.HasKey(e => e.ArticlesDeadlineId).HasName("PK__Articles__253F2FDC730F24D8");
+            entity.HasKey(e => e.ArticlesDeadlineId).HasName("PK__Articles__253F2FDC68C2A67A");
 
             entity.ToTable("ArticlesDeadline");
 
@@ -142,9 +145,32 @@ public partial class Ft1Context : DbContext
                 .HasConstraintName("FK__ArticlesD__UserI__47DBAE45");
         });
 
+        modelBuilder.Entity<CommentFeedback>(entity =>
+        {
+            entity.HasKey(e => e.CommentFeedbackId).HasName("PK__CommentF__9454C0BA0003DA36");
+
+            entity.ToTable("CommentFeedback");
+
+            entity.Property(e => e.CommentFeedbackId)
+                .HasDefaultValueSql("(newsequentialid())")
+                .HasColumnName("CommentFeedbackID");
+            entity.Property(e => e.ArticleId).HasColumnName("ArticleID");
+            entity.Property(e => e.CommentDay).HasColumnType("datetime");
+            entity.Property(e => e.ContentFeedback).HasMaxLength(1000);
+            entity.Property(e => e.UserId).HasColumnName("UserID");
+
+            entity.HasOne(d => d.Article).WithMany(p => p.CommentFeedbacks)
+                .HasForeignKey(d => d.ArticleId)
+                .HasConstraintName("FK__CommentFe__Artic__59FA5E80");
+
+            entity.HasOne(d => d.User).WithMany(p => p.CommentFeedbacks)
+                .HasForeignKey(d => d.UserId)
+                .HasConstraintName("FK__CommentFe__UserI__59063A47");
+        });
+
         modelBuilder.Entity<Faculty>(entity =>
         {
-            entity.HasKey(e => e.FacultyId).HasName("PK__Faculty__306F636E589F21FD");
+            entity.HasKey(e => e.FacultyId).HasName("PK__Faculty__306F636E8DD454CD");
 
             entity.ToTable("Faculty");
 
@@ -158,7 +184,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<HelpAndSupport>(entity =>
         {
-            entity.HasKey(e => e.HelpSupportId).HasName("PK__HelpAndS__65D53B0FE975AF64");
+            entity.HasKey(e => e.HelpSupportId).HasName("PK__HelpAndS__65D53B0F0E8D7780");
 
             entity.ToTable("HelpAndSupport");
 
@@ -173,7 +199,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<Role>(entity =>
         {
-            entity.HasKey(e => e.RoleId).HasName("PK__Role__8AFACE3A806D2ADD");
+            entity.HasKey(e => e.RoleId).HasName("PK__Role__8AFACE3A4C77BB3C");
 
             entity.ToTable("Role");
 
@@ -185,7 +211,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<TermsAndCondition>(entity =>
         {
-            entity.HasKey(e => e.TermsId).HasName("PK__TermsAnd__C05EBE00FB169D1B");
+            entity.HasKey(e => e.TermsId).HasName("PK__TermsAnd__C05EBE006FF47E0D");
 
             entity.Property(e => e.TermsId)
                 .ValueGeneratedNever()
@@ -195,11 +221,12 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.UserId).HasName("PK__User__1788CCAC57EE4492");
+            entity.HasKey(e => e.UserId).HasName("PK__User__1788CCAC96639A61");
 
             entity.ToTable("User");
 
             entity.Property(e => e.UserId).HasColumnName("UserID");
+            entity.Property(e => e.AvatarPath).HasMaxLength(255);
             entity.Property(e => e.DateCreated)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
@@ -211,6 +238,9 @@ public partial class Ft1Context : DbContext
             entity.Property(e => e.Gender).HasMaxLength(10);
             entity.Property(e => e.LastName).HasMaxLength(100);
             entity.Property(e => e.Password).HasMaxLength(100);
+            entity.Property(e => e.PhoneNumber)
+                .HasMaxLength(10)
+                .IsUnicode(false);
             entity.Property(e => e.RoleId).HasColumnName("RoleID");
             entity.Property(e => e.Status).HasDefaultValue((byte)1);
             entity.Property(e => e.TermsId).HasColumnName("TermsID");

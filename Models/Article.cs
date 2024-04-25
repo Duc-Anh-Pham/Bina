@@ -21,6 +21,8 @@ public partial class Article
 
     public DateTime? DateCreate { get; set; }
 
+    public bool? GuestAllow { get; set; }
+
     public int? ArticleStatusId { get; set; }
 
     public Guid? ArticlesDeadlineId { get; set; }
@@ -32,6 +34,8 @@ public partial class Article
     public virtual ArticleStatus? ArticleStatus { get; set; }
 
     public virtual ArticlesDeadline? ArticlesDeadline { get; set; }
+
+    public virtual ICollection<CommentFeedback> CommentFeedbacks { get; set; } = new List<CommentFeedback>();
 
     public virtual Faculty? Faculty { get; set; }
 

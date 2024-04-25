@@ -41,7 +41,30 @@
                     </strong>
                 </li>
             </ul>
+            <!-- Feedback -->
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h5>  Feedback</h5>
+                    <div class="card-body">
+                        @foreach (var comment in Model.CommentFeedbacks)
+                        {
+                            <div class="mb-3">
+                                <strong>@comment.User.FullName:</strong> @comment.ContentFeedback
+                                <br />
+                                <small class="text-muted">@comment.CommentDay?.ToString("g", System.Globalization.CultureInfo.CreateSpecificCulture("vi-VN"))</small>
+                            </div>
+                        }
+                    </div>
+                </div>
 
+                <div class="card-body">
+                    <form asp-controller="Articles" asp-action="AddFeedback" method="post">
+                        <input type="hidden" name="articleId" value="@Model.ArticleId" />
+                        <textarea class="form-control" name="feedbackText" rows="3" required></textarea>
+                        <button type="submit" class="btn btn-primary">Submit Feedback</button>
+                    </form>
+                </div>
+            </div>
             <div class="card p-2">
                 <ul class="list-group mb-3">
                      <li class="list-group-item d-flex justify-content-between lh-sm">

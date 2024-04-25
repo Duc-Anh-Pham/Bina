@@ -28,7 +28,7 @@ namespace Bina.Areas.Admin.Controllers
                 query = query.Where(ad => ad.FacultyId == facultyId);
             }
 
-            int pageSize = 4;
+            int pageSize = 7;
             int totalEntries = await query.CountAsync();
             List<ArticlesDeadline> deadlines = await query
                 .OrderBy(ad => ad.StartDue)
@@ -83,12 +83,10 @@ namespace Bina.Areas.Admin.Controllers
                 }
             }
 
-            // Truyền lại các giá trị đã nhập vào view
             ViewData["startDue"] = deadline.StartDue;
             ViewData["dueDate"] = deadline.DueDate;
             ViewData["academicYear"] = deadline.AcademicYear;
 
-            // Lấy danh sách faculty từ database và truyền vào view
             ViewBag.FacultyId = new SelectList(await _context.Faculties.ToListAsync(), "FacultyId", "FacultyId", deadline.FacultyId);
 
             return View(deadline);
@@ -189,14 +187,12 @@ namespace Bina.Areas.Admin.Controllers
 
             try
             {
-                // Xóa tất cả các bài báo có liên kết với deadline trước
                 foreach (var article in deadline.Articles)
                 {
                     article.ArticlesDeadlineId = null;
                     _context.Articles.Update(article);
                 }
 
-                // Tiến hành xóa deadline
                 _context.ArticlesDeadlines.Remove(deadline);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

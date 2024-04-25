@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Bina.Models.Article>
+﻿@model Tuple<IEnumerable<Bina.Models.Article>, Bina.Models.Pager>
 @{
     ViewData["Title"] = "Index";
     // Define a helper function to cut the string
@@ -7,9 +7,9 @@
 }
 
 <div class="container my-5">
-    <h1 class="text-center mb-4">Welcome to: @ViewBag.FacultyId Faculty Page</h1>
+    <h1 class="text-center mb-4">Welcome to: @ViewBag.FacultyName Page</h1>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-        @foreach (var item in Model)
+        @foreach (var item in Model.Item1)
         {
             <div class="col">
                 <div class="card shadow-sm">
@@ -48,6 +48,36 @@
             </div>
         }
     </div>
+</div>
+<div class="d-flex justify-content-center">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            @if (Model.Item2.CurrentPage != 1)
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-controller="ArticlesFaculty" asp-action="Index" asp-route-page="1" tabindex="-1" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">First</span>
+                    </a>
+                </li>
+            }
+            @for (var i = Model.Item2.StartPage; i <= Model.Item2.EndPage; i++)
+            {
+                <li class="page-item @(i == Model.Item2.CurrentPage ? "active" : "")">
+                    <a class="page-link" asp-controller="ArticlesFaculty" asp-action="Index" asp-route-page="@i">@i</a>
+                </li>
+            }
+            @if (Model.Item2.CurrentPage != Model.Item2.TotalPages)
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-controller="ArticlesFaculty" asp-action="Index" asp-route-page="@Model.Item2.TotalPages" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Last</span>
+                    </a>
+                </li>
+            }
+        </ul>
+    </nav>
 </div>
 
 @section Scripts {
