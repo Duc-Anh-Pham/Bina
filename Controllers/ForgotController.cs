@@ -98,8 +98,8 @@ namespace Bina.Controllers
             // Google SMTP information
             string smtpServer = "smtp.gmail.com";
             int smtpPort = 587;
-            string smtpUsername = "ducanh04022003@gmail.com";
-            string smtpPassword = "gpdhevvjsbkgfivz"; 
+            string smtpUsername = "ducanh040202003@gmail.com";
+            string smtpPassword = "qeqglgodldcvooki"; 
 
             using (var client = new SmtpClient(smtpServer, smtpPort))
             {

@@ -36,7 +36,16 @@
                             {
                                 <span class="d-none d-md-block">Hello, @User.Identity.Name</span>
                             }
-                            <img src="~/img/user3.png" class="img-3x m-2 me-0 rounded-5" alt="Bootstrap Gallery" />
+
+                            @if (!string.IsNullOrEmpty(Context.Session.GetString("AvatarPath")))
+                            {
+                                <img src="@Context.Session.GetString("AvatarPath")" class="img-3x m-2 me-0 rounded-5" alt="User Avatar" />
+                            }
+                            else if (!User.Identity.IsAuthenticated)
+                            {
+                                <img src="default-avatar.jpg" class="img-3x m-2 me-0 rounded-5" alt="Default Avatar" />
+                            }
+
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-sm shadow-sm gap-3" style="">

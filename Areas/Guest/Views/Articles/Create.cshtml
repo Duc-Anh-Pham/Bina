@@ -1,0 +1,66 @@
+﻿@* Articles/create.cshtml *@
+
+@model Bina.Models.Article
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create" method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group">
+                    <label asp-for="ArticleName" class="control-label">Article name:</label>
+                    <input asp-for="ArticleName" class="form-control" />
+                    <span asp-validation-for="ArticleName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Content" class="control-label">Description:</label>
+                    <input asp-for="Content" class="form-control" />
+                    <span asp-validation-for="Content" class="text-danger"></span>
+                </div>
+
+                <!-- Thêm các input hidden cho UserId và ArticleStatusId -->
+                <input asp-for="UserId" type="hidden" />
+                <input asp-for="ArticleStatusId" type="hidden" />
+                <input asp-for="FacultyId" type="hidden" />
+                <input asp-for="ArticlesDeadlineId" type="hidden" />
+
+
+                <div class="form-group">
+                    <label asp-for="ImagePath" class="control-label">Select Image:</label>
+                    <input type="file" name="ImageFile" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="DocumentPath" class="control-label">Select Document:</label>
+                    <input type="file" name="DocumentFile" class="form-control" />
+                </div>
+
+                @* <div class="form-group">
+                <label asp-for="ArticlesDeadlineId" class="control-label">Term Title:</label>
+                <select asp-for="ArticlesDeadlineId" class="form-control" asp-items="ViewBag.ArticlesDeadlineId"></select>
+                </div> *@
+
+                <div class="form-group">
+                    <label asp-for="ArticlesDeadlineId" class="control-label">Deadline Term:</label>
+                    <select asp-for="ArticlesDeadlineId" class="form-control" asp-items="@ViewData["DeadlineTerms"] as IEnumerable<SelectListItem>" disabled></select>
+                    <span asp-validation-for="ArticlesDeadlineId" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="FacultyId" class="control-label">Faculty:</label>
+                    <select asp-for="FacultyId" class="form-control" asp-items="ViewBag.FacultyId" disabled></select>
+                </div>
+
+                <br />
+
+                <div class="form-group">
+                    <input type="submit" value="Submit" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+

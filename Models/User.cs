@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Bina.Models;
 
@@ -13,7 +14,7 @@ public partial class User
 
     public string? LastName { get; set; }
 
-    public int? PhoneNumber { get; set; }
+    public string? PhoneNumber { get; set; }
 
     public DateOnly? DoB { get; set; }
 
@@ -21,9 +22,12 @@ public partial class User
 
     public string? Gender { get; set; }
 
+    [EmailAddress]
     public string? Email { get; set; }
 
     public string? Password { get; set; }
+
+    public string? AvatarPath { get; set; }
 
     public int? RoleId { get; set; }
 
@@ -38,6 +42,8 @@ public partial class User
     public virtual ICollection<Article> Articles { get; set; } = new List<Article>();
 
     public virtual ICollection<ArticlesDeadline> ArticlesDeadlines { get; set; } = new List<ArticlesDeadline>();
+
+    public virtual ICollection<CommentFeedback> CommentFeedbacks { get; set; } = new List<CommentFeedback>();
 
     public virtual Faculty? Faculty { get; set; }
 
@@ -57,8 +63,7 @@ public partial class User
     {
         get
         {
-            return FirstName + " " + LastName;
+            return LastName + " " + FirstName;
         }
     }
-
 }
