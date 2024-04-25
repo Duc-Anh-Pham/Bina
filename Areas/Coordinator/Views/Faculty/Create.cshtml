@@ -1,0 +1,50 @@
+﻿@model Bina.Models.ViewModels
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Faculty</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="FacultyId" class="control-label">Faculty ID</label>
+                <input asp-for="FacultyId" class="form-control" />
+                <span asp-validation-for="FacultyId" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="FacultyName" class="control-label">Faculty Name</label>
+                <input asp-for="FacultyName" class="form-control" />
+                <span asp-validation-for="FacultyName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="CoordinatorUserName" class="control-label">Coordinator </label>
+                <select asp-for="CoordinatorUserName" class="form-control" asp-items="ViewBag.CoordinatorUserNames">
+                    <option value="">Select Coordinator</option>
+                </select>
+                <span asp-validation-for="CoordinatorUserName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Established" class="control-label">Established</label>
+                <input asp-for="Established" class="form-control" />
+                <span asp-validation-for="Established" class="text-danger"></span>
+            </div>
+            </br>
+
+            <div class="form-group d-flex">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+

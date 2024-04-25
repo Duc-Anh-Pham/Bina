@@ -41,7 +41,30 @@
                     </strong>
                 </li>
             </ul>
+            <!-- Feedback -->
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h5>  Feedback</h5>
+                    <div class="card-body">
+                        @foreach (var comment in Model.CommentFeedbacks)
+                        {
+                            <div class="mb-3">
+                                <strong>@comment.User.FullName:</strong> @comment.ContentFeedback
+                                <br />
+                                <small class="text-muted">@comment.CommentDay?.ToString("g", System.Globalization.CultureInfo.CreateSpecificCulture("vi-VN"))</small>
+                            </div>
+                        }
+                    </div>
+                </div>
 
+                <div class="card-body">
+                    <form asp-controller="Articles" asp-action="AddFeedback" method="post">
+                        <input type="hidden" name="articleId" value="@Model.ArticleId" />
+                        <textarea class="form-control" name="feedbackText" rows="3" required></textarea>
+                        <button type="submit" class="btn btn-primary">Submit Feedback</button>
+                    </form>
+                </div>
+            </div>
             <div class="card p-2">
                 <ul class="list-group mb-3">
                      <li class="list-group-item d-flex justify-content-between lh-sm">
@@ -51,15 +74,18 @@
                          <strong class="text-primary" id="currentStatus">@Model.ArticleStatus.ArticleStatusName</strong>
                     </li>
                 </ul>
-                 <div class="mb-3">
+                <div class="mb-3">
                     <label for="statusSelect" class="form-label">Select Status:</label>
-                    <select class="form-select" id="statusSelect">
-                         @foreach (var status in ViewBag.StatusList)
+                    <select class="form-select" id="statusSelect" name="statusSelect">
+                        @foreach (var status in ViewBag.StatusList)
                         {
-                            <option value="@status.ArticleStatusId">@status.ArticleStatusName</option>
+                            <option value="@status.ArticleStatusId" selected="@((status.ArticleStatusId == @Model.ArticleStatusId) ? "selected" : null)">
+                                @status.ArticleStatusName
+                            </option>
                         }
                     </select>
                 </div>
+
 
                 <!-- Save button -->
                 <button class="btn btn-primary" onclick="updateStatus()">Save</button>

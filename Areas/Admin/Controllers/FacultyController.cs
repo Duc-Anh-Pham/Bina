@@ -183,10 +183,9 @@ namespace Bina.Controllers
                         var newCoordinator = await _context.Users.FirstOrDefaultAsync(u => u.UserName == viewModel.CoordinatorUserName);
                         if (newCoordinator != null && newCoordinator.FacultyId == null)
                         {
-                            // Update the old coordinator if exists
                             if (currentCoordinator != null)
                             {
-                                currentCoordinator.FacultyId = null; // Unassign the old coordinator
+                                currentCoordinator.FacultyId = null;
                                 _context.Update(currentCoordinator);
                             }
                             newCoordinator.FacultyId = faculty.FacultyId;
@@ -256,19 +255,15 @@ namespace Bina.Controllers
             var faculty = await _context.Faculties.FindAsync(id);
             if (faculty != null)
             {
-                // Find all users associated with this faculty
+
                 var associatedUsers = _context.Users.Where(u => u.FacultyId == id);
 
-                // Option 1: Set FacultyId to null for all associated users
                 foreach (var user in associatedUsers)
                 {
-                    user.FacultyId = null; // Or set to another valid FacultyId
+                    user.FacultyId = null;
                 }
 
-                // Option 2: Delete all associated users (Use with caution!)
-                // _context.Users.RemoveRange(associatedUsers);
 
-                // Save changes for users if needed
                 await _context.SaveChangesAsync();
 
                 _context.Faculties.Remove(faculty);

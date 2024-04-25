@@ -20,7 +20,7 @@
                     <span asp-validation-for="Content" class="text-danger"></span>
                 </div>
 
-                <!-- Thêm các input hidden cho UserId và ArticleStatusId -->
+                <!-- Add hidden inputs for UserId and ArticleStatusId -->
                 <input asp-for="UserId" type="hidden" />
                 <input asp-for="ArticleStatusId" type="hidden" />
                 <input asp-for="FacultyId" type="hidden" />
@@ -44,7 +44,7 @@
 
                 <div class="form-group">
                     <label asp-for="ArticlesDeadlineId" class="control-label">Deadline Term:</label>
-                    <select asp-for="ArticlesDeadlineId" class="form-control" asp-items="@ViewData["DeadlineTerms"] as IEnumerable<SelectListItem>" disabled></select>
+                    <select asp-for="ArticlesDeadlineId" class="form-control" asp-items="@ViewData["DeadlineTerms"] as IEnumerable<SelectListItem>"></select>
                     <span asp-validation-for="ArticlesDeadlineId" class="text-danger"></span>
                 </div>
 
@@ -63,4 +63,50 @@
     </div>
 </div>
 
+<!-- Bootstrap Modal for Alerts -->
+<div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="alertModalLabel">File Type Error</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="modalText">Please upload a valid file.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const imageInput = document.querySelector('input[name="ImageFile"]');
+        const documentInput = document.querySelector('input[name="DocumentFile"]');
+        const alertModal = new bootstrap.Modal(document.getElementById('alertModal'));
+        const modalText = document.getElementById('modalText');
+
+        function showAlert(message) {
+            modalText.textContent = message;
+            alertModal.show();
+        }
+
+        imageInput.addEventListener("change", function () {
+            const validImageTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+            if (this.files[0] && !validImageTypes.includes(this.files[0].type)) {
+                showAlert('Only JPEG, PNG, and GIF files are allowed for images.');
+                this.value = ''; // Clear the input.
+            }
+        });
+
+        documentInput.addEventListener("change", function () {
+            const validDocTypes = ['application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/pdf'];
+            if (this.files[0] && !validDocTypes.includes(this.files[0].type)) {
+                showAlert('Only Word (DOC, DOCX) and PDF files are allowed for documents.');
+                this.value = ''; // Clear the input.
+            }
+        });
+    });
+</script>

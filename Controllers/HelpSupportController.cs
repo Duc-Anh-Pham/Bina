@@ -50,19 +50,19 @@ namespace Bina.Controllers
     */
     public class HelpSupportController : Controller
     {
-        private readonly ILogger<HelpSupportController> _logger; //ILogger ghi log cho HelpSupportController
+        private readonly ILogger<HelpSupportController> _logger;
         private readonly Ft1Context _ft1;
 
         public HelpSupportController(ILogger<HelpSupportController> logger, Ft1Context ft1)
         {
-            _logger = logger; // gán giá trị _logger cho Ilogger
+            _logger = logger;
             _ft1 = ft1;
         }
 
         [HttpGet]
         public IActionResult Index()
         {
-            return View(); //hiển thị form gửi support
+            return View();
         }
 
         [HttpPost]

@@ -1,0 +1,58 @@
+﻿@model Bina.Models.User
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<style>
+    /* CSS để làm mờ và ngăn chặn click nút "Edit" khi Status là 0 */
+    .disabled-btn {
+        pointer-events: none; /* Ngăn chặn sự kiện click */
+        opacity: 0.5; /* Làm mờ nút */
+    }
+</style>
+
+<div class="container my-5">
+    <h1 class="text-center mb-4">User Details</h1>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-4">User Name</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.UserName)</dd>
+                        <dt class="col-sm-4">Full Name</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.FullName)</dd>
+                        <dt class="col-sm-4">Phone Number</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.PhoneNumber)</dd>
+                        <dt class="col-sm-4">DoB</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.DoB)</dd>
+                        <dt class="col-sm-4">Date Created</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.DateCreated)</dd>
+                        <dt class="col-sm-4">Gender</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.Gender)</dd>
+                        <dt class="col-sm-4">Email</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.Email)</dd>
+                        <dt class="col-sm-4">Status</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.Status)</dd>
+                        <dt class="col-sm-4">Faculty</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.Faculty.FacultyId)</dd>
+                        <dt class="col-sm-4">Role</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.Role.RoleName)</dd>
+
+                        @if (Model.Role.RoleName == "Student")
+                        {
+                            <dt class="col-sm-4">Terms Of Condination</dt>
+                            <dd class="col-sm-8">@Html.DisplayFor(model => model.Terms.TermsText)</dd>
+                        }
+
+                    </dl>
+                </div>
+                <div class="card-footer text-center">
+                    <a asp-action="Edit" asp-route-id="@Model.UserId" class="btn btn-primary btn-lg @(Model.Status == 0 ? "disabled-btn" : "")">Edit</a>
+                    <a asp-action="Index" class="btn btn-secondary btn-lg">Back to List</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

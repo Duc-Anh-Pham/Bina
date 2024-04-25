@@ -1,0 +1,54 @@
+﻿@model Bina.Models.ViewModels
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="container my-5">
+    <h1 class="text-center mb-4">Edit User</h1>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <form asp-action="Edit">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="FacultyId" />
+
+                        <div class="form-group">
+                            <label asp-for="FacultyId" class="control-label">Faculty ID</label>
+                            <input asp-for="FacultyId" class="form-control" readonly />
+                            <span asp-validation-for="FacultyId" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="FacultyName" class="control-label">Faculty Name</label>
+                            <input asp-for="FacultyName" class="form-control" />
+                            <span asp-validation-for="FacultyName" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="CoordinatorUserName" class="control-label">Coordinator </label>
+                            <select asp-for="CoordinatorUserName" class="form-control" asp- items="ViewBag.CoordinatorUserNames">
+                                <option value="">Select Coordinator</option>
+                            </select>
+                            <span asp-validation-for="CoordinatorUserName" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Established" class="control-label">Established</label>
+                            <input asp-for="Established" class="form-control" />
+                            <span asp-validation-for="Established" class="text-danger"></span>
+                        </div>
+
+                        </br>
+                        <div class="form-group d-flex">
+                            <input type="submit" value="Save" class="btn btn-primary" />
+                            <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

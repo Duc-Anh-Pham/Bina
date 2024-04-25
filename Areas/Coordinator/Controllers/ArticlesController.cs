@@ -17,11 +17,73 @@ namespace Bina.Areas.Coordinator.Controllers
         }
 
         // GET: Coordinator/Articles
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string faculty, string academicYear, string status, int page = 1, int pageSize = 3)
         {
-            var ft1Context = _context.Articles.Include(a => a.ArticleStatus).Include(a => a.ArticlesDeadline).Include(a => a.Faculty).Include(a => a.User);
-            return View(await ft1Context.ToListAsync());
+            var facultyId = HttpContext.Session.GetString("FacultyId");
+            if (string.IsNullOrEmpty(facultyId))
+            {
+                return RedirectToAction("Login", "Logins");
+            }
+            ViewBag.FacultyId = facultyId;
+
+            var facultyName = await _context.Faculties.FirstOrDefaultAsync(f => f.FacultyId == facultyId);
+            if (facultyName != null)
+            {
+                ViewBag.FacultyName = facultyName.FacultyName;
+            }
+            //ViewBag.Terms = await _context.Artic=esDeadlines.ToListAsync();
+
+            ViewBag.Faculties = await _context.Faculties.ToListAsync();
+            ViewBag.Statuses = await _context.ArticleStatuses.ToListAsync();
+
+            var articlesQuery = _context.Articles
+                .Include(a => a.ArticleStatus)
+                .Include(a => a.ArticlesDeadline)
+                .Include(a => a.Faculty)
+                .Include(a => a.User)
+                .Where(a => a.Faculty.FacultyId == facultyId);
+
+            if (!string.IsNullOrEmpty(faculty))
+            {
+                articlesQuery = articlesQuery.Where(a => a.ArticlesDeadline.FacultyId == faculty);
+            }
+
+            if (!string.IsNullOrEmpty(academicYear))
+            {
+                articlesQuery = articlesQuery.Where(a => a.ArticlesDeadline.AcademicYear.ToString() == academicYear);
+            }
+
+            if (!string.IsNullOrEmpty(status))
+            {
+                articlesQuery = articlesQuery.Where(a => a.ArticleStatus.ArticleStatusName == status);
+            }
+
+            int totalRecords = await articlesQuery.CountAsync();
+            var totalPages = (int)Math.Ceiling((double)totalRecords / pageSize);
+
+            // Ensure page is within the valid range
+            page = Math.Max(1, Math.Min(page, totalPages));
+
+            var articles = await articlesQuery
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            ViewBag.TotalPages = totalPages;
+            ViewBag.CurrentPage = page;
+            ViewBag.PageSize = pageSize;
+
+            // Pass filter parameters to the view
+            ViewBag.FacultyFilter = faculty;
+            ViewBag.AcademicYearFilter = academicYear;
+            ViewBag.StatusFilter = status;
+
+            return View(articles);
         }
+
+
+
+
 
         // GET: Coordinator/Articles/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -32,18 +94,61 @@ namespace Bina.Areas.Coordinator.Controllers
             }
 
             var article = await _context.Articles
-                .Include(a => a.ArticleStatus)
-                .FirstOrDefaultAsync(m => m.ArticleId == id);
+               .Include(a => a.ArticleStatus)
+               .Include(a => a.ArticlesDeadline)
+               .Include(a => a.Faculty)
+               .Include(a => a.User)
+               .Include(a => a.ArticleComments)
+               .Include(a => a.CommentFeedbacks)
+           .ThenInclude(c => c.User)
+               .FirstOrDefaultAsync(m => m.ArticleId == id);
 
             if (article == null)
             {
                 return NotFound();
             }
 
-            // Get all status for dropdown
             ViewBag.StatusList = await _context.ArticleStatuses.ToListAsync();
 
             return View(article);
+        }
+        [HttpPost]
+        public async Task<IActionResult> AddFeedback(int? articleId, string feedbackText)
+        {
+            if (!ModelState.IsValid || articleId == null || string.IsNullOrWhiteSpace(feedbackText))
+            {
+                articleId = 1;
+                feedbackText = "No feedback";
+            }
+
+            var userId = GetCurrentUserIdFromSession();
+
+            var newFeedback = new CommentFeedback
+            {
+                CommentFeedbackId = Guid.NewGuid(),
+                ArticleId = articleId.Value,
+
+                UserId = userId.Value,
+                ContentFeedback = feedbackText,
+                CommentDay = DateTime.Now
+            };
+
+            _context.CommentFeedbacks.Add(newFeedback);
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+            }
+
+            return RedirectToAction("Details", "Articles", new { id = articleId.Value });
+        }
+        private int? GetCurrentUserIdFromSession()
+        {
+            var userId = HttpContext.Session.GetInt32("UserId");
+            return userId;
         }
 
         // POST: Article/UpdateStatus

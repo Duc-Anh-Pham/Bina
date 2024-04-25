@@ -1,0 +1,117 @@
+﻿@model IEnumerable<Bina.Models.User>
+
+@{
+    ViewData["Title"] = "User Management";
+}
+
+<link href="~/css/site.css" rel="stylesheet" />
+
+@if (ViewBag.SuccessMessage != null)
+{
+    <div class="alert alert-success">
+        <strong>Success!</strong> @ViewBag.SuccessMessage
+    </div>
+    <!-- Thêm meta refresh để tự động làm mất thông báo sau 1 giây -->
+    <meta http-equiv="refresh" content="1">
+}
+
+
+<div class="container my-5">
+    <h1 class="text-center mb-4">User Management</h1>
+    <div class="d-flex justify-content-between mb-4">
+        <div class="w-50">
+            <!-- Search container start -->
+            <div class="container">
+                <form method="get" asp-controller="Users" asp-action="Index" class="d-flex">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="searchTerm" placeholder="Search by Username or Email..." />
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="submit">
+                                <i class="bi bi-search-heart-fill"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- Search container end -->
+        </div>
+        <div class="w-50 text-end">
+            <a asp-action="Create" class="btn btn-primary">
+                <i class="bi bi-plus-circle me-2"></i>Create New
+            </a>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover text-center">
+            <thead class="table-dark">
+                <tr>
+                    <th>User Name</th>
+                    <th>
+                        Full Name
+                        <span>
+                            <span>
+                                <a class="btn btn-light" asp-controller=" ">
+                                </a>
+                            </span>
+                        </span>
+                    </th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                    <th>DoB</th>
+                    <th>Faculty</th>
+                    <th>Role</th>
+                    <th>Date Created</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.UserName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.FullName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                        <td>@Html.DisplayFor(modelItem => item.PhoneNumber)</td>
+                        <td>@Html.DisplayFor(modelItem => item.DoB)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Faculty.FacultyId)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Role.RoleName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.DateCreated)</td>
+                        <td>
+                            <div class="d-flex justify-content-center">
+                                <div class="form-check form-switch">
+                                    @using (Html.BeginForm("ToggleStatus", "Users", new { id = item.UserId }, FormMethod.Post))
+                                    {
+                                        <input type="hidden" name="userId" value="@item.UserId" />
+                                        <input class="form-check-input" type="checkbox" role="switch" id="statusToggle_@item.UserId" @(item.Status == 1 ? "checked" : "") onchange="this.form.submit()">
+                                    }
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="btn-group" role="group" aria-label="Actions">
+                                @* @if (item.Status != 0)
+                            {
+                            <a asp-action="Edit" asp-route-id="@item.UserId" class="btn btn-primary btn-sm" title="Edit">
+                            <i class="bi bi-pencil"></i>
+                            </a>
+                            } *@
+                                <a asp-action="Edit" asp-route-id="@item.UserId" class="btn btn-primary btn-sm @(item.Status == 0 ? "disabled-btn" : "")" title="Edit">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                                <a asp-action="Details" asp-route-id="@item.UserId" class="btn btn-success btn-sm" title="Detail">
+                                    <i class="bi bi-eye"></i>
+                                </a>
+                                <a asp-action="Delete" asp-route-id="@item.UserId" class="btn btn-danger btn-sm" title="Delete">
+                                    <i class="bi bi-trash3"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

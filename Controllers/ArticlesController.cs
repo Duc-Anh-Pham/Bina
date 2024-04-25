@@ -24,7 +24,6 @@ namespace Bina.Controllers
             int? userId = HttpContext.Session.GetInt32("UserId");
             if (userId == null)
             {
-                // Xử lý trường hợp không tìm thấy UserId, có thể là chưa đăng nhập
                 return RedirectToAction("Login", "Logins");
             }
 
@@ -33,7 +32,7 @@ namespace Bina.Controllers
                 .Include(a => a.ArticlesDeadline)
                 .Include(a => a.Faculty)
                 .Include(a => a.User)
-                .Where(a => a.UserId == userId);  // Lọc các bài viết theo UserId
+                .Where(a => a.UserId == userId);
 
             return View(await articles.ToListAsync());
         }
@@ -51,6 +50,8 @@ namespace Bina.Controllers
                 .Include(a => a.ArticlesDeadline)
                 .Include(a => a.Faculty)
                 .Include(a => a.User)
+                .Include(a => a.CommentFeedbacks)
+                            .ThenInclude(c => c.User)
                 .FirstOrDefaultAsync(m => m.ArticleId == id);
             if (article == null)
             {
@@ -60,44 +61,108 @@ namespace Bina.Controllers
             return View(article);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> AddFeedback(int? articleId, string feedbackText)
+        {
+            if (!ModelState.IsValid || articleId == null || string.IsNullOrWhiteSpace(feedbackText))
+            {
+                articleId = 1;
+                feedbackText = "No feedback";
+            }
+
+            var userId = GetCurrentUserIdFromSession();
+
+            var newFeedback = new CommentFeedback
+            {
+                CommentFeedbackId = Guid.NewGuid(),
+                ArticleId = articleId.Value,
+
+                UserId = userId.Value,
+                ContentFeedback = feedbackText,
+                CommentDay = DateTime.Now
+            };
+
+            _context.CommentFeedbacks.Add(newFeedback);
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+
+            return RedirectToAction("Details", "Articles", new { id = articleId.Value });
+        }
+        private int? GetCurrentUserIdFromSession()
+        {
+            var userId = HttpContext.Session.GetInt32("UserId");
+            return userId;
+        }
+
         // GET: Articles/Create
         public IActionResult Create()
         {
-            // Lấy UserId từ session
+             
+            // Get UserId from session
             int? userId = HttpContext.Session.GetInt32("UserId");
             if (userId == null)
             {
-                // Nếu không tìm thấy UserId, có thể chuyển hướng người dùng đến trang đăng nhập
+                // If UserId is not found, possibly user is not logged in
                 return RedirectToAction("Login", "Logins");
             }
 
             var user = _context.Users
-            .Include(u => u.Faculty) // Giả sử mỗi người dùng liên kết với một khoa
+            .Include(u => u.Faculty)
             .FirstOrDefault(u => u.UserId == userId);
 
             if (user == null || user.FacultyId == null)
             {
-                // Xử lý nếu không tìm thấy người dùng hoặc người dùng không có khoa nào
-                return RedirectToAction("Login", "Logins"); // Hoặc trả về một thông báo lỗi phù hợp
+               
+                // If user or user's faculty is not found
+                return RedirectToAction("ErrorPage", new { message = "Your faculty information is missing." });
             }
 
-            // Lấy danh sách deadlines liên quan đến khoa của người dùng
+            // Get the current deadline for the user's faculty
+            var currentDeadline = _context.ArticlesDeadlines
+                .FirstOrDefault(ad => ad.FacultyId == user.FacultyId && ad.DueDate >= DateTime.Now);
+
+            if (currentDeadline == null)
+            {
+                // If current date is past the DueDate or there's no active deadline
+                return RedirectToAction("ErrorPage", new { message = "Currently, this Department has closed the Article Submission function. Please contact the Coordinator if you need further assistance" });
+            }
+
             var deadlines = _context.ArticlesDeadlines
-                .Where(a => a.FacultyId == user.FacultyId)
-                .OrderBy(a => a.DueDate) // Sắp xếp theo ngày hạn chót để lấy ra hạn chót gần nhất
-                .ToList(); // Lấy ra tất cả mà không chỉ là đầu tiên
+               .Where(a => a.FacultyId == user.FacultyId)
+               .OrderBy(a => a.DueDate)
+               .ToList();
 
-            // Lấy danh sách deadlines theo FacultyId của người dùng
             var faculties = _context.Faculties
-           .Where(f => f.FacultyId == user.FacultyId) // Chỉ lấy khoa mà người dùng thuộc về
-           .ToList();
+          .Where(f => f.FacultyId == user.FacultyId)
+          .ToList();
 
-            // Tạo SelectList cho các deadlines bao gồm ngày bắt đầu và kết thúc
-            var deadlineTermsSelectList = deadlines.Select(ad => new SelectListItem
+            // Get the current deadlines for the user's faculty that are still valid
+            var validDeadlines = _context.ArticlesDeadlines
+                .Where(ad => ad.FacultyId == user.FacultyId && ad.DueDate >= DateTime.Now)
+                .OrderBy(ad => ad.DueDate)
+                .ToList();
+
+            if (!validDeadlines.Any())
+            {
+                // If there are no valid deadlines
+                return RedirectToAction("ErrorPage", new { message = "Hiện tại Khoa này đã đóng chức năng Nộp bài Article, vui lòng liên hệ Coordinator nếu cần hỗ trợ thêm" });
+            }
+
+            // Create a SelectList for the current valid deadlines
+            var deadlineTermsSelectList = validDeadlines.Select(ad => new SelectListItem
             {
                 Value = ad.ArticlesDeadlineId.ToString(),
-                Text = $"{ad.TermTitle} - từ {ad.StartDue?.ToString("dd/MM/yyyy")} đến {ad.DueDate?.ToString("dd/MM/yyyy")}"
+                Text = $"{ad.TermTitle} - From {ad.StartDue?.ToString("dd/MM/yyyy")} => To {ad.DueDate?.ToString("HH:mm MMMM dd, yyyy")}"
             }).ToList();
+
 
             ViewData["ArticleStatusId"] = new SelectList(_context.ArticleStatuses, "ArticleStatusId", "ArticleStatusId");
             ViewData["ArticlesDeadlineId"] = new SelectList(deadlines, "ArticlesDeadlineId", "TermTitle");
@@ -109,11 +174,12 @@ namespace Bina.Controllers
             {
                 UserId = userId,
                 ArticleStatusId = 3,
-                FacultyId = user.FacultyId // Đặt khoa mặc định cho bài viết dựa trên khoa của người dùng
+                FacultyId = user.FacultyId, // Đặt khoa mặc định cho bài viết dựa trên khoa của người dùng
+                ArticlesDeadlineId = validDeadlines.First().ArticlesDeadlineId
             };
 
             // Lấy deadline đầu tiên phù hợp hoặc null nếu không có
-            article.ArticlesDeadlineId = deadlines.FirstOrDefault()?.ArticlesDeadlineId;
+            /* article.ArticlesDeadlineId = deadlines.FirstOrDefault()?.ArticlesDeadlineId;*/
 
 
             return View(article);
@@ -126,18 +192,17 @@ namespace Bina.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Xử lý file ảnh
                 if (imageFile != null && imageFile.Length > 0)
                 {
                     var imageUrl = await _firebaseCloud.UploadFileToFirebase(imageFile);
-                    article.ImagePath = imageUrl; // Lưu URL của ảnh vào thuộc tính ImagePath
+                    article.ImagePath = imageUrl;
                 }
 
                 // Xử lý file tài liệu
                 if (documentFile != null && documentFile.Length > 0)
                 {
                     var documentUrl = await _firebaseCloud.UploadFileToFirebase(documentFile);
-                    article.DocumentPath = documentUrl; // Lưu URL của tài liệu vào thuộc tính DocumentPath
+                    article.DocumentPath = documentUrl;
                 }
 
                 _context.Add(article);
@@ -249,6 +314,13 @@ namespace Bina.Controllers
         private bool ArticleExists(int id)
         {
             return _context.Articles.Any(e => e.ArticleId == id);
+        }
+
+        // Custom error page action
+        public IActionResult ErrorPage(string message)
+        {
+            ViewData["ErrorMessage"] = message;
+            return View();
         }
     }
 }
