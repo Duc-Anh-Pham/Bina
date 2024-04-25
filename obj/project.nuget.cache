@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "CMywzD6rjOMqHv42/1Sv83a531rl8S6Er/xr0pPDWzWD17J8N7T3FAdejWqeyyo8r0oFa4429L8Q7e/wHCJIZg==",
+  "dgSpecHash": "n3p/iNeF7lMiZnTWs4wDBvwA6l3TCnw+EbvyfARHHMa9KPcqOk++JbSW/ddN6qeR+8NUUEZ+yVYPQXDXyaWM4Q==",
   "success": true,
   "projectFilePath": "F:\\Greenwich IT\\TOPUP - 1640 - Enterprise Web Software Development\\Code\\Bina12-4\\Bina\\Bina.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\s2vet\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\s2vet\\.nuget\\packages\\azure.identity\\1.11.0\\azure.identity.1.11.0.nupkg.sha512",
     "C:\\Users\\s2vet\\.nuget\\packages\\bouncycastle.cryptography\\2.3.0\\bouncycastle.cryptography.2.3.0.nupkg.sha512",
+    "C:\\Users\\s2vet\\.nuget\\packages\\dinktopdf\\1.0.8\\dinktopdf.1.0.8.nupkg.sha512",
     "C:\\Users\\s2vet\\.nuget\\packages\\firebasestorage.net\\1.0.3\\firebasestorage.net.1.0.3.nupkg.sha512",
     "C:\\Users\\s2vet\\.nuget\\packages\\humanizer\\2.14.1\\humanizer.2.14.1.nupkg.sha512",
     "C:\\Users\\s2vet\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
@@ -248,6 +249,7 @@
     "C:\\Users\\s2vet\\.nuget\\packages\\system.threading.tasks\\4.3.0\\system.threading.tasks.4.3.0.nupkg.sha512",
     "C:\\Users\\s2vet\\.nuget\\packages\\system.threading.tasks.dataflow\\7.0.0\\system.threading.tasks.dataflow.7.0.0.nupkg.sha512",
     "C:\\Users\\s2vet\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512",
+    "C:\\Users\\s2vet\\.nuget\\packages\\system.threading.thread\\4.0.0\\system.threading.thread.4.0.0.nupkg.sha512",
     "C:\\Users\\s2vet\\.nuget\\packages\\system.threading.timer\\4.3.0\\system.threading.timer.4.3.0.nupkg.sha512",
     "C:\\Users\\s2vet\\.nuget\\packages\\system.windows.extensions\\7.0.0\\system.windows.extensions.7.0.0.nupkg.sha512",
     "C:\\Users\\s2vet\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
