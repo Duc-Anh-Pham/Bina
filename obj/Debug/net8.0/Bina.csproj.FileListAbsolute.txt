@@ -1395,3 +1395,5 @@ D:\Github\COMP1640\Bina\bin\Debug\net8.0\MailKit.dll
 D:\Github\COMP1640\Bina\bin\Debug\net8.0\System.ClientModel.dll
 D:\Github\COMP1640\Bina\bin\Debug\net8.0\Firebase.Storage.dll
 D:\Github\COMP1640\Bina\obj\Debug\net8.0\scopedcss\Areas\Guest\Views\Shared\_Layout.cshtml.rz.scp.css
+D:\Github\COMP1640\Bina\obj\Debug\net8.0\scopedcss\Areas\Coordinator\Views\Shared\_Layout.cshtml.rz.scp.css
+D:\Github\COMP1640\Bina\obj\Debug\net8.0\scopedcss\Areas\Manager\Views\Shared\_Layout.cshtml.rz.scp.css
