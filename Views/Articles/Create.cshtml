@@ -44,7 +44,7 @@
 
                 <div class="form-group">
                     <label asp-for="ArticlesDeadlineId" class="control-label">Deadline Term:</label>
-                    <select asp-for="ArticlesDeadlineId" class="form-control" asp-items="@ViewData["DeadlineTerms"] as IEnumerable<SelectListItem>"></select>
+                    <select asp-for="ArticlesDeadlineId" class="form-control" asp-items="@ViewData["DeadlineTerms"] as IEnumerable<SelectListItem>" disabled></select>
                     <span asp-validation-for="ArticlesDeadlineId" class="text-danger"></span>
                 </div>
 
@@ -55,8 +55,16 @@
 
                 <br />
 
+                <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" id="termsCheckbox" required>
+                    <label class="form-check-label" for="termsCheckbox">I agree to the Terms and Conditions</label>
+                </div>
+
+
+                <br />
+
                 <div class="form-group">
-                    <input type="submit" value="Submit" class="btn btn-primary" />
+                    <input type="submit" value="Submit" class="btn btn-primary" disabled id="submitButton">
                 </div>
             </form>
         </div>
@@ -82,6 +90,16 @@
 </div>
 
 <script>
+    // Check term
+    document.addEventListener("DOMContentLoaded", function () {
+        const submitButton = document.getElementById('submitButton');
+        const termsCheckbox = document.getElementById('termsCheckbox');
+
+        termsCheckbox.addEventListener('change', function () {
+            submitButton.disabled = !this.checked;
+        });
+    });
+
     document.addEventListener("DOMContentLoaded", function () {
         const imageInput = document.querySelector('input[name="ImageFile"]');
         const documentInput = document.querySelector('input[name="DocumentFile"]');

@@ -105,7 +105,7 @@ namespace Bina.Controllers
         // GET: Articles/Create
         public IActionResult Create()
         {
-             
+
             // Get UserId from session
             int? userId = HttpContext.Session.GetInt32("UserId");
             if (userId == null)
@@ -120,7 +120,7 @@ namespace Bina.Controllers
 
             if (user == null || user.FacultyId == null)
             {
-               
+
                 // If user or user's faculty is not found
                 return RedirectToAction("ErrorPage", new { message = "Your faculty information is missing." });
             }
@@ -153,7 +153,7 @@ namespace Bina.Controllers
             if (!validDeadlines.Any())
             {
                 // If there are no valid deadlines
-                return RedirectToAction("ErrorPage", new { message = "Hiện tại Khoa này đã đóng chức năng Nộp bài Article, vui lòng liên hệ Coordinator nếu cần hỗ trợ thêm" });
+                return RedirectToAction("ErrorPage", new { message = "Currently, this Department has closed the Article Submission function. Please contact the Coordinator if you need further assistance" });
             }
 
             // Create a SelectList for the current valid deadlines
