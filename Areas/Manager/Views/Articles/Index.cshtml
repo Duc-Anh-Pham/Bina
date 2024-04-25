@@ -17,7 +17,7 @@
                     <option value="">All Faculty</option>
                      @foreach (var fac in ViewBag.Faculties)
                     {
-                        <option value="@fac.FacultyId">@fac.FacultyName</option>
+                        <option value="@fac.FacultyId" style="color : black">@fac.FacultyName</option>
                     }
                 </select>
             </div>
@@ -30,7 +30,7 @@
                     <option value="">All Statuses</option>
                      @foreach (var stat in ViewBag.Statuses)
                     {
-                        <option value="@stat.ArticleStatusName">@stat.ArticleStatusName</option>
+                        <option value="@stat.ArticleStatusName" style="color : black">@stat.ArticleStatusName</option>
                     }
                 </select>
             </div>

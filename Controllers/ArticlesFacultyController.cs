@@ -16,43 +16,24 @@ namespace Bina.Controllers
         }
 
         // GET: ArticlesFaculty
-        public async Task<IActionResult> Index(int page = 1)
+        public async Task<IActionResult> Index()
         {
-            int? userId = HttpContext.Session.GetInt32("UserId");
-            if (userId == null)
+            var facultyId = HttpContext.Session.GetString("FacultyId");
+            if (string.IsNullOrEmpty(facultyId))
             {
-                // Xử lý trường hợp không tìm thấy UserId, có thể là chưa đăng nhập
-                return RedirectToAction("Login", "Logins");
-            }
-            //ViewBag.FacultyId = facultyId;
-
-            var facultyName = await _context.Faculties.FirstOrDefaultAsync(f => f.FacultyId == facultyId);
-            if (facultyName != null)
-            {
-                ViewBag.FacultyName = facultyName.FacultyName;
+                // Handle case when no facultyId is set, maybe redirect to an error page or a default view.
+                return RedirectToAction("Login", "Logins"); // Or another appropriate response
             }
 
-            int pageSize = 8;
-            var articlesQuery = _context.Articles
-                .Include(a => a.ArticleStatus)
-                .Include(a => a.ArticlesDeadline)
-                .Include(a => a.Faculty)
-                .Include(a => a.User)
-                .Where(a => a.Faculty.FacultyId == facultyId && a.ArticleStatus.ArticleStatusName == "Public");
+            var ft1Context = _context.Articles
+                                     .Include(a => a.ArticleStatus)
+                                     .Include(a => a.ArticlesDeadline)
+                                     .Include(a => a.Faculty)
+                                     .Include(a => a.User)
+                                     .Where(a => a.Faculty.FacultyId == facultyId);
 
-            int totalEntries = await articlesQuery.CountAsync();
-            List<Article> articles = await articlesQuery
-                .OrderBy(a => a.DateCreate)
-                .Skip((page - 1) * pageSize)
-                .Take(pageSize)
-                .ToListAsync();
-
-            var pager = new Pager(totalEntries, page, pageSize);
-            var model = new Tuple<IEnumerable<Article>, Pager>(articles, pager);
-
-            return View(model);
+            return View(await ft1Context.ToListAsync());
         }
-
 
 
         // GET: ArticlesFaculty/Details/5
@@ -83,6 +64,7 @@ namespace Bina.Controllers
         {
             if (!ModelState.IsValid || articleId == null || string.IsNullOrWhiteSpace(commentText))
             {
+                // Optionally, add a model error or log the issue here
                 articleId = 1;
                 commentText = "No comment";
             }
@@ -108,15 +90,20 @@ namespace Bina.Controllers
             }
             catch (Exception ex)
             {
+                // Log the exception and handle it, e.g., by returning to the 'Details' view with an error message
+
+
             }
             return RedirectToAction("Details", "ArticlesFaculty", new { id = articleId.Value });
+            // Redirect to an Error view or similar approach
         }
 
 
         private int? GetCurrentUserIdFromSession()
         {
+            // Lấy UserId từ Session
             var userId = HttpContext.Session.GetInt32("UserId");
-            return userId;
+            return userId; // Trả về giá trị userId hoặc null nếu không có giá trị nào được lưu
         }
 
         // GET: ArticlesFaculty/Create

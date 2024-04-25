@@ -1,4 +1,6 @@
-﻿namespace Bina.Models;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Bina.Models;
 
 public partial class User
 {
@@ -18,6 +20,7 @@ public partial class User
 
     public string? Gender { get; set; }
 
+    [EmailAddress]
     public string? Email { get; set; }
 
     public string? Password { get; set; }
@@ -32,14 +35,6 @@ public partial class User
 
     public int? TermsId { get; set; }
 
-    public bool RememberMe { get; set; }
-
-    public string? NewPassword { get; set; }
-
-    public string? ConfirmPassword { get; set; }
-
-    public string? OldPassword { get; set; }
-
     public virtual ICollection<ArticleComment> ArticleComments { get; set; } = new List<ArticleComment>();
 
     public virtual ICollection<Article> Articles { get; set; } = new List<Article>();
@@ -53,7 +48,16 @@ public partial class User
     public virtual Role? Role { get; set; }
 
     public virtual TermsAndCondition? Terms { get; set; }
-     public string FullName
+
+    public string? OldPassword { get; set; }
+
+    public string? NewPassword { get; set; }
+
+    public string? ConfirmPassword { get; set; }
+
+    public bool RememberMe { get; set; }
+
+    public string FullName
     {
         get
         {

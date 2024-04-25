@@ -44,7 +44,7 @@ public partial class Ft1Context : DbContext
     {
         modelBuilder.Entity<Article>(entity =>
         {
-            entity.HasKey(e => e.ArticleId).HasName("PK__Articles__9C6270C8CCA51955");
+            entity.HasKey(e => e.ArticleId).HasName("PK__Articles__9C6270C85EB2D7B6");
 
             entity.Property(e => e.ArticleId).HasColumnName("ArticleID");
             entity.Property(e => e.ArticleName)
@@ -87,7 +87,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<ArticleComment>(entity =>
         {
-            entity.HasKey(e => e.CommentId).HasName("PK__ArticleC__C3B4DFAA4EC416F0");
+            entity.HasKey(e => e.CommentId).HasName("PK__ArticleC__C3B4DFAAA9F315C9");
 
             entity.Property(e => e.CommentId)
                 .HasDefaultValueSql("(newsequentialid())")
@@ -108,7 +108,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<ArticleStatus>(entity =>
         {
-            entity.HasKey(e => e.ArticleStatusId).HasName("PK__ArticleS__3F0E2D6B50D86C1C");
+            entity.HasKey(e => e.ArticleStatusId).HasName("PK__ArticleS__3F0E2D6BA23FBCFD");
 
             entity.ToTable("ArticleStatus");
 
@@ -120,7 +120,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<ArticlesDeadline>(entity =>
         {
-            entity.HasKey(e => e.ArticlesDeadlineId).HasName("PK__Articles__253F2FDC68C2A67A");
+            entity.HasKey(e => e.ArticlesDeadlineId).HasName("PK__Articles__253F2FDCA82EDB1D");
 
             entity.ToTable("ArticlesDeadline");
 
@@ -147,7 +147,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<CommentFeedback>(entity =>
         {
-            entity.HasKey(e => e.CommentFeedbackId).HasName("PK__CommentF__9454C0BA0003DA36");
+            entity.HasKey(e => e.CommentFeedbackId).HasName("PK__CommentF__9454C0BA6BAE1410");
 
             entity.ToTable("CommentFeedback");
 
@@ -161,13 +161,16 @@ public partial class Ft1Context : DbContext
 
             entity.HasOne(d => d.Article).WithMany(p => p.CommentFeedbacks)
                 .HasForeignKey(d => d.ArticleId)
+                .HasConstraintName("FK__CommentFe__Artic__59FA5E80");
 
             entity.HasOne(d => d.User).WithMany(p => p.CommentFeedbacks)
+                .HasForeignKey(d => d.UserId)
+                .HasConstraintName("FK__CommentFe__UserI__59063A47");
         });
 
         modelBuilder.Entity<Faculty>(entity =>
         {
-            entity.HasKey(e => e.FacultyId).HasName("PK__Faculty__306F636E8DD454CD");
+            entity.HasKey(e => e.FacultyId).HasName("PK__Faculty__306F636EF49B835A");
 
             entity.ToTable("Faculty");
 
@@ -181,7 +184,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<HelpAndSupport>(entity =>
         {
-            entity.HasKey(e => e.HelpSupportId).HasName("PK__HelpAndS__65D53B0F0E8D7780");
+            entity.HasKey(e => e.HelpSupportId).HasName("PK__HelpAndS__65D53B0F62F057C8");
 
             entity.ToTable("HelpAndSupport");
 
@@ -196,7 +199,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<Role>(entity =>
         {
-            entity.HasKey(e => e.RoleId).HasName("PK__Role__8AFACE3A4C77BB3C");
+            entity.HasKey(e => e.RoleId).HasName("PK__Role__8AFACE3ABEF539CF");
 
             entity.ToTable("Role");
 
@@ -208,7 +211,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<TermsAndCondition>(entity =>
         {
-            entity.HasKey(e => e.TermsId).HasName("PK__TermsAnd__C05EBE006FF47E0D");
+            entity.HasKey(e => e.TermsId).HasName("PK__TermsAnd__C05EBE00DDCDDD91");
 
             entity.Property(e => e.TermsId)
                 .ValueGeneratedNever()
@@ -218,7 +221,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.UserId).HasName("PK__User__1788CCAC96639A61");
+            entity.HasKey(e => e.UserId).HasName("PK__User__1788CCACB3CA7AA7");
 
             entity.ToTable("User");
 

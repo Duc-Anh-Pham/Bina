@@ -1,0 +1,81 @@
+﻿ @model IEnumerable<Bina.Models.ViewModels>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container my-5">
+    <h1 class="text-center mb-4">Faculty Management</h1>
+    <p class="text-end mb-4">
+        <a asp-action="Create" class="btn btn-primary">
+            <i class="bi bi-plus-circle me-2"></i>Create New
+        </a>
+    </p>
+    <div class="table-responsive">
+        <table class = "table table-striped table-bordered table-hover text-center">
+            <thead class="table-dark">
+                <tr>
+                     <th>
+                            Faculty ID
+                        </th>
+
+                     <th>
+                        Faculty Name
+                     </th>
+
+                    <th>
+                        Coordinator Username
+                    </th>
+
+                    <th>
+                        Established
+                     </th>
+
+                     <th>
+                            Action
+                    </th>
+
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                     <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FacultyId)
+                        </td>
+
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FacultyName)
+                        </td>
+
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CoordinatorUserName)
+                        </td>
+
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Established)
+                        </td>
+                        <td>
+                               <div class="btn-group" role="group" aria-label="Actions">
+                                            <a asp-action="Edit" asp-route-id="@item.FacultyId" class="btn btn-primary btn-sm" title="Edit">
+                                                <i class="bi bi-pencil"></i>
+                                            </a>
+                                            <a asp-action="Details" asp-route-id="@item.FacultyId" class="btn btn-success btn-sm" title="Detail">
+                                                <i class="bi bi-eye"></i>
+                                            </a>
+                                            <a asp-action="Delete" asp-route-id="@item.FacultyId" class="btn btn-danger btn-sm" title="Delete">
+                                                <i class="bi bi-trash3"></i>
+                                            </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
