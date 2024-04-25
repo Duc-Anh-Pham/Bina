@@ -31,7 +31,7 @@ namespace Bina.Areas.Coordinator.Controllers
             {
                 ViewBag.FacultyName = facultyName.FacultyName;
             }
-            //ViewBag.Terms = await _context.ArticlesDeadlines.ToListAsync();
+            //ViewBag.Terms = await _context.Artic=esDeadlines.ToListAsync();
 
             ViewBag.Faculties = await _context.Faculties.ToListAsync();
             ViewBag.Statuses = await _context.ArticleStatuses.ToListAsync();
