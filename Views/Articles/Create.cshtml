@@ -44,7 +44,7 @@
 
                 <div class="form-group">
                     <label asp-for="ArticlesDeadlineId" class="control-label">Deadline Term:</label>
-                    <select asp-for="ArticlesDeadlineId" class="form-control" asp-items="@ViewData["DeadlineTerms"] as IEnumerable<SelectListItem>" disabled></select>
+                    <select asp-for="ArticlesDeadlineId" class="form-control" asp-items="@ViewData["DeadlineTerms"] as IEnumerable<SelectListItem>"></select>
                     <span asp-validation-for="ArticlesDeadlineId" class="text-danger"></span>
                 </div>
 
