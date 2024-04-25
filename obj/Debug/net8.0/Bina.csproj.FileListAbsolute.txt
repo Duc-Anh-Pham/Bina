@@ -1963,3 +1963,5 @@ E:\Document\1640 12\obj\Debug\net8.0\Bina.genruntimeconfig.cache
 E:\Document\1640 12\obj\Debug\net8.0\ref\Bina.dll
 E:\Document\1640 12\obj\Debug\net8.0\scopedcss\Areas\Coordinator\Views\Shared\_Layout.cshtml.rz.scp.css
 E:\Document\1640 12\obj\Debug\net8.0\scopedcss\Areas\Manager\Views\Shared\_Layout.cshtml.rz.scp.css
+F:\Greenwich IT\TOPUP - 1640 - Enterprise Web Software Development\Code\Bina12-4\Bina\obj\Debug\net8.0\scopedcss\Areas\Coordinator\Views\Shared\_Layout.cshtml.rz.scp.css
+F:\Greenwich IT\TOPUP - 1640 - Enterprise Web Software Development\Code\Bina12-4\Bina\obj\Debug\net8.0\scopedcss\Areas\Manager\Views\Shared\_Layout.cshtml.rz.scp.css

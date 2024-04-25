@@ -44,7 +44,7 @@ public partial class Ft1Context : DbContext
     {
         modelBuilder.Entity<Article>(entity =>
         {
-            entity.HasKey(e => e.ArticleId).HasName("PK__Articles__9C6270C85EB2D7B6");
+            entity.HasKey(e => e.ArticleId).HasName("PK__Articles__9C6270C8A4736D53");
 
             entity.Property(e => e.ArticleId).HasColumnName("ArticleID");
             entity.Property(e => e.ArticleName)
@@ -87,7 +87,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<ArticleComment>(entity =>
         {
-            entity.HasKey(e => e.CommentId).HasName("PK__ArticleC__C3B4DFAAA9F315C9");
+            entity.HasKey(e => e.CommentId).HasName("PK__ArticleC__C3B4DFAAE80DA428");
 
             entity.Property(e => e.CommentId)
                 .HasDefaultValueSql("(newsequentialid())")
@@ -108,7 +108,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<ArticleStatus>(entity =>
         {
-            entity.HasKey(e => e.ArticleStatusId).HasName("PK__ArticleS__3F0E2D6BA23FBCFD");
+            entity.HasKey(e => e.ArticleStatusId).HasName("PK__ArticleS__3F0E2D6B84546B01");
 
             entity.ToTable("ArticleStatus");
 
@@ -120,7 +120,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<ArticlesDeadline>(entity =>
         {
-            entity.HasKey(e => e.ArticlesDeadlineId).HasName("PK__Articles__253F2FDCA82EDB1D");
+            entity.HasKey(e => e.ArticlesDeadlineId).HasName("PK__Articles__253F2FDCC64478F7");
 
             entity.ToTable("ArticlesDeadline");
 
@@ -147,7 +147,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<CommentFeedback>(entity =>
         {
-            entity.HasKey(e => e.CommentFeedbackId).HasName("PK__CommentF__9454C0BA6BAE1410");
+            entity.HasKey(e => e.CommentFeedbackId).HasName("PK__CommentF__9454C0BA646E1C24");
 
             entity.ToTable("CommentFeedback");
 
@@ -170,7 +170,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<Faculty>(entity =>
         {
-            entity.HasKey(e => e.FacultyId).HasName("PK__Faculty__306F636EF49B835A");
+            entity.HasKey(e => e.FacultyId).HasName("PK__Faculty__306F636ED0E558F4");
 
             entity.ToTable("Faculty");
 
@@ -184,7 +184,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<HelpAndSupport>(entity =>
         {
-            entity.HasKey(e => e.HelpSupportId).HasName("PK__HelpAndS__65D53B0F62F057C8");
+            entity.HasKey(e => e.HelpSupportId).HasName("PK__HelpAndS__65D53B0F8CA74E32");
 
             entity.ToTable("HelpAndSupport");
 
@@ -199,7 +199,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<Role>(entity =>
         {
-            entity.HasKey(e => e.RoleId).HasName("PK__Role__8AFACE3ABEF539CF");
+            entity.HasKey(e => e.RoleId).HasName("PK__Role__8AFACE3A02869B59");
 
             entity.ToTable("Role");
 
@@ -211,7 +211,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<TermsAndCondition>(entity =>
         {
-            entity.HasKey(e => e.TermsId).HasName("PK__TermsAnd__C05EBE00DDCDDD91");
+            entity.HasKey(e => e.TermsId).HasName("PK__TermsAnd__C05EBE00869BD744");
 
             entity.Property(e => e.TermsId)
                 .ValueGeneratedNever()
@@ -221,7 +221,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.UserId).HasName("PK__User__1788CCACB3CA7AA7");
+            entity.HasKey(e => e.UserId).HasName("PK__User__1788CCAC9C22DA0B");
 
             entity.ToTable("User");
 
