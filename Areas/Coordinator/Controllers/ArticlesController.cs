@@ -38,7 +38,7 @@ namespace Bina.Areas.Coordinator.Controllers
 
             var articlesQuery = _context.Articles
                 .Include(a => a.ArticleStatus)
-                //.Include(a => a.ArticlesDeadline)
+                .Include(a => a.ArticlesDeadline)
                 .Include(a => a.Faculty)
                 .Include(a => a.User)
                 .Where(a => a.Faculty.FacultyId == facultyId);
@@ -47,8 +47,6 @@ namespace Bina.Areas.Coordinator.Controllers
             {
                 articlesQuery = articlesQuery.Where(a => a.ArticlesDeadline.FacultyId == faculty);
             }
-
-
 
             if (!string.IsNullOrEmpty(academicYear))
             {
@@ -62,6 +60,10 @@ namespace Bina.Areas.Coordinator.Controllers
 
             int totalRecords = await articlesQuery.CountAsync();
             var totalPages = (int)Math.Ceiling((double)totalRecords / pageSize);
+
+            // Ensure page is within the valid range
+            page = Math.Max(1, Math.Min(page, totalPages));
+
             var articles = await articlesQuery
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
@@ -71,8 +73,14 @@ namespace Bina.Areas.Coordinator.Controllers
             ViewBag.CurrentPage = page;
             ViewBag.PageSize = pageSize;
 
+            // Pass filter parameters to the view
+            ViewBag.FacultyFilter = faculty;
+            ViewBag.AcademicYearFilter = academicYear;
+            ViewBag.StatusFilter = status;
+
             return View(articles);
         }
+
 
 
 

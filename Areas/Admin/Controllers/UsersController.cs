@@ -18,7 +18,7 @@ namespace Bina.Areas.Admin.Controllers
         private readonly Ft1Context _context;
         private readonly FirebaseCloud _firebaseCloud;
 
-        public UsersController(Ft1Context context, ILogger<UsersController> logger, FirebaseCloud firebaseCloud)
+        public UsersController(Ft1Context context, FirebaseCloud firebaseCloud)
         {
             _context = context;
             _firebaseCloud = firebaseCloud;
@@ -163,7 +163,7 @@ namespace Bina.Areas.Admin.Controllers
         // POST: Users/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UserId,UserName,FirstName,LastName,PhoneNumber,DoB,DateCreated,Gender,Email,Password,AvatarPath,RoleId,FacultyId,Terms.TermsText")] User user)
+        public async Task<IActionResult> Create([Bind("UserId,UserName,FirstName,LastName,PhoneNumber,DoB,DateCreated,Gender,Email,Password,RoleId,FacultyId,Terms.TermsText")] User user)
         {
             if (ModelState.IsValid)
             {
@@ -251,7 +251,7 @@ namespace Bina.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("UserId,UserName,FirstName,LastName,PhoneNumber,DoB,DateCreated,Gender,Email,Password,RoleId,FacultyId,Terms")] User user)
+        public async Task<IActionResult> Edit(int id, [Bind("UserId,UserName,FirstName,LastName,PhoneNumber,DoB,DateCreated,Gender,Email,Password, AvatarPath, RoleId,FacultyId,Terms")] User user)
         {
             if (id != user.UserId)
             {
@@ -440,7 +440,7 @@ namespace Bina.Areas.Admin.Controllers
         // POST: Users/Profile/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Profile(int id, [Bind("UserId,FirstName,LastName,PhoneNumber,DoB,Gender,Password")] User user)
+        public async Task<IActionResult> Profile(int id, [Bind("UserId,FirstName,LastName,PhoneNumber,DoB,Gender,Password, AvatarPath")] User user)
         {
             int userId = HttpContext.Session.GetInt32("UserId").Value;
             if (id != user.UserId)

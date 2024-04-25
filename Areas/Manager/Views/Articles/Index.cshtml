@@ -17,7 +17,7 @@
                     <option value="">All Faculty</option>
                      @foreach (var fac in ViewBag.Faculties)
                     {
-                        <option value="@fac.FacultyId" style="color : black">@fac.FacultyName</option>
+                        <option value="@fac.FacultyId">@fac.FacultyName</option>
                     }
                 </select>
             </div>
@@ -30,7 +30,7 @@
                     <option value="">All Statuses</option>
                      @foreach (var stat in ViewBag.Statuses)
                     {
-                        <option value="@stat.ArticleStatusName" style="color : black">@stat.ArticleStatusName</option>
+                        <option value="@stat.ArticleStatusName">@stat.ArticleStatusName</option>
                     }
                 </select>
             </div>
@@ -85,33 +85,45 @@
                 }
         </div>
     </div>
-@if (ViewBag.TotalPages > 1)
-{
-    <nav aria-label="Page navigation">
-        <ul class="pagination justify-content-center">
-            @{
-                int currentPage = ViewBag.CurrentPage;
-                int totalPages = ViewBag.TotalPages;
-                int pageSize = ViewBag.PageSize;
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        <!-- Previous Page Link -->
+        <li class="page-item @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
+            <form method="get" action="@Url.Action("Index","Articles")" class="page-item-form">
+                <input type="hidden" name="faculty" value="@ViewBag.Faculty" />
+                <input type="hidden" name="academicYear" value="@ViewBag.AcademicYear" />
+                <input type="hidden" name="status" value="@ViewBag.Status" />
+                <input type="hidden" name="pageNumber" value="@(ViewBag.CurrentPage - 1)" />
+                <button type="submit" class="page-link">Previous</button>
+            </form>
+        </li>
 
-                <li class="page-item @(currentPage == 1 ? "disabled" : "")">
-                    <a class="page-link" asp-action="Index" asp-route-pageNumber="@(currentPage - 1)" asp-route-pageSize="@pageSize">Previous</a>
-                </li>
+        <!-- Page Numbers; dynamic based on total pages -->
+        @for (int i = 1; i <= ViewBag.TotalPages; i++)
+        {
+            <li class="page-item @(ViewBag.CurrentPage == i ? "active" : "")">
+                <form method="get" action="@Url.Action("Index","Articles")" class="page-item-form">
+                    <input type="hidden" name="faculty" value="@ViewBag.Faculty" />
+                    <input type="hidden" name="academicYear" value="@ViewBag.AcademicYear" />
+                    <input type="hidden" name="status" value="@ViewBag.Status" />
+                    <input type="hidden" name="pageNumber" value="@i" />
+                    <button type="submit" class="page-link">@i</button>
+                </form>
+            </li>
+        }
 
-                @for (int i = 1; i <= totalPages; i++)
-                {
-                    <li class="page-item @(i == currentPage ? "active" : "")">
-                        <a class="page-link" asp-action="Index" asp-route-pageNumber="@i" asp-route-pageSize="@pageSize">@i</a>
-                    </li>
-                }
-
-                <li class="page-item @(currentPage == totalPages ? "disabled" : "")">
-                    <a class="page-link" asp-action="Index" asp-route-pageNumber="@(currentPage + 1)" asp-route-pageSize="@pageSize">Next</a>
-                </li>
-            }
-        </ul>
-    </nav>
-}
+        <!-- Next Page Link -->
+        <li class="page-item @(ViewBag.CurrentPage == ViewBag.TotalPages ? "disabled" : "")">
+            <form method="get" action="@Url.Action("Index","Articles")" class="page-item-form">
+                <input type="hidden" name="faculty" value="@ViewBag.Faculty" />
+                <input type="hidden" name="academicYear" value="@ViewBag.AcademicYear" />
+                <input type="hidden" name="status" value="@ViewBag.Status" />
+                <input type="hidden" name="pageNumber" value="@(ViewBag.CurrentPage + 1)" />
+                <button type="submit" class="page-link">Next</button>
+            </form>
+        </li>
+    </ul>
+</nav>
 @section Scripts {
     <script>
         $(document).ready(function () {
