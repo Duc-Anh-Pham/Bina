@@ -1,4 +1,7 @@
-﻿namespace Bina.Models;
+﻿using System;
+using System.Collections.Generic;
+
+namespace Bina.Models;
 
 public partial class User
 {
@@ -9,6 +12,7 @@ public partial class User
     public string? FirstName { get; set; }
 
     public string? LastName { get; set; }
+    
 
     public int? PhoneNumber { get; set; }
 
@@ -41,11 +45,7 @@ public partial class User
     public virtual Role? Role { get; set; }
 
     public virtual TermsAndCondition? Terms { get; set; }
-
-
-
     public bool RememberMe { get; set; }
-
     public string FullName
     {
         get

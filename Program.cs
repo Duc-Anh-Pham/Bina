@@ -1,12 +1,13 @@
-﻿using Bina.Data;
+﻿using Bina.Models;
 using Bina.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Authentication.MicrosoftAccount;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Services.AddTransient<IEmailSender, EmailSender>();
 builder.Services.AddLogging(config =>
 {
     config.AddConsole()
@@ -42,8 +43,24 @@ builder.Services.AddDbContext<Ft1Context>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddControllersWithViews();
+/*builder.Services.AddControllersWithViews();*/
+builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "Example API",
+        Version = "v1",
+        Description = "An example of an ASP.NET Core Web API",
+        Contact = new OpenApiContact
+        {
+            Name = "Example Contact",
+            Email = "example@example.com",
+            Url = new Uri("https://example.com/contact"),
+        },
+    });
 
+});
 // In ConfigureServices FirebaseCloud
 builder.Services.AddSingleton<FirebaseCloud>(provider =>
 {
@@ -57,9 +74,6 @@ builder.Services.AddSingleton<FirebaseCloud>(provider =>
         ""  // authPassword not use in config
     );
 });
-
-
-
 
 builder.Services.AddSession(option =>
 {
@@ -75,6 +89,12 @@ app.Logger.LogInformation("Application has started.");
 if (app.Environment.IsDevelopment())
 {
     app.UseMigrationsEndPoint();
+    app.UseSwagger();
+
+    app.UseSwaggerUI(options =>
+    {
+        options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+    });
 }
 else
 {

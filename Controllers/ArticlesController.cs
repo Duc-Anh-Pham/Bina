@@ -1,9 +1,10 @@
-﻿using Bina.Data;
-using Bina.Models;
+﻿using Bina.Models;
 using Bina.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
+using System.Resources;
 
 namespace Bina.Controllers
 {
@@ -11,11 +12,17 @@ namespace Bina.Controllers
     {
         private readonly Ft1Context _context;
         private readonly FirebaseCloud _firebaseCloud;
-
-        public ArticlesController(Ft1Context context, ILogger<ArticlesController> logger, FirebaseCloud firebaseCloud)
+        private readonly IWebHostEnvironment _env;
+        private readonly IEmailSender _emailSender;
+        public ArticlesController(Ft1Context context, ILogger<ArticlesController> logger, FirebaseCloud firebaseCloud,
+            IWebHostEnvironment env,
+            IEmailSender emailSender
+            )
         {
             _context = context;
             _firebaseCloud = firebaseCloud;
+            _env = env;
+            _emailSender = emailSender;
         }
 
         // GET: Articles
@@ -124,6 +131,12 @@ namespace Bina.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Article article, IFormFile imageFile, IFormFile documentFile)
         {
+            int? userId = HttpContext.Session.GetInt32("UserId");
+            var user = _context.Users
+            .Include(u => u.Faculty)
+            .FirstOrDefault(u => u.UserId == userId);
+            var roleId = _context.Users.AsQueryable().Where(x => x.RoleId == 2).ToList();
+
             if (ModelState.IsValid)
             {
                 // Xử lý file ảnh
@@ -138,6 +151,50 @@ namespace Bina.Controllers
                 {
                     var documentUrl = await _firebaseCloud.UploadFileToFirebase(documentFile);
                     article.DocumentPath = documentUrl; // Lưu URL của tài liệu vào thuộc tính DocumentPath
+                }
+
+                var pathToFile = _env.WebRootPath
+                            + Path.DirectorySeparatorChar.ToString()
+                            + "Templates"
+                            + Path.DirectorySeparatorChar.ToString()
+                            + "EmailTemplate"
+                            + Path.DirectorySeparatorChar.ToString()
+                            + "Confirm_Articles.html";
+
+                var subject = "Confirm Articles";
+                string HtmlBody = "";
+                using (StreamReader streamReader = System.IO.File.OpenText(pathToFile))
+                {
+                    HtmlBody = streamReader.ReadToEnd();
+                }
+                //{0}: Subject
+                //{1}: DateTime
+                //{2}: ArticleName
+                //{3}: Email
+                //{4}: Image
+                //{5}: Faculty
+                //{6}: Message
+                //{7}: callBackURL
+                string Message = $"Please confirm your account ";
+                string messageBody = string.Format(HtmlBody,
+                        subject,
+                        String.Format("{0:dddd, d MMMM yyyy}", DateTime.Now),
+                        article.ArticleName,
+                        user?.Email,
+                        article.Faculty,
+                        Message
+                        );
+                if (user != null && !string.IsNullOrEmpty(user.Email))
+                {
+                    await _emailSender.SendEmailAsync(user.Email, subject, messageBody);
+                }
+
+                foreach (var lsEmail in roleId)
+                {
+                    if (lsEmail != null && !string.IsNullOrEmpty(lsEmail.Email))
+                    {
+                        await _emailSender.SendEmailAsync(lsEmail.Email, subject, messageBody);
+                    }
                 }
 
                 _context.Add(article);

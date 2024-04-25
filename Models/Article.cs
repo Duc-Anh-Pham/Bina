@@ -1,4 +1,7 @@
-﻿namespace Bina.Models;
+﻿using System;
+using System.Collections.Generic;
+
+namespace Bina.Models;
 
 public partial class Article
 {
@@ -15,6 +18,8 @@ public partial class Article
     public string? ImagePath { get; set; }
 
     public string? DocumentPath { get; set; }
+
+    public DateTime? DateCreate { get; set; }
 
     public int? ArticleStatusId { get; set; }
 

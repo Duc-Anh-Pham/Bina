@@ -1,5 +1,4 @@
-﻿using Bina.Data;
-using Bina.Models;
+﻿using Bina.Models;
 using Bina.Models.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;

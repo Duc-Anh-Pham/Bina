@@ -56,11 +56,32 @@
                 <br />
 
                 <div class="form-group">
-                    <input type="submit" value="Submit" class="btn btn-primary" />
+                    <input type="submit" value="Submit" class="btn btn-primary" id="submitForm" />
                 </div>
             </form>
         </div>
     </div>
 </div>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("form").on("submit", function () {
+                event.preventDefault(); 
 
+                Toastify({
+                    text: 'Successfully upload!',
+                    duration: 3000,
+                    gravity: 'top',
+                    position: 'right',
+                    backgroundColor: '#28a745',
+                    stopOnFocus: true
+                }).showToast();
 
+                var form = $(this);
+                setTimeout(function () {
+                    form.off("submit").submit(); 
+                }, 3000);
+            })
+        });
+    </script>
+}

@@ -15,7 +15,7 @@
         </p>
 
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-             @foreach (var item in Model)
+            @foreach (var item in Model)
             {
                 <div class="col">
                     <div class="card shadow-sm">
@@ -33,7 +33,7 @@
                             <p class="card-text">
                                 <span class="h6">Description:</span> <span>@truncate(item.Content, 50)</span>
                             </p>
-                            
+
                             <p class="card-text">
                                 <span class="h6">Faculty:</span> <span>@Html.DisplayFor(modelItem => item.ArticlesDeadline.FacultyId)</span>
                                 <span>-</span>
@@ -43,7 +43,7 @@
                             <p class="card-text">
                                 <span class="h6">Create by:</span> <span>@Html.DisplayFor(modelItem => item.User.FullName)</span>
                             </p>
-                            
+
                             <div class="d-flex justify-content-between align-items-center">
                                 <button type="button" class="btn btn-primary my-2 read-more-button" data-article-id="@item.ArticleId">
                                     <i class="fa-solid fa-star"></i> READ MORE
