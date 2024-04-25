@@ -88,7 +88,7 @@ namespace Bina.Controllers
             if (currentDeadline == null)
             {
                 // If current date is past the DueDate or there's no active deadline
-                return RedirectToAction("ErrorPage", new { message = "Hiện tại Khoa này đã đóng chức năng Nộp bài Article, vui lòng liên hệ Coordinator nếu cần hỗ trợ thêm" });
+                return RedirectToAction("ErrorPage", new { message = "Currently, this Department has closed the Article Submission function. Please contact the Coordinator if you need further assistance" });
             }
 
             // Lấy danh sách deadlines liên quan đến khoa của người dùng
