@@ -57,7 +57,11 @@
 </div>
 
 <nav class="navbar navbar-expand-md bg-info mb-4">
-    <div class="container-fluid">
+    <div class="container">
+
+        <a id="Academic1" class="navbar-brand" asp-area="" asp-controller="ArticlesHome" asp-action="Index" aria-current="page">
+            <i class="fa-solid fa-house"></i> Academic Portal
+        </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="true" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -65,14 +69,11 @@
         <div class="navbar-collapse collapse show" id="navbarCollapse" style="">
 
             <ul class="navbar-nav mx-auto mb-2 mb-md-0">
-                <a class="navbar-brand" asp-area="" asp-controller="ArticlesHome" asp-action="Index" aria-current="page">
-                    <i class="fa-solid fa-house"></i> Academic Portal
-                </a>
 
-                @* <li class="nav-item">
+                <li class="nav-item">
                     <a class="nav-link text-dark" class="nav-link" asp-area="" asp-controller="ArticlesHome" asp-action="Index">
                         <i class="fa-solid fa-newspaper"></i> Article</a>
-                </li> *@
+                </li>
 
                 @if (isStudent)
                 {
