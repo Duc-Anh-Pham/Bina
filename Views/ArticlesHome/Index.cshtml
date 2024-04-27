@@ -16,7 +16,7 @@
 <form method="get" action="@Url.Action("Index","ArticlesHome")">
     <div class="row mb-3">
         <div class="col-sm">
-            <select class="form-control" name="faculty">
+            <select class="form-control" name="faculty" id="faculty">
                 <option value="">All Faculties</option>
                 <!-- Populate from server-side -->
                 @foreach (var fac in ViewBag.Faculties)
@@ -36,7 +36,8 @@
     </div>
 </form>
 
-
+<!-- Display the selected faculty -->
+<div id="selectedFaculty" style="display: none;"></div>
 
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="article-list">
     @foreach (var item in Model)
@@ -71,7 +72,7 @@
             @for (int i = 1; i <= ViewBag.TotalPages; i++)
             {
                 <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
-                    <a class="page-link" href="?pageNumber=@i">@i</a>
+                    <a class="page-link" href="?faculty=@(ViewData["faculty"])&pageNumber=@i&academicYear=@(ViewData["academicYear"])">@i</a>
                 </li>
             }
         </ul>
@@ -80,4 +81,12 @@
 
 
 
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    // When the form is submitted, display the selected faculty
+    $("form").on("submit", function() {
+        var selectedFaculty = $("#faculty option:selected").text();
+        $("#selectedFaculty").text("Selected Faculty: " + selectedFaculty);
+        $("#selectedFaculty").show();
+    });
+</script>

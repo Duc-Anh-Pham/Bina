@@ -166,6 +166,9 @@ namespace Bina.Controllers
             int defaultPageSize = pageSize ?? 6;
             int currentPageNumber = pageNumber ?? 1;
 
+            ViewData["faculty"] = faculty;
+            ViewData["academicYear"] = academicYear;
+
             ViewBag.Faculties = await _context.Faculties.ToListAsync();
             ViewBag.Terms = await _context.ArticlesDeadlines.ToListAsync();
             ViewBag.Statuses = await _context.ArticleStatuses.ToListAsync();

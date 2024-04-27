@@ -155,24 +155,6 @@
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|F:\\Greenwich IT\\TOPUP - 1640 - Enterprise Web Software Development\\Code\\Bina12-4\\Bina\\Areas\\Admin\\Controllers\\ArticlesController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Admin\\AppData\\Local\\Temp\\ezrabbu4..sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|CodeFrame"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Admin\\AppData\\Local\\Temp\\ezrabbu4..sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|ResultFrame"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Admin\\AppData\\Local\\Temp\\gfyfhz5f..sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|CodeFrame"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Admin\\AppData\\Local\\Temp\\gfyfhz5f..sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|ResultFrame"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Admin\\AppData\\Local\\Temp\\w3ysofx0..sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|CodeFrame"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Admin\\AppData\\Local\\Temp\\w3ysofx0..sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|ResultFrame"
     }
   ],
   "DocumentGroupContainers": [
@@ -192,7 +174,7 @@
               "RelativeDocumentMoniker": "Views\\ArticlesHome\\Index.cshtml",
               "ToolTip": "D:\\1640\\Bina\\Views\\ArticlesHome\\Index.cshtml",
               "RelativeToolTip": "Views\\ArticlesHome\\Index.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAEYAAAAGAAAA",
+              "ViewState": "AQIAAEAAAAAAAAAAAAA0wE0AAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-04-20T16:22:08.789Z",
               "IsPinned": true,
@@ -213,8 +195,7 @@
               "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/FT1/True/SqlTable/dbo.User.sql",
               "ToolTip": "dbo.User [Data]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2024-04-19T10:06:28.335Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-19T10:06:28.335Z"
             },
             {
               "$type": "Document",
@@ -235,8 +216,7 @@
               "RelativeToolTip": "appsettings.json",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAZAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-04-25T04:34:42.603Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-25T04:34:42.603Z"
             },
             {
               "$type": "Document",
@@ -257,8 +237,7 @@
               "RelativeToolTip": "Models\\User.cs",
               "ViewState": "AQIAADMAAAAAAAAAAABAwEUAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-25T15:49:34.986Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-25T15:49:34.986Z"
             },
             {
               "$type": "Document",
@@ -267,8 +246,7 @@
               "DocumentMoniker": "C:\\Users\\Admin\\AppData\\Local\\Temp\\w3ysofx0..sql",
               "ToolTip": "SQLQuery4.sql *",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2024-04-25T17:00:16.823Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-25T17:00:16.823Z"
             },
             {
               "$type": "Document",
@@ -278,7 +256,7 @@
               "RelativeDocumentMoniker": "Controllers\\ArticlesHomeController.cs",
               "ToolTip": "D:\\1640\\Bina\\Controllers\\ArticlesHomeController.cs",
               "RelativeToolTip": "Controllers\\ArticlesHomeController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAUAAAA",
+              "ViewState": "AQIAAMIAAAAAAAAAAAAAAKoAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-20T16:04:00.505Z",
               "EditorCaption": ""
@@ -290,8 +268,7 @@
               "DocumentMoniker": "C:\\Users\\Admin\\AppData\\Local\\Temp\\ezrabbu4..sql",
               "ToolTip": "SQLQuery1.sql *",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2024-04-25T16:18:23.35Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-25T16:18:23.35Z"
             },
             {
               "$type": "Document",
@@ -300,8 +277,7 @@
               "DocumentMoniker": "C:\\Users\\Admin\\AppData\\Local\\Temp\\gfyfhz5f..sql",
               "ToolTip": "SQLQuery3.sql *",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2024-04-25T16:52:34.764Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-25T16:52:34.764Z"
             },
             {
               "$type": "Document",
@@ -313,8 +289,7 @@
               "RelativeToolTip": "Areas\\Admin\\Controllers\\UsersController.cs",
               "ViewState": "AQIAAIMAAAAAAAAAAAAmwIcAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-19T10:57:33.638Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-19T10:57:33.638Z"
             },
             {
               "$type": "Document",
@@ -347,8 +322,7 @@
               "RelativeToolTip": "Controllers\\ArticlesController.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAA2AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-13T09:20:43.882Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-13T09:20:43.882Z"
             },
             {
               "$type": "Document",
