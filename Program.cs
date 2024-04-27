@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Authentication.MicrosoftAccount;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -58,9 +59,6 @@ builder.Services.AddSingleton<FirebaseCloud>(provider =>
     );
 });
 
-
-
-
 builder.Services.AddSession(option =>
 {
     option.IdleTimeout = TimeSpan.FromMinutes(60);
@@ -70,6 +68,16 @@ var app = builder.Build();
 
 app.Logger.LogInformation("Application has started.");
 
+// Create the directory if it doesn't exist
+Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "avatars"));
+
+// Then, use the static file provider
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "avatars")),
+    RequestPath = "/uploads/avatars"
+});
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

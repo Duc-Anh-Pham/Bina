@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "ObXK2DD0uLKjQr5fx/pLRxeXMUsTosiNuF5yKTJuQMw=",
+  "Hash": "W0NnRm0PRoNXqNLfjYoimVimgSXtgj8iFJjUBEMbLq0=",
   "Source": "Bina",
   "BasePath": "_content/Bina",
   "Mode": "Default",
@@ -14968,6 +14968,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\910214aa-b62a-4cec-9924-34393f77bb2d.jpg"
+    },
+    {
+      "Identity": "D:\\Github\\COMP1640\\Bina\\wwwroot\\uploads\\avatars\\Avatar.png",
+      "SourceId": "Bina",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Github\\COMP1640\\Bina\\wwwroot\\",
+      "BasePath": "_content/Bina",
+      "RelativePath": "uploads/avatars/Avatar.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\avatars\\Avatar.png"
     },
     {
       "Identity": "D:\\Github\\COMP1640\\Bina\\wwwroot\\uploads\\e79a9112-a120-4a03-9de2-c3267ce11bf3.png",

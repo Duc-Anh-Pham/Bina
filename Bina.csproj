@@ -129,6 +129,7 @@
 
   <ItemGroup>
     <PackageReference Include="Azure.Identity" Version="1.11.0" />
+    <PackageReference Include="FirebaseStorage.net" Version="1.0.3" />
     <PackageReference Include="MailKit" Version="4.5.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="8.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.MicrosoftAccount" Version="8.0.3" />
@@ -142,10 +143,6 @@
     <PackageReference Include="MimeKit" Version="4.5.0" />
     <PackageReference Include="X.PagedList" Version="9.1.2" />
     <PackageReference Include="X.PagedList.Mvc.Core" Version="9.1.2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\uploads\avatars\" />
   </ItemGroup>
 
 </Project>

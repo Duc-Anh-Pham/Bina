@@ -19,6 +19,11 @@
                 <div class="card-body">
                     <form asp-action="Create">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                       @*  <div class="form-group">
+                            <label asp-for="AvatarPath" class="control-label">Avatar</label>
+                            <input asp-for="AvatarPath" type="file" class="form-control" />
+                            <span asp-validation-for="AvatarPath" class="text-danger"></span>
+                        </div> *@
                         <div class="form-group">
                             <label asp-for="UserName" class="control-label">User Name</label>
                             <input asp-for="UserName" class="form-control" />
@@ -57,11 +62,6 @@
                             <label asp-for="Email" class="control-label">Email</label>
                             <input asp-for="Email" class="form-control" />
                             <span asp-validation-for="Email" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Password" class="control-label">Password</label>
-                            <input asp-for="Password" class="form-control" readonly disabled/>
-                            <span asp-validation-for="Password" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <label asp-for="Role" class="control-label">Role</label>

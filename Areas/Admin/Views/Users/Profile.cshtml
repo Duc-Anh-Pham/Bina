@@ -16,6 +16,19 @@
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             <input type="hidden" asp-for="UserId" />
                             <div class="form-group">
+                                <label asp-for="AvatarPath" class="control-label"></label>
+                                @if (!string.IsNullOrEmpty(Model.AvatarPath))
+                                {
+                                    <img src="@Model.AvatarPath" alt="Avatar" class="img-thumbnail" />
+                                }
+                                else
+                                {
+                                    <p>No avatar uploaded</p>
+                                }
+                                <input type="file" name="Avatar" class="form-control-file" />
+                                <span asp-validation-for="AvatarPath" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
                                 <label asp-for="UserName" class="control-label">Username</label>
                                 <input asp-for="UserName" class="form-control" readonly disabled disabled />
                                 <span asp-validation-for="UserName" class="text-danger"></span>
@@ -60,19 +73,6 @@
                                 <span asp-validation-for="Email" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <div class="d-flex align-items-center">
-                                    <div class="flex-grow-1">
-                                        <label asp-for="Password" class="control-label">Password</label>
-                                        <input asp-for="Password" class="form-control" readonly disabled />
-                                        <span asp-validation-for="Password" class="text-danger"></span>
-                                    </div>
-                                    <div style="margin-top: 15px;">
-                                        <a asp-action="ChangePassword" asp-route-id="@Model.UserId" style="color: chartreuse;">Change Password</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
                                 <label asp-for="Role" class="control-label">Role</label>
                                 @Html.DropDownListFor(m => m.RoleId, ViewBag.RoleName as SelectList, "-- Select Role --", new { @class = "form-control", @readonly = "readonly", @disabled = "disabled" })
                                 <span asp-validation-for="RoleId" class="text-danger"></span>
@@ -97,6 +97,7 @@
                             <br />
                             <div class="form-group text-center">
                                 <input type="submit" value="Save" class="btn btn-primary" />
+                                <a asp-action="ChangePassword" class="btn btn-primary" asp-route-id="@Model.UserId">Change Password</a>
                                 <a asp-action="Index" class="btn btn-secondary">Back to List</a>
                             </div>
                         </form>
