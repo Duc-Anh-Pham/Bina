@@ -84,8 +84,10 @@ namespace Bina.Controllers
                         return RedirectToAction("Index", "Home", new { area = "Coordinator" });
                     case 3: // Manager
                         return RedirectToAction("Index", "Home", new { area = "Manager" });
-                    default: // Students
+                    case 4: // Student 
                         return RedirectToAction("Index", "Home");
+                    default: // Guest
+                        return RedirectToAction("Index", "ArticlesFaculty", new { area = "Guest" });
                 }
             }
 
@@ -182,8 +184,10 @@ namespace Bina.Controllers
                     return RedirectToAction("Index", "Home", new { area = "Coordinator" });
                 case 3: // Manager
                     return RedirectToAction("Index", "Home", new { area = "Manager" });
-                default: // Students
+                case 4: // Student 
                     return RedirectToAction("Index", "Home");
+                default: // Guest
+                    return RedirectToAction("Index", "ArticlesFaculty", new { area = "Guest" });
             }
         }
 

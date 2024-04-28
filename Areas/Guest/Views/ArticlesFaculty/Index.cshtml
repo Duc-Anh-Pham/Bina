@@ -3,11 +3,37 @@
     ViewData["Title"] = "Index";
     // Define a helper function to cut the string
     Func<string, int, string> truncate = (str, length) =>
-        str?.Length > length ? str.Substring(0, length) + "..." : str;
+    str?.Length > length ? str.Substring(0, length) + "..." : str;
 }
 
 <div class="container my-5">
-    <h1 class="text-center mb-4">Welcome to: @ViewBag.FacultyId Faculty Page</h1>
+    <h1 class="text-center mb-4">Welcome to Articles Page</h1>
+
+    <div >
+        <form method="get" action="@Url.Action("Index", "ArticlesFaculty")">
+            <div class="row mb-3">
+                <div class="col-sm">
+                    <select class="form-control" name="faculty">
+                        <option value="">All Faculty</option>
+                        @foreach (var fac in ViewBag.Faculties)
+                        {
+                            <option value="@fac.FacultyId">@fac.FacultyName</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="col-sm">
+                    <input type="text" class="form-control" name="academicYear" placeholder="Academic Year" value="@ViewBag.AcademicYear">
+                </div>
+                <div class="col-sm-auto">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         @foreach (var item in Model)
         {
@@ -19,9 +45,7 @@
                         {
                             <img src="@Url.Content(item.ImagePath)" class="card-img-top" alt="Article Image" style="height:225px; width:100%; object-fit:cover;">
                         }
-                        <span class="position-absolute top-0 end-0 bg-warning text-dark m-2 px-2 py-1 rounded">
-                            @Html.DisplayFor(modelItem => item.ArticleStatus.ArticleStatusName)
-                        </span>
+                         
                     </div>
 
                     <div class="card-body">
@@ -33,6 +57,7 @@
                             <span class="h6">Faculty:</span> <span>@Html.DisplayFor(modelItem => item.ArticlesDeadline.FacultyId)</span>
                             <span>-</span>
                             <span class="h6">Term:</span> <span>@Html.DisplayFor(modelItem => item.ArticlesDeadline.TermTitle)</span>
+
                         </p>
                         <p class="card-text">
                             <span class="h6">Create by:</span> <span>@Html.DisplayFor(modelItem => item.User.FullName)</span>
@@ -51,14 +76,50 @@
         }
     </div>
 </div>
+@* <style>
+    .page-item.active .page-link {
+        background-color: #007bff;  
+        border-color: #007bff;  
+        color: #fff;  
+    }
+</style> *@
+<div class="container">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            @if (ViewBag.CurrentPage > 1)
+            {
+                <li class="page-item">
+                    <a class="page-link" href="@Url.Action("Index", new { page = ViewBag.CurrentPage - 1, faculty = ViewBag.FacultyFilter, academicYear = ViewBag.AcademicYearFilter })" aria-label="Previous">
+                        &laquo;
+                    </a>
+                </li>
+            }
+            @for (int i = 1; i <= ViewBag.TotalPages; i++)
+            {
+                <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                    <a class="page-link" href="@Url.Action("Index", new { page = i, faculty = ViewBag.FacultyFilter, academicYear = ViewBag.AcademicYearFilter })">@i</a>
+                </li>
+            }
+            @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+            {
+                <li class="page-item">
+                    <a class="page-link" href="@Url.Action("Index", new { page = ViewBag.CurrentPage + 1, faculty = ViewBag.FacultyFilter, academicYear = ViewBag.AcademicYearFilter })" aria-label="Next">
+                        &raquo;
+                    </a>
+                </li>
+            }
+        </ul>
+    </nav>
+</div>
 
 @section Scripts {
     <script>
         $(document).ready(function () {
             $('.read-more-button').click(function () {
                 var articleId = $(this).data('article-id');
-                window.location.href = '@Url.Action("Details", "ArticlesFaculty")' + '?id=' + articleId;
+                window.location.href = '@Url.Action("Details", "Articles")' + '?id=' + articleId;
             });
         });
     </script>
 }
+

@@ -1,7 +1,6 @@
 ﻿using Bina.Data;
 using Bina.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace Bina.Guest.Controllers
@@ -17,23 +16,50 @@ namespace Bina.Guest.Controllers
         }
 
         // GET: ArticlesFaculty
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string faculty, string academicYear, int page = 1, int pageSize = 3)
         {
-            var facultyId = HttpContext.Session.GetString("FacultyId");
-            if (string.IsNullOrEmpty(facultyId))
+            // Fetching filter-related lists
+            ViewBag.Faculties = await _context.Faculties.ToListAsync();
+            // ViewBag.Statuses = await _context.ArticleStatuses.ToListAsync();
+            ViewBag.FacultyFilter = faculty;
+            ViewBag.AcademicYearFilter = academicYear;
+
+            var articlesQuery = _context.Articles
+                 .Include(a => a.ArticleStatus)
+                 .Include(a => a.ArticlesDeadline)
+                 .Include(a => a.Faculty)
+                 .Include(a => a.User)
+                 .Where(a => a.ArticleStatus.ArticleStatusName == "public" && a.GuestAllow == true)
+                 .AsQueryable();
+
+            // Applying filters
+            if (!string.IsNullOrEmpty(faculty))
             {
-                return RedirectToAction("Login", "Logins");
+                articlesQuery = articlesQuery.Where(a => a.FacultyId == faculty);
+            }
+            if (!string.IsNullOrEmpty(academicYear))
+            {
+                articlesQuery = articlesQuery.Where(a => a.ArticlesDeadline.AcademicYear.ToString() == academicYear);
             }
 
-            var ft1Context = _context.Articles
-                                     .Include(a => a.ArticleStatus)
-                                     .Include(a => a.ArticlesDeadline)
-                                     .Include(a => a.Faculty)
-                                     .Include(a => a.User)
-                                     .Where(a => a.Faculty.FacultyId == facultyId);
+            int totalRecords = await articlesQuery.CountAsync();
+            int totalPages = (int)Math.Ceiling((double)totalRecords / pageSize);
+            page = Math.Max(1, Math.Min(page, totalPages));  // Ensure the page is within the valid range
 
-            return View(await ft1Context.ToListAsync());
+            var filteredArticles = await articlesQuery
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            ViewBag.TotalPages = totalPages;
+            ViewBag.CurrentPage = page;
+            ViewBag.PageSize = pageSize;
+
+            return View(filteredArticles);
         }
+
+
+
 
 
         // GET: ArticlesFaculty/Details/5

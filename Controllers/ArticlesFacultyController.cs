@@ -117,6 +117,32 @@ namespace Bina.Controllers
             var userId = HttpContext.Session.GetInt32("UserId");
             return userId;
         }
+        [HttpPost]
+        public async Task<IActionResult> ToggleLike(int articleId)
+        {
+            var userId = GetCurrentUserIdFromSession();
+
+            var existingLike = await _context.ArticleLikes
+                .FirstOrDefaultAsync(l => l.UserId == userId && l.ArticleId == articleId);
+
+            var article = await _context.Articles.FindAsync(articleId);
+
+            if (existingLike != null)
+            {
+                _context.ArticleLikes.Remove(existingLike);
+                article.LikesCount--;
+                await _context.SaveChangesAsync();
+                return Json(new { liked = false });
+            }
+            else
+            {
+                var newLike = new ArticleLike { UserId = userId, ArticleId = articleId };
+                _context.ArticleLikes.Add(newLike);
+                article.LikesCount++;
+                await _context.SaveChangesAsync();
+                return Json(new { liked = true });
+            }
+        }
 
         // GET: ArticlesFaculty/Create
         public IActionResult Create()
