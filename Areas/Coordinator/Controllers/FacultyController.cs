@@ -1,8 +1,8 @@
 ﻿using Bina.Data;
 using Bina.Models;
+using Bina.Models.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Bina.Models.Authentication;
 
 namespace Bina.Areas.Coordinator.Controllers
 {
