@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "W0NnRm0PRoNXqNLfjYoimVimgSXtgj8iFJjUBEMbLq0=",
+  "Hash": "XXWxfuJSCOuzcMwJ2iTTf/DK2HaedMJA3B8o+IdQz0E=",
   "Source": "Bina",
   "BasePath": "_content/Bina",
   "Mode": "Default",
@@ -1535,6 +1535,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "D:\\Github\\COMP1640\\Bina\\wwwroot\\img\\Avatar.png",
+      "SourceId": "Bina",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Github\\COMP1640\\Bina\\wwwroot\\",
+      "BasePath": "_content/Bina",
+      "RelativePath": "img/Avatar.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\Avatar.png"
     },
     {
       "Identity": "D:\\Github\\COMP1640\\Bina\\wwwroot\\img\\bg.svg",

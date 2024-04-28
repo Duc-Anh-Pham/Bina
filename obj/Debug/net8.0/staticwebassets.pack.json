@@ -69,6 +69,10 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "D:\\Github\\COMP1640\\Bina\\wwwroot\\img\\Avatar.png",
+      "PackagePath": "staticwebassets\\img\\Avatar.png"
+    },
+    {
       "Id": "D:\\Github\\COMP1640\\Bina\\wwwroot\\img\\bg.svg",
       "PackagePath": "staticwebassets\\img\\bg.svg"
     },

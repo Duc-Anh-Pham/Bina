@@ -12,22 +12,9 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row">
-                        <form asp-action="Edit">
+                        <form asp-action="Profile">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             <input type="hidden" asp-for="UserId" />
-                            <div class="form-group">
-                                <label asp-for="AvatarPath" class="control-label"></label>
-                                @if (!string.IsNullOrEmpty(Model.AvatarPath))
-                                {
-                                    <img src="@Model.AvatarPath" alt="Avatar" class="img-thumbnail" />
-                                }
-                                else
-                                {
-                                    <p>No avatar uploaded</p>
-                                }
-                                <input type="file" name="Avatar" class="form-control-file" />
-                                <span asp-validation-for="AvatarPath" class="text-danger"></span>
-                            </div>
                             <div class="form-group">
                                 <label asp-for="UserName" class="control-label">Username</label>
                                 <input asp-for="UserName" class="form-control" readonly disabled disabled />
@@ -55,7 +42,7 @@
                             </div>
                             <div class="form-group">
                                 <label asp-for="DateCreated" class="control-label">Date Created</label>
-                                <input asp-for="DateCreated" class="form-control" asp-items="ViewBag.DateCreated" />
+                                <input asp-for="DateCreated" class="form-control" asp-items="ViewBag.DateCreated" readonly disabled />
                                 <span asp-validation-for="DateCreated" class="text-danger"></span>
                             </div>
                             <div class="form-group">
@@ -96,7 +83,7 @@
                             </div>
                             <br />
                             <div class="form-group text-center">
-                                <input type="submit" value="Save" class="btn btn-primary" />
+                                <input type="submit" value="Save" class="btn btn-primary"/>
                                 <a asp-action="ChangePassword" class="btn btn-primary" asp-route-id="@Model.UserId">Change Password</a>
                                 <a asp-action="Index" class="btn btn-secondary">Back to List</a>
                             </div>

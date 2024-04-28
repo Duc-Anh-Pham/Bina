@@ -218,7 +218,6 @@ namespace Bina.Areas.Admin.Controllers
                 _context.Users.Add(user);
                 await _context.SaveChangesAsync();
 
-                TempData["SuccessMessage"] = "User created with default or uploaded avatar.";
                 TempData["SuccessMessage"] = "Please confirm your email to activate your account.";
                 return RedirectToAction(nameof(Index));
             }
@@ -418,8 +417,8 @@ namespace Bina.Areas.Admin.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // GET: Users/Profile/5
         [Authentication]
+        [HttpGet]
         public async Task<IActionResult> Profile(int? id)
         {
             int userId = HttpContext.Session.GetInt32("UserId").Value;
@@ -429,14 +428,13 @@ namespace Bina.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            // Kiểm tra xem id có khớp với userId của người dùng đăng nhập hay không
             if (id != userId)
             {
                 TempData["ErrorMessage"] = "You are not authorized to access this page.";
                 return RedirectToAction("Profile", new { id = userId });
             }
 
-            var user = _context.Users.Find(id);
+            var user = await _context.Users.FindAsync(id);
 
             if (user == null)
             {
@@ -449,12 +447,12 @@ namespace Bina.Areas.Admin.Controllers
             return View(user);
         }
 
-        // POST: Users/Profile/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Profile(int id, [Bind("UserId,FirstName,LastName,PhoneNumber,DoB,Gender,Password, AvatarPath")] User user)
+        public async Task<IActionResult> Profile(int id, [Bind("UserId,FirstName,LastName,PhoneNumber,DoB,Gender,Password")] User user)
         {
             int userId = HttpContext.Session.GetInt32("UserId").Value;
+
             if (id != user.UserId)
             {
                 return NotFound();
@@ -492,7 +490,7 @@ namespace Bina.Areas.Admin.Controllers
                         throw;
                     }
                 }
-
+                TempData["SuccessMessage"] = "User Profile Change Successfull";
                 return RedirectToAction(nameof(Index));
             }
 
