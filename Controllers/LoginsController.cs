@@ -87,6 +87,11 @@ namespace Bina.Controllers
                 HttpContext.Session.SetString("UserName", u.UserName.ToString());
                 HttpContext.Session.SetInt32("RoleId", u.RoleId.Value);
                 HttpContext.Session.SetInt32("UserId", u.UserId);
+                if (!string.IsNullOrEmpty(u.AvatarPath))
+                {
+                    HttpContext.Session.SetString("AvatarPath", u.AvatarPath);
+                }
+
 
                 // Kiểm tra RoleId và chuyển hướng đến Area tương ứng
                 switch (u.Role.RoleId)
@@ -97,8 +102,10 @@ namespace Bina.Controllers
                         return RedirectToAction("Index", "Home", new { area = "Coordinator" });
                     case 3: // Manager
                         return RedirectToAction("Index", "Home", new { area = "Manager" });
-                    default: // Students
+                    case 4: // Students
                         return RedirectToAction("Index", "Home");
+					default:
+						return RedirectToAction("Index", "Home", new { area = "Guest" });
                 }
             }
             else
@@ -143,6 +150,7 @@ namespace Bina.Controllers
 			HttpContext.Session.SetString("Email", user.Email.ToString());
 			HttpContext.Session.SetInt32("RoleId", user.RoleId.Value);
             HttpContext.Session.SetInt32("UserId", user.UserId);
+            HttpContext.Session.SetString("AvatarPath", user.AvatarPath);
 
             // Kiểm tra RoleId và chuyển hướng đến Area tương ứng
             return RedirectToAreaBasedOnRoleId(user.RoleId.Value);
@@ -181,6 +189,8 @@ namespace Bina.Controllers
 			HttpContext.Session.SetString("Email", user.Email.ToString());
 			HttpContext.Session.SetInt32("RoleId", user.RoleId.Value);
             HttpContext.Session.SetInt32("UserId", user.UserId);
+            HttpContext.Session.SetString("AvatarPath", user.AvatarPath);
+
 
             // Kiểm tra RoleId và chuyển hướng đến Area tương ứng
             return RedirectToAreaBasedOnRoleId(user.RoleId.Value);
@@ -190,15 +200,17 @@ namespace Bina.Controllers
 		{
 			switch (roleId)
 			{
-				case 1: // Admin
-					return RedirectToAction("Index", "Home", new { area = "Admin" });
-				case 2: // Coordinator
-					return RedirectToAction("Index", "Home", new { area = "Coordinator" });
-				case 3: // Manager
-					return RedirectToAction("Index", "Home", new { area = "Manager" });
-				default: // Students
-					return RedirectToAction("Index", "Home");
-			}
+                case 1: // Admin
+                    return RedirectToAction("Index", "Home", new { area = "Admin" });
+                case 2: // Coordinator
+                    return RedirectToAction("Index", "Home", new { area = "Coordinator" });
+                case 3: // Manager
+                    return RedirectToAction("Index", "Home", new { area = "Manager" });
+                case 4: // Students
+                    return RedirectToAction("Index", "Home");
+                default:
+                    return RedirectToAction("Index", "Home", new { area = "Guest" });
+            }
 		}
 
 		//create forgot password 

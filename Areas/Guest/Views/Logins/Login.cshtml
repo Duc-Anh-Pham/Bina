@@ -1,0 +1,106 @@
+﻿@{
+	Layout = null;
+}
+
+@model Bina.Models.User;
+
+@{
+	ViewData["Title"] = "Login";
+}
+
+<link href="~/css/NotificationMessage.css" rel="stylesheet" />
+
+@if (TempData["ErrorMessage"] != null)
+{
+	<div class="alert-login d-flex justify-content-center">
+		<span class="alert-message"><strong>Account</strong> @TempData["ErrorMessage"]</span>
+	</div>
+	<meta http-equiv="refresh" content="1">
+}
+
+
+<!doctype html>
+<html lang="en">
+<head>
+	<title>Login Page</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<link rel="stylesheet" href="/css/style.css">
+
+	<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+
+</head>
+<body class="img js-fullheight" style="background-image: url(/img/ImgLoginPage.jpg);">
+	<section class="ftco-section">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-6 text-center mb-5">
+					<h3 class="heading-section">Please Enter Login Information !</h3>
+				</div>
+			</div>
+			<div class="row justify-content-center">
+				<div class="col-md-6 col-lg-4">
+					<div class="login-wrap p-0">
+						@* <form action="#" class="signin-form"> *@
+						@using (Html.BeginForm("Login", "Logins", FormMethod.Post))
+						{
+							<div class="form-group">
+								@Html.TextBoxFor(us => us.Email, new { @class = "form-control", autofocus = "autofocus", placeholder = "Email@gmail.com", required = "required"})
+							</div>
+
+							<div class="form-group">
+								@Html.PasswordFor(us => us.Password, new { @class = "form-control", type = "password", required = "required", placeholder = "Password", id = "password-field", pattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&#])[A-Za-z\\d@$!%*?&#]{6,}$", title = "Password must contain at least 6 characters, including uppercase, lowercase, numbers, and special characters." })
+								<span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+							</div>
+
+							<div class="form-group text-center">
+								@* <button type="submit" class="form-control btn btn-primary submit px-3">Sign In</button> *@
+								<button type="submit" class="custom-btn btn-1">Login</button>
+							</div>
+							<div class="form-group d-md-flex">
+								<div class="w-50">
+									<label class="checkbox-wrap checkbox-primary">
+										Remember Me
+										@Html.CheckBoxFor(us => us.RememberMe)
+										<span class="checkmark"></span>
+									</label>
+								</div>
+
+								@* Forgot Password Function ??? *@
+								<div class="w-50 text-md-right">
+									<a asp-controller="Forgot" asp-action="ForgotPassword" style="color: #fff">Forgot Password</a>
+								</div>
+							</div>
+						}
+						@* </form> *@
+						<p class="w-100 text-center">&mdash; Or Sign In With &mdash;</p>
+						<div class="social d-flex text-center">
+							<a asp-controller="Logins" asp-action="Google" class="px-2 py-2 mr-md-1 rounded" style="display: inline-block;">
+								<img src="~/img/social/Google.png" style="width: 30px; height: 30px; float: left; margin-right: 5px;"> Sign in Google
+							</a>
+							<a asp-controller="Logins" asp-action="Microsoft" class="px-2 py-2 mr-md-1 rounded" style="display: inline-block;">
+								<img src="~/img/social/Microsoft.png" style="width: 29px; height: 29px; float: left; margin-right: 5px;">
+								Sign in Microsoft
+							</a>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/popper.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/main.js"></script>
+
+</body>
+</html>
+
+

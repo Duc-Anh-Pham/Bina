@@ -1,0 +1,24 @@
+﻿@* File: Views/Upload/Index.cshtml *@
+
+@{
+    ViewData["Title"] = "Upload Image";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@if (ViewBag.Message != null)
+{
+    <p class="alert alert-info">@ViewBag.Message</p>
+    @if (ViewBag.ImageUrl != null)
+    {
+        <img src="@ViewBag.ImageUrl" style="max-width: 100%;" />
+    }
+}
+
+<form asp-action="Upload" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="file">Select Image:</label>
+        <input type="file" class="form-control" name="file" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Upload</button>
+</form>

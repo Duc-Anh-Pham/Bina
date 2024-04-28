@@ -15,10 +15,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="Areas\Guest\Views\HelpSupport\ConfirmationPage.cshtml" />
+    <Content Remove="Areas\Guest\Views\HelpSupport\Index.cshtml" />
     <Content Remove="wwwroot\img\ImgLoginPage.jpg" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Areas\Guest\Views\HelpSupport\ConfirmationPage.cshtml" />
+    <None Include="Areas\Guest\Views\HelpSupport\Index.cshtml" />
     <None Include="Views\HelpSupport\ConfirmationPage.cshtml" />
     <None Include="Views\HelpSupport\Index.cshtml" />
     <None Include="wwwroot\css\bootstrap.min.css" />
