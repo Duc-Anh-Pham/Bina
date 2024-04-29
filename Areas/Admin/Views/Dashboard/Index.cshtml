@@ -1,103 +1,81 @@
-﻿@model IEnumerable<Bina.Models.Article>
+﻿@* Index Dashboard Page  *@
+
+@using System.Text.Json
 
 @{
-    Layout = null;
+    // Initialize the JSON variables as strings so they can be used outside the code block
+    string facultiesJson = "[]";
+    string publicCountsJson = "[]";
+    string approvedCountsJson = "[]";
+    string processingCountsJson = "[]";
+    string rejectCountsJson = "[]";
+
+    if (ViewBag.Statistics is List<Bina.Models.ArticleStatisticViewModel> statistics && statistics.Any())
+    {
+        var faculties = statistics.Select(s => s.FacultyName).Distinct().ToList();
+        var publicCounts = statistics.Where(s => s.Status == "Public").Select(s => s.Count).ToList();
+        var approvedCounts = statistics.Where(s => s.Status == "Approved").Select(s => s.Count).ToList();
+        var processingCounts = statistics.Where(s => s.Status == "Processing").Select(s => s.Count).ToList();
+        var rejectCounts = statistics.Where(s => s.Status == "Reject").Select(s => s.Count).ToList();
+
+        // Serialize the data within the Razor code block
+        facultiesJson = JsonSerializer.Serialize(faculties);
+        publicCountsJson = JsonSerializer.Serialize(publicCounts);
+        approvedCountsJson = JsonSerializer.Serialize(approvedCounts);
+        processingCountsJson = JsonSerializer.Serialize(processingCounts);
+        rejectCountsJson = JsonSerializer.Serialize(rejectCounts);
+    }
 }
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ArticleName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Content)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ImagePath)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DocumentPath)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DateCreate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.GuestAllow)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ArticleStatus)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ArticlesDeadline)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Faculty)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.User)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ArticleName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Content)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ImagePath)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DocumentPath)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateCreate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GuestAllow)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ArticleStatus.ArticleStatusId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ArticlesDeadline.ArticlesDeadlineId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Faculty.FacultyId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.UserId)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ArticleId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ArticleId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ArticleId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
-</body>
-</html>
+
+
+<div style="background: white">
+    <div class="container mt-5">
+        <h2>Article Status by Faculty and Academic Year</h2>
+        <canvas id="myChart"></canvas>
+    </div>
+
+    <script>
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: @Html.Raw(facultiesJson),
+                datasets: [{
+                    label: 'Public',
+                    data: @Html.Raw(publicCountsJson),
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                }, {
+                    label: 'Approved',
+                    data: @Html.Raw(approvedCountsJson),
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }, {
+                    label: 'Processing',
+                    data: @Html.Raw(processingCountsJson),
+                    backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                    borderColor: 'rgba(255, 206, 86, 1)',
+                    borderWidth: 1
+                }, {
+                    label: 'Reject',
+                    data: @Html.Raw(rejectCountsJson),
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</div>
+

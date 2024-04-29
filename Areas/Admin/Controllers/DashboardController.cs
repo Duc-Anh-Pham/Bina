@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Bina.Data;
+using Bina.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Bina.Data;
-using Bina.Models;
 
 namespace Bina.Areas.Admin.Controllers
 {
@@ -23,8 +19,25 @@ namespace Bina.Areas.Admin.Controllers
         // GET: Admin/Dashboard
         public async Task<IActionResult> Index()
         {
-            var ft1Context = _context.Articles.Include(a => a.ArticleStatus).Include(a => a.ArticlesDeadline).Include(a => a.Faculty).Include(a => a.User);
-            return View(await ft1Context.ToListAsync());
+            var ft1Context = _context.Articles
+                .Include(a => a.ArticleStatus)
+                .Include(a => a.ArticlesDeadline)
+                .Include(a => a.Faculty)
+                .Include(a => a.User);
+            var articleList = await ft1Context.ToListAsync();
+
+            // Make sure to call the ArticleStatistics method to get the data
+            var statistics = ArticleStatistics();
+            // Ensure that statistics is not null before passing it to the view
+            if (statistics == null)
+            {
+                // Handle the null case, possibly by initializing an empty list
+                statistics = new List<ArticleStatisticViewModel>();
+            }
+
+            ViewBag.Statistics = statistics; // Now we know this is not null
+
+            return View(articleList);
         }
 
         // GET: Admin/Dashboard/Details/5
@@ -179,5 +192,23 @@ namespace Bina.Areas.Admin.Controllers
         {
             return _context.Articles.Any(e => e.ArticleId == id);
         }
+
+        public List<ArticleStatisticViewModel> ArticleStatistics()
+        {
+            var results = _context.Articles
+                .Include(a => a.Faculty)
+                .Include(a => a.ArticleStatus)
+                .GroupBy(a => new { a.Faculty.FacultyName, a.ArticleStatus.ArticleStatusName, a.ArticlesDeadline.AcademicYear })
+                .Select(g => new ArticleStatisticViewModel
+                {
+                    FacultyName = g.Key.FacultyName,
+                    Status = g.Key.ArticleStatusName,
+                    AcademicYear = (int)g.Key.AcademicYear,
+                    Count = g.Count()
+                }).ToList();
+
+            return results;
+        }
+
     }
 }
