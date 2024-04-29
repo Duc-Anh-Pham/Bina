@@ -15,5 +15,9 @@ public partial class HelpAndSupport
 
     public string? UserMessages { get; set; }
 
+    public int? UserId { get; set; }
+
     public DateTime CreatedAt { get; set; }
+
+    public virtual User? User { get; set; }
 }

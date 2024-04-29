@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "8s+Cd2hGXSN2R9BWL3uRoBfCQd86X7Lc4vrBaV1q874=",
+  "Hash": "4Yj/kyW4UxvGkkJeukBii8CUZeZ1kOx1SHWnKxI3vAg=",
   "Source": "Bina",
   "BasePath": "_content/Bina",
   "Mode": "Default",
@@ -1535,6 +1535,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "F:\\Greenwich IT\\TOPUP - 1640 - Enterprise Web Software Development\\Code\\Bina 14-4\\Bina\\wwwroot\\img\\Avatar.png",
+      "SourceId": "Bina",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\Greenwich IT\\TOPUP - 1640 - Enterprise Web Software Development\\Code\\Bina 14-4\\Bina\\wwwroot\\",
+      "BasePath": "_content/Bina",
+      "RelativePath": "img/Avatar.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\Avatar.png"
     },
     {
       "Identity": "F:\\Greenwich IT\\TOPUP - 1640 - Enterprise Web Software Development\\Code\\Bina 14-4\\Bina\\wwwroot\\img\\bg.svg",

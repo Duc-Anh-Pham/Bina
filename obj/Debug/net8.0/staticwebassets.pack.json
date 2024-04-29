@@ -69,6 +69,10 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "F:\\Greenwich IT\\TOPUP - 1640 - Enterprise Web Software Development\\Code\\Bina 14-4\\Bina\\wwwroot\\img\\Avatar.png",
+      "PackagePath": "staticwebassets\\img\\Avatar.png"
+    },
+    {
       "Id": "F:\\Greenwich IT\\TOPUP - 1640 - Enterprise Web Software Development\\Code\\Bina 14-4\\Bina\\wwwroot\\img\\bg.svg",
       "PackagePath": "staticwebassets\\img\\bg.svg"
     },
