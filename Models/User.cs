@@ -42,6 +42,7 @@ public partial class User
     public virtual ICollection<ArticlesDeadline> ArticlesDeadlines { get; set; } = new List<ArticlesDeadline>();
 
     public virtual ICollection<CommentFeedback> CommentFeedbacks { get; set; } = new List<CommentFeedback>();
+    public virtual ICollection<ArticleLike> ArticleLikes { get; set; }
 
     public virtual Faculty? Faculty { get; set; }
 

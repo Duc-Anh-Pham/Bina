@@ -18,7 +18,7 @@ namespace Bina.Areas.Admin.Controllers
         private readonly Ft1Context _context;
         private readonly FirebaseCloud _firebaseCloud;
 
-        public UsersController(Ft1Context context, ILogger<UsersController> logger, FirebaseCloud firebaseCloud)
+        public UsersController(Ft1Context context, FirebaseCloud firebaseCloud)
         {
             _context = context;
             _firebaseCloud = firebaseCloud;
@@ -163,7 +163,7 @@ namespace Bina.Areas.Admin.Controllers
         // POST: Users/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UserId,UserName,FirstName,LastName,PhoneNumber,DoB,DateCreated,Gender,Email,Password,AvatarPath,RoleId,FacultyId,Terms.TermsText")] User user)
+        public async Task<IActionResult> Create([Bind("UserId,UserName,FirstName,LastName,PhoneNumber,DoB,DateCreated,Gender,Email,Password,RoleId,FacultyId,Terms.TermsText, AvatarFile")] User user, IFormFile AvatarFile)
         {
             if (ModelState.IsValid)
             {
@@ -206,6 +206,15 @@ namespace Bina.Areas.Admin.Controllers
                 // Gửi thông tin người dùng qua email 
                 SendConfirmationEmail(user.Email, confirmationToken, user.Password);
 
+                // Handle avatar upload
+                var avatarUrl = await _firebaseCloud.UploadAvatarToFirebase(AvatarFile);
+                user.AvatarPath = avatarUrl;  // Save the avatar URL in the user's record
+
+                // Continue with saving user etc...
+                _context.Users.Add(user);
+                await _context.SaveChangesAsync();
+
+                TempData["SuccessMessage"] = "User created with default or uploaded avatar.";
                 TempData["SuccessMessage"] = "Please confirm your email to activate your account.";
                 return RedirectToAction(nameof(Index));
             }
@@ -216,7 +225,7 @@ namespace Bina.Areas.Admin.Controllers
             return View(user);
         }
 
-        // GET: Users/Profile/5
+        // GET: Users/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Users == null)
@@ -247,11 +256,9 @@ namespace Bina.Areas.Admin.Controllers
         }
 
         // POST: Users/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("UserId,UserName,FirstName,LastName,PhoneNumber,DoB,DateCreated,Gender,Email,Password,RoleId,FacultyId,Terms")] User user)
+        public async Task<IActionResult> Edit(int id, [Bind("UserId,UserName,FirstName,LastName,PhoneNumber,DoB,DateCreated,Gender,Email,Password, AvatarPath, RoleId,FacultyId,Terms")] User user, IFormFile AvatarFile)
         {
             if (id != user.UserId)
             {
@@ -269,6 +276,17 @@ namespace Bina.Areas.Admin.Controllers
                     if (userToUpdate == null)
                     {
                         return NotFound();
+                    }
+
+                    // Handle avatar upload if a new file is provided
+                    if (AvatarFile != null && AvatarFile.Length > 0)
+                    {
+                        userToUpdate.AvatarPath = await _firebaseCloud.UploadAvatarToFirebase(AvatarFile);
+                    }
+                    // If no new avatar file is provided, keep the old avatar path
+                    else
+                    {
+                        userToUpdate.AvatarPath = user.AvatarPath;
                     }
 
                     // Lưu trữ TermsId hiện tại
@@ -334,9 +352,10 @@ namespace Bina.Areas.Admin.Controllers
                     }
                 }
             }
-
+            // Populate view data for form re-display
             ViewData["FacultyId"] = new SelectList(_context.Faculties, "FacultyId", "FacultyId", user.FacultyId);
             ViewData["RoleId"] = new SelectList(_context.Roles, "RoleId", "RoleName", user.RoleId);
+            ViewData["TermsText"] = new SelectList(_context.TermsAndConditions, "TermsId", "TermsText", user.TermsId);
             return View(user);
         }
 
@@ -440,7 +459,7 @@ namespace Bina.Areas.Admin.Controllers
         // POST: Users/Profile/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Profile(int id, [Bind("UserId,FirstName,LastName,PhoneNumber,DoB,Gender,Password")] User user)
+        public async Task<IActionResult> Profile(int id, [Bind("UserId,FirstName,LastName,PhoneNumber,DoB,Gender,Password, AvatarPath")] User user)
         {
             int userId = HttpContext.Session.GetInt32("UserId").Value;
             if (id != user.UserId)

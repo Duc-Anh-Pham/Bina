@@ -79,13 +79,29 @@
                     <select class="form-select" id="statusSelect" name="statusSelect">
                         @foreach (var status in ViewBag.StatusList)
                         {
-                            <option value="@status.ArticleStatusId" selected="@((status.ArticleStatusId == @Model.ArticleStatusId) ? "selected" : null)">
+                            <option value="@status.ArticleStatusId" style="color: black" selected="@((status.ArticleStatusId == @Model.ArticleStatusId) ? "selected" : null)">
                                 @status.ArticleStatusName
                             </option>
                         }
                     </select>
                 </div>
+                <li class="list-group-item d-flex justify-content-between lh-sm">
+                    <div>
+                        <h6 class="my-0">Guest Allow:</h6>
+                    </div>
+                    <strong class="text-body-secondary">
+                        @(Model.GuestAllow == true ? "Allowed" : "Not Allowed")
+                    </strong>
+                </li>
 
+                <div class="mb-3">
+                    <form asp-action="ToggleGuestAllow" asp-controller="Articles" method="post">
+                        <input type="hidden" name="articleId" value="@Model.ArticleId" />
+                        <button type="submit" class="btn btn-primary">
+                            @(Model.GuestAllow == true ? "Disallow Guest" : "Allow Guest")
+                        </button>
+                    </form>
+                </div>
 
                 <!-- Save button -->
                 <button class="btn btn-primary" onclick="updateStatus()">Save</button>
@@ -125,7 +141,10 @@
                 <embed src="@Model.DocumentPath" type="application/pdf" width="100%" height="600px" />
                 <a href="@Model.DocumentPath" download="@Model.DocumentPath" class="btn btn-success">Download File</a>
             </dd>
-
+            <div class="mb-3">
+                 
+                <span id="likeCount">@Model.LikesCount</span> likes
+            </div>
         </div>
 
 

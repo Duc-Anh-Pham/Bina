@@ -17,8 +17,9 @@ namespace Bina.Areas.Coordinator.Controllers
         }
 
         // GET: Coordinator/Articles
-        public async Task<IActionResult> Index(string faculty, string academicYear, string status, int page = 1, int pageSize = 3)
+        public async Task<IActionResult> Index(string academicYear, string status, int page = 1, int pageSize = 9)
         {
+            // Redirect if no session exists
             var facultyId = HttpContext.Session.GetString("FacultyId");
             if (string.IsNullOrEmpty(facultyId))
             {
@@ -26,28 +27,18 @@ namespace Bina.Areas.Coordinator.Controllers
             }
             ViewBag.FacultyId = facultyId;
 
-            var facultyName = await _context.Faculties.FirstOrDefaultAsync(f => f.FacultyId == facultyId);
-            if (facultyName != null)
-            {
-                ViewBag.FacultyName = facultyName.FacultyName;
-            }
-            //ViewBag.Terms = await _context.Artic=esDeadlines.ToListAsync();
-
             ViewBag.Faculties = await _context.Faculties.ToListAsync();
             ViewBag.Statuses = await _context.ArticleStatuses.ToListAsync();
 
+
             var articlesQuery = _context.Articles
                 .Include(a => a.ArticleStatus)
-                //.Include(a => a.ArticlesDeadline)
+                .Include(a => a.ArticlesDeadline)
                 .Include(a => a.Faculty)
                 .Include(a => a.User)
-                .Where(a => a.Faculty.FacultyId == facultyId);
+                .Where(a => a.FacultyId == facultyId);
 
-            if (!string.IsNullOrEmpty(faculty))
-            {
-                articlesQuery = articlesQuery.Where(a => a.ArticlesDeadline.FacultyId == faculty);
-            }
-
+            // filters
 
 
             if (!string.IsNullOrEmpty(academicYear))
@@ -60,19 +51,27 @@ namespace Bina.Areas.Coordinator.Controllers
                 articlesQuery = articlesQuery.Where(a => a.ArticleStatus.ArticleStatusName == status);
             }
 
+            // Pagination  
             int totalRecords = await articlesQuery.CountAsync();
-            var totalPages = (int)Math.Ceiling((double)totalRecords / pageSize);
-            var articles = await articlesQuery
-                .Skip((page - 1) * pageSize)
-                .Take(pageSize)
-                .ToListAsync();
+            int totalPages = (int)Math.Ceiling((double)totalRecords / pageSize);
+            page = Math.Max(1, Math.Min(page, totalPages));
+
+            var filteredArticles = await articlesQuery
+               .Skip((page - 1) * pageSize)
+               .Take(pageSize)
+               .ToListAsync();
 
             ViewBag.TotalPages = totalPages;
             ViewBag.CurrentPage = page;
             ViewBag.PageSize = pageSize;
 
-            return View(articles);
+            ViewBag.AcademicYearFilter = academicYear;
+            ViewBag.StatusFilter = status;
+
+            return View(filteredArticles);
         }
+
+
 
 
 
@@ -276,7 +275,26 @@ namespace Bina.Areas.Coordinator.Controllers
 
             return View(article);
         }
+        [HttpPost]
+        public async Task<IActionResult> ToggleGuestAllow(int? articleId)
+        {
+            if (articleId == null)
+            {
+                return NotFound();
+            }
 
+            var article = await _context.Articles.FindAsync(articleId);
+            if (article == null)
+            {
+                return NotFound();
+            }
+
+            article.GuestAllow = !article.GuestAllow;
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Details", new { id = articleId });
+        }
         // POST: Coordinator/Articles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

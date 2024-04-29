@@ -54,10 +54,6 @@
               "target": "Package",
               "version": "[1.11.0, )"
             },
-            "DinkToPdf": {
-              "target": "Package",
-              "version": "[1.0.8, )"
-            },
             "FirebaseStorage.net": {
               "target": "Package",
               "version": "[1.0.3, )"

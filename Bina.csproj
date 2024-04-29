@@ -15,10 +15,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="Areas\Guest\Views\HelpSupport\ConfirmationPage.cshtml" />
+    <Content Remove="Areas\Guest\Views\HelpSupport\Index.cshtml" />
     <Content Remove="wwwroot\img\ImgLoginPage.jpg" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Areas\Guest\Views\HelpSupport\ConfirmationPage.cshtml" />
+    <None Include="Areas\Guest\Views\HelpSupport\Index.cshtml" />
     <None Include="Views\HelpSupport\ConfirmationPage.cshtml" />
     <None Include="Views\HelpSupport\Index.cshtml" />
     <None Include="wwwroot\css\bootstrap.min.css" />
@@ -129,7 +133,6 @@
 
   <ItemGroup>
     <PackageReference Include="Azure.Identity" Version="1.11.0" />
-    <PackageReference Include="DinkToPdf" Version="1.0.8" />
     <PackageReference Include="FirebaseStorage.net" Version="1.0.3" />
     <PackageReference Include="MailKit" Version="4.5.0" />
     <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.7" />

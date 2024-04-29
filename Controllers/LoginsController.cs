@@ -84,8 +84,10 @@ namespace Bina.Controllers
                         return RedirectToAction("Index", "Home", new { area = "Coordinator" });
                     case 3: // Manager
                         return RedirectToAction("Index", "Home", new { area = "Manager" });
-                    default: // Students
-                        return RedirectToAction("Index", "ArticlesHome");
+                    case 4: // Student 
+                        return RedirectToAction("Index", "Home");
+                    default: // Guest
+                        return RedirectToAction("Index", "ArticlesFaculty", new { area = "Guest" });
                 }
             }
 
@@ -182,8 +184,10 @@ namespace Bina.Controllers
                     return RedirectToAction("Index", "Home", new { area = "Coordinator" });
                 case 3: // Manager
                     return RedirectToAction("Index", "Home", new { area = "Manager" });
-                default: // Students
-                    return RedirectToAction("Index", "ArticlesHome");
+                case 4: // Student 
+                    return RedirectToAction("Index", "Home");
+                default: // Guest
+                    return RedirectToAction("Index", "ArticlesFaculty", new { area = "Guest" });
             }
         }
 
@@ -197,7 +201,7 @@ namespace Bina.Controllers
             HttpContext.Session.Clear();
             HttpContext.Session.Remove("Email");
 
-            return RedirectToAction("Login", "Logins");
+            return RedirectToAction("Index", "Home");
         }
     }
 }

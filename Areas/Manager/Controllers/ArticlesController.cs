@@ -17,20 +17,23 @@ namespace Bina.Areas.Manager.Controllers
         }
 
         // GET: Manager/Articles
-        public async Task<IActionResult> Index(string faculty, string academicYear, string status, int? pageSize = 6, int? pageNumber = 1)
+        public async Task<IActionResult> Index(string faculty, string academicYear, string status, int page = 1, int pageSize = 9)
         {
-            //ViewBag.Terms = await _context.ArticlesDeadlines.ToListAsync();
-
+            // Fetching filter-related lists
             ViewBag.Faculties = await _context.Faculties.ToListAsync();
+
             ViewBag.Statuses = await _context.ArticleStatuses.ToListAsync();
-
+            ViewBag.FacultyFilter = faculty;
+            ViewBag.AcademicYearFilter = academicYear;
+            ViewBag.StatusFilter = status;
             var articlesQuery = _context.Articles
-                .Include(a => a.ArticleStatus)
-                //.Include(a => a.ArticlesDeadline)
-                .Include(a => a.Faculty)
-                .Include(a => a.User)
-                .AsQueryable();
+                 .Include(a => a.ArticleStatus)
+                 .Include(a => a.ArticlesDeadline)
+                 .Include(a => a.Faculty)
+                 .Include(a => a.User)
+                  .AsQueryable();
 
+            // Applying filters
             if (!string.IsNullOrEmpty(faculty))
             {
                 articlesQuery = articlesQuery.Where(a => a.ArticlesDeadline.FacultyId == faculty);
@@ -48,22 +51,23 @@ namespace Bina.Areas.Manager.Controllers
                 articlesQuery = articlesQuery.Where(a => a.ArticleStatus.ArticleStatusName == status);
             }
 
-            int defaultPageSize = pageSize ?? 5;
-            int currentPageNumber = pageNumber ?? 1;
+
             int totalRecords = await articlesQuery.CountAsync();
-            int totalPages = (int)Math.Ceiling((double)totalRecords / defaultPageSize);
+            int totalPages = (int)Math.Ceiling((double)totalRecords / pageSize);
+            page = Math.Max(1, Math.Min(page, totalPages));  // Ensure the page is within the valid range
 
             var filteredArticles = await articlesQuery
-                .Skip((currentPageNumber - 1) * defaultPageSize)
-                .Take(defaultPageSize)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
                 .ToListAsync();
 
             ViewBag.TotalPages = totalPages;
-            ViewBag.CurrentPage = currentPageNumber;
-            ViewBag.PageSize = defaultPageSize;
+            ViewBag.CurrentPage = page;
+            ViewBag.PageSize = pageSize;
 
             return View(filteredArticles);
         }
+
 
 
 

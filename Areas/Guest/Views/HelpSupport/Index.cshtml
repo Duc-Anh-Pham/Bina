@@ -1,0 +1,47 @@
+﻿@model Bina.Models.HelpSupport
+
+
+<div id="Quynh" class="container">
+	<div class="row justify-content-left">
+		<div class="col-md-6">
+			<div class="form-container">
+				<h1 class="mb-4" style="font-color: white">HELP and SUPPORT</h1>
+				<form asp-action="HelpSupport" method="post">
+					<div class="form-group">
+						<label asp-for="Email" style="color: black; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">Email Address:</label>
+						<input asp-for="Email" class="form-control" />
+						<span asp-validation-for="Email" class="text-danger"></span>
+					</div>
+
+					<div class="form-group">
+						<label asp-for="FullName" style="color: black; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">Full Name:</label>
+						<input asp-for="FullName" class="form-control" />
+						<span asp-validation-for="FullName" class="text-danger"></span>
+					</div>
+
+					<div class="form-group">
+						<label asp-for="Title" style="color: black; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">Title:</label>
+						<input asp-for="Title" class="form-control" />
+						<span asp-validation-for="Title" class="text-danger"></span>
+					</div>
+
+					<div class="form-group">
+						<label asp-for="UserMessages" style="color: black; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">Your Messages:</label>
+						<textarea asp-for="UserMessages" rows=" 4" cols="68" name="UserMessages"> </textarea>
+						<span asp-validation-for="UserMessages" class="text-danger"></span>
+					</div>
+
+					<div class="form-group">
+						<label asp-for="CreatedAt" style="color: black; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">Create At:</label>
+						<input asp-for="CreatedAt" class="form-control" type="datetime-local" />
+						<span asp-validation-for="CreatedAt" class="text-danger"></span>
+					</div>
+
+					<button type="submit" class="btn btn-primary">Send Message</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+		</div>
+	</div>
