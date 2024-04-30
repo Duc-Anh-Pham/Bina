@@ -169,19 +169,6 @@
               "IsPinned": true
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Ft1Context.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Downloads\\Bina-main\\Bina\\Data\\Ft1Context.cs",
-              "RelativeDocumentMoniker": "Data\\Ft1Context.cs",
-              "ToolTip": "C:\\Users\\Admin\\Downloads\\Bina-main\\Bina\\Data\\Ft1Context.cs*",
-              "RelativeToolTip": "Data\\Ft1Context.cs*",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-29T19:04:27.669Z",
-              "EditorCaption": ""
-            },
-            {
               "$type": "Bookmark",
               "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
             },
@@ -192,6 +179,18 @@
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Ft1Context.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Downloads\\Bina-main\\Bina\\Data\\Ft1Context.cs",
+              "RelativeDocumentMoniker": "Data\\Ft1Context.cs",
+              "ToolTip": "C:\\Users\\Admin\\Downloads\\Bina-main\\Bina\\Data\\Ft1Context.cs",
+              "RelativeToolTip": "Data\\Ft1Context.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-29T19:04:27.669Z"
             },
             {
               "$type": "Document",
@@ -249,8 +248,7 @@
               "RelativeToolTip": "Controllers\\ArticlesController.cs",
               "ViewState": "AQIAADwAAAAAAAAAAAAEwI4AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-24T05:13:26.462Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-24T05:13:26.462Z"
             },
             {
               "$type": "Document",
@@ -318,9 +316,9 @@
               "Title": "User.cs",
               "DocumentMoniker": "C:\\Users\\Admin\\Downloads\\Bina-main\\Bina\\Models\\User.cs",
               "RelativeDocumentMoniker": "Models\\User.cs",
-              "ToolTip": "C:\\Users\\Admin\\Downloads\\Bina-main\\Bina\\Models\\User.cs*",
-              "RelativeToolTip": "Models\\User.cs*",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAAEkAAAAAAAAA",
+              "ToolTip": "C:\\Users\\Admin\\Downloads\\Bina-main\\Bina\\Models\\User.cs",
+              "RelativeToolTip": "Models\\User.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACoAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-11T20:42:52.102Z",
               "EditorCaption": ""
@@ -371,8 +369,7 @@
               "RelativeToolTip": "Controllers\\LoginsController.cs",
               "ViewState": "AQIAAE4AAAAAAAAAAAAAAGEAAABGAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-11T20:49:42.104Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-11T20:49:42.104Z"
             },
             {
               "$type": "Document",
@@ -417,8 +414,7 @@
               "RelativeToolTip": "Controllers\\ArticlesFacultyController.cs",
               "ViewState": "AQIAAAMAAAAAAAAAAAAAABkAAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-24T05:12:21.753Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-24T05:12:21.753Z"
             },
             {
               "$type": "Document",
@@ -442,8 +438,7 @@
               "RelativeToolTip": "Controllers\\ArticlesHomeController.cs",
               "ViewState": "AQIAAIsAAAAAAAAAAAAAAKgAAAA5AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-24T10:09:19.209Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-24T10:09:19.209Z"
             },
             {
               "$type": "Document",

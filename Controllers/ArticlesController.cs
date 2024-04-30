@@ -4,6 +4,7 @@ using Bina.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 
 namespace Bina.Controllers
 {
@@ -11,11 +12,15 @@ namespace Bina.Controllers
     {
         private readonly Ft1Context _context;
         private readonly FirebaseCloud _firebaseCloud;
+        private readonly IWebHostEnvironment _env;
+        //private readonly IEmailSender _emailSender;
 
         public ArticlesController(Ft1Context context, ILogger<ArticlesController> logger, FirebaseCloud firebaseCloud)
         {
             _context = context;
             _firebaseCloud = firebaseCloud;
+          //  _env = env;
+            //_emailSender = emailSender;
         }
 
         // GET: Articles
