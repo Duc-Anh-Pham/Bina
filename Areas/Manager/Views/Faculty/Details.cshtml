@@ -1,0 +1,48 @@
+﻿ @model Bina.Models.ViewModels
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="container my-5">
+    <h1 class="text-center mb-4">Faculty Details</h1>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+    <dl class="row">
+        <dt class="col-sm-2">
+            Faculty ID
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FacultyId)
+        </dd>
+
+        <dt class="col-sm-2">
+            Faculty Name
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FacultyName)
+        </dd>
+
+        <dt class="col-sm-2">
+            Coordinator
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CoordinatorUserName)
+        </dd>
+
+        <dt class="col-sm-2">
+            Established
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Established)
+        </dd>
+    </dl>
+</div>
+<br/>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.FacultyId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

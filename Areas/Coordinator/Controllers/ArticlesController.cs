@@ -17,11 +17,64 @@ namespace Bina.Areas.Coordinator.Controllers
         }
 
         // GET: Coordinator/Articles
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string academicYear, string status, int page = 1, int pageSize = 9)
         {
-            var ft1Context = _context.Articles.Include(a => a.ArticleStatus).Include(a => a.ArticlesDeadline).Include(a => a.Faculty).Include(a => a.User);
-            return View(await ft1Context.ToListAsync());
+            // Redirect if no session exists
+            var facultyId = HttpContext.Session.GetString("FacultyId");
+            if (string.IsNullOrEmpty(facultyId))
+            {
+                return RedirectToAction("Login", "Logins");
+            }
+            ViewBag.FacultyId = facultyId;
+
+            ViewBag.Faculties = await _context.Faculties.ToListAsync();
+            ViewBag.Statuses = await _context.ArticleStatuses.ToListAsync();
+
+
+            var articlesQuery = _context.Articles
+                .Include(a => a.ArticleStatus)
+                .Include(a => a.ArticlesDeadline)
+                .Include(a => a.Faculty)
+                .Include(a => a.User)
+                .Where(a => a.FacultyId == facultyId);
+
+            // filters
+
+
+            if (!string.IsNullOrEmpty(academicYear))
+            {
+                articlesQuery = articlesQuery.Where(a => a.ArticlesDeadline.AcademicYear.ToString() == academicYear);
+            }
+
+            if (!string.IsNullOrEmpty(status))
+            {
+                articlesQuery = articlesQuery.Where(a => a.ArticleStatus.ArticleStatusName == status);
+            }
+
+            // Pagination  
+            int totalRecords = await articlesQuery.CountAsync();
+            int totalPages = (int)Math.Ceiling((double)totalRecords / pageSize);
+            page = Math.Max(1, Math.Min(page, totalPages));
+
+            var filteredArticles = await articlesQuery
+               .Skip((page - 1) * pageSize)
+               .Take(pageSize)
+               .ToListAsync();
+
+            ViewBag.TotalPages = totalPages;
+            ViewBag.CurrentPage = page;
+            ViewBag.PageSize = pageSize;
+
+            ViewBag.AcademicYearFilter = academicYear;
+            ViewBag.StatusFilter = status;
+
+            return View(filteredArticles);
         }
+
+
+
+
+
 
         // GET: Coordinator/Articles/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -32,18 +85,61 @@ namespace Bina.Areas.Coordinator.Controllers
             }
 
             var article = await _context.Articles
-                .Include(a => a.ArticleStatus)
-                .FirstOrDefaultAsync(m => m.ArticleId == id);
+               .Include(a => a.ArticleStatus)
+               .Include(a => a.ArticlesDeadline)
+               .Include(a => a.Faculty)
+               .Include(a => a.User)
+               .Include(a => a.ArticleComments)
+               .Include(a => a.CommentFeedbacks)
+           .ThenInclude(c => c.User)
+               .FirstOrDefaultAsync(m => m.ArticleId == id);
 
             if (article == null)
             {
                 return NotFound();
             }
 
-            // Get all status for dropdown
             ViewBag.StatusList = await _context.ArticleStatuses.ToListAsync();
 
             return View(article);
+        }
+        [HttpPost]
+        public async Task<IActionResult> AddFeedback(int? articleId, string feedbackText)
+        {
+            if (!ModelState.IsValid || articleId == null || string.IsNullOrWhiteSpace(feedbackText))
+            {
+                articleId = 1;
+                feedbackText = "No feedback";
+            }
+
+            var userId = GetCurrentUserIdFromSession();
+
+            var newFeedback = new CommentFeedback
+            {
+                CommentFeedbackId = Guid.NewGuid(),
+                ArticleId = articleId.Value,
+
+                UserId = userId.Value,
+                ContentFeedback = feedbackText,
+                CommentDay = DateTime.Now
+            };
+
+            _context.CommentFeedbacks.Add(newFeedback);
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+            }
+
+            return RedirectToAction("Details", "Articles", new { id = articleId.Value });
+        }
+        private int? GetCurrentUserIdFromSession()
+        {
+            var userId = HttpContext.Session.GetInt32("UserId");
+            return userId;
         }
 
         // POST: Article/UpdateStatus
@@ -179,7 +275,26 @@ namespace Bina.Areas.Coordinator.Controllers
 
             return View(article);
         }
+        [HttpPost]
+        public async Task<IActionResult> ToggleGuestAllow(int? articleId)
+        {
+            if (articleId == null)
+            {
+                return NotFound();
+            }
 
+            var article = await _context.Articles.FindAsync(articleId);
+            if (article == null)
+            {
+                return NotFound();
+            }
+
+            article.GuestAllow = !article.GuestAllow;
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Details", new { id = articleId });
+        }
         // POST: Coordinator/Articles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

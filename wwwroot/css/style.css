@@ -8427,3 +8427,9 @@ textarea.form-control {
         border: 1px solid transparent;
         background: #fbceb5;
         color: #fff; }
+
+.filter-tag {
+    display: inline-block;
+    margin-right: 10px; /* Khoảng cách giữa các thẻ */
+}
+

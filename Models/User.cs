@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Bina.Models;
 
@@ -44,7 +42,11 @@ public partial class User
 
     public virtual ICollection<CommentFeedback> CommentFeedbacks { get; set; } = new List<CommentFeedback>();
 
+    public virtual ICollection<ArticleLike> ArticleLikes { get; set; }
+
     public virtual Faculty? Faculty { get; set; }
+
+    public virtual ICollection<HelpAndSupport> HelpAndSupports { get; set; } = new List<HelpAndSupport>();
 
     public virtual Role? Role { get; set; }
 
@@ -62,7 +64,7 @@ public partial class User
     {
         get
         {
-            return LastName + " " + FirstName;
+            return FirstName + " " + LastName;
         }
     }
 }

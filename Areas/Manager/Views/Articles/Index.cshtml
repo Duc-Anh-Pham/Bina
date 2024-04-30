@@ -1,0 +1,155 @@
+﻿@model IEnumerable<Bina.Models.Article>
+    @{
+        ViewData["Title"] = "Index";
+        // Define a helper function to cut the string
+        Func<string, int, string> truncate = (str, length) =>
+        str?.Length > length ? str.Substring(0, length) + "..." : str;
+    }
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+    <div class="container my-5">
+        <h1 class="text-center mb-4">Welcome to Articles Page</h1>
+
+    <div>
+        <form method="get" action="@Url.Action("Index","Articles")">
+            <div class="row mb-3">
+                <div class="col-sm">
+                    <select class="form-control" name="faculty">
+                        <option value="">All Faculties</option>
+                        <!-- Populate from server-side -->
+                        @foreach (var fac in ViewBag.Faculties)
+                        {
+                            <option value="@fac.FacultyId" style="color: black">@fac.FacultyName</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="col-sm">
+                    <input type="text" class="form-control" name="academicYear" placeholder="Academic Year">
+                </div>
+                <div class="col-sm">
+                    <select class="form-control" name="status">
+                        <option value="">All Statuses</option>
+                        <!-- Populate from server-side -->
+                        @foreach (var stat in ViewBag.Statuses)
+                        {
+                            <option value="@stat.ArticleStatusName" style="color: black">@stat.ArticleStatusName</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-sm-auto">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" >
+            @foreach (var item in Model)
+                {
+                    <div class="col">
+                        <div class="card shadow-sm">
+                            <div class="position-relative">
+                                @* Adjust the condition to check for the item's image existence *@
+                                @if (!string.IsNullOrEmpty(item.ImagePath))
+                                {
+                                    <img src="@Url.Content(item.ImagePath)" class="card-img-top" alt="Article Image" style="height:225px; width:100%; object-fit:cover;">
+                                }
+                                @*Article status *@
+                                <span class="position-absolute top-0 end-0 bg-warning text-dark m-2 px-2 py-1 rounded">
+                                    @Html.DisplayFor(modelItem => item.ArticleStatus.ArticleStatusName)
+                                </span>
+
+                                     @*Allow Guest  *@
+                                        <span class="position-absolute top-0 start-0 bg-warning text-dark m-2 px-2 py-1 rounded">
+                                            @Html.DisplayFor(modelItem => item.ArticleStatus.ArticleStatusName)
+                                        </span>
+
+                                        @if (item.GuestAllow == true)
+                                        {
+                                            <span class="position-absolute top-0 start-0 bg-success text-white m-2 px-2 py-1 rounded">Allow Guest</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="position-absolute top-0 start-0 bg-danger text-white m-2 px-2 py-1 rounded">Disallow Guest</span>
+                                        }
+                            </div>
+
+                            <div class="card-body">
+                                <h5 class="card-title">@Html.DisplayFor(modelItem => item.ArticleName)</h5>
+                                <p class="card-text">
+                                    <span class="h6">Description:</span> <span>@truncate(item.Content, 50)</span>
+                                </p>
+                                <p class="card-text">
+                                    <span class="h6">Faculty:</span> <span>@Html.DisplayFor(modelItem => item.ArticlesDeadline.FacultyId)</span>
+                                    <span>-</span>
+                                    <span class="h6">Term:</span> <span>@Html.DisplayFor(modelItem => item.ArticlesDeadline.TermTitle)</span>
+
+                                </p>
+                                <p class="card-text">
+                                    <span class="h6">Create by:</span> <span>@Html.DisplayFor(modelItem => item.User.FullName)</span>
+                                </p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <button type="button" class="btn btn-primary my-2 read-more-button" data-article-id="@item.ArticleId">
+                                        <i class="fa-solid fa-star"></i> READ MORE
+
+
+                                    </button>
+                                    <small class="text-body-secondary">9 mins</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+        </div>
+    </div>
+
+<nav
+    <div class="container">
+    <!-- Existing content -->
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+                @if (ViewBag.CurrentPage > 1)
+                {
+                    <li class="page-item">
+                                    <a class="page-link" href="@Url.Action("Index", new { page = ViewBag.CurrentPage - 1, faculty = ViewBag.FacultyFilter, academicYear = ViewBag.AcademicYearFilter, status = ViewBag.StatusFilter })" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+                }
+                @for (int i = 1; i <= ViewBag.TotalPages; i++)
+                {
+                    <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                            <a class="page-link" href="@Url.Action("Index", new { page = i, faculty = ViewBag.FacultyFilter, academicYear = ViewBag.AcademicYearFilter,status = ViewBag.StatusFilter })">@i</a>
+                    </li>
+                }
+                @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+                {
+                    <li class="page-item">
+                            <a class="page-link" href="@Url.Action("Index", new { page = ViewBag.CurrentPage + 1, faculty = ViewBag.FacultyFilter, academicYear = ViewBag.AcademicYearFilter,status = ViewBag.StatusFilter })" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </li>
+                }
+    </ul>
+</nav>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('.read-more-button').click(function () {
+                var articleId = $(this).data('article-id');
+                window.location.href = '@Url.Action("Details", "Articles")' + '?id=' + articleId;
+            });
+        });
+    </script>
+}
+

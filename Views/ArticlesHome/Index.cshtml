@@ -1,0 +1,94 @@
+﻿@model IEnumerable<Bina.Models.Article>
+
+@{
+    // Define a helper function to cut the string
+    Func<string, int, string> truncate = (str, length) =>
+        str?.Length > length ? str.Substring(0, length) + "..." : str;
+
+    int pageNumber = ViewBag.PageNumber ?? 1; // Default page number
+    int pageSize = ViewBag.PageSize ?? 6; // Default page size
+}
+
+<div class="container">
+    <head>
+        <h4 style="text-align:center">Public Articles of All Faculty</h4>
+    </head>
+
+    <form method="get" action="@Url.Action("Index","ArticlesHome")">
+        <div class="row mb-3">
+            <div class="col-sm">
+                <select class="form-control" name="faculty" id="faculty">
+                    <option value="">All Faculties</option>
+                    <!-- Populate from server-side -->
+                    @foreach (var fac in ViewBag.Faculties)
+                    {
+                        <option value="@fac.FacultyId">@fac.FacultyName</option>
+                    }
+                </select>
+            </div>
+
+            <div class="col-sm">
+                <input type="text" class="form-control" name="academicYear" placeholder="Academic Year">
+            </div>
+
+            <div class="col-sm-auto">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </div>
+    </form>
+
+    <!-- Display the selected faculty -->
+    <div id="selectedFaculty" style="display: none;"></div>
+
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="article-list">
+        @foreach (var item in Model)
+        {
+            if (item.ArticleStatus.ArticleStatusName == "Public")
+            {
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <div class="position-relative">
+                            <img src="@Url.Content(item.ImagePath)" class="card-img-top" alt="Image" style="height:225px; width:100%; object-fit:cover;">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">@Html.DisplayFor(modelItem => item.ArticleName)</h5>
+                            <p class="card-text"><span class="h6">Description:</span> <span>@truncate(item.Content, 50)</span></p>
+                            <p class="card-text"><span class="h6">Faculty:</span> <span>@Html.DisplayFor(modelItem => item.ArticlesDeadline.FacultyId)</span> <span>-</span> <span class="h6">Term:</span> <span>@Html.DisplayFor(modelItem => item.ArticlesDeadline.TermTitle)</span></p>
+                            <p class="card-text"><span class="h6">Create by:</span> <span>@Html.DisplayFor(modelItem => item.User.FullName)</span></p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <a asp-action="Details" asp-route-id="@item.ArticleId" class="btn btn-primary my-2 read-more-button"><i class="fa-solid fa-star"></i> READ MORE</a>
+                                <small class="text-body-secondary">@item.DateCreate</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+
+    <!-- Pagination controls -->
+    <div class="d-flex justify-content-center mt-4">
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                @for (int i = 1; i <= ViewBag.TotalPages; i++)
+                {
+                    <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                        <a class="page-link" href="?faculty=@(ViewData["faculty"])&pageNumber=@i&academicYear=@(ViewData["academicYear"])">@i</a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    </div>
+
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    // When the form is submitted, display the selected faculty
+    $("form").on("submit", function () {
+        var selectedFaculty = $("#faculty option:selected").text();
+        $("#selectedFaculty").text("Selected Faculty: " + selectedFaculty);
+        $("#selectedFaculty").show();
+    });
+</script>

@@ -16,23 +16,42 @@ namespace Bina.Controllers
         }
 
         // GET: ArticlesFaculty
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1)
         {
             var facultyId = HttpContext.Session.GetString("FacultyId");
             if (string.IsNullOrEmpty(facultyId))
             {
                 return RedirectToAction("Login", "Logins");
             }
+            //ViewBag.FacultyId = facultyId;
 
-            var ft1Context = _context.Articles
-                                     .Include(a => a.ArticleStatus)
-                                     .Include(a => a.ArticlesDeadline)
-                                     .Include(a => a.Faculty)
-                                     .Include(a => a.User)
-                                     .Where(a => a.Faculty.FacultyId == facultyId);
+            var facultyName = await _context.Faculties.FirstOrDefaultAsync(f => f.FacultyId == facultyId);
+            if (facultyName != null)
+            {
+                ViewBag.FacultyName = facultyName.FacultyName;
+            }
 
-            return View(await ft1Context.ToListAsync());
+            int pageSize = 8;
+            var articlesQuery = _context.Articles
+                .Include(a => a.ArticleStatus)
+                .Include(a => a.ArticlesDeadline)
+                .Include(a => a.Faculty)
+                .Include(a => a.User)
+                .Where(a => a.Faculty.FacultyId == facultyId && a.ArticleStatus.ArticleStatusName == "Public");
+
+            int totalEntries = await articlesQuery.CountAsync();
+            List<Article> articles = await articlesQuery
+                .OrderBy(a => a.DateCreate)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            var pager = new Pager(totalEntries, page, pageSize);
+            var model = new Tuple<IEnumerable<Article>, Pager>(articles, pager);
+
+            return View(model);
         }
+
 
 
         // GET: ArticlesFaculty/Details/5
@@ -97,6 +116,32 @@ namespace Bina.Controllers
         {
             var userId = HttpContext.Session.GetInt32("UserId");
             return userId;
+        }
+        [HttpPost]
+        public async Task<IActionResult> ToggleLike(int articleId)
+        {
+            var userId = GetCurrentUserIdFromSession();
+
+            var existingLike = await _context.ArticleLikes
+                .FirstOrDefaultAsync(l => l.UserId == userId && l.ArticleId == articleId);
+
+            var article = await _context.Articles.FindAsync(articleId);
+
+            if (existingLike != null)
+            {
+                _context.ArticleLikes.Remove(existingLike);
+                article.LikesCount--;
+                await _context.SaveChangesAsync();
+                return Json(new { liked = false });
+            }
+            else
+            {
+                var newLike = new ArticleLike { UserId = userId, ArticleId = articleId };
+                _context.ArticleLikes.Add(newLike);
+                article.LikesCount++;
+                await _context.SaveChangesAsync();
+                return Json(new { liked = true });
+            }
         }
 
         // GET: ArticlesFaculty/Create

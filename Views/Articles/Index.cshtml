@@ -14,7 +14,7 @@
             <a asp-action="Create" class="btn btn-success">Add New Article</a>
         </p>
 
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
              @foreach (var item in Model)
             {
                 <div class="col">
@@ -28,7 +28,7 @@
                         </div>
 
                         <div class="card-body">
-                            <h5 class="card-title">@Html.DisplayFor(modelItem => item.ArticleName)</h5>
+                            <h5 class="card-title text-primary-emphasis">@Html.DisplayFor(modelItem => item.ArticleName)</h5>
 
                             <p class="card-text">
                                 <span class="h6">Description:</span> <span>@truncate(item.Content, 50)</span>
@@ -38,6 +38,10 @@
                                 <span class="h6">Faculty:</span> <span>@Html.DisplayFor(modelItem => item.ArticlesDeadline.FacultyId)</span>
                                 <span>-</span>
                                 <span class="h6">Term:</span> <span>@Html.DisplayFor(modelItem => item.ArticlesDeadline.TermTitle)</span>
+                            </p
+
+                            <p class="card-text">
+                                <span class="h6">Academic year:</span> <span>@Html.DisplayFor(modelItem => item.ArticlesDeadline.AcademicYear)</span>
                             </p>
 
                             <p class="card-text">

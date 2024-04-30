@@ -29,7 +29,11 @@ public partial class Article
 
     public string? FacultyId { get; set; }
 
+    public int? LikesCount { get; set; }
+
     public virtual ICollection<ArticleComment> ArticleComments { get; set; } = new List<ArticleComment>();
+
+    public virtual ICollection<ArticleLike> ArticleLikes { get; set; } = new List<ArticleLike>();
 
     public virtual ArticleStatus? ArticleStatus { get; set; }
 

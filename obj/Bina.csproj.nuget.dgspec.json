@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Github\\COMP1640\\Bina\\Bina.csproj": {}
+    "F:\\Greenwich IT\\TOPUP - 1640 - Enterprise Web Software Development\\Code\\Bina 14-4\\Bina\\Bina.csproj": {}
   },
   "projects": {
-    "D:\\Github\\COMP1640\\Bina\\Bina.csproj": {
+    "F:\\Greenwich IT\\TOPUP - 1640 - Enterprise Web Software Development\\Code\\Bina 14-4\\Bina\\Bina.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Github\\COMP1640\\Bina\\Bina.csproj",
+        "projectUniqueName": "F:\\Greenwich IT\\TOPUP - 1640 - Enterprise Web Software Development\\Code\\Bina 14-4\\Bina\\Bina.csproj",
         "projectName": "Bina",
-        "projectPath": "D:\\Github\\COMP1640\\Bina\\Bina.csproj",
-        "packagesPath": "C:\\Users\\ducan\\.nuget\\packages\\",
-        "outputPath": "D:\\Github\\COMP1640\\Bina\\obj\\",
+        "projectPath": "F:\\Greenwich IT\\TOPUP - 1640 - Enterprise Web Software Development\\Code\\Bina 14-4\\Bina\\Bina.csproj",
+        "packagesPath": "C:\\Users\\s2vet\\.nuget\\packages\\",
+        "outputPath": "F:\\Greenwich IT\\TOPUP - 1640 - Enterprise Web Software Development\\Code\\Bina 14-4\\Bina\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\ducan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\s2vet\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -57,6 +62,10 @@
               "target": "Package",
               "version": "[4.5.0, )"
             },
+            "Microsoft.AspNet.Mvc": {
+              "target": "Package",
+              "version": "[5.2.7, )"
+            },
             "Microsoft.AspNetCore.Authentication.Google": {
               "target": "Package",
               "version": "[8.0.3, )"
@@ -87,13 +96,21 @@
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "target": "Package",
-              "version": "[8.0.3, )"
+              "version": "[8.0.4, )"
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[8.0.2, )"
             },
             "MimeKit": {
+              "target": "Package",
+              "version": "[4.5.0, )"
+            },
+            "PagedList": {
+              "target": "Package",
+              "version": "[1.17.0, )"
+            },
+            "PagedList.Mvc": {
               "target": "Package",
               "version": "[4.5.0, )"
             },
@@ -125,7 +142,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

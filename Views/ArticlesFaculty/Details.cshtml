@@ -76,7 +76,14 @@
                 <embed src="@Model.DocumentPath" type="application/pdf" width="100%" height="600px" />
                 <a href="@Model.DocumentPath" download="@Model.DocumentPath" class="btn btn-success">Download File</a>
             </dd>
-
+            <div class="mb-3">
+                <button class="btn btn-primary" id="likeButton">Like</button>
+                <span id="likeCount">@Model.LikesCount</span> likes
+            </div>
+            <div class="container">
+ 
+                
+            </div>
         </div>
 
 
@@ -110,3 +117,21 @@
     </div>
 
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+   $(document).ready(function () {
+    $('#likeButton').click(function () {
+        var articleId = @Model.ArticleId;
+        $.post('/ArticlesFaculty/ToggleLike', { articleId: articleId }, function (data) {
+            if (data.liked) {
+                $('#likeCount').text(parseInt($('#likeCount').text()) + 1);
+                alert('You liked this article.');
+            } else {
+                $('#likeCount').text(parseInt($('#likeCount').text()) - 1);
+                alert('You unliked this article.'); 
+            }
+        });
+    });
+});
+
+</script>
