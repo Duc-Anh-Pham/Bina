@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "QcuXrd8oHxnSi0wSz5L5W6J52q3W/38rLrPRkx6bKH4=",
+  "Hash": "kmXfGGwmfH1zlN5enOg+vs1y2Z1iKDB9ghLfXvVPZjI=",
   "Source": "Bina",
   "BasePath": "_content/Bina",
   "Mode": "Default",
@@ -14949,6 +14949,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\scss\\style.scss"
+    },
+    {
+      "Identity": "C:\\Users\\Admin\\Downloads\\Bina-main\\Bina\\wwwroot\\Templates\\EmailTemplate\\Confirm_Articles.html",
+      "SourceId": "Bina",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Admin\\Downloads\\Bina-main\\Bina\\wwwroot\\",
+      "BasePath": "_content/Bina",
+      "RelativePath": "Templates/EmailTemplate/Confirm_Articles.html",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Templates\\EmailTemplate\\Confirm_Articles.html"
     },
     {
       "Identity": "C:\\Users\\Admin\\Downloads\\Bina-main\\Bina\\wwwroot\\uploads\\33355f2c-b182-4835-9359-a4ca13f0465b.png",

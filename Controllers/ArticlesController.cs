@@ -4,6 +4,9 @@ using Bina.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Org.BouncyCastle.Cms;
+using System.Net.Mail;
+using System.Net;
 
 namespace Bina.Controllers
 {
@@ -11,11 +14,13 @@ namespace Bina.Controllers
     {
         private readonly Ft1Context _context;
         private readonly FirebaseCloud _firebaseCloud;
+        private readonly IWebHostEnvironment _env;
 
-        public ArticlesController(Ft1Context context, ILogger<ArticlesController> logger, FirebaseCloud firebaseCloud)
+        public ArticlesController(Ft1Context context, ILogger<ArticlesController> logger, FirebaseCloud firebaseCloud, IWebHostEnvironment env)
         {
             _context = context;
             _firebaseCloud = firebaseCloud;
+            _env = env;
         }
 
         // GET: Articles
@@ -192,10 +197,10 @@ namespace Bina.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (imageFile != null && imageFile.Length > 0)
+                 if (imageFile != null && imageFile.Length > 0)
                 {
                     var imageUrl = await _firebaseCloud.UploadFileToFirebase(imageFile);
-                    article.ImagePath = imageUrl;
+                    article.ImagePath = imageUrl; 
                 }
 
                 // Xử lý file tài liệu
@@ -207,6 +212,89 @@ namespace Bina.Controllers
 
                 _context.Add(article);
                 await _context.SaveChangesAsync();
+
+                //send mail for all coor
+                int? userId = HttpContext.Session.GetInt32("UserId");
+                var user = _context.Users
+                .Include(u => u.Faculty)
+                .FirstOrDefault(u => u.UserId == userId);
+                var allCoor = _context.Users.Where(c => c.RoleId == 2).ToList();
+
+                var pathToFile = _env.WebRootPath
+             + Path.DirectorySeparatorChar.ToString()
+             + "Templates"
+             + Path.DirectorySeparatorChar.ToString()
+             + "EmailTemplate"
+             + Path.DirectorySeparatorChar.ToString()
+             + "Confirm_Articles.html";
+
+                var subject = "Confirm Articles";
+                string HtmlBody = "";
+                using (StreamReader streamReader = System.IO.File.OpenText(pathToFile))
+                {
+                    HtmlBody = streamReader.ReadToEnd();
+                }
+                //{0}: Subject
+                //{1}: DateTime
+                //{2}: ArticleName
+                //{3}: Email
+                //{4}: Image
+                //{5}: Faculty
+                //{6}: Message
+                //{7}: callBackURL
+                string Message = $"Please confirm your account ";
+                string messageBody = string.Format(HtmlBody,
+                       subject,
+                       String.Format("{0:dddd, d MMMM yyyy}", DateTime.Now),
+                       article.ArticleName,
+                       user?.Email,
+                       article.FacultyId,
+                       Message
+                       );
+
+                try
+                {
+                    // Configure SMTP client
+                    using (var smtpClient = new SmtpClient("smtp.gmail.com"))
+                    {
+                        smtpClient.Port = 587; // SMTP port (e.g., 587 for TLS)
+                        smtpClient.Credentials = new NetworkCredential("anunicore@gmail.com", "cyss hjci xhxf ohfg");
+                        smtpClient.EnableSsl = true; // Enable SSL/TLS
+
+                        // Create email message
+                        using (var message = new MailMessage())
+                        {
+                            message.From = new MailAddress("anunicore@gmail.com");
+                            message.To.Add(user.Email);
+                            message.Subject = "Confirm Articles";
+                            message.Body = messageBody;
+
+                            // Send email
+                            smtpClient.Send(message);
+                        }
+
+                        foreach (User recipient in allCoor)
+                        {
+                            // Create email message
+                            using (var message = new MailMessage())
+                            {
+                                message.From = new MailAddress("anunicore@gmail.com");
+                                message.To.Add(recipient.Email);
+                                message.Subject = "Confirm Articles";
+                                // Create HTML view
+                                AlternateView htmlView = AlternateView.CreateAlternateViewFromString(messageBody, null, "text/html");
+                                message.AlternateViews.Add(htmlView);
+
+                                // Send email
+                                smtpClient.Send(message);
+                            }
+                        }
+                    }
+                }catch(Exception ex)
+                {
+                    
+                    throw ex;
+                }
 
                 return RedirectToAction(nameof(Index));
             }

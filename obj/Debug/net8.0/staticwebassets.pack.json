@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\Bina.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\Admin\\Downloads\\Bina-main\\Bina\\wwwroot\\Templates\\EmailTemplate\\Confirm_Articles.html",
+      "PackagePath": "staticwebassets\\Templates\\EmailTemplate\\Confirm_Articles.html"
+    },
+    {
       "Id": "C:\\Users\\Admin\\Downloads\\Bina-main\\Bina\\wwwroot\\css\\Loading.css",
       "PackagePath": "staticwebassets\\css\\Loading.css"
     },
