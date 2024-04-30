@@ -26,26 +26,17 @@
                 <div class="header-actions d-flex align-items-center justify-content-end">
                     <div class="dropdown ms-2">
 
-                        <a class="dropdown-toggle d-flex align-items-center user-settings" href="#!" role="button"
-                           data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="dropdown-toggle d-flex align-items-center user-settings" href="#!" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             @if (!string.IsNullOrEmpty(Context.Session.GetString("UserName")))
                             {
                                 <span class="d-none d-md-block">Hello, @Context.Session.GetString("UserName")</span>
+                                <img src="@(string.IsNullOrEmpty(Context.Session.GetString("AvatarPath")) ? "https://firebasestorage.googleapis.com/v0/b/comp1640web.appspot.com/o/avatar%2FAvatar.png?alt=media&token=3f4c73c3-768d-482e-bdc3-f61487b5f35d" : Context.Session.GetString("AvatarPath"))" class="img-3x m-2 me-0 rounded-5" alt="User Avatar" />
                             }
-                            else if (!User.Identity.IsAuthenticated)
+                            else if (User.Identity.IsAuthenticated)
                             {
                                 <span class="d-none d-md-block">Hello, @User.Identity.Name</span>
+                                <img src="@(string.IsNullOrEmpty(User.FindFirst("AvatarPath")?.Value) ? "https://firebasestorage.googleapis.com/v0/b/comp1640web.appspot.com/o/avatar%2FAvatar.png?alt=media&token=3f4c73c3-768d-482e-bdc3-f61487b5f35d" : User.FindFirst("AvatarPath")?.Value)" class="img-3x m-2 me-0 rounded-5" alt="User Avatar" />
                             }
-
-                            @if (!string.IsNullOrEmpty(Context.Session.GetString("AvatarPath")))
-                            {
-                                <img src="@Context.Session.GetString("AvatarPath")" class="img-3x m-2 me-0 rounded-5" alt="User Avatar" />
-                            }
-                            else if (!User.Identity.IsAuthenticated)
-                            {
-                                <img src="default-avatar.jpg" class="img-3x m-2 me-0 rounded-5" alt="Default Avatar" />
-                            }
-
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-sm shadow-sm gap-3" style="">

@@ -2893,22 +2893,6 @@
       "PackagePath": "staticwebassets\\scss\\style.scss"
     },
     {
-      "Id": "D:\\Github\\COMP1640\\Bina\\wwwroot\\uploads\\33355f2c-b182-4835-9359-a4ca13f0465b.png",
-      "PackagePath": "staticwebassets\\uploads\\33355f2c-b182-4835-9359-a4ca13f0465b.png"
-    },
-    {
-      "Id": "D:\\Github\\COMP1640\\Bina\\wwwroot\\uploads\\910214aa-b62a-4cec-9924-34393f77bb2d.jpg",
-      "PackagePath": "staticwebassets\\uploads\\910214aa-b62a-4cec-9924-34393f77bb2d.jpg"
-    },
-    {
-      "Id": "D:\\Github\\COMP1640\\Bina\\wwwroot\\uploads\\avatars\\Avatar.png",
-      "PackagePath": "staticwebassets\\uploads\\avatars\\Avatar.png"
-    },
-    {
-      "Id": "D:\\Github\\COMP1640\\Bina\\wwwroot\\uploads\\e79a9112-a120-4a03-9de2-c3267ce11bf3.png",
-      "PackagePath": "staticwebassets\\uploads\\e79a9112-a120-4a03-9de2-c3267ce11bf3.png"
-    },
-    {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.Bina.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },

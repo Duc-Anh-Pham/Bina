@@ -1,6 +1,7 @@
 ﻿@{
-    var isAuthenticated = User.Identity.IsAuthenticated || (!string.IsNullOrEmpty(Context.Session.GetString("Email")) && Context.Session.GetInt32("RoleId") == 4);
+    var isAuthenticated = User.Identity.IsAuthenticated || (!string.IsNullOrEmpty(Context.Session.GetString("Email")) && Context.Session.GetInt32("RoleId") == 4 && Context.Session.GetInt32("UserId") != null);
 }
+
 
 
 <div class="container-fluid">
@@ -36,16 +37,18 @@
             <div class="col-md-3 text-end">
                 <a class="dropdown-toggle d-flex align-items-center user-settings" href="#!" role="button"
                    data-bs-toggle="dropdown" aria-expanded="false">
-                    @if (!string.IsNullOrEmpty(Context.Session.GetString("UserName")))
+                    @if (!string.IsNullOrEmpty(Context.Session.GetString("UserName")) && Context.Session.GetInt32("UserId") != null)
                     {
-                        <span class="d-none d-md-block">Hi, @Context.Session.GetString("UserName")</span>
+                        <span class="d-none d-md-block">Hello, @Context.Session.GetString("UserName")</span>
+                        <img src="@(string.IsNullOrEmpty(Context.Session.GetString("AvatarPath")) ? "https://firebasestorage.googleapis.com/v0/b/comp1640web.appspot.com/o/avatar%2FAvatar.png?alt=media&token=3f4c73c3-768d-482e-bdc3-f61487b5f35d" : Context.Session.GetString("AvatarPath"))" class="img-3x m-2 me-0 rounded-5" style="max-width: 40px;" alt="User Avatar" />
                     }
-                    else if (!User.Identity.IsAuthenticated)
+                    else if (User.Identity.IsAuthenticated)
                     {
-                        <span class="d-none d-md-block">Hi, @User.Identity.Name</span>
+                        <span class="d-none d-md-block">Hello, @User.Identity.Name</span>
+                        <img src="~/img/Avatar.png" class="img-3x m-2 me-0 rounded-5" style="max-width: 40px;" alt="User Avatar" />
                     }
-                    <img src="~/img/user3.png" class="img-3x m-2 me-0 rounded-5" style="max-width: 40px;" alt="Bootstrap Gallery" />
                 </a>
+
                 <div class="dropdown-menu dropdown-menu dropdown-menu-sm shadow-sm gap-3" style="">
                     <a class="dropdown-item d-flex align-items-center py-2" asp-controller="Profile" asp-action="EditProfile" asp-route-id="@Context.Session.GetInt32("UserId")">
                         <i class="bi bi-person-vcard" style="margin-right: 10px"></i>User Profile

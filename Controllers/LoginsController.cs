@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.MicrosoftAccount;
 using Microsoft.AspNetCore.Authorization;
 using System.Text;
+using System.Security.Claims;
 
 namespace Bina.Controllers
 {
@@ -87,11 +88,16 @@ namespace Bina.Controllers
                 HttpContext.Session.SetString("UserName", u.UserName.ToString());
                 HttpContext.Session.SetInt32("RoleId", u.RoleId.Value);
                 HttpContext.Session.SetInt32("UserId", u.UserId);
-                if (!string.IsNullOrEmpty(u.AvatarPath))
+                // Check if u.AvatarPath is not null before setting it to the session
+                if (u.AvatarPath != null)
                 {
-                    HttpContext.Session.SetString("AvatarPath", u.AvatarPath);
+                    HttpContext.Session.SetString("AvatarPath", u.AvatarPath.ToString());
                 }
-
+                else
+                {
+                    // Set a default avatar path if u.AvatarPath is null
+                    HttpContext.Session.SetString("AvatarPath", "https://firebasestorage.googleapis.com/v0/b/comp1640web.appspot.com/o/avatar%2FAvatar.png?alt=media&token=3f4c73c3-768d-482e-bdc3-f61487b5f35d");
+                }
 
                 // Kiểm tra RoleId và chuyển hướng đến Area tương ứng
                 switch (u.Role.RoleId)
@@ -126,37 +132,50 @@ namespace Bina.Controllers
 				});
 		}
 
-		public async Task<IActionResult> GoogleResponse()
-		{
-			var result = await HttpContext.AuthenticateAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        public async Task<IActionResult> GoogleResponse()
+        {
+            var result = await HttpContext.AuthenticateAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
-			// Lấy thông tin từ Google
-			var claims = result.Principal.Identities.FirstOrDefault()?.Claims;
-			var email = claims.FirstOrDefault(c => c.Type == System.Security.Claims.ClaimTypes.Email)?.Value;
-			var name = claims.FirstOrDefault(c => c.Type == System.Security.Claims.ClaimTypes.Name)?.Value;
+            // Lấy thông tin từ Google
+            var claims = result.Principal.Identities.FirstOrDefault()?.Claims;
+            var email = claims.FirstOrDefault(c => c.Type == System.Security.Claims.ClaimTypes.Email)?.Value;
+            var name = claims.FirstOrDefault(c => c.Type == System.Security.Claims.ClaimTypes.Name)?.Value;
+            var avatarUrl = claims.FirstOrDefault(c => c.Type == "picture")?.Value; // Giả sử tên claim chứa URL avatar là "picture"
 
-			// Kiểm tra xem người dùng đã tồn tại trong database hay chưa
-			var user = _context.Users.FirstOrDefault(u => u.Email == email);
 
-			if (user == null)
-			{
-				// Nếu người dùng không tồn tại, trả về trang Login với thông báo lỗi
-				TempData["ErrorMessage"] = "Unavailable!";
-				return RedirectToAction("Login", "Logins");
-			}
+            // Kiểm tra xem người dùng đã tồn tại trong database hay chưa
+            var user = _context.Users.FirstOrDefault(u => u.Email == email);
 
-			// Lưu thông tin người dùng vào session
-			HttpContext.Session.SetString("UserName", user.UserName.ToString());
-			HttpContext.Session.SetString("Email", user.Email.ToString());
-			HttpContext.Session.SetInt32("RoleId", user.RoleId.Value);
+            if (user == null)
+            {
+                // Nếu người dùng không tồn tại, trả về trang Login với thông báo lỗi
+                TempData["ErrorMessage"] = "Unavailable!";
+                return RedirectToAction("Login", "Logins");
+            }
+
+            // Lưu thông tin người dùng vào session
+            HttpContext.Session.SetString("UserName", user.UserName.ToString());
+            HttpContext.Session.SetString("Email", user.Email.ToString());
+            HttpContext.Session.SetInt32("RoleId", user.RoleId.Value);
             HttpContext.Session.SetInt32("UserId", user.UserId);
-            HttpContext.Session.SetString("AvatarPath", user.AvatarPath);
+
+            // Lưu avatar URL vào database nếu có
+            if (avatarUrl != null)
+            {
+                var identity = User.Identity as ClaimsIdentity;
+                identity.AddClaim(new Claim("AvatarPath", avatarUrl));
+                user.AvatarPath = avatarUrl;
+                _context.Update(user);
+                await _context.SaveChangesAsync();
+                HttpContext.Session.SetString("AvatarPath", avatarUrl);
+            }
 
             // Kiểm tra RoleId và chuyển hướng đến Area tương ứng
             return RedirectToAreaBasedOnRoleId(user.RoleId.Value);
-		}
+        }
 
-		public async Task Microsoft()
+
+        public async Task Microsoft()
 		{
 			await HttpContext.ChallengeAsync(MicrosoftAccountDefaults.AuthenticationScheme,
 				new AuthenticationProperties()
@@ -184,13 +203,17 @@ namespace Bina.Controllers
 				return RedirectToAction("Login", "Logins");
 			}
 
-			// Lưu thông tin người dùng vào session
-			HttpContext.Session.SetString("UserName", user.UserName.ToString());
-			HttpContext.Session.SetString("Email", user.Email.ToString());
-			HttpContext.Session.SetInt32("RoleId", user.RoleId.Value);
+            // Lưu thông tin người dùng vào session
+            HttpContext.Session.SetString("UserName", user.UserName.ToString());
+            HttpContext.Session.SetString("Email", user.Email.ToString());
+            HttpContext.Session.SetInt32("RoleId", user.RoleId.Value);
             HttpContext.Session.SetInt32("UserId", user.UserId);
-            HttpContext.Session.SetString("AvatarPath", user.AvatarPath);
 
+            // Check if u.AvatarPath is not null before setting it to the session
+            if (user.AvatarPath != null)
+            {
+                HttpContext.Session.SetString("AvatarPath", user.AvatarPath.ToString());
+            }
 
             // Kiểm tra RoleId và chuyển hướng đến Area tương ứng
             return RedirectToAreaBasedOnRoleId(user.RoleId.Value);

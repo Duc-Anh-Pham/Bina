@@ -2,9 +2,11 @@
 using Bina.Models;
 using Bina.Models.Authentication;
 using Bina.Services;
+using Firebase.Storage;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 using System.Net;
 using System.Net.Mail;
 using System.Security.Cryptography;
@@ -16,10 +18,12 @@ namespace Bina.Areas.Admin.Controllers
     public class UsersController : Controller
     {
         private readonly Ft1Context _context;
+        private readonly FirebaseCloud _firebaseCloud;
 
-        public UsersController(Ft1Context context)
+        public UsersController(Ft1Context context, ILogger<UsersController> logger, FirebaseCloud firebaseCloud)
         {
             _context = context;
+            _firebaseCloud = firebaseCloud;
         }
 
         [Authentication]
@@ -148,15 +152,6 @@ namespace Bina.Areas.Admin.Controllers
             return new string(password);
         }
 
-        //private string HashPassword(string password)
-        //{
-        //    // Sử dụng một thuật toán mã hóa an toàn, ví dụ: SHA256
-        //    using (var sha256 = SHA256.Create())
-        //    {
-        //        var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
-        //        return BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
-        //    }
-        //}
 
         // POST: Users/Create
         [HttpPost]
@@ -166,13 +161,13 @@ namespace Bina.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 // List of allowed email domains
-                var allowedDomains = new List<string> { "@gmail.com", "@edu.com", "@org.com" };
+                var allowedDomains = new List<string> { "@gmail.com", "@fpt.edu.vn", "@org.com" };
 
                 // Check if the email domain is allowed
-                var emailDomain = new string(user.Email.SkipWhile(c => c != '@').Skip(1).ToArray());
+                var emailDomain = user.Email.Substring(user.Email.IndexOf('@')).ToLower(); // Tách đuôi email từ ký tự '@' và chuyển thành chữ thường
                 if (!allowedDomains.Contains(emailDomain, StringComparer.OrdinalIgnoreCase))
                 {
-                    ModelState.AddModelError("Email", "Email must be from one of the following domains: @gmail.com, @edu.com, @org.com");
+                    ModelState.AddModelError("Email", "Email must be from one of the following domains: @gmail.com, @fpt.edu.vn, @org.com");
                     ViewData["FacultyId"] = new SelectList(_context.Faculties, "FacultyId", "FacultyId", user.FacultyId);
                     ViewData["RoleName"] = new SelectList(_context.Roles, "RoleId", "RoleName", user.RoleId);
                     ViewData["TermsText"] = new SelectList(_context.TermsAndConditions, "TermsId", "TermsText", user.TermsId);
@@ -200,6 +195,9 @@ namespace Bina.Areas.Admin.Controllers
                     return View(user);
                 }
 
+                // Gán đường dẫn ảnh avatar mặc định
+                user.AvatarPath = "https://firebasestorage.googleapis.com/v0/b/comp1640web.appspot.com/o/avatar%2FAvatar.png?alt=media&token=3f4c73c3-768d-482e-bdc3-f61487b5f35d";
+
                 // Tạo mật khẩu ngẫu nhiên
                 user.Password = GenerateRandomPassword();
 
@@ -222,6 +220,7 @@ namespace Bina.Areas.Admin.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
+            // (Return statement and view data handling as in your original code)
             ViewData["FacultyId"] = new SelectList(_context.Faculties, "FacultyId", "FacultyId", user.FacultyId);
             ViewData["RoleName"] = new SelectList(_context.Roles, "RoleId", "RoleName", user.RoleId);
             ViewData["TermsText"] = new SelectList(_context.TermsAndConditions, "TermsId", "TermsText", user.TermsId);
@@ -237,10 +236,10 @@ namespace Bina.Areas.Admin.Controllers
             }
 
             var user = await _context.Users
-                .Include(u => u.Faculty)
-                .Include(u => u.Role) // Eager loading Roles
-                .Include(u => u.Terms)
-                .FirstOrDefaultAsync(m => m.UserId == id);
+            .Include(u => u.Faculty)
+            .Include(u => u.Role) // Eager loading Roles
+            .Include(u => u.Terms)
+            .FirstOrDefaultAsync(m => m.UserId == id);
 
             if (user == null)
             {
@@ -261,7 +260,7 @@ namespace Bina.Areas.Admin.Controllers
         // POST: Users/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("UserId,UserName,FirstName,LastName,PhoneNumber,DoB,DateCreated,Gender,Email,Password,AvatarPath,RoleId,FacultyId,Terms")] User user)
+        public async Task<IActionResult> Edit(int id, [Bind("UserId,UserName,FirstName,LastName,PhoneNumber,DoB,Gender,Email,Password,AvatarPath,RoleId,FacultyId,Terms.TermsText")] User user, IFormFile AvatarFile)
         {
             if (id != user.UserId)
             {
@@ -281,13 +280,7 @@ namespace Bina.Areas.Admin.Controllers
                         return NotFound();
                     }
 
-                    // Lưu trữ TermsId hiện tại
-                    var currentTermsId = userToUpdate.TermsId;
-
-                    // Tạm thời gán TermsId thành null
-                    userToUpdate.TermsId = null;
-
-                    // Cập nhật các trường dữ liệu
+                    // Xử lý cập nhật thông tin người dùng
                     userToUpdate.UserName = user.UserName;
                     userToUpdate.FirstName = user.FirstName;
                     userToUpdate.LastName = user.LastName;
@@ -299,36 +292,48 @@ namespace Bina.Areas.Admin.Controllers
                     userToUpdate.RoleId = user.RoleId;
                     userToUpdate.FacultyId = user.FacultyId;
 
-                    _context.Users.Update(userToUpdate);
-                    await _context.SaveChangesAsync();
-
-                    // Kiểm tra vai trò mới
-                    var newRole = await _context.Roles.FindAsync(user.RoleId);
-                    if (newRole != null && newRole.RoleName == "Student")
+                    // Xử lý cập nhật TermsAndConditions
+                    if (user.RoleId == (int)Roles.Student)
                     {
-                        // Kiểm tra nếu TermsText không rỗng
                         if (!string.IsNullOrWhiteSpace(user.Terms?.TermsText))
                         {
-                            // Tìm TermsAndCondition có TermsText tương ứng trong cơ sở dữ liệu
                             var existingTerms = await _context.TermsAndConditions
                                 .FirstOrDefaultAsync(t => t.TermsText == user.Terms.TermsText);
 
                             if (existingTerms != null)
                             {
-                                // Nếu TermsText đã tồn tại, gán TermsId hiện có cho user
                                 userToUpdate.TermsId = existingTerms.TermsId;
                             }
                             else
                             {
-                                // Ngược lại, tạo mới TermsAndCondition
                                 var newTerms = new TermsAndCondition { TermsText = user.Terms.TermsText };
                                 _context.TermsAndConditions.Add(newTerms);
                                 await _context.SaveChangesAsync();
                                 userToUpdate.TermsId = newTerms.TermsId;
                             }
                         }
+                        else
+                        {
+                            userToUpdate.TermsId = null;
+                        }
                     }
-                    // Nếu vai trò mới không phải "Student", giữ TermsId là null
+                    else
+                    {
+                        userToUpdate.TermsId = null;
+                    }
+
+                    // Xử lý cập nhật AvatarPath
+                    if (AvatarFile != null && AvatarFile.Length > 0)
+                    {
+                        string avatarUrl = await _firebaseCloud.UploadAvatarToFirebase(AvatarFile, "avatar");
+                        if (!string.IsNullOrEmpty(avatarUrl))
+                        {
+                            userToUpdate.AvatarPath = avatarUrl;
+                        }
+                    }
+
+                    _context.Users.Update(userToUpdate);
+                    await _context.SaveChangesAsync();
 
                     return RedirectToAction(nameof(Index));
                 }
@@ -344,7 +349,7 @@ namespace Bina.Areas.Admin.Controllers
                     }
                 }
             }
-            // Populate view data for form re-display
+
             ViewData["FacultyId"] = new SelectList(_context.Faculties, "FacultyId", "FacultyId", user.FacultyId);
             ViewData["RoleId"] = new SelectList(_context.Roles, "RoleId", "RoleName", user.RoleId);
             ViewData["TermsText"] = new SelectList(_context.TermsAndConditions, "TermsId", "TermsText", user.TermsId);
@@ -434,7 +439,10 @@ namespace Bina.Areas.Admin.Controllers
                 return RedirectToAction("Profile", new { id = userId });
             }
 
-            var user = await _context.Users.FindAsync(id);
+            var user = await _context.Users
+                .Include(u => u.Faculty)
+                .Include(u => u.Role)
+                .FirstOrDefaultAsync(m => m.UserId == id);
 
             if (user == null)
             {
@@ -449,10 +457,8 @@ namespace Bina.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Profile(int id, [Bind("UserId,FirstName,LastName,PhoneNumber,DoB,Gender,Password")] User user)
+        public async Task<IActionResult> Profile(int id, [Bind("UserId,FirstName,LastName,PhoneNumber,DoB,Gender,Password")] User user, IFormFile AvatarFile)
         {
-            int userId = HttpContext.Session.GetInt32("UserId").Value;
-
             if (id != user.UserId)
             {
                 return NotFound();
@@ -463,21 +469,34 @@ namespace Bina.Areas.Admin.Controllers
                 try
                 {
                     var userToUpdate = await _context.Users.FindAsync(id);
-
                     if (userToUpdate == null)
                     {
                         return NotFound();
                     }
 
+                    // Cập nhật thông tin người dùng
                     userToUpdate.FirstName = user.FirstName;
                     userToUpdate.LastName = user.LastName;
                     userToUpdate.PhoneNumber = user.PhoneNumber;
                     userToUpdate.DoB = user.DoB;
                     userToUpdate.Gender = user.Gender;
+                    // Mã hóa mật khẩu tại đây, tùy thuộc vào cách mật khẩu được xử lý trong hệ thống của bạn
                     userToUpdate.Password = user.Password;
+
+                    // Xử lý tải lên avatar
+                    if (AvatarFile != null && AvatarFile.Length > 0)
+                    {
+                        string avatarUrl = await _firebaseCloud.UploadAvatarToFirebase(AvatarFile, "avatars/" + userToUpdate.UserId.ToString());
+                        if (!string.IsNullOrEmpty(avatarUrl))
+                        {
+                            userToUpdate.AvatarPath = avatarUrl;
+                        }
+                    }
 
                     _context.Users.Update(userToUpdate);
                     await _context.SaveChangesAsync();
+                    TempData["SuccessMessage"] = "Profile updated successfully.";
+                    return RedirectToAction(nameof(Index));
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -490,8 +509,6 @@ namespace Bina.Areas.Admin.Controllers
                         throw;
                     }
                 }
-                TempData["SuccessMessage"] = "User Profile Change Successfull";
-                return RedirectToAction(nameof(Index));
             }
 
             ViewData["FacultyId"] = new SelectList(_context.Faculties, "FacultyId", "FacultyId", user.FacultyId);

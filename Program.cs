@@ -68,16 +68,16 @@ var app = builder.Build();
 
 app.Logger.LogInformation("Application has started.");
 
-// Create the directory if it doesn't exist
-Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "avatars"));
+//// Create the directory if it doesn't exist
+//Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "avatars"));
 
-// Then, use the static file provider
-app.UseStaticFiles(new StaticFileOptions
-{
-    FileProvider = new PhysicalFileProvider(
-        Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "avatars")),
-    RequestPath = "/uploads/avatars"
-});
+//// Then, use the static file provider
+//app.UseStaticFiles(new StaticFileOptions
+//{
+//    FileProvider = new PhysicalFileProvider(
+//        Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "avatars")),
+//    RequestPath = "/uploads/avatars"
+//});
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
