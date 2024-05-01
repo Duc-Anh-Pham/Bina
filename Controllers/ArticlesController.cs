@@ -218,7 +218,7 @@ namespace Bina.Controllers
                 var user = _context.Users
                 .Include(u => u.Faculty)
                 .FirstOrDefault(u => u.UserId == userId);
-                var allCoor = _context.Users.Where(c => c.RoleId == 2).ToList();
+                var allCoor = _context.Users.Where(c => c.RoleId == 2 && c.FacultyId == article.FacultyId).ToList();
 
                 var pathToFile = _env.WebRootPath
              + Path.DirectorySeparatorChar.ToString()
@@ -258,7 +258,7 @@ namespace Bina.Controllers
                     using (var smtpClient = new SmtpClient("smtp.gmail.com"))
                     {
                         smtpClient.Port = 587; // SMTP port (e.g., 587 for TLS)
-                        smtpClient.Credentials = new NetworkCredential("anunicore@gmail.com", "cyss hjci xhxf ohfg");
+                        smtpClient.Credentials = new NetworkCredential("anunicore@gmail.com", "rmvc jzxm nwyq jqpb");
                         smtpClient.EnableSsl = true; // Enable SSL/TLS
 
                         // Create email message
@@ -267,7 +267,9 @@ namespace Bina.Controllers
                             message.From = new MailAddress("anunicore@gmail.com");
                             message.To.Add(user.Email);
                             message.Subject = "Confirm Articles";
-                            message.Body = messageBody;
+                            // Create HTML view
+                            AlternateView htmlView = AlternateView.CreateAlternateViewFromString(messageBody, null, "text/html");
+                            message.AlternateViews.Add(htmlView);
 
                             // Send email
                             smtpClient.Send(message);
