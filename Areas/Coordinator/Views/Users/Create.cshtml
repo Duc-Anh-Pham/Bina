@@ -48,8 +48,8 @@
                             <label asp-for="Gender" class="control-label">Gender</label>
                             <select asp-for="Gender" class="form-control">
                                 <option value="">--Select Gender--</option>
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
+                                <option value="Male" style="color: black">Male</option>
+                                <option value="Female" style="color: black">Female</option>
                             </select>
                             <span asp-validation-for="Gender" class="text-danger"></span>
                         </div>
@@ -65,15 +65,15 @@
                         </div>
                         <div class="form-group">
                             <label asp-for="Role" class="control-label">Role</label>
-                            <select asp-for="Role" class="form-control" asp-items="ViewBag.RoleName"></select>
+                            <select asp-for="Role" class="form-control" asp-items="ViewBag.RoleName" style="color: black"></select>
                         </div>
                         <div class="form-group">
                             <label asp-for="FacultyId" class="control-label"> Faculty ID</label>
                             <select asp-for="FacultyId" class="form-control">
-                                <option value="">None</option>
+                                <option value="" style="color: black">None</option>
                                 @foreach (var faculty in ViewBag.FacultyId)
                                 {
-                                    <option value="@faculty.Value">@faculty.Text</option>
+                                    <option value="@faculty.Value" style="color: black">@faculty.Text</option>
                                 }
                             </select>
                             <span asp-validation-for="FacultyId" class="text-danger"></span>

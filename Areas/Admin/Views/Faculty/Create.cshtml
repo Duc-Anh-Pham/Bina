@@ -26,11 +26,12 @@
 
             <div class="form-group">
                 <label asp-for="CoordinatorUserName" class="control-label">Coordinator </label>
-                <select asp-for="CoordinatorUserName" class="form-control" asp-items="ViewBag.CoordinatorUserNames">
+                <select asp-for="CoordinatorUserName" class="form-control" asp-items="ViewBag.CoordinatorUserNames" style="color: black;">
                     <option value="">Select Coordinator</option>
                 </select>
                 <span asp-validation-for="CoordinatorUserName" class="text-danger"></span>
             </div>
+
 
 
 

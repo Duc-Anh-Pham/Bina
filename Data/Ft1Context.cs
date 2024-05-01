@@ -40,13 +40,13 @@ public partial class Ft1Context : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=(localdb)\\ProjectModels;Initial Catalog=FT1;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
+        => optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=FT1;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Article>(entity =>
         {
-            entity.HasKey(e => e.ArticleId).HasName("PK__Articles__9C6270C8FCD99836");
+            entity.HasKey(e => e.ArticleId).HasName("PK__Articles__9C6270C8B2728D12");
 
             entity.Property(e => e.ArticleId).HasColumnName("ArticleID");
             entity.Property(e => e.ArticleName)
@@ -90,7 +90,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<ArticleComment>(entity =>
         {
-            entity.HasKey(e => e.CommentId).HasName("PK__ArticleC__C3B4DFAA1AA1B992");
+            entity.HasKey(e => e.CommentId).HasName("PK__ArticleC__C3B4DFAA68808478");
 
             entity.Property(e => e.CommentId)
                 .HasDefaultValueSql("(newsequentialid())")
@@ -111,7 +111,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<ArticleLike>(entity =>
         {
-            entity.HasKey(e => e.ArticleLikeId).HasName("PK__ArticleL__54C4A1CEB2E4A367");
+            entity.HasKey(e => e.ArticleLikeId).HasName("PK__ArticleL__54C4A1CE8F97EB6A");
 
             entity.ToTable("ArticleLike");
 
@@ -132,7 +132,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<ArticleStatus>(entity =>
         {
-            entity.HasKey(e => e.ArticleStatusId).HasName("PK__ArticleS__3F0E2D6B7BE90BA1");
+            entity.HasKey(e => e.ArticleStatusId).HasName("PK__ArticleS__3F0E2D6BAC03A4FE");
 
             entity.ToTable("ArticleStatus");
 
@@ -144,7 +144,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<ArticlesDeadline>(entity =>
         {
-            entity.HasKey(e => e.ArticlesDeadlineId).HasName("PK__Articles__253F2FDC18990B80");
+            entity.HasKey(e => e.ArticlesDeadlineId).HasName("PK__Articles__253F2FDC1E94C382");
 
             entity.ToTable("ArticlesDeadline");
 
@@ -171,7 +171,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<CommentFeedback>(entity =>
         {
-            entity.HasKey(e => e.CommentFeedbackId).HasName("PK__CommentF__9454C0BAD9FB8AD2");
+            entity.HasKey(e => e.CommentFeedbackId).HasName("PK__CommentF__9454C0BA90454313");
 
             entity.ToTable("CommentFeedback");
 
@@ -194,7 +194,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<Faculty>(entity =>
         {
-            entity.HasKey(e => e.FacultyId).HasName("PK__Faculty__306F636E6465867C");
+            entity.HasKey(e => e.FacultyId).HasName("PK__Faculty__306F636E03CD69FF");
 
             entity.ToTable("Faculty");
 
@@ -208,7 +208,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<HelpAndSupport>(entity =>
         {
-            entity.HasKey(e => e.HelpSupportId).HasName("PK__HelpAndS__65D53B0FE235F67D");
+            entity.HasKey(e => e.HelpSupportId).HasName("PK__HelpAndS__65D53B0F3C8596A8");
 
             entity.ToTable("HelpAndSupport");
 
@@ -228,7 +228,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<Role>(entity =>
         {
-            entity.HasKey(e => e.RoleId).HasName("PK__Role__8AFACE3AB49576B6");
+            entity.HasKey(e => e.RoleId).HasName("PK__Role__8AFACE3A64143403");
 
             entity.ToTable("Role");
 
@@ -240,7 +240,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<TermsAndCondition>(entity =>
         {
-            entity.HasKey(e => e.TermsId).HasName("PK__TermsAnd__C05EBE00747C2314");
+            entity.HasKey(e => e.TermsId).HasName("PK__TermsAnd__C05EBE002467E276");
 
             entity.Property(e => e.TermsId)
                 .ValueGeneratedNever()
@@ -250,7 +250,7 @@ public partial class Ft1Context : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.UserId).HasName("PK__User__1788CCAC252C9C64");
+            entity.HasKey(e => e.UserId).HasName("PK__User__1788CCACF866CAFC");
 
             entity.ToTable("User");
 
