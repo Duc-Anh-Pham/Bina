@@ -9,9 +9,13 @@
 
   <ItemGroup>
     <Compile Remove="Areas\Identity\**" />
+    <Compile Remove="wwwroot\uploads\**" />
     <Content Remove="Areas\Identity\**" />
+    <Content Remove="wwwroot\uploads\**" />
     <EmbeddedResource Remove="Areas\Identity\**" />
+    <EmbeddedResource Remove="wwwroot\uploads\**" />
     <None Remove="Areas\Identity\**" />
+    <None Remove="wwwroot\uploads\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -153,11 +157,6 @@
     <PackageReference Include="PagedList.Mvc" Version="4.5.0" />
     <PackageReference Include="X.PagedList" Version="9.1.2" />
     <PackageReference Include="X.PagedList.Mvc.Core" Version="9.1.2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Data\" />
-    <Folder Include="wwwroot\uploads\avatars\" />
   </ItemGroup>
 
 </Project>

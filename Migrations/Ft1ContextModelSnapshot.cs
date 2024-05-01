@@ -17,7 +17,7 @@ namespace Bina.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.4")
+                .HasAnnotation("ProductVersion", "8.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -48,9 +48,6 @@ namespace Bina.Migrations
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
 
-                    b.Property<DateTime?>("DateCreate")
-                        .HasColumnType("datetime");
-
                     b.Property<string>("DocumentPath")
                         .HasMaxLength(255)
                         .IsUnicode(false)
@@ -76,7 +73,7 @@ namespace Bina.Migrations
                         .HasColumnName("UserID");
 
                     b.HasKey("ArticleId")
-                        .HasName("PK__Articles__9C6270C8393E49F7");
+                        .HasName("PK__Articles__9C6270C8CB56DD9F");
 
                     b.HasIndex("ArticleStatusId");
 
@@ -111,7 +108,7 @@ namespace Bina.Migrations
                         .HasColumnName("UserID");
 
                     b.HasKey("CommentId")
-                        .HasName("PK__ArticleC__C3B4DFAA9462E707");
+                        .HasName("PK__ArticleC__C3B4DFAA15BFFD4E");
 
                     b.HasIndex("ArticleId");
 
@@ -131,7 +128,7 @@ namespace Bina.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("ArticleStatusId")
-                        .HasName("PK__ArticleS__3F0E2D6B2FAED5EA");
+                        .HasName("PK__ArticleS__3F0E2D6B45808540");
 
                     b.ToTable("ArticleStatus", (string)null);
                 });
@@ -139,10 +136,8 @@ namespace Bina.Migrations
             modelBuilder.Entity("Bina.Models.ArticlesDeadline", b =>
                 {
                     b.Property<Guid>("ArticlesDeadlineId")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
-                        .HasColumnName("ArticlesDeadlineID")
-                        .HasDefaultValueSql("(newsequentialid())");
+                        .HasColumnName("ArticlesDeadlineID");
 
                     b.Property<int?>("AcademicYear")
                         .HasColumnType("int")
@@ -171,7 +166,7 @@ namespace Bina.Migrations
                         .HasColumnName("UserID");
 
                     b.HasKey("ArticlesDeadlineId")
-                        .HasName("PK__Articles__253F2FDC17D099A8");
+                        .HasName("PK__Articles__253F2FDCCAA1AF57");
 
                     b.HasIndex("FacultyId");
 
@@ -200,7 +195,7 @@ namespace Bina.Migrations
                         .HasDefaultValue((byte)1);
 
                     b.HasKey("FacultyId")
-                        .HasName("PK__Faculty__306F636E15A21A4C");
+                        .HasName("PK__Faculty__306F636ED538B474");
 
                     b.ToTable("Faculty", (string)null);
                 });
@@ -238,7 +233,7 @@ namespace Bina.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("HelpSupportId")
-                        .HasName("PK__HelpAndS__65D53B0F40D27CC2");
+                        .HasName("PK__HelpAndS__65D53B0F8821C824");
 
                     b.ToTable("HelpAndSupport", (string)null);
                 });
@@ -254,7 +249,7 @@ namespace Bina.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("RoleId")
-                        .HasName("PK__Role__8AFACE3AF059BEAD");
+                        .HasName("PK__Role__8AFACE3AB4D1A7C8");
 
                     b.ToTable("Role", (string)null);
                 });
@@ -270,7 +265,7 @@ namespace Bina.Migrations
                         .HasColumnType("nvarchar(500)");
 
                     b.HasKey("TermsId")
-                        .HasName("PK__TermsAnd__C05EBE0068ECE614");
+                        .HasName("PK__TermsAnd__C05EBE00C5C4011E");
 
                     b.ToTable("TermsAndConditions", (string)null);
                 });
@@ -350,7 +345,7 @@ namespace Bina.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.HasKey("UserId")
-                        .HasName("PK__User__1788CCACCC230F71");
+                        .HasName("PK__User__1788CCACF2EED1F7");
 
                     b.HasIndex("FacultyId");
 
@@ -431,17 +426,17 @@ namespace Bina.Migrations
                     b.HasOne("Bina.Models.Faculty", "Faculty")
                         .WithMany("Users")
                         .HasForeignKey("FacultyId")
-                        .HasConstraintName("FK__User__FacultyID__403A8C7D");
+                        .HasConstraintName("FK__User__FacultyID__412EB0B6");
 
                     b.HasOne("Bina.Models.Role", "Role")
                         .WithMany("Users")
                         .HasForeignKey("RoleId")
-                        .HasConstraintName("FK__User__RoleID__3F466844");
+                        .HasConstraintName("FK__User__RoleID__403A8C7D");
 
                     b.HasOne("Bina.Models.TermsAndCondition", "Terms")
                         .WithMany("Users")
                         .HasForeignKey("TermsId")
-                        .HasConstraintName("FK__User__TermsID__412EB0B6");
+                        .HasConstraintName("FK__User__TermsID__4222D4EF");
 
                     b.Navigation("Faculty");
 

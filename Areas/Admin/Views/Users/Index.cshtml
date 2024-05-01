@@ -143,24 +143,28 @@
                         int currentPage = ViewBag.CurrentPage;
                         int totalPages = ViewBag.TotalPages;
                         int pageSize = ViewBag.PageSize;
+                        string currentSearchTerm = ViewBag.SearchTerm;
+                        string currentSortBy = ViewBag.SortBy;
+                        string currentSortDirection = ViewBag.SortDirection;
 
                         <li class="page-item @(currentPage == 1 ? "disabled" : "")">
-                            <a class="page-link" asp-action="Index" asp-route-pageNumber="@(currentPage - 1)" asp-route-pageSize="@pageSize">Previous</a>
+                            <a class="page-link" asp-action="Index" asp-route-pageNumber="@(currentPage - 1)" asp-route-pageSize="@pageSize" asp-route-searchTerm="@currentSearchTerm" asp-route-sortBy="@currentSortBy" asp-route-sortDirection="@currentSortDirection">Previous</a>
                         </li>
 
                         @for (int i = 1; i <= totalPages; i++)
                         {
                             <li class="page-item @(i == currentPage ? "active" : "")">
-                                <a class="page-link" asp-action="Index" asp-route-pageNumber="@i" asp-route-pageSize="@pageSize">@i</a>
+                                <a class="page-link" asp-action="Index" asp-route-pageNumber="@i" asp-route-pageSize="@pageSize" asp-route-searchTerm="@currentSearchTerm" asp-route-sortBy="@currentSortBy" asp-route-sortDirection="@currentSortDirection">@i</a>
                             </li>
                         }
 
                         <li class="page-item @(currentPage == totalPages ? "disabled" : "")">
-                            <a class="page-link" asp-action="Index" asp-route-pageNumber="@(currentPage + 1)" asp-route-pageSize="@pageSize">Next</a>
+                            <a class="page-link" asp-action="Index" asp-route-pageNumber="@(currentPage + 1)" asp-route-pageSize="@pageSize" asp-route-searchTerm="@currentSearchTerm" asp-route-sortBy="@currentSortBy" asp-route-sortDirection="@currentSortDirection">Next</a>
                         </li>
                     }
                 </ul>
             </nav>
+
         }
     </div>
 </div>

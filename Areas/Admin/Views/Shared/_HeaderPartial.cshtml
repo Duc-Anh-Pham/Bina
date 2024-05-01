@@ -27,7 +27,7 @@
                 <div class="header-actions d-flex align-items-center justify-content-end">
                     <div class="dropdown ms-2">
 
-                        <a class="dropdown-toggle d-flex align-items-center user-settings" href="#!" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        @* <a class="dropdown-toggle d-flex align-items-center user-settings" href="#!" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             @if (!string.IsNullOrEmpty(Context.Session.GetString("UserName")))
                             {
                                 <span class="d-none d-md-block">Hello, @Context.Session.GetString("UserName")</span>
@@ -38,10 +38,24 @@
                                 <span class="d-none d-md-block">Hello, @User.Identity.Name</span>
                                 <img src="@(string.IsNullOrEmpty(User.FindFirst("AvatarPath")?.Value) ? "https://firebasestorage.googleapis.com/v0/b/comp1640web.appspot.com/o/avatar%2FAvatar.png?alt=media&token=3f4c73c3-768d-482e-bdc3-f61487b5f35d" : User.FindFirst("AvatarPath")?.Value)" class="img-3x m-2 me-0 rounded-5" alt="User Avatar" />
                             }
+                        </a> *@
+
+                        <a class="dropdown-toggle d-flex align-items-center user-settings" href="#!" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            @if (!string.IsNullOrEmpty(Context.Session.GetString("UserName")))
+                            {
+                                <span class="d-none d-md-block">Hello, @Context.Session.GetString("UserName")</span>
+                                <img src="@Url.Content(Context.Session.GetString("AvatarPath") ?? "https://firebasestorage.googleapis.com/v0/b/comp1640web.appspot.com/o/avatar%2FAvatar.png?alt=media&token=3f4c73c3-768d-482e-bdc3-f61487b5f35d")" class="img-3x m-2 me-0 rounded-5" alt="User Avatar" />
+                            }
+                            else if (User.Identity.IsAuthenticated)
+                            {
+                                <span class="d-none d-md-block">Hello, @User.Identity.Name</span>
+                                <img src="@Url.Content(User.FindFirst("AvatarPath")?.Value ?? "https://firebasestorage.googleapis.com/v0/b/comp1640web.appspot.com/o/avatar%2FAvatar.png?alt=media&token=3f4c73c3-768d-482e-bdc3-f61487b5f35d")" class="img-3x m-2 me-0 rounded-5" alt="User Avatar" />
+                            }
                         </a>
 
+
                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-sm shadow-sm gap-3" style="">
-                            <a class="dropdown-item d-flex align-items-center py-2" href="agent-profile.html">
+                            <a class="dropdown-item d-flex align-items-center py-2" asp-area="Admin" asp-controller="Users" asp-action="Profile" asp-route-id="@Context.Session.GetInt32("UserId")">
                                 <i class="bi bi-person-vcard" style="margin-right: 10px"></i>User Profile
                             </a>
                             <a class="dropdown-item d-flex align-items-center py-2" href="account-settings.html">

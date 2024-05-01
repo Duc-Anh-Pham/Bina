@@ -30,9 +30,9 @@
                         <dt class="col-sm-4">Faculty</dt>
                     <dd class="col-sm-8">@Html.DisplayFor(model => model.Faculty.FacultyId)</dd>
                         <dt class="col-sm-4">Role</dt>
-                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Role.RoleId)</dd>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Role.RoleName)</dd>
                         <dt class="col-sm-4">Terms Of Condination</dt>
-                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Terms.TermsId)</dd>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Terms.TermsText)</dd>
                 </dl>
                 <div class="form-group text-center">
                     <button class="btn btn-danger" data-toggle="modal" data-target="#confirmDeleteModal">Delete</button>

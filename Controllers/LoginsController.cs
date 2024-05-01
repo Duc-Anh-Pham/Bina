@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authentication.MicrosoftAccount;
 using Microsoft.AspNetCore.Authorization;
 using System.Text;
 using System.Security.Claims;
+using System.Security.Cryptography;
 
 namespace Bina.Controllers
 {
@@ -40,7 +41,8 @@ namespace Bina.Controllers
 					var user = new User
 					{
 						Email = parts[0],
-						Password = parts[1]
+						Password = parts[1],
+						RememberMe = true
 					};
 					return View(user);
 				}
@@ -54,12 +56,21 @@ namespace Bina.Controllers
             return View();
 		}
 
+        private string HashPassword(string password)
+        {
+            using (var sha256 = SHA256.Create())
+            {
+                var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+                return BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
+            }
+        }
+
         [HttpPost]
         public IActionResult Login(User user)
         {
             var u = _context.Users
                 .Include(u => u.Role)
-                .FirstOrDefault(us => us.Email.Equals(user.Email) && us.Password.Equals(user.Password));
+                .FirstOrDefault(us => us.Email.Equals(user.Email) && HashPassword(user.Password).Equals(us.Password) || us.Password.Equals(user.Password));
 
             if (u != null)
             {
@@ -80,6 +91,11 @@ namespace Bina.Controllers
                         Expires = DateTimeOffset.Now.AddDays(30)
                     });
                 }
+                else
+                {
+                    // Xóa cookie "RememberMe" nếu nó tồn tại
+                    Response.Cookies.Delete("RememberMe");
+                }
 
                 // Save the changes to the database
                 _context.SaveChanges();
@@ -88,6 +104,12 @@ namespace Bina.Controllers
                 HttpContext.Session.SetString("UserName", u.UserName.ToString());
                 HttpContext.Session.SetInt32("RoleId", u.RoleId.Value);
                 HttpContext.Session.SetInt32("UserId", u.UserId);
+
+                if (u.RoleId == 2 && u.RoleId == 3 || u.FacultyId != null)
+                {
+                    HttpContext.Session.SetString("FacultyId", u.FacultyId.ToString());
+                }
+
                 // Check if u.AvatarPath is not null before setting it to the session
                 if (u.AvatarPath != null)
                 {
@@ -122,7 +144,6 @@ namespace Bina.Controllers
             }
         }
 
-
         public async Task Google()
 		{
 			await HttpContext.ChallengeAsync(GoogleDefaults.AuthenticationScheme,
@@ -140,8 +161,7 @@ namespace Bina.Controllers
             var claims = result.Principal.Identities.FirstOrDefault()?.Claims;
             var email = claims.FirstOrDefault(c => c.Type == System.Security.Claims.ClaimTypes.Email)?.Value;
             var name = claims.FirstOrDefault(c => c.Type == System.Security.Claims.ClaimTypes.Name)?.Value;
-            var avatarUrl = claims.FirstOrDefault(c => c.Type == "picture")?.Value; // Giả sử tên claim chứa URL avatar là "picture"
-
+            var avatarUrl = claims.FirstOrDefault(c => c.Type == "picture")?.Value;
 
             // Kiểm tra xem người dùng đã tồn tại trong database hay chưa
             var user = _context.Users.FirstOrDefault(u => u.Email == email);
@@ -159,7 +179,11 @@ namespace Bina.Controllers
             HttpContext.Session.SetInt32("RoleId", user.RoleId.Value);
             HttpContext.Session.SetInt32("UserId", user.UserId);
 
-            // Lưu avatar URL vào database nếu có
+            if (user.RoleId == 2 && user.RoleId == 3 || user.FacultyId != null)
+            {
+                HttpContext.Session.SetString("FacultyId", user.FacultyId.ToString());
+            }
+            // Lưu avatar URL vào database
             if (avatarUrl != null)
             {
                 var identity = User.Identity as ClaimsIdentity;
@@ -208,6 +232,11 @@ namespace Bina.Controllers
             HttpContext.Session.SetString("Email", user.Email.ToString());
             HttpContext.Session.SetInt32("RoleId", user.RoleId.Value);
             HttpContext.Session.SetInt32("UserId", user.UserId);
+
+            if (user.RoleId == 2 && user.RoleId == 3 || user.FacultyId != null)
+            {
+                HttpContext.Session.SetString("FacultyId", user.FacultyId.ToString());
+            }
 
             // Check if u.AvatarPath is not null before setting it to the session
             if (user.AvatarPath != null)
