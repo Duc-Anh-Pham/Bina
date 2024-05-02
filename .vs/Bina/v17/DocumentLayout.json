@@ -3,6 +3,18 @@
   "WorkspaceRootPath": "F:\\Greenwich IT\\TOPUP - 1640 - Enterprise Web Software Development\\Code\\Bina 02-05\\Bina\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|f:\\greenwich it\\topup - 1640 - enterprise web software development\\code\\bina 02-05\\bina\\views\\articles\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|solutionrelative:views\\articles\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|f:\\greenwich it\\topup - 1640 - enterprise web software development\\code\\bina 02-05\\bina\\views\\articlesfaculty\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|solutionrelative:views\\articlesfaculty\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|f:\\greenwich it\\topup - 1640 - enterprise web software development\\code\\bina 02-05\\bina\\views\\articles\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|solutionrelative:views\\articles\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|f:\\greenwich it\\topup - 1640 - enterprise web software development\\code\\bina 02-05\\bina\\areas\\manager\\controllers\\articlescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|solutionrelative:areas\\manager\\controllers\\articlescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -45,7 +57,46 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "F:\\Greenwich IT\\TOPUP - 1640 - Enterprise Web Software Development\\Code\\Bina 02-05\\Bina\\Views\\ArticlesFaculty\\Details.cshtml",
+              "RelativeDocumentMoniker": "Views\\ArticlesFaculty\\Details.cshtml",
+              "ToolTip": "F:\\Greenwich IT\\TOPUP - 1640 - Enterprise Web Software Development\\Code\\Bina 02-05\\Bina\\Views\\ArticlesFaculty\\Details.cshtml",
+              "RelativeToolTip": "Views\\ArticlesFaculty\\Details.cshtml",
+              "ViewState": "AQIAAHAAAAAAAAAAAAAAAIYAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-02T05:17:34.406Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "F:\\Greenwich IT\\TOPUP - 1640 - Enterprise Web Software Development\\Code\\Bina 02-05\\Bina\\Views\\Articles\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Articles\\Index.cshtml",
+              "ToolTip": "F:\\Greenwich IT\\TOPUP - 1640 - Enterprise Web Software Development\\Code\\Bina 02-05\\Bina\\Views\\Articles\\Index.cshtml",
+              "RelativeToolTip": "Views\\Articles\\Index.cshtml",
+              "ViewState": "AQIAACMAAAAAAAAAAAAAADYAAABwAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-02T05:13:19.283Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "F:\\Greenwich IT\\TOPUP - 1640 - Enterprise Web Software Development\\Code\\Bina 02-05\\Bina\\Views\\Articles\\Details.cshtml",
+              "RelativeDocumentMoniker": "Views\\Articles\\Details.cshtml",
+              "ToolTip": "F:\\Greenwich IT\\TOPUP - 1640 - Enterprise Web Software Development\\Code\\Bina 02-05\\Bina\\Views\\Articles\\Details.cshtml",
+              "RelativeToolTip": "Views\\Articles\\Details.cshtml",
+              "ViewState": "AQIAAD0AAAAAAAAAAAAawFYAAAA6AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-02T05:10:52.588Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "Index.cshtml",
               "DocumentMoniker": "F:\\Greenwich IT\\TOPUP - 1640 - Enterprise Web Software Development\\Code\\Bina 02-05\\Bina\\Areas\\Manager\\Views\\Articles\\Index.cshtml",
               "RelativeDocumentMoniker": "Areas\\Manager\\Views\\Articles\\Index.cshtml",
@@ -57,7 +108,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "ArticlesController.cs",
               "DocumentMoniker": "F:\\Greenwich IT\\TOPUP - 1640 - Enterprise Web Software Development\\Code\\Bina 02-05\\Bina\\Areas\\Manager\\Controllers\\ArticlesController.cs",
               "RelativeDocumentMoniker": "Areas\\Manager\\Controllers\\ArticlesController.cs",
@@ -70,7 +121,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "FirebaseCloud.cs",
               "DocumentMoniker": "F:\\Greenwich IT\\TOPUP - 1640 - Enterprise Web Software Development\\Code\\Bina 02-05\\Bina\\Services\\FirebaseCloud.cs",
               "RelativeDocumentMoniker": "Services\\FirebaseCloud.cs",
@@ -82,7 +133,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 6,
               "Title": "dbo.User [Data]",
               "DocumentMoniker": "ViewDataWindow_MSSQL__/DUC_ANH/FT1/True/SqlTable/dbo.User.sql",
               "ToolTip": "dbo.User [Data]",
