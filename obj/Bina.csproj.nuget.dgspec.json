@@ -99,6 +99,10 @@
               "target": "Package",
               "version": "[4.5.0, )"
             },
+            "System.Net.Http": {
+              "target": "Package",
+              "version": "[4.3.4, )"
+            },
             "X.PagedList": {
               "target": "Package",
               "version": "[9.1.2, )"

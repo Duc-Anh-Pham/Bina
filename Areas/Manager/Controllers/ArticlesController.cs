@@ -1,8 +1,10 @@
 ﻿using Bina.Data;
 using Bina.Models;
+using Bina.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.IO.Compression;
 
 namespace Bina.Areas.Manager.Controllers
 {
@@ -10,10 +12,12 @@ namespace Bina.Areas.Manager.Controllers
     public class ArticlesController : Controller
     {
         private readonly Ft1Context _context;
+        private readonly FirebaseCloud _firebaseCloud;
 
-        public ArticlesController(Ft1Context context)
+        public ArticlesController(Ft1Context context, FirebaseCloud firebaseCloud)
         {
             _context = context;
+            _firebaseCloud = firebaseCloud;
         }
 
         // GET: Manager/Articles
@@ -67,10 +71,6 @@ namespace Bina.Areas.Manager.Controllers
 
             return View(filteredArticles);
         }
-
-
-
-
 
         // GET: Manager/Articles/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -219,6 +219,36 @@ namespace Bina.Areas.Manager.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
+        public async Task<IActionResult> ExportToZip()
+        {
+            var articles = await _context.Articles.Where(a => !string.IsNullOrEmpty(a.DocumentPath)).ToListAsync();
+
+            using (var memoryStream = new MemoryStream())
+            {
+                using (var archive = new ZipArchive(memoryStream, ZipArchiveMode.Create, true))
+                {
+                    foreach (var article in articles)
+                    {
+                        var documentStream = await _firebaseCloud.DownloadFileFromFirebase(article.DocumentPath);
+                        if (documentStream != null)
+                        {
+                            var zipEntry = archive.CreateEntry(article.ArticleName + ".pdf", CompressionLevel.Fastest);
+                            using (var entryStream = zipEntry.Open())
+                            {
+                                await documentStream.CopyToAsync(entryStream);
+                            }
+                        }
+                    }
+                }
+
+                memoryStream.Position = 0;
+                var contentType = "application/zip";
+                var fileName = "ArticlesDocuments.zip";
+                return File(memoryStream, contentType, fileName);
+            }
+        }
+
 
         private bool ArticleExists(int id)
         {

@@ -3,27 +3,19 @@
   "WorkspaceRootPath": "D:\\Github\\COMP1640\\Bina\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|d:\\github\\comp1640\\bina\\areas\\coordinator\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|solutionrelative:areas\\coordinator\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|d:\\github\\comp1640\\bina\\areas\\manager\\controllers\\articlescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|solutionrelative:areas\\manager\\controllers\\articlescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|d:\\github\\comp1640\\bina\\areas\\manager\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|solutionrelative:areas\\manager\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|d:\\github\\comp1640\\bina\\services\\firebasecloud.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|solutionrelative:services\\firebasecloud.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|d:\\github\\comp1640\\bina\\areas\\manager\\views\\users\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|solutionrelative:areas\\manager\\views\\users\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|d:\\github\\comp1640\\bina\\areas\\manager\\views\\shared\\_headerpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|solutionrelative:areas\\manager\\views\\shared\\_headerpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|d:\\github\\comp1640\\bina\\areas\\manager\\views\\articles\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|solutionrelative:areas\\manager\\views\\articles\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/DUC_ANH/FT1/True/SqlTable/dbo.User.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|d:\\github\\comp1640\\bina\\controllers\\loginscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|solutionrelative:controllers\\loginscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -33,7 +25,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -41,77 +33,51 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "UsersController.cs",
-              "DocumentMoniker": "D:\\Github\\COMP1640\\Bina\\Areas\\Coordinator\\Controllers\\UsersController.cs",
-              "RelativeDocumentMoniker": "Areas\\Coordinator\\Controllers\\UsersController.cs",
-              "ToolTip": "D:\\Github\\COMP1640\\Bina\\Areas\\Coordinator\\Controllers\\UsersController.cs",
-              "RelativeToolTip": "Areas\\Coordinator\\Controllers\\UsersController.cs",
-              "ViewState": "AQIAABgAAAAAAAAAAAAAAC0AAABQAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-01T07:54:21.167Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "_HeaderPartial.cshtml",
-              "DocumentMoniker": "D:\\Github\\COMP1640\\Bina\\Areas\\Manager\\Views\\Shared\\_HeaderPartial.cshtml",
-              "RelativeDocumentMoniker": "Areas\\Manager\\Views\\Shared\\_HeaderPartial.cshtml",
-              "ToolTip": "D:\\Github\\COMP1640\\Bina\\Areas\\Manager\\Views\\Shared\\_HeaderPartial.cshtml",
-              "RelativeToolTip": "Areas\\Manager\\Views\\Shared\\_HeaderPartial.cshtml",
-              "ViewState": "AQIAAG4AAAAAAAAAAAAAAA0AAABCAAAA",
+              "DocumentIndex": 2,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\Github\\COMP1640\\Bina\\Areas\\Manager\\Views\\Articles\\Index.cshtml",
+              "RelativeDocumentMoniker": "Areas\\Manager\\Views\\Articles\\Index.cshtml",
+              "ToolTip": "D:\\Github\\COMP1640\\Bina\\Areas\\Manager\\Views\\Articles\\Index.cshtml",
+              "RelativeToolTip": "Areas\\Manager\\Views\\Articles\\Index.cshtml",
+              "ViewState": "AQIAAJcAAAAAAAAAAAAkwLIAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-01T07:44:38.483Z",
+              "WhenOpened": "2024-05-02T02:49:14.566Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "dbo.User [Data]",
-              "DocumentMoniker": "ViewDataWindow_MSSQL__/DUC_ANH/FT1/True/SqlTable/dbo.User.sql",
-              "ToolTip": "dbo.User [Data]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2024-05-01T07:06:17.638Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "LoginsController.cs",
-              "DocumentMoniker": "D:\\Github\\COMP1640\\Bina\\Controllers\\LoginsController.cs",
-              "RelativeDocumentMoniker": "Controllers\\LoginsController.cs",
-              "ToolTip": "D:\\Github\\COMP1640\\Bina\\Controllers\\LoginsController.cs",
-              "RelativeToolTip": "Controllers\\LoginsController.cs",
-              "ViewState": "AQIAANYAAAAAAAAAAAAqwOoAAAAAAAAA",
+              "DocumentIndex": 0,
+              "Title": "ArticlesController.cs",
+              "DocumentMoniker": "D:\\Github\\COMP1640\\Bina\\Areas\\Manager\\Controllers\\ArticlesController.cs",
+              "RelativeDocumentMoniker": "Areas\\Manager\\Controllers\\ArticlesController.cs",
+              "ToolTip": "D:\\Github\\COMP1640\\Bina\\Areas\\Manager\\Controllers\\ArticlesController.cs",
+              "RelativeToolTip": "Areas\\Manager\\Controllers\\ArticlesController.cs",
+              "ViewState": "AQIAANwAAAAAAAAAAAArwOgAAABCAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-01T07:06:27.729Z",
+              "WhenOpened": "2024-05-02T02:45:31.514Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "UsersController.cs",
-              "DocumentMoniker": "D:\\Github\\COMP1640\\Bina\\Areas\\Manager\\Controllers\\UsersController.cs",
-              "RelativeDocumentMoniker": "Areas\\Manager\\Controllers\\UsersController.cs",
-              "ToolTip": "D:\\Github\\COMP1640\\Bina\\Areas\\Manager\\Controllers\\UsersController.cs",
-              "RelativeToolTip": "Areas\\Manager\\Controllers\\UsersController.cs",
-              "ViewState": "AQIAABgAAAAAAAAAAAAqwC0AAABMAAAA",
+              "Title": "FirebaseCloud.cs",
+              "DocumentMoniker": "D:\\Github\\COMP1640\\Bina\\Services\\FirebaseCloud.cs",
+              "RelativeDocumentMoniker": "Services\\FirebaseCloud.cs",
+              "ToolTip": "D:\\Github\\COMP1640\\Bina\\Services\\FirebaseCloud.cs",
+              "RelativeToolTip": "Services\\FirebaseCloud.cs",
+              "ViewState": "AQIAADcAAAAAAAAAAAAkwEwAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-01T07:01:35.738Z",
+              "WhenOpened": "2024-05-01T12:01:08.138Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\Github\\COMP1640\\Bina\\Areas\\Manager\\Views\\Users\\Index.cshtml",
-              "RelativeDocumentMoniker": "Areas\\Manager\\Views\\Users\\Index.cshtml",
-              "ToolTip": "D:\\Github\\COMP1640\\Bina\\Areas\\Manager\\Views\\Users\\Index.cshtml",
-              "RelativeToolTip": "Areas\\Manager\\Views\\Users\\Index.cshtml",
-              "ViewState": "AQIAAAQAAAAAAAAAAAAqwHoAAACgAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-01T07:00:21.137Z",
+              "DocumentIndex": 3,
+              "Title": "dbo.User [Data]",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/DUC_ANH/FT1/True/SqlTable/dbo.User.sql",
+              "ToolTip": "dbo.User [Data]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2024-05-01T08:19:42.394Z",
               "EditorCaption": ""
             }
           ]

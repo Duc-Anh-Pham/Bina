@@ -57,5 +57,32 @@ namespace Bina.Services
             return result; // Trả về URL của file đã được tải lên
 
         }
+
+        public async Task<Stream> DownloadFileFromFirebase(string filePath)
+        {
+            if (string.IsNullOrEmpty(filePath))
+                return null;
+
+            var stream = new MemoryStream();
+            var reference = _firebaseStorage.Child("images").Child(filePath);
+            var task = reference.GetDownloadUrlAsync();
+
+            await Task.Run(async () =>
+            {
+                var url = await task;
+                using (var httpClient = new HttpClient())
+                {
+                    var response = await httpClient.GetAsync(url);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        await response.Content.CopyToAsync(stream);
+                    }
+                }
+            });
+
+            stream.Position = 0; // Reset stream position after download
+            return stream;
+        }
+
     }
 }
