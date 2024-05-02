@@ -70,7 +70,7 @@ namespace Bina.Controllers
         {
             var u = _context.Users
                 .Include(u => u.Role)
-                .FirstOrDefault(us => us.Email.Equals(user.Email) && HashPassword(user.Password).Equals(us.Password) || us.Password.Equals(user.Password));
+                .FirstOrDefault(us => us.Email.Equals(user.Email) && us.Password.Equals(user.Password) || HashPassword(user.Password).Equals(us.Password));
 
             if (u != null)
             {
@@ -125,15 +125,15 @@ namespace Bina.Controllers
                 switch (u.Role.RoleId)
                 {
                     case 1: // Admin
-                        return RedirectToAction("Index", "Home", new { area = "Admin" });
+                        return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
                     case 2: // Coordinator
-                        return RedirectToAction("Index", "Home", new { area = "Coordinator" });
+                        return RedirectToAction("Index", "Dashboard", new { area = "Coordinator" });
                     case 3: // Manager
-                        return RedirectToAction("Index", "Home", new { area = "Manager" });
+                        return RedirectToAction("Index", "Dashboard", new { area = "Manager" });
                     case 4: // Students
                         return RedirectToAction("Index", "Home");
-					default:
-						return RedirectToAction("Index", "Home", new { area = "Guest" });
+                    default:
+                        return RedirectToAction("Index", "ArticlesFaculty", new { area = "Guest" });
                 }
             }
             else
@@ -250,20 +250,20 @@ namespace Bina.Controllers
 
 		private IActionResult RedirectToAreaBasedOnRoleId(int roleId)
 		{
-			switch (roleId)
-			{
+            switch (roleId)
+            {
                 case 1: // Admin
-                    return RedirectToAction("Index", "Home", new { area = "Admin" });
+                    return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
                 case 2: // Coordinator
-                    return RedirectToAction("Index", "Home", new { area = "Coordinator" });
+                    return RedirectToAction("Index", "Dashboard", new { area = "Coordinator" });
                 case 3: // Manager
-                    return RedirectToAction("Index", "Home", new { area = "Manager" });
+                    return RedirectToAction("Index", "Dashboard", new { area = "Manager" });
                 case 4: // Students
                     return RedirectToAction("Index", "Home");
                 default:
-                    return RedirectToAction("Index", "Home", new { area = "Guest" });
+                    return RedirectToAction("Index", "ArticlesFaculty", new { area = "Guest" });
             }
-		}
+        }
 
 		//create forgot password 
 
@@ -275,7 +275,7 @@ namespace Bina.Controllers
 			HttpContext.Session.Clear();
 			HttpContext.Session.Remove("Email");
 
-			return RedirectToAction("Index", "Home");
+			return RedirectToAction("Login", "Logins");
 		}
 	}
 }

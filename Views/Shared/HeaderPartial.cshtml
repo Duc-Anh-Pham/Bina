@@ -1,12 +1,12 @@
-﻿﻿@{
-    var isAuthenticated = User.Identity.IsAuthenticated || (!string.IsNullOrEmpty(Context.Session.GetString("Email")) && (Context.Session.GetInt32("RoleId") == 4 || Context.Session.GetInt32("RoleId") == 5));
+﻿@{
+    var isAuthenticated = User.Identity.IsAuthenticated || (!string.IsNullOrEmpty(Context.Session.GetString("Email")) && (Context.Session.GetInt32("RoleId") == 4));
     var isStudent = Context.Session.GetInt32("RoleId") == 4;
 }
 
 <div class="container-fluid">
     <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
         <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"
-           asp-area="" asp-controller="ArticlesHome" asp-action="Index">
+           asp-area="" asp-controller="Home" asp-action="Index">
             <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
             <span class="fs-4">SC University Magazine</span>
         </a>
@@ -62,7 +62,7 @@
 <nav class="navbar navbar-expand-md bg-info mb-4">
     <div class="container">
 
-        <a id="Academic1" class="navbar-brand" asp-area="" asp-controller="ArticlesHome" asp-action="Index" aria-current="page">
+        <a id="Academic1" class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" aria-current="page">
             <i class="fa-solid fa-house"></i> Academic Portal
         </a>
 

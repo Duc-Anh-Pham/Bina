@@ -7,15 +7,43 @@
       "RelativeMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|solutionrelative:areas\\manager\\controllers\\articlescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|d:\\github\\comp1640\\bina\\services\\firebasecloud.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|solutionrelative:services\\firebasecloud.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|d:\\github\\comp1640\\bina\\areas\\manager\\views\\articles\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|solutionrelative:areas\\manager\\views\\articles\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|d:\\github\\comp1640\\bina\\services\\firebasecloud.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|solutionrelative:services\\firebasecloud.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/DUC_ANH/FT1/True/SqlTable/dbo.User.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|d:\\github\\comp1640\\bina\\views\\shared\\headerpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|solutionrelative:views\\shared\\headerpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|d:\\github\\comp1640\\bina\\areas\\guest\\views\\shared\\headerpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|solutionrelative:areas\\guest\\views\\shared\\headerpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|d:\\github\\comp1640\\bina\\controllers\\profilecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|solutionrelative:controllers\\profilecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|d:\\github\\comp1640\\bina\\views\\profile\\editprofile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|solutionrelative:views\\profile\\editprofile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|d:\\github\\comp1640\\bina\\areas\\admin\\views\\users\\profile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|solutionrelative:areas\\admin\\views\\users\\profile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|d:\\github\\comp1640\\bina\\controllers\\loginscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|solutionrelative:controllers\\loginscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|d:\\github\\comp1640\\bina\\areas\\admin\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|solutionrelative:areas\\admin\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -25,7 +53,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -33,15 +61,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "Index.cshtml",
               "DocumentMoniker": "D:\\Github\\COMP1640\\Bina\\Areas\\Manager\\Views\\Articles\\Index.cshtml",
               "RelativeDocumentMoniker": "Areas\\Manager\\Views\\Articles\\Index.cshtml",
               "ToolTip": "D:\\Github\\COMP1640\\Bina\\Areas\\Manager\\Views\\Articles\\Index.cshtml",
               "RelativeToolTip": "Areas\\Manager\\Views\\Articles\\Index.cshtml",
-              "ViewState": "AQIAAJcAAAAAAAAAAAAkwLIAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-02T02:49:14.566Z",
+              "WhenOpened": "2024-05-02T09:09:21.874Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "FirebaseCloud.cs",
+              "DocumentMoniker": "D:\\Github\\COMP1640\\Bina\\Services\\FirebaseCloud.cs",
+              "RelativeDocumentMoniker": "Services\\FirebaseCloud.cs",
+              "ToolTip": "D:\\Github\\COMP1640\\Bina\\Services\\FirebaseCloud.cs",
+              "RelativeToolTip": "Services\\FirebaseCloud.cs",
+              "ViewState": "AQIAACoAAAAAAAAAAADwvwAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-02T09:07:26.625Z",
               "EditorCaption": ""
             },
             {
@@ -52,22 +93,87 @@
               "RelativeDocumentMoniker": "Areas\\Manager\\Controllers\\ArticlesController.cs",
               "ToolTip": "D:\\Github\\COMP1640\\Bina\\Areas\\Manager\\Controllers\\ArticlesController.cs",
               "RelativeToolTip": "Areas\\Manager\\Controllers\\ArticlesController.cs",
-              "ViewState": "AQIAANwAAAAAAAAAAAArwOgAAABCAAAA",
+              "ViewState": "AQIAAMoAAAAAAAAAAAApwNkAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-02T02:45:31.514Z",
+              "WhenOpened": "2024-05-02T09:07:16.143Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "FirebaseCloud.cs",
-              "DocumentMoniker": "D:\\Github\\COMP1640\\Bina\\Services\\FirebaseCloud.cs",
-              "RelativeDocumentMoniker": "Services\\FirebaseCloud.cs",
-              "ToolTip": "D:\\Github\\COMP1640\\Bina\\Services\\FirebaseCloud.cs",
-              "RelativeToolTip": "Services\\FirebaseCloud.cs",
-              "ViewState": "AQIAADcAAAAAAAAAAAAkwEwAAAABAAAA",
+              "DocumentIndex": 4,
+              "Title": "HeaderPartial.cshtml",
+              "DocumentMoniker": "D:\\Github\\COMP1640\\Bina\\Views\\Shared\\HeaderPartial.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\HeaderPartial.cshtml",
+              "ToolTip": "D:\\Github\\COMP1640\\Bina\\Views\\Shared\\HeaderPartial.cshtml",
+              "RelativeToolTip": "Views\\Shared\\HeaderPartial.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAGoAAAAGAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-02T08:45:22.437Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Profile.cshtml",
+              "DocumentMoniker": "D:\\Github\\COMP1640\\Bina\\Areas\\Admin\\Views\\Users\\Profile.cshtml",
+              "RelativeDocumentMoniker": "Areas\\Admin\\Views\\Users\\Profile.cshtml",
+              "ToolTip": "D:\\Github\\COMP1640\\Bina\\Areas\\Admin\\Views\\Users\\Profile.cshtml",
+              "RelativeToolTip": "Areas\\Admin\\Views\\Users\\Profile.cshtml",
+              "ViewState": "AQIAAEQAAAAAAAAAAAAmwFkAAABAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-02T08:26:58.203Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "LoginsController.cs",
+              "DocumentMoniker": "D:\\Github\\COMP1640\\Bina\\Controllers\\LoginsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\LoginsController.cs",
+              "ToolTip": "D:\\Github\\COMP1640\\Bina\\Controllers\\LoginsController.cs",
+              "RelativeToolTip": "Controllers\\LoginsController.cs",
+              "ViewState": "AQIAAPQAAAAAAAAAAAAAABUBAAArAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-01T12:01:08.138Z",
+              "WhenOpened": "2024-05-02T08:07:01.116Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "UsersController.cs",
+              "DocumentMoniker": "D:\\Github\\COMP1640\\Bina\\Areas\\Admin\\Controllers\\UsersController.cs",
+              "RelativeDocumentMoniker": "Areas\\Admin\\Controllers\\UsersController.cs",
+              "ToolTip": "D:\\Github\\COMP1640\\Bina\\Areas\\Admin\\Controllers\\UsersController.cs",
+              "RelativeToolTip": "Areas\\Admin\\Controllers\\UsersController.cs",
+              "ViewState": "AQIAAFkCAAAAAAAAAAAAAFsCAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-02T08:03:41.631Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ProfileController.cs",
+              "DocumentMoniker": "D:\\Github\\COMP1640\\Bina\\Controllers\\ProfileController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ProfileController.cs",
+              "ToolTip": "D:\\Github\\COMP1640\\Bina\\Controllers\\ProfileController.cs",
+              "RelativeToolTip": "Controllers\\ProfileController.cs",
+              "ViewState": "AQIAAKgAAAAAAAAAAAAAADsAAAAtAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-02T08:03:32.905Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "EditProfile.cshtml",
+              "DocumentMoniker": "D:\\Github\\COMP1640\\Bina\\Views\\Profile\\EditProfile.cshtml",
+              "RelativeDocumentMoniker": "Views\\Profile\\EditProfile.cshtml",
+              "ToolTip": "D:\\Github\\COMP1640\\Bina\\Views\\Profile\\EditProfile.cshtml",
+              "RelativeToolTip": "Views\\Profile\\EditProfile.cshtml",
+              "ViewState": "AQIAAD8AAAAAAAAAAAAAAGYAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-02T08:03:20.931Z",
               "EditorCaption": ""
             },
             {
@@ -77,7 +183,20 @@
               "DocumentMoniker": "ViewDataWindow_MSSQL__/DUC_ANH/FT1/True/SqlTable/dbo.User.sql",
               "ToolTip": "dbo.User [Data]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2024-05-01T08:19:42.394Z",
+              "WhenOpened": "2024-05-02T08:24:21.083Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "HeaderPartial.cshtml",
+              "DocumentMoniker": "D:\\Github\\COMP1640\\Bina\\Areas\\Guest\\Views\\Shared\\HeaderPartial.cshtml",
+              "RelativeDocumentMoniker": "Areas\\Guest\\Views\\Shared\\HeaderPartial.cshtml",
+              "ToolTip": "D:\\Github\\COMP1640\\Bina\\Areas\\Guest\\Views\\Shared\\HeaderPartial.cshtml",
+              "RelativeToolTip": "Areas\\Guest\\Views\\Shared\\HeaderPartial.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACsAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-02T08:44:12.131Z",
               "EditorCaption": ""
             }
           ]
