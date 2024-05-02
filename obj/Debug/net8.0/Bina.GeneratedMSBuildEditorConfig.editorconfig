@@ -298,26 +298,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcR3Vlc3RcVmlld3NcQXJ0aWNsZXNGYWN1bHR5XEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/Greenwich IT/TOPUP - 1640 - Enterprise Web Software Development/Code/Bina 14-4/Bina/Areas/Guest/Views/Articles/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcR3Vlc3RcVmlld3NcQXJ0aWNsZXNcQ3JlYXRlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[F:/Greenwich IT/TOPUP - 1640 - Enterprise Web Software Development/Code/Bina 14-4/Bina/Areas/Guest/Views/Articles/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcR3Vlc3RcVmlld3NcQXJ0aWNsZXNcRGVsZXRlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[F:/Greenwich IT/TOPUP - 1640 - Enterprise Web Software Development/Code/Bina 14-4/Bina/Areas/Guest/Views/Articles/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcR3Vlc3RcVmlld3NcQXJ0aWNsZXNcRGV0YWlscy5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[F:/Greenwich IT/TOPUP - 1640 - Enterprise Web Software Development/Code/Bina 14-4/Bina/Areas/Guest/Views/Articles/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcR3Vlc3RcVmlld3NcQXJ0aWNsZXNcRWRpdC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[F:/Greenwich IT/TOPUP - 1640 - Enterprise Web Software Development/Code/Bina 14-4/Bina/Areas/Guest/Views/Articles/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcR3Vlc3RcVmlld3NcQXJ0aWNsZXNcSW5kZXguY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
 [F:/Greenwich IT/TOPUP - 1640 - Enterprise Web Software Development/Code/Bina 14-4/Bina/Areas/Guest/Views/Forgot/ForgotPassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcR3Vlc3RcVmlld3NcRm9yZ290XEZvcmdvdFBhc3N3b3JkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 

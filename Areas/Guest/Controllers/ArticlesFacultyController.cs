@@ -16,7 +16,7 @@ namespace Bina.Guest.Controllers
         }
 
         // GET: ArticlesFaculty
-        public async Task<IActionResult> Index(string faculty, string academicYear, int page = 1, int pageSize = 3)
+        public async Task<IActionResult> Index(string faculty, string academicYear, int page = 1, int pageSize = 6)
         {
             // Fetching filter-related lists
             ViewBag.Faculties = await _context.Faculties.ToListAsync();
