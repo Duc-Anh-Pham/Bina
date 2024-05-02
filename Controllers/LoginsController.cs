@@ -272,7 +272,7 @@ namespace Bina.Controllers
             HttpContext.Session.Clear();
             HttpContext.Session.Remove("Email");
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "Logins");
         }
     }
 }
