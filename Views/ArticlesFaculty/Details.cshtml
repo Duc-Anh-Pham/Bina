@@ -119,19 +119,17 @@
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-   $(document).ready(function () {
-    $('#likeButton').click(function () {
-        var articleId = @Model.ArticleId;
-        $.post('/ArticlesFaculty/ToggleLike', { articleId: articleId }, function (data) {
-            if (data.liked) {
-                $('#likeCount').text(parseInt($('#likeCount').text()) + 1);
-                alert('You liked this article.');
-            } else {
-                $('#likeCount').text(parseInt($('#likeCount').text()) - 1);
-                alert('You unliked this article.'); 
-            }
+    $(document).ready(function () {
+        $('#likeButton').click(function () {
+            var articleId = @Model.ArticleId;
+            $.post('/ArticlesFaculty/ToggleLike', { articleId: articleId }, function (data) {
+                if (data.liked) {
+                    $('#likeCount').text(parseInt($('#likeCount').text()) + 1);
+                } else {
+                    $('#likeCount').text(parseInt($('#likeCount').text()) - 1);
+                }
+            });
         });
     });
-});
 
 </script>

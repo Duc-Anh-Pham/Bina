@@ -18,7 +18,7 @@
             <div class="form-group">
                 <label asp-for="FacultyId" class="control-label">Faculty ID</label>
                 <input asp-for="FacultyId" class="form-control" readonly />
-                <span asp-validation-for="FacultyId" class="text-danger"></span>
+                <span asp-validation-for="FacultyId" class="text-danger" style="color: black"></span>
             </div>
 
             <div class="form-group">
@@ -29,7 +29,7 @@
 
             <div class="form-group">
                 <label asp-for="CoordinatorUserName" class="control-label">Coordinator </label>
-                <select asp-for="CoordinatorUserName" class="form-control" asp-items="ViewBag.CoordinatorUserNames">
+                <select asp-for="CoordinatorUserName" class="form-control" asp-items="ViewBag.CoordinatorUserNames" style="color: black">
                     <option value="">Select Coordinator</option>
                 </select>
                 <span asp-validation-for="CoordinatorUserName" class="text-danger"></span>

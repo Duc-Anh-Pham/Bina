@@ -102,3 +102,9 @@ body {
 
 /* Footer End */
 
+/* Định dạng màu chữ trong thẻ <strong> thành màu đen */
+.form-group strong {
+    color: black;
+}
+
+
