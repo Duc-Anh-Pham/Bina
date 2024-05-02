@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "KfKm+rjFYswNY/urMl+7ClrjZ93/Jcm3QBHdNwAvsF9r6jDuoZKK7ZzrlKzROfMQ9X7gY2KMMVfoLwjqGY/Jug==",
+  "dgSpecHash": "Yja875pTQzQLIo3tNj3fX0NffVbXIg62sYrjOKyNCWSBTnwzLkVHSEpaNELCorxXjzs6DXHvcHxKsrnQ1JC/jQ==",
   "success": true,
-  "projectFilePath": "F:\\Greenwich IT\\TOPUP - 1640 - Enterprise Web Software Development\\Code\\Bina 02-05\\Bina\\Bina.csproj",
+  "projectFilePath": "F:\\Greenwich IT\\TOPUP - 1640 - Enterprise Web Software Development\\Code\\Bina 14-4\\Bina\\Bina.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\s2vet\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\s2vet\\.nuget\\packages\\azure.identity\\1.11.0\\azure.identity.1.11.0.nupkg.sha512",

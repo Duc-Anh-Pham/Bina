@@ -1,4 +1,4 @@
-﻿@{
+﻿﻿@{
     var isAuthenticated = User.Identity.IsAuthenticated || (!string.IsNullOrEmpty(Context.Session.GetString("Email")) && (Context.Session.GetInt32("RoleId") == 4));
     var isStudent = Context.Session.GetInt32("RoleId") == 4;
 }

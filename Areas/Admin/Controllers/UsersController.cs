@@ -2,7 +2,6 @@
 using Bina.Models;
 using Bina.Models.Authentication;
 using Bina.Services;
-using Firebase.Storage;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -30,7 +29,7 @@ namespace Bina.Areas.Admin.Controllers
 
         // GET: Users/Index/Search
         [HttpGet]
-        public async Task<IActionResult> Index(string searchTerm, string sortBy, string sortDirection, int? pageSize = 3, int? pageNumber = 1)
+        public async Task<IActionResult> Index(string searchTerm, string sortBy, string sortDirection, int? pageSize = 10, int? pageNumber = 1)
         {
             int defaultPageSize = pageSize ?? 5;
             int currentPageNumber = pageNumber ?? 1;

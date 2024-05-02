@@ -1,4 +1,4 @@
-﻿@{
+﻿﻿@{
     var isAuthenticated = User.Identity.IsAuthenticated || (!string.IsNullOrEmpty(Context.Session.GetString("Email")) && (Context.Session.GetInt32("RoleId") == 5));
     var isStudent = Context.Session.GetInt32("RoleId") == 5;
 }
@@ -73,35 +73,35 @@
 
             <ul class="navbar-nav mx-auto mb-2 mb-md-0">
 
+               
 
-
-                @*   @if (isStudent)
+              @*   @if (isStudent)
                 {
-                <li class="nav-item">
-                <a class="nav-link text-dark" class="nav-link" asp-area="" asp-controller="ArticlesHome" asp-action="Index">
-                <i class="fa-solid fa-newspaper"></i> Article
-                </a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" class="nav-link" asp-area="" asp-controller="ArticlesHome" asp-action="Index">
+                            <i class="fa-solid fa-newspaper"></i> Article
+                        </a>
+                    </li>
 
-                <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="" asp-controller="ArticlesFaculty" asp-action="index">
-                <i class="fa-solid fa-list-check"></i> Faculty
-                </a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="" asp-controller="Articles" asp-action="index">
-                <i class="fa-solid fa-list-check"></i> Article Management
-                </a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="ArticlesFaculty" asp-action="index">
+                            <i class="fa-solid fa-list-check"></i> Faculty
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Articles" asp-action="index">
+                            <i class="fa-solid fa-list-check"></i> Article Management
+                        </a>
+                    </li>
                 } *@
 
                 @*<li class="nav-item">
                 <a class="nav-link" href="#"><i class="fa-regular fa-address-book"></i> Contact</a>
                 </li> *@
-                @*   <li class="nav-item">
-                <a class="nav-link" asp-controller="HelpSupport" asp-action="Index">
-                <i class="fa-solid fa-circle-info"></i> Help And Support
-                </a>
+              @*   <li class="nav-item">
+                    <a class="nav-link" asp-controller="HelpSupport" asp-action="Index">
+                        <i class="fa-solid fa-circle-info"></i> Help And Support
+                    </a>
                 </li> *@
             </ul>
         </div>
