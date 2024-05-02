@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Github\\COMP1640\\Bina\\Bina.csproj": {}
+    "C:\\Users\\Admin\\Desktop\\Bina 5 03\\Bina\\Bina.csproj": {}
   },
   "projects": {
-    "D:\\Github\\COMP1640\\Bina\\Bina.csproj": {
+    "C:\\Users\\Admin\\Desktop\\Bina 5 03\\Bina\\Bina.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Github\\COMP1640\\Bina\\Bina.csproj",
+        "projectUniqueName": "C:\\Users\\Admin\\Desktop\\Bina 5 03\\Bina\\Bina.csproj",
         "projectName": "Bina",
-        "projectPath": "D:\\Github\\COMP1640\\Bina\\Bina.csproj",
-        "packagesPath": "C:\\Users\\ducan\\.nuget\\packages\\",
-        "outputPath": "D:\\Github\\COMP1640\\Bina\\obj\\",
+        "projectPath": "C:\\Users\\Admin\\Desktop\\Bina 5 03\\Bina\\Bina.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Admin\\Desktop\\Bina 5 03\\Bina\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\ducan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,7 +26,9 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://packagesource": {}
         },
         "frameworks": {
           "net8.0": {
@@ -131,7 +137,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
