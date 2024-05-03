@@ -82,13 +82,41 @@ namespace Bina.Controllers
             return View();
         }
 
-        // POST: Faculty/Create
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("FacultyId,FacultyName,Established,CoordinatorUserName")] ViewModels viewModel)
         {
             if (ModelState.IsValid)
             {
+                if (string.IsNullOrWhiteSpace(viewModel.FacultyId) || string.IsNullOrWhiteSpace(viewModel.FacultyName))
+                {
+                    ModelState.AddModelError("", "Faculty ID and Faculty Name are required.");
+                    ViewBag.CoordinatorUserNames = _context.Users
+                        .Where(u => u.RoleId == 2 && u.FacultyId == null)
+                        .Select(u => new SelectListItem
+                        {
+                            Text = u.UserName,
+                            Value = u.UserName
+                        })
+                        .ToList();
+                    return View(viewModel);
+                }
+
+                if (await _context.Faculties.AnyAsync(f => f.FacultyId == viewModel.FacultyId || f.FacultyName == viewModel.FacultyName))
+                {
+                    ModelState.AddModelError("", "Faculty ID or Faculty Name already exists.");
+                    ViewBag.CoordinatorUserNames = _context.Users
+                        .Where(u => u.RoleId == 2 && u.FacultyId == null)
+                        .Select(u => new SelectListItem
+                        {
+                            Text = u.UserName,
+                            Value = u.UserName
+                        })
+                        .ToList();
+                    return View(viewModel);
+                }
+
                 var faculty = new Faculty
                 {
                     FacultyId = viewModel.FacultyId,
@@ -111,8 +139,21 @@ namespace Bina.Controllers
 
                 return RedirectToAction(nameof(Index));
             }
-            return View(viewModel);
+            else
+            {
+                ViewBag.CoordinatorUserNames = _context.Users
+                   .Where(u => u.RoleId == 2 && u.FacultyId == null)
+               .Select(u => new SelectListItem
+               {
+                   Text = u.UserName,
+                   Value = u.UserName
+               })
+                   .ToList();
+
+                return View(viewModel);
+            }
         }
+
         // GET: Faculty/Edit/5
         public async Task<IActionResult> Edit(string id)
         {

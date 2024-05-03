@@ -17,36 +17,36 @@
                         <input type="hidden" asp-for="ArticlesDeadlineId" />
                         <div class="form-group">
                             <label asp-for="TermName" class="control-label"> Term Name</label>
-                            <input asp-for="TermName" class="form-control" />
+                            <input asp-for="TermName" class="form-control" vali required/>
                             <span asp-validation-for="TermName" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <label asp-for="TermTitle" class="control-label">Term Title </label>
-                            <input asp-for="TermTitle" class="form-control" />
-                            <span asp-validation-for="TermTitle" class="text-danger"></span>
+                            <input asp-for="TermTitle" class="form-control" required/>
+                            <span asp-validation-for="TermTitle" class="text-danger" ></span>
                         </div
 
  
                          <div class="form-group">
                             <label asp-for="FacultyId" class="control-label">Faculty ID</label>
-                            <select asp-for="FacultyId" class="form-control" asp-items="@ViewBag.FacultyId" style="color: black"></select>
+                            <select asp-for="FacultyId" class="form-control" asp-items="@ViewBag.FacultyId" style="color: black" required></select>
                             <span asp-validation-for="FacultyId" class="text-danger"></span>
                         </div>
 
                         <div class="form-group">
                             <label asp-for="StartDue" class="control-label">Start Due</label>
-                            <input asp-for=" StartDue" class="form-control" asp-items="ViewBag.DateCreated" />
+                            <input asp-for=" StartDue" class="form-control" asp-items="ViewBag.DateCreated" required />
                             <span asp-validation-for=" StartDue" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <label asp-for=" DueDate" class="control-label">Due Date</label>
-                            <input asp-for=" DueDate" class="form-control" asp-items="ViewBag.DateCreated" />
+                            <input asp-for=" DueDate" class="form-control" asp-items="ViewBag.DateCreated" required/>
                             <span asp-validation-for=" DueDate" class="text-danger"></span>
                         </div>
 
                         <div class="form-group">
                             <label asp-for=" AcademicYear" class="control-label">Academic Year</label>
-                            <input asp-for=" AcademicYear" class="form-control" asp-items="ViewBag.AcademicYear" />
+                            <input asp-for=" AcademicYear" class="form-control" asp-items="ViewBag.AcademicYear" required />
                             <span asp-validation-for="AcademicYear" class="text-danger"></span>
                         </div>
 

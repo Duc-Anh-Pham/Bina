@@ -17,7 +17,6 @@
                 <span asp-validation-for="FacultyId" class="text-danger"></span>
             </div>
 
-
             <div class="form-group">
                 <label asp-for="FacultyName" class="control-label">Faculty Name</label>
                 <input asp-for="FacultyName" class="form-control" required />
@@ -32,14 +31,9 @@
                 <span asp-validation-for="CoordinatorUserName" class="text-danger"></span>
             </div>
 
-
-
-
-            <!-- Established date field, hidden and set to today's date -->
-            <input asp-for="Established" class="form-control" type="hidden" value="@DateTime.Now.ToString("yyyy-MM-dd HH:mm")" />
+             <input asp-for="Established" class="form-control" type="hidden" value="@DateTime.Now.ToString("yyyy-MM-dd HH:mm")" />
 
             <br />
-
 
             <div class="form-group d-flex">
                 <input type="submit" value="Create" class="btn btn-primary" />
@@ -49,6 +43,3 @@
     </div>
 </div>
 
-
-
- 

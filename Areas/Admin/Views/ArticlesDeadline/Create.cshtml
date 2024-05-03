@@ -15,35 +15,37 @@
 
             <div class="form-group">
                 <label asp-for="TermName" class="control-label">Term Name</label>
-                <input asp-for="TermName" class="form-control" />
+                <input asp-for="TermName" class="form-control" required />
                 <span asp-validation-for="TermName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TermTitle" class="control-label"> Term Title</label>
-                <input asp-for="TermTitle" class="form-control" />
+                <label asp-for="TermTitle" class="control-label">Term Title</label>
+                <input asp-for="TermTitle" class="form-control" required />
                 <span asp-validation-for="TermTitle" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="FacultyId" class="control-label">Faculty ID</label>
-                <select asp-for="FacultyId" class="form-control" asp-items="@ViewBag.FacultyId" style="color: black"></select>
+                <label asp-for="FacultyId" class="control-label">Faculty</label>
+                <select asp-for="FacultyId" class="form-control" asp-items="@ViewBag.FacultyId" required>
+                    <option value="">-- Select Faculty --</option>
+                </select>
+                <span asp-validation-for="FacultyId" class="text-danger"></span>
             </div>
-
-
-
             <div class="form-group">
-                <label for="startDue" class="control-label">Start Due</label>
-                <input type="datetime-local" id="startDue" name="startDue" class="form-control" />
+                <label asp-for="StartDue" class="control-label">Start Due</label>
+                <input asp-for="StartDue" class="form-control" required />
+                <span asp-validation-for="StartDue" class="text-danger"></span>
+            </div>s
+            <div class="form-group">
+                <label asp-for="DueDate" class="control-label">Due Date</label>
+                <input asp-for="DueDate" class="form-control" required />
+                <span asp-validation-for="DueDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AcademicYear" class="control-label">Academic Year</label>
+                <input asp-for="AcademicYear" class="form-control" required />
+                <span asp-validation-for="AcademicYear" class="text-danger"></span>
             </div>
 
-            <div class="form-group">
-                <label for="dueDate" class="control-label">Due Date</label>
-                <input type="datetime-local" id="dueDate" name="dueDate" class="form-control" />
-            </div>
-
-            <div class="form-group">
-                <label for="academicYear" class="control-label">Academic Year</label>
-                <input type="int" id="academicYear" name="academicYear" class="form-control" />
-            </div>
 
             </br>
             <div class="form-group d-flex">
