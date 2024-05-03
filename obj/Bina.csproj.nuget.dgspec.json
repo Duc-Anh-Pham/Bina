@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Github\\COMP1640\\Bina\\Bina.csproj": {}
+    "E:\\Document\\1640 12\\Bina.csproj": {}
   },
   "projects": {
-    "D:\\Github\\COMP1640\\Bina\\Bina.csproj": {
+    "E:\\Document\\1640 12\\Bina.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Github\\COMP1640\\Bina\\Bina.csproj",
+        "projectUniqueName": "E:\\Document\\1640 12\\Bina.csproj",
         "projectName": "Bina",
-        "projectPath": "D:\\Github\\COMP1640\\Bina\\Bina.csproj",
-        "packagesPath": "C:\\Users\\ducan\\.nuget\\packages\\",
-        "outputPath": "D:\\Github\\COMP1640\\Bina\\obj\\",
+        "projectPath": "E:\\Document\\1640 12\\Bina.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "E:\\Document\\1640 12\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ducan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -34,11 +34,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -131,7 +126,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

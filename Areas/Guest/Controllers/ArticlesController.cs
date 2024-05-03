@@ -1,7 +1,6 @@
 ﻿using Bina.Data;
 using Bina.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace Bina.Guest.Controllers
