@@ -197,10 +197,12 @@ namespace Bina.Controllers
         {
             if (ModelState.IsValid)
             {
-                 if (imageFile != null && imageFile.Length > 0)
+                article.GuestAllow = false;
+                article.DateCreate = DateTime.Now;
+                if (imageFile != null && imageFile.Length > 0)
                 {
                     var imageUrl = await _firebaseCloud.UploadFileToFirebase(imageFile);
-                    article.ImagePath = imageUrl; 
+                    article.ImagePath = imageUrl;
                 }
 
                 // Xử lý file tài liệu
@@ -292,9 +294,10 @@ namespace Bina.Controllers
                             }
                         }
                     }
-                }catch(Exception ex)
+                }
+                catch (Exception ex)
                 {
-                    
+
                     throw ex;
                 }
 

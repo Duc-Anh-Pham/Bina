@@ -49,7 +49,7 @@ namespace Bina.Controllers
                 return NotFound();
             }
 
-            ViewData["FacultyId"] = new SelectList(_context.Faculties, "FacultyId", "FacultyId", user.FacultyId);
+            ViewData["FacultyName"] = new SelectList(_context.Faculties, "FacultyId", "FacultyName", user.FacultyId);
             ViewData["RoleName"] = new SelectList(_context.Roles, "RoleId", "RoleName", user.RoleId);
 
             return View(user);
@@ -113,7 +113,7 @@ namespace Bina.Controllers
                 }
             }
 
-            ViewData["FacultyId"] = new SelectList(_context.Faculties, "FacultyId", "FacultyId", user.FacultyId);
+            ViewData["FacultyName"] = new SelectList(_context.Faculties, "FacultyId", "FacultyName", user.FacultyId);
             ViewData["RoleId"] = new SelectList(_context.Roles, "RoleId", "RoleName", user.RoleId);
             return View(user);
         }

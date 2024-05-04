@@ -108,7 +108,7 @@ namespace Bina.Areas.Admin.Controllers
         // GET: Users/Create
         public IActionResult Create()
         {
-            ViewData["FacultyId"] = new SelectList(_context.Faculties, "FacultyId", "FacultyId");
+            ViewData["FacultyName"] = new SelectList(_context.Faculties, "FacultyId", "FacultyName");
             ViewData["RoleName"] = new SelectList(_context.Roles, "RoleId", "RoleName");
             ViewData["TermsText"] = new SelectList(_context.TermsAndConditions, "TermsId", "TermsText");
 
@@ -170,7 +170,7 @@ namespace Bina.Areas.Admin.Controllers
                 if (!allowedDomains.Contains(emailDomain, StringComparer.OrdinalIgnoreCase))
                 {
                     ModelState.AddModelError("Email", "Email must be from one of the following domains: @gmail.com, @fpt.edu.vn, @org.com");
-                    ViewData["FacultyId"] = new SelectList(_context.Faculties, "FacultyId", "FacultyId", user.FacultyId);
+                    ViewData["FacultyName"] = new SelectList(_context.Faculties, "FacultyId", "FacultyName", user.FacultyId);
                     ViewData["RoleName"] = new SelectList(_context.Roles, "RoleId", "RoleName", user.RoleId);
                     ViewData["TermsText"] = new SelectList(_context.TermsAndConditions, "TermsId", "TermsText", user.TermsId);
                     return View(user);
@@ -180,7 +180,7 @@ namespace Bina.Areas.Admin.Controllers
                 if (string.IsNullOrWhiteSpace(user.UserName))
                 {
                     ModelState.AddModelError("", "User Name cannot be empty!");
-                    ViewData["FacultyId"] = new SelectList(_context.Faculties, "FacultyId", "FacultyId", user.FacultyId);
+                    ViewData["FacultyName"] = new SelectList(_context.Faculties, "FacultyId", "FacultyName", user.FacultyId);
                     ViewData["RoleName"] = new SelectList(_context.Roles, "RoleId", "RoleName", user.RoleId);
                     return View(user);
                 }
@@ -192,7 +192,7 @@ namespace Bina.Areas.Admin.Controllers
                     // Notify that email or User Name already exists
                     string errorMessage = existingUser.Email == user.Email ? "Email already exists in the system. Please enter another email." : "User Name already exists in the system. Please enter another User Name.";
                     ModelState.AddModelError(existingUser.Email == user.Email ? "Email" : "UserName", errorMessage);
-                    ViewData["FacultyId"] = new SelectList(_context.Faculties, "FacultyId", "FacultyId", user.FacultyId);
+                    ViewData["FacultyName"] = new SelectList(_context.Faculties, "FacultyId", "FacultyName", user.FacultyId);
                     ViewData["RoleName"] = new SelectList(_context.Roles, "RoleId", "RoleName", user.RoleId);
                     return View(user);
                 }
@@ -220,7 +220,7 @@ namespace Bina.Areas.Admin.Controllers
             }
 
             // (Return statement and view data handling as in your original code)
-            ViewData["FacultyId"] = new SelectList(_context.Faculties, "FacultyId", "FacultyId", user.FacultyId);
+            ViewData["FacultyName"] = new SelectList(_context.Faculties, "FacultyId", "FacultyName", user.FacultyId);
             ViewData["RoleName"] = new SelectList(_context.Roles, "RoleId", "RoleName", user.RoleId);
             ViewData["TermsText"] = new SelectList(_context.TermsAndConditions, "TermsId", "TermsText", user.TermsId);
             return View(user);
@@ -245,7 +245,7 @@ namespace Bina.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            ViewData["FacultyId"] = new SelectList(_context.Faculties, "FacultyId", "FacultyId", user.FacultyId);
+            ViewData["FacultyName"] = new SelectList(_context.Faculties, "FacultyId", "FacultyName", user.FacultyId);
             ViewData["RoleName"] = new SelectList(_context.Roles, "RoleId", "RoleName", user.RoleId); // Tạo SelectList cho Roles
             ViewData["TermsText"] = new SelectList(_context.TermsAndConditions, "TermsId", "TermsText", user.TermsId);
 
@@ -355,7 +355,7 @@ namespace Bina.Areas.Admin.Controllers
                 }
             }
 
-            ViewData["FacultyId"] = new SelectList(_context.Faculties, "FacultyId", "FacultyId", user.FacultyId);
+            ViewData["FacultyName"] = new SelectList(_context.Faculties, "FacultyId", "FacultyName", user.FacultyId);
             ViewData["RoleId"] = new SelectList(_context.Roles, "RoleId", "RoleName", user.RoleId);
             ViewData["TermsText"] = new SelectList(_context.TermsAndConditions, "TermsId", "TermsText", user.TermsId);
             return View(user);
@@ -454,7 +454,7 @@ namespace Bina.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            ViewData["FacultyId"] = new SelectList(_context.Faculties, "FacultyId", "FacultyId", user.FacultyId);
+            ViewData["FacultyName"] = new SelectList(_context.Faculties, "FacultyId", "FacultyName", user.FacultyId);
             ViewData["RoleName"] = new SelectList(_context.Roles, "RoleId", "RoleName", user.RoleId);
 
             return View(user);
@@ -518,7 +518,7 @@ namespace Bina.Areas.Admin.Controllers
                 }
             }
 
-            ViewData["FacultyId"] = new SelectList(_context.Faculties, "FacultyId", "FacultyId", user.FacultyId);
+            ViewData["FacultyName"] = new SelectList(_context.Faculties, "FacultyId", "FacultyName", user.FacultyId);
             ViewData["RoleId"] = new SelectList(_context.Roles, "RoleId", "RoleName", user.RoleId);
             return View(user);
         }

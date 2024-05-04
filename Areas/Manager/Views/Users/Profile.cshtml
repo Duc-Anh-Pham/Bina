@@ -79,7 +79,7 @@
                                 <label asp-for="FacultyId" class="control-label"> Faculty ID</label>
                                 <select asp-for="FacultyId" class="form-control" readonly disabled>
                                     <option value="">None</option>
-                                    @foreach (var faculty in ViewBag.FacultyId)
+                                    @foreach (var faculty in ViewBag.FacultyName)
                                     {
                                         <option value="@faculty.Value">@faculty.Text</option>
                                     }

@@ -1,12 +1,11 @@
 ﻿@model Bina.Models.HelpSupport
 
-
 <div id="Quynh" class="container">
 	<div class="row justify-content-left">
 		<div class="col-md-6">
 			<div class="form-container">
 				<h1 class="mb-4" style="font-color: white">HELP and SUPPORT</h1>
-				<form asp-action="HelpSupport" method="post">
+				<form asp-action="HelpSupport" method="post" onsubmit="setCreatedAt()">
 					<div class="form-group">
 						<label asp-for="Email" style="color: black; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">Email Address:</label>
 						<input asp-for="Email" class="form-control" />
@@ -27,12 +26,11 @@
 
 					<div class="form-group">
 						<label asp-for="UserMessages" style="color: black; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">Your Messages:</label>
-						<textarea asp-for="UserMessages" rows=" 4" cols="68" name="UserMessages"> </textarea>
+						<textarea asp-for="UserMessages" rows="4" cols="68" name="UserMessages"></textarea>
 						<span asp-validation-for="UserMessages" class="text-danger"></span>
 					</div>
 
-					<!-- Hidden field for CreatedAt -->
-					<input asp-for="CreatedAt" type="hidden" />
+					<input asp-for="CreatedAt" class="form-control" type="hidden" id="CreatedAt" name="CreatedAt" />
 
 					<button type="submit" class="btn btn-primary">Send Message</button>
 				</form>
@@ -42,9 +40,9 @@
 </div>
 
 <script>
-	document.getElementById('helpSupportForm').addEventListener('submit', function () {
+	function setCreatedAt() {
 		var now = new Date();
-		var datetimeLocal = now.toISOString().slice(0, 16);
-		document.querySelector('input[asp-for="CreatedAt"]').value = datetimeLocal;
-	});
+		var dateTimeLocal = now.toISOString().substring(0, 16); // Chuyển đổi thời gian hiện tại thành định dạng yyyy-MM-ddTHH:mm
+		document.getElementById('CreatedAt').value = dateTimeLocal;
+	}
 </script>

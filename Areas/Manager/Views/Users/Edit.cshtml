@@ -77,12 +77,12 @@
                             <span asp-validation-for="DateCreated" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label asp-for="FacultyId" class="control-label"> Faculty ID</label>
+                            <label asp-for="FacultyId" class="control-label"> Faculty Name</label>
                             <select asp-for="FacultyId" class="form-control">
-                                <option value="">None</option>
-                                @foreach (var faculty in ViewBag.FacultyId)
+                                <option value="" style="background-color: black">None</option>
+                                @foreach (var faculty in ViewBag.FacultyName)
                                 {
-                                    <option value="@faculty.Value">@faculty.Text</option>
+                                    <option value="@faculty.Value" style="background-color: black">@faculty.Text</option>
                                 }
                             </select>
                             <span asp-validation-for="FacultyId" class="text-danger"></span>

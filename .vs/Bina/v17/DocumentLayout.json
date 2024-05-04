@@ -3,30 +3,51 @@
   "WorkspaceRootPath": "D:\\Github\\COMP1640\\Bina\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|d:\\github\\comp1640\\bina\\areas\\coordinator\\views\\articles\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|solutionrelative:areas\\coordinator\\views\\articles\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|d:\\github\\comp1640\\bina\\views\\articles\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|solutionrelative:views\\articles\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|d:\\github\\comp1640\\bina\\areas\\admin\\views\\users\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|solutionrelative:areas\\admin\\views\\users\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|d:\\github\\comp1640\\bina\\views\\articles\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|solutionrelative:views\\articles\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|d:\\github\\comp1640\\bina\\areas\\admin\\views\\users\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|solutionrelative:areas\\admin\\views\\users\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/DUC_ANH/FT1/True/SqlTable/dbo.User.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|d:\\github\\comp1640\\bina\\controllers\\articlescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|solutionrelative:controllers\\articlescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/DUC_ANH/FT1/True/SqlTable/dbo.Articles.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|d:\\github\\comp1640\\bina\\areas\\coordinator\\controllers\\articlescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|solutionrelative:areas\\coordinator\\controllers\\articlescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ducan\\AppData\\Local\\Temp\\t2osjadr..sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|d:\\github\\comp1640\\bina\\areas\\admin\\controllers\\articlesdeadlinecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|solutionrelative:areas\\admin\\controllers\\articlesdeadlinecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|d:\\github\\comp1640\\bina\\areas\\admin\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|solutionrelative:areas\\admin\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/DUC_ANH/FT1/True/SqlTable/dbo.Faculty.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+      "AbsoluteMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|d:\\github\\comp1640\\bina\\areas\\admin\\views\\articlesdeadline\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|solutionrelative:areas\\admin\\views\\articlesdeadline\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/DUC_ANH/FT1/True/SqlTable/dbo.User.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+      "AbsoluteMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|d:\\github\\comp1640\\bina\\areas\\admin\\views\\articlesdeadline\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|solutionrelative:areas\\admin\\views\\articlesdeadline\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|d:\\github\\comp1640\\bina\\areas\\admin\\views\\users\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{22AD2300-F318-4702-9F42-308098DFF384}|Bina.csproj|solutionrelative:areas\\admin\\views\\users\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ducan\\AppData\\Local\\Temp\\t2osjadr..sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|CodeFrame"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ducan\\AppData\\Local\\Temp\\t2osjadr..sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|ResultFrame"
     }
   ],
   "DocumentGroupContainers": [
@@ -36,7 +57,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -44,87 +65,136 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Create.cshtml",
-              "DocumentMoniker": "D:\\Github\\COMP1640\\Bina\\Areas\\Admin\\Views\\Users\\Create.cshtml",
-              "RelativeDocumentMoniker": "Areas\\Admin\\Views\\Users\\Create.cshtml",
-              "ToolTip": "D:\\Github\\COMP1640\\Bina\\Areas\\Admin\\Views\\Users\\Create.cshtml",
-              "RelativeToolTip": "Areas\\Admin\\Views\\Users\\Create.cshtml",
-              "ViewState": "AQIAADMAAAAAAAAAAADwv0IAAAA1AAAA",
+              "DocumentIndex": 0,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "D:\\Github\\COMP1640\\Bina\\Views\\Articles\\Details.cshtml",
+              "RelativeDocumentMoniker": "Views\\Articles\\Details.cshtml",
+              "ToolTip": "D:\\Github\\COMP1640\\Bina\\Views\\Articles\\Details.cshtml",
+              "RelativeToolTip": "Views\\Articles\\Details.cshtml",
+              "ViewState": "AQIAADsAAAAAAAAAAAAMwE0AAAAdAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-04T03:32:11.11Z",
+              "WhenOpened": "2024-05-04T15:32:20.625Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\Github\\COMP1640\\Bina\\Areas\\Coordinator\\Views\\Articles\\Index.cshtml",
-              "RelativeDocumentMoniker": "Areas\\Coordinator\\Views\\Articles\\Index.cshtml",
-              "ToolTip": "D:\\Github\\COMP1640\\Bina\\Areas\\Coordinator\\Views\\Articles\\Index.cshtml",
-              "RelativeToolTip": "Areas\\Coordinator\\Views\\Articles\\Index.cshtml",
-              "ViewState": "AQIAABwAAAAAAAAAAAAAABwAAABbAAAA",
+              "DocumentMoniker": "D:\\Github\\COMP1640\\Bina\\Views\\Articles\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Articles\\Index.cshtml",
+              "ToolTip": "D:\\Github\\COMP1640\\Bina\\Views\\Articles\\Index.cshtml",
+              "RelativeToolTip": "Views\\Articles\\Index.cshtml",
+              "ViewState": "AQIAAC0AAAAAAAAAAADwvzcAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-04T03:30:40.463Z",
+              "WhenOpened": "2024-05-04T15:31:44.06Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "UsersController.cs",
-              "DocumentMoniker": "D:\\Github\\COMP1640\\Bina\\Areas\\Admin\\Controllers\\UsersController.cs",
-              "RelativeDocumentMoniker": "Areas\\Admin\\Controllers\\UsersController.cs",
-              "ToolTip": "D:\\Github\\COMP1640\\Bina\\Areas\\Admin\\Controllers\\UsersController.cs",
-              "RelativeToolTip": "Areas\\Admin\\Controllers\\UsersController.cs",
-              "ViewState": "AQIAAFoAAAAAAAAAAAAAAGYAAABLAAAA",
+              "Title": "ArticlesController.cs",
+              "DocumentMoniker": "D:\\Github\\COMP1640\\Bina\\Controllers\\ArticlesController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ArticlesController.cs",
+              "ToolTip": "D:\\Github\\COMP1640\\Bina\\Controllers\\ArticlesController.cs",
+              "RelativeToolTip": "Controllers\\ArticlesController.cs",
+              "ViewState": "AQIAANUAAAAAAAAAAAAAAPoAAAArAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-04T03:25:23.409Z",
+              "WhenOpened": "2024-05-04T12:10:35.949Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "dbo.Faculty [Data]",
-              "DocumentMoniker": "ViewDataWindow_MSSQL__/DUC_ANH/FT1/True/SqlTable/dbo.Faculty.sql",
-              "ToolTip": "dbo.Faculty [Data]",
+              "Title": "dbo.Articles [Data]",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/DUC_ANH/FT1/True/SqlTable/dbo.Articles.sql",
+              "ToolTip": "dbo.Articles [Data]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2024-05-04T03:24:42.625Z",
+              "WhenOpened": "2024-05-04T11:59:08.712Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Edit.cshtml",
-              "DocumentMoniker": "D:\\Github\\COMP1640\\Bina\\Areas\\Admin\\Views\\Users\\Edit.cshtml",
-              "RelativeDocumentMoniker": "Areas\\Admin\\Views\\Users\\Edit.cshtml",
-              "ToolTip": "D:\\Github\\COMP1640\\Bina\\Areas\\Admin\\Views\\Users\\Edit.cshtml",
-              "RelativeToolTip": "Areas\\Admin\\Views\\Users\\Edit.cshtml",
-              "ViewState": "AQIAAD8AAAAAAAAAAAAAAFcAAAA/AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-04T03:24:06.648Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Details.cshtml",
-              "DocumentMoniker": "D:\\Github\\COMP1640\\Bina\\Areas\\Admin\\Views\\Users\\Details.cshtml",
-              "RelativeDocumentMoniker": "Areas\\Admin\\Views\\Users\\Details.cshtml",
-              "ToolTip": "D:\\Github\\COMP1640\\Bina\\Areas\\Admin\\Views\\Users\\Details.cshtml",
-              "RelativeToolTip": "Areas\\Admin\\Views\\Users\\Details.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAADwvwAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-04T03:24:03.875Z",
+              "Title": "dbo.User [Data]",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/DUC_ANH/FT1/True/SqlTable/dbo.User.sql",
+              "ToolTip": "dbo.User [Data]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2024-05-04T11:06:05.573Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "dbo.User [Data]",
-              "DocumentMoniker": "ViewDataWindow_MSSQL__/DUC_ANH/FT1/True/SqlTable/dbo.User.sql",
-              "ToolTip": "dbo.User [Data]",
+              "Title": "ArticlesController.cs",
+              "DocumentMoniker": "D:\\Github\\COMP1640\\Bina\\Areas\\Coordinator\\Controllers\\ArticlesController.cs",
+              "RelativeDocumentMoniker": "Areas\\Coordinator\\Controllers\\ArticlesController.cs",
+              "ToolTip": "D:\\Github\\COMP1640\\Bina\\Areas\\Coordinator\\Controllers\\ArticlesController.cs",
+              "RelativeToolTip": "Areas\\Coordinator\\Controllers\\ArticlesController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-04T10:28:35.739Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "UsersController.cs",
+              "DocumentMoniker": "D:\\Github\\COMP1640\\Bina\\Areas\\Admin\\Controllers\\UsersController.cs",
+              "RelativeDocumentMoniker": "Areas\\Admin\\Controllers\\UsersController.cs",
+              "ToolTip": "D:\\Github\\COMP1640\\Bina\\Areas\\Admin\\Controllers\\UsersController.cs",
+              "RelativeToolTip": "Areas\\Admin\\Controllers\\UsersController.cs",
+              "ViewState": "AQIAAHkAAAAAAAAAAAAAAIIAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-04T09:38:34.507Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "D:\\Github\\COMP1640\\Bina\\Areas\\Admin\\Views\\ArticlesDeadline\\Create.cshtml",
+              "RelativeDocumentMoniker": "Areas\\Admin\\Views\\ArticlesDeadline\\Create.cshtml",
+              "ToolTip": "D:\\Github\\COMP1640\\Bina\\Areas\\Admin\\Views\\ArticlesDeadline\\Create.cshtml",
+              "RelativeToolTip": "Areas\\Admin\\Views\\ArticlesDeadline\\Create.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAATAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-04T09:28:22.277Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\Github\\COMP1640\\Bina\\Areas\\Admin\\Views\\ArticlesDeadline\\Index.cshtml",
+              "RelativeDocumentMoniker": "Areas\\Admin\\Views\\ArticlesDeadline\\Index.cshtml",
+              "ToolTip": "D:\\Github\\COMP1640\\Bina\\Areas\\Admin\\Views\\ArticlesDeadline\\Index.cshtml",
+              "RelativeToolTip": "Areas\\Admin\\Views\\ArticlesDeadline\\Index.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAADwvwAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-04T09:28:04.42Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ArticlesDeadlineController.cs",
+              "DocumentMoniker": "D:\\Github\\COMP1640\\Bina\\Areas\\Admin\\Controllers\\ArticlesDeadlineController.cs",
+              "RelativeDocumentMoniker": "Areas\\Admin\\Controllers\\ArticlesDeadlineController.cs",
+              "ToolTip": "D:\\Github\\COMP1640\\Bina\\Areas\\Admin\\Controllers\\ArticlesDeadlineController.cs",
+              "RelativeToolTip": "Areas\\Admin\\Controllers\\ArticlesDeadlineController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAADwvwAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-04T09:27:45.674Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "SQLQuery2.sql ",
+              "DocumentMoniker": "C:\\Users\\ducan\\AppData\\Local\\Temp\\t2osjadr..sql",
+              "ToolTip": "SQLQuery2.sql *",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2024-05-02T21:02:06.706Z",
+              "WhenOpened": "2024-05-04T09:58:26.717Z",
               "EditorCaption": ""
             }
           ]

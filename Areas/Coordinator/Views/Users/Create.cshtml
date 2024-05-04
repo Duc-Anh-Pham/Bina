@@ -41,15 +41,15 @@
                         </div>
                         <div class="form-group">
                             <label asp-for="DoB" class="control-label">Date Of Birth</label>
-                            <input asp-for="DoB" class="form-control" />
+                            <input type="" asp-for="DoB" class="form-control" />
                             <span asp-validation-for="DoB" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <label asp-for="Gender" class="control-label">Gender</label>
                             <select asp-for="Gender" class="form-control">
                                 <option value="">--Select Gender--</option>
-                                <option value="Male" style="color: black">Male</option>
-                                <option value="Female" style="color: black">Female</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
                             </select>
                             <span asp-validation-for="Gender" class="text-danger"></span>
                         </div>
@@ -59,21 +59,17 @@
                             <span asp-validation-for="Email" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label asp-for="Password" class="control-label">Password</label>
-                            <input asp-for="Password" class="form-control" />
-                            <span asp-validation-for="Password" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
                             <label asp-for="Role" class="control-label">Role</label>
                             <select asp-for="Role" class="form-control" asp-items="ViewBag.RoleName" style="color: black"></select>
+                            <span asp-validation-for="Role" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label asp-for="FacultyId" class="control-label"> Faculty ID</label>
+                            <label asp-for="FacultyId" class="control-label"> Faculty Name</label>
                             <select asp-for="FacultyId" class="form-control">
-                                <option value="" style="color: black">None</option>
-                                @foreach (var faculty in ViewBag.FacultyId)
+                                <option value="" style="background-color: black">None</option>
+                                @foreach (var faculty in ViewBag.FacultyName)
                                 {
-                                    <option value="@faculty.Value" style="color: black">@faculty.Text</option>
+                                    <option value="@faculty.Value" style="background-color: black">@faculty.Text</option>
                                 }
                             </select>
                             <span asp-validation-for="FacultyId" class="text-danger"></span>

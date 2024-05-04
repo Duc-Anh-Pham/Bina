@@ -1,81 +1,238 @@
-﻿@* Index Dashboard Page  *@
-
-@using System.Text.Json
-
-@{
-    // Initialize the JSON variables as strings so they can be used outside the code block
-    string facultiesJson = "[]";
-    string publicCountsJson = "[]";
-    string approvedCountsJson = "[]";
-    string processingCountsJson = "[]";
-    string rejectCountsJson = "[]";
-
-    if (ViewBag.Statistics is List<Bina.Models.ArticleStatisticViewModel> statistics && statistics.Any())
-    {
-        var faculties = statistics.Select(s => s.FacultyName).Distinct().ToList();
-        var publicCounts = statistics.Where(s => s.Status == "Public").Select(s => s.Count).ToList();
-        var approvedCounts = statistics.Where(s => s.Status == "Approved").Select(s => s.Count).ToList();
-        var processingCounts = statistics.Where(s => s.Status == "Processing").Select(s => s.Count).ToList();
-        var rejectCounts = statistics.Where(s => s.Status == "Reject").Select(s => s.Count).ToList();
-
-        // Serialize the data within the Razor code block
-        facultiesJson = JsonSerializer.Serialize(faculties);
-        publicCountsJson = JsonSerializer.Serialize(publicCounts);
-        approvedCountsJson = JsonSerializer.Serialize(approvedCounts);
-        processingCountsJson = JsonSerializer.Serialize(processingCounts);
-        rejectCountsJson = JsonSerializer.Serialize(rejectCounts);
-    }
+﻿﻿@{
+    ViewData["Title"] = "Dashboard";
 }
 
-
-
-
-<div style="background: white">
-    <div class="container mt-5">
-        <h2>Article Status by Faculty and Academic Year</h2>
-        <canvas id="myChart"></canvas>
+<div class="container mt-5">
+    <h2>Faculty Article Statistics</h2>
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="yearSelect">Select Academic Year:</label>
+                <select class="form-control" id="yearSelect">
+                    <!-- Options will be added dynamically -->
+                </select>
+            </div>
+        </div>
     </div>
 
-    <script>
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: @Html.Raw(facultiesJson),
-                datasets: [{
-                    label: 'Public',
-                    data: @Html.Raw(publicCountsJson),
-                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                    borderColor: 'rgba(255, 99, 132, 1)',
-                    borderWidth: 1
-                }, {
-                    label: 'Approved',
-                    data: @Html.Raw(approvedCountsJson),
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    borderWidth: 1
-                }, {
-                    label: 'Processing',
-                    data: @Html.Raw(processingCountsJson),
-                    backgroundColor: 'rgba(255, 206, 86, 0.2)',
-                    borderColor: 'rgba(255, 206, 86, 1)',
-                    borderWidth: 1
-                }, {
-                    label: 'Reject',
-                    data: @Html.Raw(rejectCountsJson),
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
-    </script>
+    <div class="row">
+        <div class="col-md-8">
+            <canvas id="articleChart"></canvas>
+        </div>
+        <div class="col-md-4">
+            <h2>Total Likes by Faculty</h2>
+            <canvas id="likePieChart"></canvas>
+        </div>
+    </div>
 </div>
 
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const data = {
+            '2021': {
+                'Information Technology': { 'Public': 25, 'Approved': 55, 'Processing': 12, 'Reject': 8, 'AllowGuest': 5, "TotalLike": 234 },
+                'Business Administration': { 'Public': 23, 'Approved': 40, 'Processing': 5, 'Reject': 10, 'AllowGuest': 6, "TotalLike": 387 },
+                'Engineering': { 'Public': 13, 'Approved': 65, 'Processing': 10, 'Reject': 2, 'AllowGuest': 5, "TotalLike": 432 },
+                'Arts and Social Sciences': { 'Public': 10, 'Approved': 55, 'Processing': 7, 'Reject': 8, 'AllowGuest': 3, "TotalLike": 542 },
+                'Graphic Design': { 'Public': 24, 'Approved': 65, 'Processing': 10, 'Reject': 2, 'AllowGuest': 5, "TotalLike": 152 }
+            },
+            '2022': {
+                'Information Technology': { 'Public': 10, 'Approved': 25, 'Processing': 9, 'Reject': 7, 'AllowGuest': 5, "TotalLike": 324 },
+                'Business Administration': { 'Public': 10, 'Approved': 29, 'Processing': 5, 'Reject': 5, 'AllowGuest': 6, "TotalLike": 529 },
+                'Engineering': { 'Public': 8, 'Approved': 23, 'Processing': 8, 'Reject': 2, 'AllowGuest': 5, "TotalLike": 542 },
+                'Arts and Social Sciences': { 'Public': 7, 'Approved': 19, 'Processing': 7, 'Reject': 3, 'AllowGuest': 3, "TotalLike": 125 },
+                'Graphic Design': { 'Public': 10, 'Approved': 32, 'Processing': 10, 'Reject': 5, 'AllowGuest': 5, "TotalLike": 521 }
+
+            },
+            "2023": {
+                "Information Technology": {
+                    "Public": 10,
+                    "Approved": 25,
+                    "Processing": 9,
+                    "Reject": 7,
+                    "AllowGuest": 5,
+                    "TotalLike": 423
+                },
+                "Business Administration": {
+                    "Public": 10,
+                    "Approved": 23,
+                    "Processing": 5,
+                    "Reject": 5,
+                    "AllowGuest": 6,
+                    "TotalLike": 443
+                },
+                "Engineering": {
+                    "Public": 8,
+                    "Approved": 23,
+                    "Processing": 8,
+                    "Reject": 2,
+                    "AllowGuest": 5,
+                    "TotalLike": 763
+                },
+                "Arts and Social Sciences": {
+                    "Public": 7,
+                    "Approved": 19,
+                    "Processing": 7,
+                    "Reject": 3,
+                    "AllowGuest": 3,
+                    "TotalLike": 562
+                },
+                "Graphic Design": {
+                    "Public": 10,
+                    "Approved": 31,
+                    "Processing": 10,
+                    "Reject": 5,
+                    "AllowGuest": 5,
+                    "TotalLike": 876
+                }
+            },
+            "2024": {
+                "Information Technology": {
+                    "Public": 10,
+                    "Approved": 25,
+                    "Processing": 9,
+                    "Reject": 7,
+                    "AllowGuest": 5,
+                    "TotalLike": 521
+                },
+                "Business Administration": {
+                    "Public": 10,
+                    "Approved": 43,
+                    "Processing": 5,
+                    "Reject": 5,
+                    "AllowGuest": 6,
+                    "TotalLike": 766
+                },
+                "Engineering": {
+                    "Public": 8,
+                    "Approved": 23,
+                    "Processing": 8,
+                    "Reject": 2,
+                    "AllowGuest": 5,
+                    "TotalLike": 542
+                },
+                "Arts and Social Sciences": {
+                    "Public": 7,
+                    "Approved": 20,
+                    "Processing": 7,
+                    "Reject": 3,
+                    "AllowGuest": 3,
+                    "TotalLike": 142
+                },
+                "Graphic Design": {
+                    "Public": 10,
+                    "Approved": 40,
+                    "Processing": 10,
+                    "Reject": 5,
+                    "AllowGuest": 5,
+                    "TotalLike": 772
+                }
+            }
+        };
+
+        const yearSelect = document.getElementById('yearSelect');
+        Object.keys(data).forEach(year => {
+            const option = document.createElement('option');
+            option.value = year;
+            option.text = year;
+            option.style.color = 'blueviolet';
+            yearSelect.appendChild(option);
+        });
+
+        const ctxBar = document.getElementById('articleChart').getContext('2d');
+        const ctxPie = document.getElementById('likePieChart').getContext('2d');
+        let barChart, pieChart;
+
+        function fetchData(year) {
+            return new Promise((resolve) => {
+                setTimeout(() => resolve(data[year]), 100); // Simulating an AJAX call
+            });
+        }
+
+        function updateBarChart(yearData) {
+            const faculties = Object.keys(yearData);
+            const datasets = [];
+            ['Public', 'Approved', 'Processing', 'Reject', 'AllowGuest'].forEach(status => {
+                datasets.push({
+                    label: status,
+                    data: faculties.map(faculty => yearData[faculty][status]),
+                    backgroundColor: generateColor(status),
+                });
+            });
+
+            if (barChart) {
+                barChart.destroy();
+            }
+
+            barChart = new Chart(ctxBar, {
+                type: 'bar',
+                data: {
+                    labels: faculties,
+                    datasets: datasets
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        function updatePieChart(yearData) {
+            const faculties = Object.keys(yearData);
+            const totalLikes = faculties.map(faculty => yearData[faculty].TotalLike);
+
+            if (pieChart) {
+                pieChart.destroy();
+            }
+
+            pieChart = new Chart(ctxPie, {
+                type: 'pie',
+                data: {
+                    labels: faculties,
+                    datasets: [{
+                        data: totalLikes,
+                        backgroundColor: faculties.map(faculty => generateColor(faculty)),
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        }
+                    }
+                }
+            });
+        }
+
+        function generateColor(faculty) {
+            const colorPalette = {
+                'Information Technology': '#f56954',
+                'Business Administration': '#00a65a',
+                'Engineering': '#f39c12',
+                'Arts and Social Sciences': '#00c0ef',
+                'Graphic Design': '#3c8dbc'
+            };
+            return colorPalette[faculty];
+        }
+
+        yearSelect.addEventListener('change', function () {
+            fetchData(this.value).then(data => {
+                updateBarChart(data);
+                updatePieChart(data);
+            });
+        });
+
+        // Initial chart display
+        fetchData(yearSelect.value).then(data => {
+            updateBarChart(data);
+            updatePieChart(data);
+        });
+    });
+
+</script>

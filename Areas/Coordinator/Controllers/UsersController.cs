@@ -117,7 +117,7 @@ namespace Bina.Areas.Coordinator.Controllers
             // Lấy FacultyId của Coordinator hiện tại từ session
             string coordinatorFacultyId = HttpContext.Session.GetString("FacultyId");
 
-            ViewData["FacultyId"] = new SelectList(_context.Faculties.Where(f => f.FacultyId == coordinatorFacultyId), "FacultyId", "FacultyId");
+            ViewData["FacultyName"] = new SelectList(_context.Faculties.Where(f => f.FacultyId == coordinatorFacultyId), "FacultyId", "FacultyName");
             var allowedRoles = new List<string> { "Student", "Guest" };
             ViewData["RoleName"] = new SelectList(_context.Roles.Where(r => allowedRoles.Contains(r.RoleName)), "RoleId", "RoleName");
             ViewData["TermsText"] = new SelectList(_context.TermsAndConditions, "TermsId", "TermsText");
@@ -182,7 +182,7 @@ namespace Bina.Areas.Coordinator.Controllers
                 if (user.FacultyId != coordinatorFacultyId)
                 {
                     ModelState.AddModelError("FacultyId", "User can only be created with the same FacultyId as the current Coordinator.");
-                    ViewData["FacultyId"] = new SelectList(_context.Faculties, "FacultyId", "FacultyId", user.FacultyId);
+                    ViewData["FacultyName"] = new SelectList(_context.Faculties, "FacultyId", "FacultyName", user.FacultyId);
                     ViewData["RoleName"] = new SelectList(_context.Roles.Where(r => allowedRoles.Contains(r.RoleName)), "RoleId", "RoleName", user.RoleId);
                     ViewData["TermsText"] = new SelectList(_context.TermsAndConditions, "TermsId", "TermsText", user.TermsId);
                     return View(user);
@@ -191,7 +191,7 @@ namespace Bina.Areas.Coordinator.Controllers
                 if (selectedRole != null && !allowedRoles.Contains(selectedRole.RoleName))
                 {
                     ModelState.AddModelError("RoleId", "Invalid role selected. Only Student or Guest roles are allowed.");
-                    ViewData["FacultyId"] = new SelectList(_context.Faculties, "FacultyId", "FacultyId", user.FacultyId);
+                    ViewData["FacultyName"] = new SelectList(_context.Faculties, "FacultyId", "FacultyId", user.FacultyId);
                     ViewData["RoleName"] = new SelectList(_context.Roles.Where(r => allowedRoles.Contains(r.RoleName)), "RoleId", "RoleName", user.RoleId);
                     ViewData["TermsText"] = new SelectList(_context.TermsAndConditions, "TermsId", "TermsText", user.TermsId);
                     return View(user);
@@ -205,7 +205,7 @@ namespace Bina.Areas.Coordinator.Controllers
 				if (!allowedDomains.Contains(emailDomain, StringComparer.OrdinalIgnoreCase))
 				{
 					ModelState.AddModelError("Email", "Email must be from one of the following domains: @gmail.com, @fpt.edu.vn, @org.com");
-					ViewData["FacultyId"] = new SelectList(_context.Faculties, "FacultyId", "FacultyId", user.FacultyId);
+					ViewData["FacultyName"] = new SelectList(_context.Faculties, "FacultyId", "FacultyName", user.FacultyId);
 					ViewData["RoleName"] = new SelectList(_context.Roles, "RoleId", "RoleName", user.RoleId);
 					ViewData["TermsText"] = new SelectList(_context.TermsAndConditions, "TermsId", "TermsText", user.TermsId);
 					return View(user);
@@ -215,7 +215,7 @@ namespace Bina.Areas.Coordinator.Controllers
 				if (string.IsNullOrWhiteSpace(user.UserName))
 				{
 					ModelState.AddModelError("", "User Name cannot be empty!");
-					ViewData["FacultyId"] = new SelectList(_context.Faculties, "FacultyId", "FacultyId", user.FacultyId);
+					ViewData["FacultyName"] = new SelectList(_context.Faculties, "FacultyId", "FacultyName", user.FacultyId);
 					ViewData["RoleName"] = new SelectList(_context.Roles, "RoleId", "RoleName", user.RoleId);
 					return View(user);
 				}
@@ -227,7 +227,7 @@ namespace Bina.Areas.Coordinator.Controllers
 					// Notify that email or User Name already exists
 					string errorMessage = existingUser.Email == user.Email ? "Email already exists in the system. Please enter another email." : "User Name already exists in the system. Please enter another User Name.";
 					ModelState.AddModelError(existingUser.Email == user.Email ? "Email" : "UserName", errorMessage);
-					ViewData["FacultyId"] = new SelectList(_context.Faculties, "FacultyId", "FacultyId", user.FacultyId);
+					ViewData["FacultyName"] = new SelectList(_context.Faculties, "FacultyId", "FacultyName", user.FacultyId);
 					ViewData["RoleName"] = new SelectList(_context.Roles, "RoleId", "RoleName", user.RoleId);
 					return View(user);
 				}
@@ -255,7 +255,7 @@ namespace Bina.Areas.Coordinator.Controllers
 			}
 
 			// (Return statement and view data handling as in your original code)
-			ViewData["FacultyId"] = new SelectList(_context.Faculties, "FacultyId", "FacultyId", user.FacultyId);
+			ViewData["FacultyName"] = new SelectList(_context.Faculties, "FacultyId", "FacultyName", user.FacultyId);
 			ViewData["RoleName"] = new SelectList(_context.Roles, "RoleId", "RoleName", user.RoleId);
 			ViewData["TermsText"] = new SelectList(_context.TermsAndConditions, "TermsId", "TermsText", user.TermsId);
 			return View(user);
@@ -280,7 +280,7 @@ namespace Bina.Areas.Coordinator.Controllers
 				return NotFound();
 			}
 
-			ViewData["FacultyId"] = new SelectList(_context.Faculties, "FacultyId", "FacultyId", user.FacultyId);
+			ViewData["FacultyName"] = new SelectList(_context.Faculties, "FacultyId", "FacultyName", user.FacultyId);
             // Lọc danh sách role chỉ bao gồm "Student" và "Guest"
             var allowedRoles = new List<string> { "Student", "Guest" };
             ViewData["RoleName"] = new SelectList(_context.Roles.Where(r => allowedRoles.Contains(r.RoleName)), "RoleId", "RoleName", user.RoleId);
@@ -392,7 +392,7 @@ namespace Bina.Areas.Coordinator.Controllers
 				}
 			}
 
-			ViewData["FacultyId"] = new SelectList(_context.Faculties, "FacultyId", "FacultyId", user.FacultyId);
+			ViewData["FacultyName"] = new SelectList(_context.Faculties, "FacultyId", "FacultyName", user.FacultyId);
 			ViewData["RoleId"] = new SelectList(_context.Roles, "RoleId", "RoleName", user.RoleId);
 			ViewData["TermsText"] = new SelectList(_context.TermsAndConditions, "TermsId", "TermsText", user.TermsId);
 			return View(user);
@@ -491,7 +491,7 @@ namespace Bina.Areas.Coordinator.Controllers
 				return NotFound();
 			}
 
-			ViewData["FacultyId"] = new SelectList(_context.Faculties, "FacultyId", "FacultyId", user.FacultyId);
+			ViewData["FacultyName"] = new SelectList(_context.Faculties, "FacultyId", "FacultyName", user.FacultyId);
 			ViewData["RoleName"] = new SelectList(_context.Roles, "RoleId", "RoleName", user.RoleId);
 
 			return View(user);
@@ -555,7 +555,7 @@ namespace Bina.Areas.Coordinator.Controllers
 				}
 			}
 
-			ViewData["FacultyId"] = new SelectList(_context.Faculties, "FacultyId", "FacultyId", user.FacultyId);
+			ViewData["FacultyName"] = new SelectList(_context.Faculties, "FacultyId", "FacultyId", user.FacultyId);
 			ViewData["RoleId"] = new SelectList(_context.Roles, "RoleId", "RoleName", user.RoleId);
 			return View(user);
 		}
