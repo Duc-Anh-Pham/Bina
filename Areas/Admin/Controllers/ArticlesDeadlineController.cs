@@ -16,7 +16,6 @@ namespace Bina.Areas.Admin.Controllers
             _context = context;
         }
 
-        // GET: Admin/ArticlesDeadline
         public async Task<IActionResult> Index(string? facultyId = null, int page = 1)
         {
             IQueryable<ArticlesDeadline> query = _context.ArticlesDeadlines
@@ -37,9 +36,9 @@ namespace Bina.Areas.Admin.Controllers
                 .ToListAsync();
 
             var pager = new Pager(totalEntries, page, pageSize);
-            var model = new Tuple<IEnumerable<ArticlesDeadline>, Pager>(deadlines, pager);
 
-            return View(model);
+            ViewBag.FacultyId = facultyId;
+            return View(new Tuple<IEnumerable<ArticlesDeadline>, Pager>(deadlines, pager));
         }
 
         // GET: Admin/ArticlesDeadline/Details/5

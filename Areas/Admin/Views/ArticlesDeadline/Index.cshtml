@@ -3,35 +3,34 @@
 @{
     ViewData["Title"] = "Index";
 }
-
 <div class="container my-5">
-    <div class="row">
-        <div class="col-md-12 text-center">
-            <h1>Articles Deadline</h1>
-        </div>
-    </div>
-    <div class="row align-items-end">
-        <div class="col-md-6">
-            <form method="get" asp-controller="ArticlesDeadline" asp-action="Index">
-                <div class="app-container mt-5">
-                    <div class="row">
-                        <div class="col col-md-12 d-flex">
-                            <input type="text" class="form-control" name="facultyId" placeholder="Search Article Deadline for Faculty ID" />
-                            <button type="submit" class="btn btn-outline-secondary ms-3">Search</button>
+    <h1 class="text-center mb-4">Article Deadline</h1>
+    <div class="d-flex justify-content-between mb-4">
+        <div class="w-50">
+            <!-- Search container start -->
+            <div class="container">
+                <form method="get" asp-controller="ArticlesDeadline" asp-action="Index" class="d-flex">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="facultyId" placeholder="Search Article Deadline for Faculty ID" value="@ViewBag.FacultyId" />
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="submit">
+                                <i class="bi bi-search-heart-fill"></i>
+                            </button>
                         </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
+            <!-- Search container end -->
         </div>
-        <div class="col-md-6 d-flex justify-content-md-end">
-            <p class="mb-4">
-                <a asp-action="Create" class="btn btn-primary">
-                    <i class="bi bi-plus-circle me-2"></i>Create New
-                </a>
-            </p>
+        <div class="w-50 text-end">
+            <a asp-action="Create" class="btn btn-primary">
+                <i class="bi bi-plus-circle me-2"></i>Create New
+            </a>
         </div>
     </div>
 </div>
+
+
 
 <div class="table-responsive">
     <table class="table table-striped table-bordered table-hover text-center">
@@ -83,13 +82,13 @@
     </table>
 </div>
 
- <div class="d-flex justify-content-center">
+<div class="d-flex justify-content-center">
     <nav aria-label="Page navigation example">
         <ul class="pagination">
             @if (Model.Item2.CurrentPage != 1)
             {
                 <li class="page-item">
-                    <a class="page-link" asp-controller="ArticlesDeadline" asp-action="Index" asp-route-page="1" tabindex="-1" aria-label="Previous">
+                    <a class="page-link" asp-controller="ArticlesDeadline" asp-action="Index" asp-route-page="1" asp-route-facultyId="@ViewBag.FacultyId" tabindex="-1" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                         <span class="sr-only">First</span>
                     </a>
@@ -98,13 +97,13 @@
             @for (var i = Model.Item2.StartPage; i <= Model.Item2.EndPage; i++)
             {
                 <li class="page-item @(i == Model.Item2.CurrentPage ? "active" : "")">
-                    <a class="page-link" asp-controller="ArticlesDeadline" asp-action="Index" asp-route-page="@i">@i</a>
+                    <a class="page-link" asp-controller="ArticlesDeadline" asp-action="Index" asp-route-page="@i" asp-route-facultyId="@ViewBag.FacultyId">@i</a>
                 </li>
             }
             @if (Model.Item2.CurrentPage != Model.Item2.TotalPages)
             {
                 <li class="page-item">
-                    <a class="page-link" asp-controller="ArticlesDeadline" asp-action="Index" asp-route-page="@Model.Item2.TotalPages" aria-label="Next">
+                    <a class="page-link" asp-controller="ArticlesDeadline" asp-action="Index" asp-route-page="@Model.Item2.TotalPages" asp-route-facultyId="@ViewBag.FacultyId" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                         <span class="sr-only">Last</span>
                     </a>

@@ -67,11 +67,11 @@
             </div>
             <div class="card p-2">
                 <ul class="list-group mb-3">
-                     <li class="list-group-item d-flex justify-content-between lh-sm">
+                    <li class="list-group-item d-flex justify-content-between lh-sm">
                         <div>
                             <h6 class="my-0">Status : </h6>
                         </div>
-                         <strong class="text-primary" id="currentStatus">@Model.ArticleStatus.ArticleStatusName</strong>
+                        <strong class="text-primary" id="currentStatus">@Model.ArticleStatus.ArticleStatusName</strong>
                     </li>
                 </ul>
                 <div class="mb-3">
@@ -142,32 +142,32 @@
                 <a href="@Model.DocumentPath" download="@Model.DocumentPath" class="btn btn-success">Download File</a>
             </dd>
             <div class="mb-3">
-                 
+
                 <span id="likeCount">@Model.LikesCount</span> likes
             </div>
         </div>
 
 
     </div>
-  
+
 </div>
 <script>
-     function updateStatus() {
+    function updateStatus() {
         var newStatusId = document.getElementById("statusSelect").value;
-        
+
         $.ajax({
-            url: '/Coordinator/Articles/UpdateStatus',  
+            url: '/Coordinator/Articles/UpdateStatus',
             type: 'POST',
             data: {
                 articleId: @Model.ArticleId,
                 newStatusId: newStatusId
             },
             success: function (response) {
-                 alert("Status updated successfully!");
-                 $("#currentStatus").text(response.newStatusName);
+                alert("Status updated successfully!");
+                $("#currentStatus").text(response.newStatusName);
             },
             error: function (xhr, status, error) {
-                 alert("Error updating status: " + error);
+                alert("Error updating status: " + error);
             }
         });
     }
