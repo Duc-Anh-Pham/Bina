@@ -29,7 +29,11 @@ namespace Bina.Areas.Coordinator.Controllers
 
             ViewBag.Faculties = await _context.Faculties.ToListAsync();
             ViewBag.Statuses = await _context.ArticleStatuses.ToListAsync();
-
+            var facultyName = await _context.Faculties.FirstOrDefaultAsync(f => f.FacultyId == facultyId);
+            if (facultyName != null)
+            {
+                ViewBag.FacultyName = facultyName.FacultyName;
+            }
 
             var articlesQuery = _context.Articles
                 .Include(a => a.ArticleStatus)

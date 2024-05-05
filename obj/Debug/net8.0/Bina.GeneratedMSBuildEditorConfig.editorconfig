@@ -334,14 +334,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcR3Vlc3RcVmlld3NcTG9naW5zXExvZ2luLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Github/COMP1640/Bina/Areas/Guest/Views/Profile/ChangePassword.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcR3Vlc3RcVmlld3NcUHJvZmlsZVxDaGFuZ2VQYXNzd29yZC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/Github/COMP1640/Bina/Areas/Guest/Views/Profile/EditProfile.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcR3Vlc3RcVmlld3NcUHJvZmlsZVxFZGl0UHJvZmlsZS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
 [D:/Github/COMP1640/Bina/Areas/Guest/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcR3Vlc3RcVmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -360,6 +352,14 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/Github/COMP1640/Bina/Areas/Guest/Views/Upload/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcR3Vlc3RcVmlld3NcVXBsb2FkXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Github/COMP1640/Bina/Areas/Guest/Views/Users/ChangePassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcR3Vlc3RcVmlld3NcVXNlcnNcQ2hhbmdlUGFzc3dvcmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Github/COMP1640/Bina/Areas/Guest/Views/Users/Profile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcR3Vlc3RcVmlld3NcVXNlcnNcUHJvZmlsZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Github/COMP1640/Bina/Areas/Guest/Views/_ViewImports.cshtml]
